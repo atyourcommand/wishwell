@@ -1,0 +1,56 @@
+{
+	"version":"dev",
+	"enabled":"true",
+	"requests":[
+		{
+			"id":"0001",
+			"type":"question",
+			"ui":"radio",
+			"label":"Would you like a Funeral, Cremation or Other?",
+			"default":"funeral",
+			"value":"",
+			"placeholder":"",
+			"required":"Y"
+		},
+		{
+			"id":"0002",
+			"type":"option",
+			"ui":"text",
+			"label":"Burial preferences",
+			"default":"",
+			"value":"",
+			"placeholder":"Describe your burial preferences",
+			"required":"Y"
+		}
+		
+	],
+	"assets":[
+		{
+			"id":"0001",
+			"type":"question",
+			"ui":"radio",
+			"label":"Would you like leave any assets?",
+			"default":"Y",
+			"value":"",
+			"placeholder":"",
+			"required":"Y"
+		}
+		
+	],
+	"benefactors":[
+		
+	],
+	"deets":
+		{	
+			"firstName":"",
+			"lastName":"",
+			"gender":""
+			
+		},
+    "deets_default":
+		{
+			"firstName":"not set",
+			"lastName":"not set",
+			"gender":"Other"
+		}    
+}
