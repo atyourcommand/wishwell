@@ -52,7 +52,7 @@ class DetailsScreenState extends State<DetailsScreen> {
       //debugPrint('1:  ${focusNode.hasFocus}');
     });
     _lastNameController.addListener(() async {
-      //debugPrint('2:  ${focusNode.hasFocus}');
+      //debugPrint('2s:  ${focusNode.hasFocus}');
     });
   }
 
