@@ -158,7 +158,8 @@ class DetailsScreenState extends State<DetailsScreen> {
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('There are fields that did not validate')),
+        const SnackBar(
+            content: Text('There are some fields that did not validate')),
       );
     }
   }
