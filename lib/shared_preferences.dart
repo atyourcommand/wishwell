@@ -16,7 +16,7 @@ class UserData {
     // THEN SAVE DETAILS OBJECT TO DEVICE PREFERENCES
     var savedData = jsonEncode(rawData);
     await prefs.setString('jsonData', savedData);
-    debugPrint('In shared prefs some data has been saved to the device');
+    debugPrint('In the shared prefs some data has been saved to the device');
     debugPrint(savedData.toString());
   }
 
