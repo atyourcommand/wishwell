@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wishwell/details_screen.dart';
 import 'package:wishwell/legatee_screen.dart';
-//import 'package:wishwell/home_screen.dart';
+import 'package:wishwell/client_screen.dart';
 
 class Nav extends StatefulWidget {
   const Nav({super.key});
@@ -15,7 +15,7 @@ class _NavState extends State<Nav> {
     //const Home(),
     const DetailsScreen(),
     const LegateeScreen(),
-    const Text('Profile'),
+    const ClientScreen(),
   ];
   void _onItemTap(int index) {
     setState(() {
@@ -44,7 +44,7 @@ class _NavState extends State<Nav> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
-              label: 'Profile',
+              label: 'Clients',
             )
           ],
           currentIndex: _selectedIndex,
