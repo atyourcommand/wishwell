@@ -40,12 +40,26 @@ class DetailsScreenState extends State<DetailsScreen> {
       //debugPrint('1:  ${focusNode.hasFocus}');
     });
     // LOAD DATA TO FORM ON PAGE LOAD
-    UserData.getStartingData().then((val) {
-      var sData = UserModel.fromMap(jsonDecode(val.toString()));
-      //debugPrint('Default First Name: ${(sData.firstName.toString())}');
-      //debugPrint('Default Last Name: ${(sData.lastName.toString())}');
-      _firstNameController.text = sData.firstName.toString();
-      _lastNameController.text = sData.lastName.toString();
+    AllData.getStartingData().then((val) {
+      var decodedJson = jsonDecode(val);
+      var userDetails = decodedJson['deets']; //get nested deets
+      //debugPrint(userDetails.toString());
+
+      if (userDetails == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('There is no User Details data')),
+        );
+      } else {
+        Map myMap = userDetails;
+        var list = [];
+        myMap.forEach((key, value) => list.add('"$key":"$value"'));
+        var array = list.join(',');
+        var d = '{$array}';
+        var sData = UserModel.fromMap(jsonDecode(d.toString()));
+        //debugPrint(sData.toString());
+        _firstNameController.text = sData.firstName.toString();
+        _lastNameController.text = sData.lastName.toString();
+      }
     });
 
     _firstNameController.addListener(() async {
@@ -62,8 +76,8 @@ class DetailsScreenState extends State<DetailsScreen> {
         //    'firstName': _firstNameController.text,
         //    'lastName': _lastNameController.text,
         //  };
-        //  await UserData.saveJsonData(dataStore);
-        //  //UserData.getJsonData();
+        //  await AllData.saveJsonData(dataStore);
+        //  //AllData.getJsonData();
         //},
         onPressed: () {
           _createUser();
@@ -143,10 +157,10 @@ class DetailsScreenState extends State<DetailsScreen> {
       key.currentState!.save();
 
       // SAVE FORM ENTRIES TO DEVICE USER PREFERENCES
-      final dataStore = _userObject;
-      UserData.saveJsonData(dataStore);
-      debugPrint('Details screen create user saved as below');
-      debugPrint(_userObject.toString());
+      final dataStore = ({"deets": _userObject});
+      AllData.saveJsonData(dataStore);
+      //debugPrint('Details screen create user saved as below');
+      //debugPrint(dataStore.toString());
 
       //debugPrint("""
       //The user has registered with an first name of '${_userObject['firstName']}'

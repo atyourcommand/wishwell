@@ -37,14 +37,9 @@
 		}
 		
 	],
-	"benefactors":[
-		
-	],
 	"deets":
 		{	
-			"firstName":"",
-			"lastName":"",
-			"gender":""
+			
 			
 		},
     "deets_default":
@@ -52,5 +47,43 @@
 			"firstName":"not set",
 			"lastName":"not set",
 			"gender":"Other"
-		}    
+		} , 
+	"clients":[
+		{
+			"firstName":"A",
+			"lastName":"B",
+			"clientId":"",
+			"dob":"",
+			"address1":"",
+			"address2": "",
+			"city":"",
+			"postcode": "",
+			"country":""
+		},
+		{
+			"firstName":"C",
+			"lastName":"D",
+			"clientId":"",
+			"dob":"",
+			"address1":"",
+			"address2": "",
+			"city":"",
+			"postcode": "",
+			"country":""
+		},
+		{
+			"firstName":"E",
+			"lastName":"F",
+			"clientId":"",
+			"dob":"",
+			"address1":"",
+			"address2": "",
+			"city":"",
+			"postcode": "",
+			"country":""
+		}
+	]
+		
+	
+	  
 }

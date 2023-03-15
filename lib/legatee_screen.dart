@@ -38,47 +38,23 @@ class LegateeScreenState extends State<LegateeScreen> {
 
     // LOAD DATA TO FORM ON PAGE LOAD
 
-    UserData.getStartingData().then((val) {
+    AllData.getStartingData().then((val) {
       // ignore: unused_local_variable
       var sData = UserModel.fromMap(jsonDecode(val.toString()));
+      //debugPrint('The Val:$val');
       //debugPrint('Default First Name: ${(sData.firstName.toString())}');
       //debugPrint('Default Last Name: ${(sData.lastName.toString())}');
       _firstNameController.text = sData.firstName.toString();
       _lastNameController.text = sData.lastName.toString();
       _genderController.text = sData.gender.toString();
       //var selectedGender = sData.gender.toString()
-      debugPrint('EACH TIME loading gender string ${_genderController.text}');
       return sData;
     });
-
-    getSavedGender(def) {
-      UserData.getNewStartingData().then((val) {
-        var sData = UserModel.fromMap(jsonDecode(val.toString()));
-        if (sData.gender == null || sData.gender == '') {
-          debugPrint('getting gender default');
-          return def;
-        } else {
-          debugPrint('getting saved gender ${sData.gender}');
-          return '${sData.gender}';
-        }
-      });
-    }
-
-    // ignore: unused_local_variable
-    var selectedGender = getSavedGender('Male');
 
     super.initState();
   }
 
   Widget saveNameBtn() => ElevatedButton(
-        //onPressed: () async {
-        //  final dataStore = <String, dynamic>{
-        //    'firstName': _firstNameController.text,
-        //    'lastName': _lastNameController.text,
-        //  };
-        //  await UserData.saveJsonData(dataStore);
-        //  //UserData.getJsonData();
-        //},
         onPressed: () {
           _createUser();
         },
@@ -99,37 +75,19 @@ class LegateeScreenState extends State<LegateeScreen> {
     super.dispose();
   }
 
-  //bool _ageHasError = false;
   final String firstName = 'firstName';
   final String lastName = 'lastName';
   final String gender = 'gender';
   bool _genderHasError = false;
-  //var selectedGender =
 
   @override
   Widget build(BuildContext context) {
-    //debugPrint('ddd');
-
-    //var selectedGender = _genderController.text;
-
-    // ignore: unnecessary_brace_in_string_interps
-    debugPrint('ddfgdf ${_genderController.text}');
     return FormBuilder(
-        //appBar: AppBar(
-        //  title: const Text('My Details'),
-        //),
         autovalidateMode: AutovalidateMode.onUserInteraction,
         key: _formKey,
         onChanged: () {
           _formKey.currentState!.save();
-
-          //debugPrint(_formKey.currentState!.value.toString());
         },
-        // ignore: prefer_const_literals_to_create_immutables
-        // initialValue: {
-        //  'gender': 'male',
-        //},
-
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -207,7 +165,7 @@ class LegateeScreenState extends State<LegateeScreen> {
 
       final dataStore = _formKey.currentState?.value;
       //debugPrint(dataStore.toString());
-      UserData.saveJsonData(dataStore);
+      AllData.saveJsonData(dataStore);
       //debugPrint('saved');
 
       ScaffoldMessenger.of(context).showSnackBar(
