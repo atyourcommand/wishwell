@@ -9,7 +9,8 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 class LegateeScreen extends StatefulWidget {
-  const LegateeScreen({super.key});
+  const LegateeScreen({Key? key}) : super(key: key);
+
   @override
   State<LegateeScreen> createState() => LegateeScreenState();
 }

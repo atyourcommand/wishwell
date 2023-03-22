@@ -7,7 +7,8 @@ import 'package:wishwell/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DetailsScreen extends StatefulWidget {
-  const DetailsScreen({super.key});
+  const DetailsScreen({Key? key}) : super(key: key);
+
   @override
   State<DetailsScreen> createState() => DetailsScreenState();
 }

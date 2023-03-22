@@ -4,7 +4,8 @@ import 'package:wishwell/legatee_screen.dart';
 import 'package:wishwell/client_screen.dart';
 
 class Nav extends StatefulWidget {
-  const Nav({super.key});
+  const Nav({Key? key}) : super(key: key);
+
   @override
   State<Nav> createState() => _NavState();
 }

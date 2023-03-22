@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:wishwell/form_validator.dart';
 import 'package:wishwell/shared_preferences.dart';
 import 'package:wishwell/client_page.dart';
@@ -7,7 +8,8 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 class ClientScreen extends StatefulWidget {
-  const ClientScreen({super.key});
+  const ClientScreen({Key? key}) : super(key: key);
+
   @override
   State<ClientScreen> createState() => ClientScreenState();
 }
@@ -17,30 +19,45 @@ class ClientScreenState extends State<ClientScreen> {
   final _formKey = GlobalKey<FormBuilderState>();
   late TextEditingController _firstNameController;
   late TextEditingController _lastNameController;
+  late TextEditingController _gender;
+  late TextEditingController _address1;
+  late TextEditingController _address2;
+  late TextEditingController _city;
+  late TextEditingController _country;
+  late TextEditingController _dob;
+  String? _dropDownValue;
   late Future<List<Client>> clientsFuture; //NEW
 
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(title: const Text("Client List")),
-        body:
-
-            //buildForm(context),
-            FutureBuilder<List<Client>>(
-          future: AllData.getClientData(context),
-          builder: (context, snapshot) {
-            final clients = snapshot.data;
-            //buildForm(context);
-            switch (snapshot.connectionState) {
-              case ConnectionState.waiting:
-                return const Center(child: CircularProgressIndicator());
-              default:
-                if (snapshot.hasError) {
-                  return const Center(child: Text('Some error occurred'));
-                } else {
-                  return buildClients(clients!);
-                }
-            }
-          },
+        body: SizedBox(
+          height: MediaQuery.of(context).size.height,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                buildForm(context),
+                FutureBuilder<List<Client>>(
+                  future: AllData.getClientData(context),
+                  builder: (context, snapshot) {
+                    final clients = snapshot.data;
+                    //buildForm(context);
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.waiting:
+                        return const Center(child: CircularProgressIndicator());
+                      default:
+                        if (snapshot.hasError) {
+                          return const Center(
+                              child: Text('Some error occurred'));
+                        } else {
+                          return buildClients(clients!);
+                        }
+                    }
+                  },
+                ),
+              ],
+            ),
+          ),
         ),
       );
 
@@ -63,13 +80,20 @@ class ClientScreenState extends State<ClientScreen> {
             ),
           );
         },
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
       );
 
   @override
   initState() {
     _firstNameController = TextEditingController();
     _lastNameController = TextEditingController();
-
+    _gender = TextEditingController();
+    _address1 = TextEditingController();
+    _address2 = TextEditingController();
+    _city = TextEditingController();
+    _country = TextEditingController();
+    _dob = TextEditingController();
     super.initState();
     //clientsFuture = getClients();
   }
@@ -85,6 +109,12 @@ class ClientScreenState extends State<ClientScreen> {
   void dispose() {
     _firstNameController.dispose();
     _lastNameController.dispose();
+    _gender.dispose();
+    _address1.dispose();
+    _address2.dispose();
+    _city.dispose();
+    _country.dispose();
+    _dob.dispose();
     super.dispose();
   }
 
@@ -92,6 +122,12 @@ class ClientScreenState extends State<ClientScreen> {
 
   final String firstName = 'firstName';
   final String lastName = 'lastName';
+  final String gender = 'Gender';
+  final String address = 'Address1';
+  final String address1 = 'Address2';
+  final String city = 'City';
+  final String country = 'Country';
+  final String dob = 'Date of Birth';
 
   Widget buildForm(BuildContext context) {
     return FormBuilder(
@@ -105,6 +141,8 @@ class ClientScreenState extends State<ClientScreen> {
           child: Column(
             children: [
               const Text('Client Page'),
+
+              //=========frist name textFeild========//
               FormBuilderTextField(
                 controller: _firstNameController,
                 name: firstName,
@@ -112,6 +150,7 @@ class ClientScreenState extends State<ClientScreen> {
                 validator: FormBuilderValidators.required(),
                 onSaved: (val) => _clientObject['firstName'] = val ?? '',
               ),
+              //=========last name textFeild========//
               const SizedBox(height: 10),
               FormBuilderTextField(
                 controller: _lastNameController,
@@ -120,6 +159,110 @@ class ClientScreenState extends State<ClientScreen> {
                 validator: FormBuilderValidators.required(),
                 onSaved: (val) => _clientObject['lastName'] = val ?? '',
               ),
+              //===============Gender =========//
+              const SizedBox(height: 10),
+              DropdownButton(
+                  hint: _dropDownValue == null
+                      ? const Text('Gender')
+                      : Text(
+                          _dropDownValue!,
+                          style: const TextStyle(color: Colors.black38),
+                        ),
+                  isExpanded: true,
+                  iconSize: 30.0,
+                  style: const TextStyle(color: Colors.black38),
+                  items: [
+                    'Male',
+                    'Female',
+                  ].map(
+                    (val) {
+                      return DropdownMenuItem<String>(
+                        value: val,
+                        child: Text(val),
+                      );
+                    },
+                  ).toList(),
+                  onChanged: (val) {
+                    setState(
+                      () {
+                        _dropDownValue = val as String?;
+                      },
+                    );
+                  }),
+              //=========Address  textFeild========//
+              const SizedBox(height: 10),
+              FormBuilderTextField(
+                controller: _address1,
+                name: address,
+                decoration: const InputDecoration(labelText: 'Address1'),
+                validator: FormBuilderValidators.required(),
+                onSaved: (val) => _clientObject['lastName'] = val ?? '',
+              ),
+              //=========Address1  textFeild========//
+              const SizedBox(height: 10),
+              FormBuilderTextField(
+                controller: _address2,
+                name: address1,
+                decoration: const InputDecoration(labelText: 'Address2'),
+                validator: FormBuilderValidators.required(),
+                onSaved: (val) => _clientObject['lastName'] = val ?? '',
+              ),
+              //=========Address2  textFeild========//
+              const SizedBox(height: 10),
+              FormBuilderTextField(
+                controller: _city,
+                name: city,
+                decoration: const InputDecoration(labelText: 'City'),
+                validator: FormBuilderValidators.required(),
+                onSaved: (val) => _clientObject['lastName'] = val ?? '',
+              ),
+              //============city==========//
+              const SizedBox(height: 10),
+              FormBuilderTextField(
+                controller: _country,
+                name: country,
+                decoration: const InputDecoration(labelText: 'Country'),
+                validator: FormBuilderValidators.required(),
+                onSaved: (val) => _clientObject['lastName'] = val ?? '',
+              ),
+              //============country=============//
+              // FormBuilderTextField(
+              //   controller: _dob,
+              //   name: dob,
+              //   decoration: const InputDecoration(labelText: 'Date of Birth'),
+              //   validator: FormBuilderValidators.required(),
+              //   onSaved: (val) => _clientObject['lastName'] = val ?? '',
+              // ),
+
+              //============Date of birth=============//
+              const SizedBox(height: 10),
+              FormBuilderTextField(
+                controller: _dob,
+                name: lastName,
+                decoration: const InputDecoration(labelText: 'Date of Birth'),
+                validator: FormBuilderValidators.required(),
+                onSaved: (val) => _clientObject['lastName'] = val ?? '',
+                onTap: () async {
+                  DateTime? pickedDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(1950),
+                      lastDate: DateTime(2100));
+
+                  if (pickedDate != null) {
+                    print(pickedDate);
+                    String formattedDate =
+                        DateFormat('yyyy-MM-dd').format(pickedDate);
+                    print(
+                        formattedDate); //formatted date output using intl package =>  2021-03-16
+                    setState(() {
+                      _dob.text =
+                          formattedDate; //set output date to TextField value.
+                    });
+                  } else {}
+                },
+              ),
+
               saveNameBtn(),
             ],
           ),
@@ -130,19 +273,11 @@ class ClientScreenState extends State<ClientScreen> {
     if (_formKey.currentState == null) {
       debugPrint('_formKey.currentState == null');
     } else if (_formKey.currentState!.validate()) {
-      // Commit the field values to their variables
       _formKey.currentState!.save();
 
-      // SAVE FORM ENTRIES TO DEVICE USER PREFERENCES
       final dataStore = ({"clients": _clientObject});
       AllData.saveJsonData(dataStore);
-      //debugPrint('Details screen create client saved as below');
       debugPrint(dataStore.toString());
-
-      //debugPrint("""
-      //The client has registered with an first name of '${_clientObject['firstName']}'
-      //and a last name of '${_clientObject['lastName']}'
-      // """);
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Processing Data')),
