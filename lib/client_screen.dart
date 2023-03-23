@@ -81,7 +81,7 @@ class ClientScreenState extends State<ClientScreen> {
           );
         },
         shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
       );
 
   @override
@@ -185,7 +185,7 @@ class ClientScreenState extends State<ClientScreen> {
                   onChanged: (val) {
                     setState(
                       () {
-                        _dropDownValue = val as String?;
+                        _dropDownValue = val;
                       },
                     );
                   }),
@@ -250,10 +250,10 @@ class ClientScreenState extends State<ClientScreen> {
                       lastDate: DateTime(2100));
 
                   if (pickedDate != null) {
-                    print(pickedDate);
+                    //debugPrint(pickedDate);
                     String formattedDate =
                         DateFormat('yyyy-MM-dd').format(pickedDate);
-                    print(
+                    debugPrint(
                         formattedDate); //formatted date output using intl package =>  2021-03-16
                     setState(() {
                       _dob.text =
