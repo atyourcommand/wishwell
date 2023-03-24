@@ -39,18 +39,18 @@ class LegateeScreenState extends State<LegateeScreen> {
 
     // LOAD DATA TO FORM ON PAGE LOAD
 
-    AllData.getStartingData().then((val) {
-      // ignore: unused_local_variable
-      var sData = UserModel.fromMap(jsonDecode(val.toString()));
-      //debugPrint('The Val:$val');
-      //debugPrint('Default First Name: ${(sData.firstName.toString())}');
-      //debugPrint('Default Last Name: ${(sData.lastName.toString())}');
-      _firstNameController.text = sData.firstName.toString();
-      _lastNameController.text = sData.lastName.toString();
-      _genderController.text = sData.gender.toString();
-      //var selectedGender = sData.gender.toString()
-      return sData;
-    });
+    // AllData.getStartingData().then((val) {
+    //   // ignore: unused_local_variable
+    //   var sData = UserModel.fromMap(jsonDecode(val.toString()));
+    //   //debugPrint('The Val:$val');
+    //   //debugPrint('Default First Name: ${(sData.firstName.toString())}');
+    //   //debugPrint('Default Last Name: ${(sData.lastName.toString())}');
+    //   _firstNameController.text = sData.firstName.toString();
+    //   _lastNameController.text = sData.lastName.toString();
+    //   _genderController.text = sData.gender.toString();
+    //   //var selectedGender = sData.gender.toString()
+    //   return sData;
+    // });
 
     super.initState();
   }

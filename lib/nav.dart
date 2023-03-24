@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wishwell/add_client_dart.dart';
 import 'package:wishwell/details_screen.dart';
 import 'package:wishwell/legatee_screen.dart';
 import 'package:wishwell/client_screen.dart';
@@ -17,6 +18,7 @@ class _NavState extends State<Nav> {
     const DetailsScreen(),
     const LegateeScreen(),
     const ClientScreen(),
+    ClientAdd(),
   ];
   void _onItemTap(int index) {
     setState(() {
@@ -34,19 +36,40 @@ class _NavState extends State<Nav> {
           child: _widgetOptions.elementAt(_selectedIndex),
         ),
         bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
+          type: BottomNavigationBarType.fixed,
+          items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Icon(
+                Icons.home,
+                color: Colors.grey.shade600,
+              ),
+              // backgroundColor: Colors.blue,
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.message),
+              icon: Icon(
+                Icons.message,
+                color: Colors.grey.shade600,
+              ),
+              // backgroundColor: Colors.white,
               label: 'Messages',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
+              icon: Icon(
+                Icons.person,
+                color: Colors.grey.shade600,
+              ),
+              // backgroundColor: Colors.blue,
               label: 'Clients',
-            )
+            ),
+            BottomNavigationBarItem(
+              // backgroundColor: Colors.blue,
+              icon: Icon(
+                Icons.person_add,
+                color: Colors.grey.shade600,
+              ),
+              label: 'Add Client',
+            ),
           ],
           currentIndex: _selectedIndex,
           onTap: _onItemTap,
