@@ -63,11 +63,12 @@ class ClientScreenState extends State<ClientScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: const Text("Client List")),
+        //appBar: AppBar(title: const Text("Client List")),
         body: SizedBox(
           height: MediaQuery.of(context).size.height,
           child: SingleChildScrollView(
             child: Column(
+              // ignore: prefer_const_literals_to_create_immutables
               children: [
                 buildClients(clientList),
                 //  buildForm(context),

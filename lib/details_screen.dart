@@ -72,7 +72,7 @@ class DetailsScreenState extends State<DetailsScreen> {
     });
   }
 
-  Widget saveNameBtn() => ElevatedButton(
+  Widget saveNameBtn() => OutlinedButton(
         //onPressed: () async {
         //  final dataStore = <String, dynamic>{
         //    'firstName': _firstNameController.text,
@@ -86,7 +86,7 @@ class DetailsScreenState extends State<DetailsScreen> {
         },
         child: const Text('Save data'),
       );
-  Widget clearDataBtn() => ElevatedButton(
+  Widget clearDataBtn() => OutlinedButton(
         onPressed: clearSharedPrefs,
         child: const Text('Add some default data'),
       );
@@ -113,6 +113,24 @@ class DetailsScreenState extends State<DetailsScreen> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
+              const SizedBox(
+                height: 80,
+              ),
+              const Text("To start, lets learn",
+                  style: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.w300,
+                  )),
+              const Text(
+                "about you.",
+                style: TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(
+                height: 50,
+              ),
               TF(
                 onSaved: (val) => _userObject['firstName'] = val ?? '',
                 controller: _firstNameController,
@@ -136,6 +154,9 @@ class DetailsScreenState extends State<DetailsScreen> {
                       _lastNameController.clear();
                     },
                     child: const Icon(Icons.clear)),
+              ),
+              const SizedBox(
+                height: 50,
               ),
               saveNameBtn(),
               clearDataBtn(),

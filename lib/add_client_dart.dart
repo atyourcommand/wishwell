@@ -28,7 +28,7 @@ class _ClientAddState extends State<ClientAdd> {
   final String city = 'City';
   final String country = 'Country';
   final String dob = 'Date of Birth';
-  Widget saveNameBtn() => ElevatedButton(
+  Widget saveNameBtn() => OutlinedButton(
         onPressed: () {
           _clientObject['firstName'] =
               _firstNameController.text.toString().trim();
@@ -146,7 +146,7 @@ class _ClientAddState extends State<ClientAdd> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(title: const Text("Add Client")),
+      //appBar: AppBar(title: const Text("Add Client")),
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
         child: Padding(
@@ -154,6 +154,24 @@ class _ClientAddState extends State<ClientAdd> {
           child: SingleChildScrollView(
             child: Column(
               children: [
+                const SizedBox(
+                  height: 80,
+                ),
+                const Text("Why not,",
+                    style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.w300,
+                    )),
+                const Text(
+                  "add a client.",
+                  style: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(
+                  height: 50,
+                ),
                 //=========frist name textFeild========//
                 TextFormField(
                   controller: _firstNameController,
@@ -289,7 +307,9 @@ class _ClientAddState extends State<ClientAdd> {
                     } else {}
                   },
                 ),
-
+                const SizedBox(
+                  height: 50,
+                ),
                 saveNameBtn(),
               ],
             ),

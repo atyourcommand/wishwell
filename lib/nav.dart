@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wishwell/add_client_dart.dart';
 import 'package:wishwell/details_screen.dart';
-import 'package:wishwell/legatee_screen.dart';
+import 'package:wishwell/home_screen.dart';
+//import 'package:wishwell/legatee_screen.dart';
 import 'package:wishwell/client_screen.dart';
 
 class Nav extends StatefulWidget {
@@ -15,8 +16,8 @@ class _NavState extends State<Nav> {
   int _selectedIndex = 0;
   final List<Widget> _widgetOptions = <Widget>[
     //const Home(),
+    const Home(),
     const DetailsScreen(),
-    const LegateeScreen(),
     const ClientScreen(),
     const ClientAdd(),
   ];
@@ -52,7 +53,7 @@ class _NavState extends State<Nav> {
                 color: Colors.grey.shade600,
               ),
               // backgroundColor: Colors.white,
-              label: 'Messages',
+              label: 'User Details',
             ),
             BottomNavigationBarItem(
               icon: Icon(
