@@ -1,4 +1,4 @@
-import 'dart:convert';
+//import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wishwell/shared_preferences.dart';
 
-import 'client_model.dart';
+//import 'client_model.dart';
 import 'form_validator.dart';
 
 class ClientAdd extends StatefulWidget {
@@ -18,7 +18,7 @@ class ClientAdd extends StatefulWidget {
 }
 
 class _ClientAddState extends State<ClientAdd> {
-  Map _clientObject = <String, String>{};
+  final Map _clientObject = <String, String>{};
 
   final String firstName = 'firstName';
   final String lastName = 'lastName';
@@ -48,13 +48,13 @@ class _ClientAddState extends State<ClientAdd> {
       );
 
   void _createClient() {
-    debugPrint("client===> ${_clientObject}");
+    //debugPrint("client===> $_clientObject");
 
     if (validateForm()) {
       final dataStore = ({"clients": _clientObject});
       debugPrint(dataStore.toString());
-      AllData.saveJsonData(dataStore);
-      debugPrint(dataStore.toString());
+      AllData.saveClientData(dataStore);
+      //debugPrint(dataStore.toString());
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Processing Data')),
@@ -118,9 +118,13 @@ class _ClientAddState extends State<ClientAdd> {
   // }
 
   final FormValidator formValidator = FormValidator();
+
+  // ignore: unused_field
   final _formKey = GlobalKey<FormBuilderState>();
   late TextEditingController _firstNameController;
   late TextEditingController _lastNameController;
+
+  // ignore: unused_field
   late TextEditingController _gender;
   late TextEditingController _address1;
   late TextEditingController _address2;
@@ -135,17 +139,7 @@ class _ClientAddState extends State<ClientAdd> {
   Future<void> storedata() async {
     final SharedPreferences prefs = await _prefs;
     prefs.setString('firstname', _firstNameController.text.toString().trim());
-
     prefs.setString('lastname', _lastNameController.text.toString().trim());
-
-    // setState(() {
-    //   _counter = prefs.setInt('counter', counter).then((bool success) {
-    //     return counter;
-    //   });
-    // }
-
-    // )
-    // ;
   }
 
   @override
@@ -156,7 +150,7 @@ class _ClientAddState extends State<ClientAdd> {
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -211,7 +205,7 @@ class _ClientAddState extends State<ClientAdd> {
                     onChanged: (val) {
                       setState(
                         () {
-                          _dropDownValue = val as String?;
+                          _dropDownValue = val;
                         },
                       );
                     }),
@@ -283,10 +277,10 @@ class _ClientAddState extends State<ClientAdd> {
                         lastDate: DateTime(2100));
 
                     if (pickedDate != null) {
-                      print(pickedDate);
+                      debugPrint(pickedDate as String?);
                       String formattedDate =
                           DateFormat('yyyy-MM-dd').format(pickedDate);
-                      print(
+                      debugPrint(
                           formattedDate); //formatted date output using intl package =>  2021-03-16
                       setState(() {
                         _dob.text =
@@ -326,10 +320,10 @@ class _ClientAddState extends State<ClientAdd> {
     //   );
     //   return false;
     // }
-///
+    ///
 //////
-///
-///
+    ///
+    ///
     // if (_address1.text.toString().isEmpty) {
     //   ScaffoldMessenger.of(context).showSnackBar(
     //     const SnackBar(content: Text('Enter address1')),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wishwell/client_model.dart';
-
+//import 'package:wishwell/client_screen.dart';
+//import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wishwell/shared_preferences.dart';
 import 'package:flutter/cupertino.dart';
 
 class ClientPage extends StatelessWidget {
@@ -34,8 +36,10 @@ class ClientPage extends StatelessWidget {
               ),
               const SizedBox(height: 30),
               CupertinoButton.filled(
-                onPressed: () {},
-                child: const Text('Connect'),
+                onPressed: () async {
+                  AllData.deleteClient('1');
+                },
+                child: const Text('Delete'),
               ),
             ],
           ),

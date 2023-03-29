@@ -22,15 +22,15 @@ class Client {
   });
 //constructor to convert json to object instance
   static Client fromJson(Map<Stream, dynamic> json) => Client(
-        firstName: json['firstName'] == null ? "" : json['firstName'],
-        lastName: json['lastName'] == null ? "" : json['lastName'],
-        clientId: json['clientId'] == null ? "" : json['clientId'],
+        firstName: json['firstName'] ?? "",
+        lastName: json['lastName'] ?? "",
+        clientId: json['clientId'] ?? "",
         //  dob: json['dob'],
-        address1: json['address1'] == null ? "" : json['address1'],
-        address2: json['address2'] == null ? "" : json['address2'],
-        city: json['city'] == null ? "" : json['city'],
-        postcode: json['postcode'] == null ? "" : json['postcode'],
-        country: json['country'] == null ? "" : json['country'],
+        address1: json['address1'] ?? "",
+        address2: json['address2'] ?? "",
+        city: json['city'] ?? "",
+        postcode: json['postcode'] ?? "",
+        country: json['country'] ?? "",
       );
 
   //a method that convert object to Json string
@@ -49,32 +49,6 @@ class Client {
 
   @override
   String toString() {
-    return '{ ${this.firstName}, ${this.lastName}, ${this.address1}, ${this.address2}, ${this.city}, ${this.clientId} }';
+    return '{ $firstName, $lastName, $address1, $address2, $city, $clientId }';
   }
-}
-
-///
-///
-///
-////
-/////
-/////////
-///
-
-class Server {
-  final String name;
-  final String countryCode;
-  final String serverProtocol;
-
-  const Server({
-    required this.name,
-    required this.countryCode,
-    required this.serverProtocol,
-  });
-
-  static Server fromJson(json) => Server(
-        name: json['name'],
-        countryCode: json['countryCode'],
-        serverProtocol: json['serverProtocol'],
-      );
 }

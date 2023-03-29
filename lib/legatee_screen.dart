@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
+//import 'dart:convert';
 //import 'package:wishwell/components/text_field.dart' ;
 import 'package:wishwell/form_validator.dart';
 import 'package:wishwell/shared_preferences.dart';
-import 'package:wishwell/user_model.dart';
+//import 'package:wishwell/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -166,7 +166,7 @@ class LegateeScreenState extends State<LegateeScreen> {
 
       final dataStore = _formKey.currentState?.value;
       //debugPrint(dataStore.toString());
-      AllData.saveJsonData(dataStore);
+      AllData.saveUserData(dataStore);
       //debugPrint('saved');
 
       ScaffoldMessenger.of(context).showSnackBar(

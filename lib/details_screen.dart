@@ -42,18 +42,18 @@ class DetailsScreenState extends State<DetailsScreen> {
     });
     // LOAD DATA TO FORM ON PAGE LOAD
     AllData.getStartingData().then((val) {
-      var decodedJson = jsonDecode(val);
-      var userDetails = decodedJson['deets']; //get nested deets
-      //debugPrint(userDetails.toString());
+      String jsonDataString = val.toString();
+      final decodedJson = jsonDecode(jsonDataString);
 
-      if (userDetails == null) {
+      if (decodedJson['deets'] == null) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('There is no User Details data')),
         );
       } else {
-        Map myMap = userDetails;
+        var userDetails = decodedJson['deets']; //get nested deets
+
         var list = [];
-        myMap.forEach((key, value) => list.add('"$key":"$value"'));
+        userDetails.forEach((key, value) => list.add('"$key":"$value"'));
         var array = list.join(',');
         var d = '{$array}';
         var sData = UserModel.fromMap(jsonDecode(d.toString()));
@@ -61,6 +61,7 @@ class DetailsScreenState extends State<DetailsScreen> {
         _firstNameController.text = sData.firstName.toString();
         _lastNameController.text = sData.lastName.toString();
       }
+      //debugPrint(userDetails.toString());
     });
 
     _firstNameController.addListener(() async {
@@ -159,7 +160,7 @@ class DetailsScreenState extends State<DetailsScreen> {
 
       // SAVE FORM ENTRIES TO DEVICE USER PREFERENCES
       final dataStore = ({"deets": _userObject});
-      AllData.saveJsonData(dataStore);
+      AllData.saveUserData(dataStore);
       //debugPrint('Details screen create user saved as below');
       //debugPrint(dataStore.toString());
 
@@ -179,9 +180,3 @@ class DetailsScreenState extends State<DetailsScreen> {
     }
   }
 }
-
-
-
-
-
-

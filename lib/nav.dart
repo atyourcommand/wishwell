@@ -18,7 +18,7 @@ class _NavState extends State<Nav> {
     const DetailsScreen(),
     const LegateeScreen(),
     const ClientScreen(),
-    ClientAdd(),
+    const ClientAdd(),
   ];
   void _onItemTap(int index) {
     setState(() {

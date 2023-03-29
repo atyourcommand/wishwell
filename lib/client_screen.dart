@@ -1,15 +1,15 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wishwell/form_validator.dart';
+//import 'package:intl/intl.dart';
+//import 'package:shared_preferences/shared_preferences.dart';
+//import 'package:wishwell/form_validator.dart';
 import 'package:wishwell/shared_preferences.dart';
 import 'package:wishwell/client_page.dart';
 import 'package:wishwell/client_model.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:wishwell/add_client_dart.dart';
+//import 'package:flutter_form_builder/flutter_form_builder.dart';
+//import 'package:form_builder_validators/form_builder_validators.dart';
+//import 'package:wishwell/add_client_dart.dart';
 
 class ClientScreen extends StatefulWidget {
   const ClientScreen({Key? key}) : super(key: key);
@@ -37,7 +37,7 @@ class ClientScreenState extends State<ClientScreen> {
   void initState() {
     AllData.getStartingData().then((value) async {
       final body = await json.decode(value);
-      List<dynamic> clientData = body;
+      List<dynamic> clientData = body["clients"];
       debugPrint("clientData==> ${clientData[0]['firstName']}");
       clientList.clear();
       setState(() {
@@ -106,11 +106,11 @@ class ClientScreenState extends State<ClientScreen> {
               trailing: const Icon(Icons.arrow_forward_ios),
               isThreeLine: true,
               title: Text(client.lastName),
-              // onTap: () {
-              //   Navigator.of(context).push(MaterialPageRoute(
-              //     builder: (context) => ClientPage(client: client),
-              //   ));
-              // },
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ClientPage(client: client),
+                ));
+              },
             ),
           );
         },
@@ -152,6 +152,7 @@ class ClientScreenState extends State<ClientScreen> {
   //   super.dispose();
   // }
 
+  // ignore: unused_field
   final _clientObject = <String, String>{};
 
   final String firstName = 'firstName';

@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
+//import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -7,20 +7,14 @@ import 'package:wishwell/client_model.dart';
 
 class AllData {
   static List<Client> clientList = [];
-  static Future saveJsonData(objData) async {
+  static Future saveClientData(objData) async {
     // PREFS DATA
     final prefs = await SharedPreferences.getInstance();
-    // var currentPrefs = prefs.setString('jsonData', objData);
-    // LOCAL DATA NOT USING
-    // final String res = await rootBundle.loadString('assets/data.json');
-    //final localData = await json.decode(res);
-    // var rawData = await json.decode(currentPrefs!);
-    // //debugPrint('SHOWING LOCAL DATA BEFORE SAVE: $rawData');
-    // rawData.addEntries(objData.entries);
-    // var savedData = jsonEncode(rawData);
-    // //debugPrint('SHOWING LOCAL DATA AFTER SAVE: $savedData');
-    // //await prefs.clear();
-    // debugPrint("temp data====> $savedData");
+
+    var raw = {};
+    final currentData = prefs.getString('jsonData');
+    String jsonDataString = currentData.toString();
+    final decodedJson = jsonDecode(jsonDataString);
 
     final body = objData;
     var clientData = body['clients'];
@@ -33,9 +27,39 @@ class AllData {
         city: clientData['city'],
         postcode: clientData['postcode'],
         country: clientData['country']));
+    var clients = {'clients': clientList};
+    //debugPrint("objData===> $clientList");
+    if (decodedJson != null) {
+      raw.addAll(decodedJson);
+    }
+    raw.addAll(clients);
+    await prefs.setString('jsonData', jsonEncode(raw));
+  }
 
-    debugPrint("objData===> ${clientList}");
-    await prefs.setString('jsonData', jsonEncode(clientList));
+  static Future deleteClient(cid) async {
+    final prefs = await SharedPreferences.getInstance();
+    final currentData = prefs.getString('jsonData');
+    String jsonDataString = currentData.toString();
+    final decodedJson = jsonDecode(jsonDataString);
+    var clientData = decodedJson['clients'];
+    debugPrint('delete client no:$cid');
+    await clientData.remove((item) => item.clientId == cid);
+  }
+
+  // SAVE THE USER DETAILS WITH PREVIOUS DATA
+  static Future saveUserData(objData) async {
+    final prefs = await SharedPreferences.getInstance();
+    var raw = {};
+    final currentData = prefs.getString('jsonData');
+
+    String jsonDataString = currentData.toString();
+    final decodedJson = jsonDecode(jsonDataString);
+
+    raw.addAll(decodedJson);
+    raw.addAll(objData);
+
+    prefs.setString('jsonData', jsonEncode(raw));
+    debugPrint('SAVING USER DETAILS AND PREVIOUS DATA: $raw');
   }
 
   static Future<List<Client>> getClientData(BuildContext context) async {
