@@ -1,14 +1,10 @@
-
 //import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wishwell/shared_preferences.dart';
-
-//import 'client_model.dart';
 import 'form_validator.dart';
 
 class ClientAdd extends StatefulWidget {

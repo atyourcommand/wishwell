@@ -1,15 +1,8 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-//import 'package:intl/intl.dart';
-//import 'package:shared_preferences/shared_preferences.dart';
-//import 'package:wishwell/form_validator.dart';
 import 'package:wishwell/shared_preferences.dart';
 import 'package:wishwell/client_detail.dart';
 import 'package:wishwell/client_model.dart';
-//import 'package:flutter_form_builder/flutter_form_builder.dart';
-//import 'package:form_builder_validators/form_builder_validators.dart';
-//import 'package:wishwell/add_client_dart.dart';
 
 class ClientScreen extends StatefulWidget {
   const ClientScreen({Key? key}) : super(key: key);

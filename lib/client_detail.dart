@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wishwell/client_model.dart';
-//import 'package:wishwell/client_screen.dart';
-//import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wishwell/shared_preferences.dart';
-import 'package:flutter/cupertino.dart';
+//import 'package:flutter/cupertino.dart';
 
 class ClientPage extends StatelessWidget {
   final Client client;
@@ -18,8 +16,11 @@ class ClientPage extends StatelessWidget {
         appBar: AppBar(
           title: Text(client.firstName),
         ),
-        body: Center(
+        body: Container(
+          alignment: Alignment.center,
+          padding: const EdgeInsets.all(20),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               //Image.network(
               //  'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif',
@@ -27,20 +28,56 @@ class ClientPage extends StatelessWidget {
               // width: double.infinity,
               //  fit: BoxFit.cover,
               //),
+              const SizedBox(
+                height: 10,
+              ),
               Text(
-                client.lastName,
+                '${client.firstName} ${client.lastName}',
                 style: const TextStyle(
-                  fontSize: 40,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              const SizedBox(
+                height: 20,
+              ),
+              Text(
+                client.address1,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+              Text(
+                client.address2,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+              Text(
+                client.city,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+              Text(
+                client.country,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+
               const SizedBox(height: 30),
-              CupertinoButton.filled(
+
+              OutlinedButton(
                 onPressed: () async {
                   AllData.deleteClient('1');
                 },
-                child: const Text('Delete'),
-              ),
+                child: const Text('Deleted this client'),
+              )
             ],
           ),
         ),
