@@ -21,12 +21,12 @@ class ClientPage extends StatelessWidget {
         body: Center(
           child: Column(
             children: <Widget>[
-              Image.network(
-                'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif',
-                height: 400,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
+              //Image.network(
+              //  'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif',
+              //  height: 400,
+              // width: double.infinity,
+              //  fit: BoxFit.cover,
+              //),
               Text(
                 client.lastName,
                 style: const TextStyle(

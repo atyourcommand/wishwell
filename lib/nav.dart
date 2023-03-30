@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wishwell/add_client_dart.dart';
-import 'package:wishwell/details_screen.dart';
+import 'package:wishwell/add_client.dart';
+import 'package:wishwell/user_screen.dart';
 import 'package:wishwell/home_screen.dart';
 //import 'package:wishwell/legatee_screen.dart';
 import 'package:wishwell/client_screen.dart';
