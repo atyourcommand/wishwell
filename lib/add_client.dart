@@ -292,16 +292,17 @@ class _ClientAddState extends State<ClientAdd> {
                         lastDate: DateTime(2100));
 
                     if (pickedDate != null) {
-                      debugPrint(pickedDate as String?);
+                      debugPrint(pickedDate.toString());
                       String formattedDate =
                           DateFormat('yyyy-MM-dd').format(pickedDate);
-                      debugPrint(
-                          formattedDate); //formatted date output using intl package =>  2021-03-16
+                      //formatted date output using intl package =>  2021-03-16
                       setState(() {
-                        _dob.text =
-                            formattedDate; //set output date to TextField value.
+                        _dob.text = formattedDate
+                            .toString(); //set output date to TextField value.
                       });
-                    } else {}
+                    } else {
+                      debugPrint("===============working data");
+                    }
                   },
                 ),
                 const SizedBox(

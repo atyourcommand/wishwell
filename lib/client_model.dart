@@ -2,7 +2,7 @@ class Client {
   final String firstName;
   final String lastName;
   final String clientId;
-  //final String dob;
+  final String dob;
   final String address1;
   final String address2;
   final String city;
@@ -13,7 +13,7 @@ class Client {
     required this.firstName,
     required this.lastName,
     required this.clientId,
-    // required this.dob,
+    required this.dob,
     required this.address1,
     required this.address2,
     required this.city,
@@ -25,12 +25,12 @@ class Client {
         firstName: json['firstName'] ?? "",
         lastName: json['lastName'] ?? "",
         clientId: json['clientId'] ?? "",
-        //  dob: json['dob'],
         address1: json['address1'] ?? "",
         address2: json['address2'] ?? "",
         city: json['city'] ?? "",
         postcode: json['postcode'] ?? "",
         country: json['country'] ?? "",
+        dob: json['dob'] ?? "",
       );
 
   //a method that convert object to Json string
@@ -39,7 +39,7 @@ class Client {
         'firstName': firstName,
         'lastName': lastName,
         'clientId': clientId,
-        //'dob': dob,
+        'dob': dob,
         'address1': address1,
         'address2': address2,
         'city': city,
@@ -49,6 +49,6 @@ class Client {
 
   @override
   String toString() {
-    return '{ $firstName, $lastName, $address1, $address2, $city, $clientId }';
+    return '{ $firstName, $lastName, $address1, $address2, $city, $clientId ,$dob}';
   }
 }

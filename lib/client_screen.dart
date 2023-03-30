@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+
 import 'package:wishwell/shared_preferences.dart';
-import 'package:wishwell/client_detail.dart';
 import 'package:wishwell/client_model.dart';
+import 'components/nav2.dart';
 
 class ClientScreen extends StatefulWidget {
   const ClientScreen({Key? key}) : super(key: key);
@@ -36,14 +37,16 @@ class ClientScreenState extends State<ClientScreen> {
       setState(() {
         for (int i = 0; i < clientData.length; i++) {
           clientList.add(Client(
-              firstName: clientData[i]['firstName'],
-              lastName: clientData[i]['lastName'],
-              clientId: clientData[i]['clientId'],
-              address1: clientData[i]['address1'],
-              address2: clientData[i]['address2'],
-              city: clientData[i]['city'],
-              postcode: clientData[i]['postcode'],
-              country: clientData[i]['country']));
+            firstName: clientData[i]['firstName'],
+            lastName: clientData[i]['lastName'],
+            clientId: clientData[i]['clientId'],
+            address1: clientData[i]['address1'],
+            address2: clientData[i]['address2'],
+            city: clientData[i]['city'],
+            dob: clientData[i]['dob'],
+            postcode: clientData[i]['postcode'],
+            country: clientData[i]['country'],
+          ));
         }
         // clientList = clientData;
       });
@@ -56,34 +59,38 @@ class ClientScreenState extends State<ClientScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        //appBar: AppBar(title: const Text("Client List")),
-        body: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          child: SingleChildScrollView(
-            child: Column(
-              // ignore: prefer_const_literals_to_create_immutables
-              children: [
-                buildClients(clientList),
-                //  buildForm(context),
-                //   FutureBuilder<List<Client>>(
-                //     // future: ClientAdd.storedata(),
-                //     builder: (context, snapshot) {
-                //       final clients = snapshot.data;
-                //       //buildForm(context);
-                //       switch (snapshot.connectionState) {
-                //         case ConnectionState.waiting:
-                //           return const Center(child: CircularProgressIndicator());
-                //         default:
-                //           if (snapshot.hasError) {
-                //             return const Center(
-                //                 child: Text('Some error occurred'));
-                //           } else {
-                //             return buildClients(clients!);
-                //           }
-                //       }
-                //     },
-                //   ),
-              ],
+        bottomNavigationBar: BottomAppBar(
+          child: SizedBox(
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Nav2()));
+              },
+              child: const Text("Add another client"),
+            ),
+          ),
+        ),
+        body: SafeArea(
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height,
+            child: SingleChildScrollView(
+              child: Column(
+                // ignore: prefer_const_literals_to_create_immutables
+                children: [
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  const Text("Client Screen",
+                      style: TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.w300,
+                      )),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  buildClients(clientList),
+                ],
+              ),
             ),
           ),
         ),
@@ -95,15 +102,64 @@ class ClientScreenState extends State<ClientScreen> {
           final client = clients[index];
           return Card(
             child: ListTile(
-              leading: Text(client.firstName),
-              subtitle: Text(client.firstName),
               trailing: const Icon(Icons.arrow_forward_ios),
-              isThreeLine: true,
-              title: Text(client.lastName),
+              // isThreeLine: true,
+              title: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text("Name :"),
+                      Text(client.firstName),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text(" Last Name :"),
+                      Text(client.lastName),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text("city :"),
+                      Text(client.city),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text("address1 :"),
+                      Text(client.address1),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text("address2 :"),
+                      Text(client.address2),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text("country :"),
+                      Text(client.country),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text("postcode :"),
+                      Text(client.postcode),
+                    ],
+                  ),
+                  // Row(
+                  //   children: [
+                  //     Text("DOB :"),
+                  //     Text(client.dob),
+                  //   ],
+                  // ),
+                ],
+              ),
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => ClientPage(client: client),
-                ));
+                // Navigator.of(context).push(MaterialPageRoute(
+                //   builder: (context) => ClientPage(client: client),
+                // ));
               },
             ),
           );
@@ -299,6 +355,7 @@ class ClientScreenState extends State<ClientScreen> {
   //   ),
   // ));
 }
+
 
 
 

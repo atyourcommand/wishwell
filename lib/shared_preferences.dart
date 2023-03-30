@@ -25,6 +25,7 @@ class AllData {
         address1: clientData['address1'],
         address2: clientData['address2'],
         city: clientData['city'],
+        dob: clientData['dob'],
         postcode: clientData['postcode'],
         country: clientData['country']));
     var clients = {'clients': clientList};

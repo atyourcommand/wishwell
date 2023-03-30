@@ -2,26 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:wishwell/add_client.dart';
 import 'package:wishwell/user_screen.dart';
 import 'package:wishwell/home_screen.dart';
-import './common_controller.dart';
+
 //import 'package:wishwell/legatee_screen.dart';
 import 'package:wishwell/client_screen.dart';
 
-class Nav extends StatefulWidget {
-  Nav({Key? key}) : super(key: key);
+class Nav2 extends StatefulWidget {
+  Nav2({Key? key}) : super(key: key);
 
   @override
-  State<Nav> createState() => _NavState();
-
+  State<Nav2> createState() => _NavState();
 }
 
-class _NavState extends State<Nav> {
-   
+class _NavState extends State<Nav2> {
   // static move() {
   //   int count = 3;
   //   return count;
   // }
-  
-  int _selectedIndex = 0;
+
+  int _selectedIndex = 3;
   final List<Widget> _widgetOptions = <Widget>[
     //const Home(),
     const Home(),
