@@ -3,6 +3,7 @@ class Client {
   final String lastName;
   final String clientId;
   final String dob;
+  final String gender;
   final String address1;
   final String address2;
   final String city;
@@ -14,6 +15,7 @@ class Client {
     required this.lastName,
     required this.clientId,
     required this.dob,
+    required this.gender,
     required this.address1,
     required this.address2,
     required this.city,
@@ -27,6 +29,7 @@ class Client {
         clientId: json['clientId'] ?? "",
         address1: json['address1'] ?? "",
         address2: json['address2'] ?? "",
+        gender: json['gender'] ?? "",
         city: json['city'] ?? "",
         postcode: json['postcode'] ?? "",
         country: json['country'] ?? "",
@@ -40,6 +43,7 @@ class Client {
         'lastName': lastName,
         'clientId': clientId,
         'dob': dob,
+        'gender': gender,
         'address1': address1,
         'address2': address2,
         'city': city,
@@ -49,6 +53,6 @@ class Client {
 
   @override
   String toString() {
-    return '{ $firstName, $lastName, $address1, $address2, $city, $clientId ,$dob}';
+    return '{ $firstName, $lastName, $address1, $address2, $city, $clientId ,$dob, }';
   }
 }

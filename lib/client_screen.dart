@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-
-import 'package:wishwell/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wishwell/client_model.dart';
+import 'package:wishwell/shared_preferences.dart';
+import 'package:wishwell/client_detail.dart';
 import 'components/nav2.dart';
 
 class ClientScreen extends StatefulWidget {
@@ -29,6 +30,7 @@ class ClientScreenState extends State<ClientScreen> {
 
   @override
   void initState() {
+    getGenderValuesSF();
     AllData.getStartingData().then((value) async {
       final body = await json.decode(value);
       List<dynamic> clientData = body["clients"];
@@ -42,6 +44,7 @@ class ClientScreenState extends State<ClientScreen> {
             clientId: clientData[i]['clientId'],
             address1: clientData[i]['address1'],
             address2: clientData[i]['address2'],
+            gender: clientData[i]['gender'] ?? "",
             city: clientData[i]['city'],
             dob: clientData[i]['dob'],
             postcode: clientData[i]['postcode'],
@@ -57,14 +60,21 @@ class ClientScreenState extends State<ClientScreen> {
     super.initState();
   }
 
+  getGenderValuesSF() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    String gendername = prefs.getString('gender') ?? "";
+    return gendername.toString();
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
         bottomNavigationBar: BottomAppBar(
           child: SizedBox(
             child: ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Nav2()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Nav2()));
               },
               child: const Text("Add another client"),
             ),
@@ -108,43 +118,55 @@ class ClientScreenState extends State<ClientScreen> {
                 children: [
                   Row(
                     children: [
-                      Text("Name :"),
+                      const Text("Name :"),
                       Text(client.firstName),
                     ],
                   ),
                   Row(
                     children: [
-                      Text(" Last Name :"),
+                      const Text(" Last Name :"),
                       Text(client.lastName),
                     ],
                   ),
                   Row(
                     children: [
-                      Text("city :"),
+                      const Text("city :"),
                       Text(client.city),
                     ],
                   ),
                   Row(
                     children: [
-                      Text("address1 :"),
+                      const Text("clientId :"),
+                      Text(client.clientId),
+                    ],
+                  ),
+                  // Row(
+                  //   children: [
+                  //     const Text("gender :"),
+                  //     Text(getGenderValuesSF.toString()),
+                  //   ],
+                  // ),
+                  Row(
+                    children: [
+                      const Text("address1 :"),
                       Text(client.address1),
                     ],
                   ),
                   Row(
                     children: [
-                      Text("address2 :"),
+                      const Text("address2 :"),
                       Text(client.address2),
                     ],
                   ),
                   Row(
                     children: [
-                      Text("country :"),
+                      const Text("country :"),
                       Text(client.country),
                     ],
                   ),
                   Row(
                     children: [
-                      Text("postcode :"),
+                      const Text("postcode :"),
                       Text(client.postcode),
                     ],
                   ),
@@ -157,9 +179,9 @@ class ClientScreenState extends State<ClientScreen> {
                 ],
               ),
               onTap: () {
-                // Navigator.of(context).push(MaterialPageRoute(
-                //   builder: (context) => ClientPage(client: client),
-                // ));
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ClientPage(client: client),
+                ));
               },
             ),
           );
@@ -207,7 +229,7 @@ class ClientScreenState extends State<ClientScreen> {
 
   final String firstName = 'firstName';
   final String lastName = 'lastName';
-  final String gender = 'Gender';
+  //final String gender = 'gender';
   final String address = 'Address1';
   final String address1 = 'Address2';
   final String city = 'City';

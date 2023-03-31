@@ -15,6 +15,6 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         // home : new ListViewBuilder(), NO Need To Use Unnecessary New Keyword
         //home: const ListTileApp());
-        home:  Nav());
+        home: const Nav());
   }
 }

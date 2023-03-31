@@ -7,7 +7,7 @@ import 'package:wishwell/home_screen.dart';
 import 'package:wishwell/client_screen.dart';
 
 class Nav2 extends StatefulWidget {
-  Nav2({Key? key}) : super(key: key);
+  const Nav2({Key? key}) : super(key: key);
 
   @override
   State<Nav2> createState() => _NavState();
@@ -25,7 +25,7 @@ class _NavState extends State<Nav2> {
     const Home(),
     const DetailsScreen(),
     const ClientScreen(),
-    const ClientAdd(),
+    ClientAdd(),
   ];
   void _onItemTap(int index) {
     setState(() {

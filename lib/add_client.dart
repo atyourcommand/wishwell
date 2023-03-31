@@ -8,8 +8,6 @@ import 'package:wishwell/shared_preferences.dart';
 import 'form_validator.dart';
 
 class ClientAdd extends StatefulWidget {
-  const ClientAdd({super.key});
-
   @override
   State<ClientAdd> createState() => _ClientAddState();
 }
@@ -18,28 +16,35 @@ class _ClientAddState extends State<ClientAdd> {
   final Map _clientObject = <String, String>{};
 
   final String firstName = 'firstName';
+
   final String lastName = 'lastName';
-  final String gender = 'Gender';
+  final String gender = 'gender';
   final String address = 'Address1';
   final String address1 = 'Address2';
   final String city = 'City';
   final String country = 'Country';
-  final String dob = 'Date of Birth';
+
+  //final String dob = 'Date of Birth';
   Widget saveNameBtn() => OutlinedButton(
         onPressed: () {
-          _clientObject['firstName'] =
-              _firstNameController.text.toString().trim();
-          _clientObject['lastName'] =
-              _lastNameController.text.toString().trim();
-          _clientObject['clientId'] = "1";
-          _clientObject['address1'] = _address1.text.toString().trim();
-          _clientObject['address2'] = _address2.text.toString().trim();
-          _clientObject['city'] = _city.text.toString().trim();
-          _clientObject['postcode'] = "";
-          _clientObject['country'] = _country.text.toString().trim();
-          storedata();
+          setState(() {
+            _clientObject['firstName'] =
+                _firstNameController.text.toString().trim();
+            _clientObject['lastName'] =
+                _lastNameController.text.toString().trim();
+            _clientObject['clientId'] =
+                _clientIdController.text.toString().trim();
 
-          _createClient();
+            _clientObject['address1'] = _address1.text.toString().trim();
+            _clientObject['address2'] = _address2.text.toString().trim();
+            _clientObject['city'] = _city.text.toString().trim();
+            _clientObject['postcode'] = "";
+            _clientObject['country'] = _country.text.toString().trim();
+
+            //  _clientObject['gender'] = _gender.text.toString().trim();
+            storedata();
+            _createClient();
+          });
         },
         child: const Text('Create client'),
       );
@@ -85,12 +90,14 @@ class _ClientAddState extends State<ClientAdd> {
     // initialGetSavedData();
     _firstNameController = TextEditingController();
     _lastNameController = TextEditingController();
-    _gender = TextEditingController();
+    _clientIdController = TextEditingController();
+    //  _gender = TextEditingController();
     _address1 = TextEditingController();
     _address2 = TextEditingController();
     _city = TextEditingController();
     _country = TextEditingController();
     _dob = TextEditingController();
+
     super.initState();
     //clientsFuture = getClients();
   }
@@ -120,30 +127,38 @@ class _ClientAddState extends State<ClientAdd> {
   final _formKey = GlobalKey<FormBuilderState>();
   late TextEditingController _firstNameController;
   late TextEditingController _lastNameController;
+  late TextEditingController _clientIdController;
 
   // ignore: unused_field
-  late TextEditingController _gender;
+  late TextEditingController _genderController;
   late TextEditingController _address1;
   late TextEditingController _address2;
   late TextEditingController _city;
   late TextEditingController _country;
+  // late TextEditingController _gender;
   late TextEditingController _dob;
   String? _dropDownValue;
   // late Future<List<Client>> clientsFuture; //NEW
 
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
-  Future<void> storedata() async {
+  storedata() async {
     final SharedPreferences prefs = await _prefs;
     prefs.setString('firstname', _firstNameController.text.toString().trim());
     prefs.setString('lastname', _lastNameController.text.toString().trim());
+    prefs.setString('gender', _dropDownValue.toString().trim());
+
+    print("=============storedata======>${_dropDownValue.toString()}");
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      //appBar: AppBar(title: const Text("Add Client")),
+      appBar: AppBar(
+        leading: const BackButton(),
+        title: const Text('My App'),
+      ),
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
         child: Padding(
@@ -160,7 +175,7 @@ class _ClientAddState extends State<ClientAdd> {
                       fontWeight: FontWeight.w300,
                     )),
                 const Text(
-                  "add a client.",
+                  "Add a client.",
                   style: TextStyle(
                     fontSize: 40,
                     fontWeight: FontWeight.bold,
@@ -194,6 +209,15 @@ class _ClientAddState extends State<ClientAdd> {
                   },
                   onSaved: (val) => _clientObject['lastName'] = val ?? '',
                 ),
+
+                //=========Client ID textFeild========//
+                FormBuilderTextField(
+                  controller: _clientIdController,
+                  name: city,
+                  decoration: const InputDecoration(labelText: 'Client Id'),
+                  validator: FormBuilderValidators.required(),
+                  onSaved: (val) => _clientObject['lastName'] = val ?? '',
+                ),
                 //===============Gender =========//
                 const SizedBox(height: 10),
                 DropdownButton(
@@ -218,9 +242,14 @@ class _ClientAddState extends State<ClientAdd> {
                       },
                     ).toList(),
                     onChanged: (val) {
+                      //_genderController.text = _dropDownValue!;
+                      // print(
+                      //     "===============>check= gender===========>${_genderController.toString()}");
                       setState(
                         () {
-                          _dropDownValue = val;
+                          _dropDownValue = val.toString();
+
+                          print("============chekcypu ====>$_dropDownValue");
                         },
                       );
                     }),
@@ -388,3 +417,6 @@ class _ClientAddState extends State<ClientAdd> {
 
 //   Client client = Client.fromJson(Jsondetails);
 // }
+
+
+

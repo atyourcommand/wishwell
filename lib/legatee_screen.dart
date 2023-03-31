@@ -29,13 +29,13 @@ class LegateeScreenState extends State<LegateeScreen> {
 
   late TextEditingController _firstNameController;
   late TextEditingController _lastNameController;
-  late TextEditingController _genderController;
+
 
   @override
   void initState() {
     _firstNameController = TextEditingController();
     _lastNameController = TextEditingController();
-    _genderController = TextEditingController();
+;
 
     // LOAD DATA TO FORM ON PAGE LOAD
 
@@ -72,13 +72,13 @@ class LegateeScreenState extends State<LegateeScreen> {
   void dispose() {
     _firstNameController.dispose();
     _lastNameController.dispose();
-    _genderController.dispose();
+
     super.dispose();
   }
 
   final String firstName = 'firstName';
   final String lastName = 'lastName';
-  final String gender = 'gender';
+
   bool _genderHasError = false;
 
   @override
