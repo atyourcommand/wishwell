@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 //import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,8 +27,8 @@ class AllData {
         gender: clientData['gender'] ?? "",
         address2: clientData['address2'],
         city: clientData['city'],
-        //dob: clientData['dob'],
-        dob: '24.08.62',
+        dob: clientData['dob'],
+        //dob: '24.08.62',
         postcode: clientData['postcode'],
         country: clientData['country']));
     var clients = {'clients': clientList};
@@ -67,7 +68,7 @@ class AllData {
 
     raw.addAll(decodedJson);
     raw.addAll(objData);
-
+    log(jsonEncode(raw));
     prefs.setString('jsonData', jsonEncode(raw));
     debugPrint('SAVING USER DETAILS AND PREVIOUS DATA: $raw');
   }

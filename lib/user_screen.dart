@@ -103,66 +103,68 @@ class DetailsScreenState extends State<DetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-        //appBar: AppBar(
-        //  title: const Text('My Details'),
-        //),
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        key: key,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 80,
-              ),
-              const Text("To start, lets learn",
+    return SingleChildScrollView(
+      child: Form(
+          //appBar: AppBar(
+          //  title: const Text('My Details'),
+          //),
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          key: key,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 80,
+                ),
+                const Text("To start, lets learn",
+                    style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.w300,
+                    )),
+                const Text(
+                  "about you.",
                   style: TextStyle(
                     fontSize: 40,
-                    fontWeight: FontWeight.w300,
-                  )),
-              const Text(
-                "about you.",
-                style: TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 50,
-              ),
-              TF(
-                onSaved: (val) => _userObject['firstName'] = val ?? '',
-                controller: _firstNameController,
-                hintText: 'First Name',
-                suffix: GestureDetector(
-                    onTap: () {
-                      _firstNameController.clear();
-                    },
-                    child: const Icon(Icons.clear)),
-                autoFocus: true,
-                focusNode: _firstNameFocusNode,
-              ),
-              const SizedBox(height: 10),
-              TF(
-                focusNode: focusNode,
-                onSaved: (val) => _userObject['lastName'] = val ?? '',
-                controller: _lastNameController,
-                hintText: 'Last Name',
-                suffix: GestureDetector(
-                    onTap: () {
-                      _lastNameController.clear();
-                    },
-                    child: const Icon(Icons.clear)),
-              ),
-              const SizedBox(
-                height: 50,
-              ),
-              saveNameBtn(),
-              clearDataBtn(),
-            ],
-          ),
-        ));
+                const SizedBox(
+                  height: 50,
+                ),
+                TF(
+                  onSaved: (val) => _userObject['firstName'] = val ?? '',
+                  controller: _firstNameController,
+                  hintText: 'First Name',
+                  suffix: GestureDetector(
+                      onTap: () {
+                        _firstNameController.clear();
+                      },
+                      child: const Icon(Icons.clear)),
+                  autoFocus: true,
+                  focusNode: _firstNameFocusNode,
+                ),
+                const SizedBox(height: 10),
+                TF(
+                  focusNode: focusNode,
+                  onSaved: (val) => _userObject['lastName'] = val ?? '',
+                  controller: _lastNameController,
+                  hintText: 'Last Name',
+                  suffix: GestureDetector(
+                      onTap: () {
+                        _lastNameController.clear();
+                      },
+                      child: const Icon(Icons.clear)),
+                ),
+                const SizedBox(
+                  height: 50,
+                ),
+                saveNameBtn(),
+                clearDataBtn(),
+              ],
+            ),
+          )),
+    );
   }
 
   //VALIDATION

@@ -1,4 +1,6 @@
 //import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -19,7 +21,7 @@ class _ClientAddState extends State<ClientAdd> {
   final Map _clientObject = <String, String>{};
 
   final String firstName = 'firstName';
-
+  final String dob = 'dob';
   final String lastName = 'lastName';
   final String gender = 'gender';
   final String address = 'Address1';
@@ -30,6 +32,8 @@ class _ClientAddState extends State<ClientAdd> {
   //final String dob = 'Date of Birth';
   Widget saveNameBtn() => OutlinedButton(
         onPressed: () {
+          log("====saving data=====");
+
           setState(() {
             _clientObject['firstName'] =
                 _firstNameController.text.toString().trim();
@@ -37,17 +41,19 @@ class _ClientAddState extends State<ClientAdd> {
                 _lastNameController.text.toString().trim();
             _clientObject['clientId'] =
                 _clientIdController.text.toString().trim();
-
+            _clientObject['gender'] = _dropDownValue.toString().trim();
             _clientObject['address1'] = _address1.text.toString().trim();
             _clientObject['address2'] = _address2.text.toString().trim();
             _clientObject['city'] = _city.text.toString().trim();
             _clientObject['postcode'] = "";
             _clientObject['country'] = _country.text.toString().trim();
-
+            _clientObject['dob'] = _dob.text.toString().trim();
             //  _clientObject['gender'] = _gender.text.toString().trim();
-            storedata();
-            _createClient();
           });
+          log("====$_clientObject=====");
+
+          // storedata();
+          _createClient();
         },
         child: const Text('Create client'),
       );
@@ -57,7 +63,8 @@ class _ClientAddState extends State<ClientAdd> {
 
     if (validateForm()) {
       final dataStore = ({"clients": _clientObject});
-      debugPrint(dataStore.toString());
+      // debugPrint(dataStore.toString());
+      log("====dataStore => $dataStore=====");
       AllData.saveClientData(dataStore);
       //debugPrint(dataStore.toString());
 
@@ -153,7 +160,8 @@ class _ClientAddState extends State<ClientAdd> {
     prefs.setString('firstname', _firstNameController.text.toString().trim());
     prefs.setString('lastname', _lastNameController.text.toString().trim());
     prefs.setString('gender', _dropDownValue.toString().trim());
-
+    prefs.setString('dob', _clientObject['dob']);
+    log(_clientObject['dob']);
     debugPrint("=============storedata======>${_dropDownValue.toString()}");
   }
 
