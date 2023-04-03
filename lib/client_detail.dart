@@ -14,7 +14,10 @@ class ClientPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text(client.firstName),
+          iconTheme: const IconThemeData(color: Colors.black),
+          title: Text(client.firstName,
+              style: const TextStyle(color: Colors.black)),
+          backgroundColor: Colors.white,
         ),
         body: Container(
           alignment: Alignment.center,
@@ -33,6 +36,20 @@ class ClientPage extends StatelessWidget {
               ),
               Text(
                 '${client.firstName} ${client.lastName}',
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                client.dob,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+              Text(
+                client.gender,
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -63,6 +80,13 @@ class ClientPage extends StatelessWidget {
                 ),
               ),
               Text(
+                client.postcode,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+              Text(
                 client.country,
                 style: const TextStyle(
                   fontSize: 20,
@@ -71,10 +95,9 @@ class ClientPage extends StatelessWidget {
               ),
 
               const SizedBox(height: 30),
-
               OutlinedButton(
                 onPressed: () async {
-                  AllData.deleteClient('1');
+                  AllData.deleteClient(int.parse(client.clientId));
                 },
                 child: const Text('Deleted this client'),
               )

@@ -34,22 +34,22 @@ class ClientScreenState extends State<ClientScreen> {
     AllData.getStartingData().then((value) async {
       final body = await json.decode(value);
       List<dynamic> clientData = body["clients"];
-      debugPrint("clientData==> ${clientData[0]['firstName']}");
+      //debugPrint("clientData==> ${clientData[0]['firstName']}");
       clientList.clear();
       setState(() {
         for (int i = 0; i < clientData.length; i++) {
           clientList.add(Client(
-            firstName: clientData[i]['firstName'],
-            lastName: clientData[i]['lastName'],
-            clientId: clientData[i]['clientId'],
-            address1: clientData[i]['address1'],
-            address2: clientData[i]['address2'],
-            gender: clientData[i]['gender'] ?? "",
-            city: clientData[i]['city'],
-            dob: clientData[i]['dob'],
-            postcode: clientData[i]['postcode'],
-            country: clientData[i]['country'],
-          ));
+              firstName: clientData[i]['firstName'],
+              lastName: clientData[i]['lastName'],
+              //clientId: clientData[i]['clientId'],
+              address1: clientData[i]['address1'],
+              address2: clientData[i]['address2'],
+              gender: clientData[i]['gender'] ?? "",
+              city: clientData[i]['city'],
+              dob: clientData[i]['dob'],
+              postcode: clientData[i]['postcode'],
+              country: clientData[i]['country'],
+              clientId: i.toString()));
         }
         // clientList = clientData;
       });
@@ -62,39 +62,46 @@ class ClientScreenState extends State<ClientScreen> {
 
   getGenderValuesSF() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-
     String gendername = prefs.getString('gender') ?? "";
     return gendername.toString();
   }
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        bottomNavigationBar: BottomAppBar(
-          child: SizedBox(
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Nav2()));
-              },
-              child: const Text("Add another client"),
-            ),
-          ),
-        ),
+        // bottomNavigationBar: BottomAppBar(
+        //   child: SizedBox(
+        //     child: OutlinedButton(
+        //       onPressed: () {
+        //         Navigator.push(context,
+        //             MaterialPageRoute(builder: (context) => const Nav2()));
+        //       },
+        //       child: const Text("Add another client"),
+        //     ),
+        //   ),
+        // ),
         body: SafeArea(
           child: SizedBox(
             height: MediaQuery.of(context).size.height,
             child: SingleChildScrollView(
               child: Column(
-                // ignore: prefer_const_literals_to_create_immutables
                 children: [
                   const SizedBox(
                     height: 50,
                   ),
-                  const Text("Client Screen",
+                  const Text("Clients",
                       style: TextStyle(
                         fontSize: 40,
                         fontWeight: FontWeight.w300,
                       )),
+                  OutlinedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Nav2()));
+                    },
+                    child: const Text('+ Client'),
+                  ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -110,70 +117,67 @@ class ClientScreenState extends State<ClientScreen> {
         itemCount: clients.length,
         itemBuilder: (context, index) {
           final client = clients[index];
+
           return Card(
             child: ListTile(
               trailing: const Icon(Icons.arrow_forward_ios),
               // isThreeLine: true,
               title: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      const Text("Name :"),
-                      Text(client.firstName),
-                    ],
+                  Text(
+                    '${client.firstName} ${client.lastName}',
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.normal,
+                    ),
                   ),
-                  Row(
-                    children: [
-                      const Text(" Last Name :"),
-                      Text(client.lastName),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      const Text("city :"),
-                      Text(client.city),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      const Text("clientId :"),
-                      Text(client.clientId),
-                    ],
-                  ),
+                  // Row(
+                  //   children: [
+                  //     const Text(" Last Name :"),
+                  //     Text(client.lastName),
+                  //   ],
+                  // ),
+                  // Row(
+                  //   children: [
+                  //     const Text("city :"),
+                  //     Text(client.city),
+                  //   ],
+                  // ),
+                  // Row(
+                  //   children: [
+                  //     const Text("clientId :"),
+                  //     Text(index.toString()),
+                  //   ],
+                  // ),
                   // Row(
                   //   children: [
                   //     const Text("gender :"),
                   //     Text(getGenderValuesSF.toString()),
                   //   ],
                   // ),
-                  Row(
-                    children: [
-                      const Text("address1 :"),
-                      Text(client.address1),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      const Text("address2 :"),
-                      Text(client.address2),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      const Text("country :"),
-                      Text(client.country),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      const Text("postcode :"),
-                      Text(client.postcode),
-                    ],
-                  ),
                   // Row(
                   //   children: [
-                  //     Text("DOB :"),
-                  //     Text(client.dob),
+                  //     const Text("address1 :"),
+                  //     Text(client.address1),
+                  //   ],
+                  // ),
+                  // Row(
+                  //   children: [
+                  //     const Text("address2 :"),
+                  //     Text(client.address2),
+                  //   ],
+                  // ),
+                  // Row(
+                  //   children: [
+                  //     const Text("country :"),
+                  //     Text(client.country),
+                  //   ],
+                  // ),
+                  // Row(
+                  //   children: [
+                  //     const Text("postcode :"),
+                  //     Text(client.postcode),
                   //   ],
                   // ),
                 ],
@@ -229,7 +233,7 @@ class ClientScreenState extends State<ClientScreen> {
 
   final String firstName = 'firstName';
   final String lastName = 'lastName';
-  //final String gender = 'gender';
+  final String gender = 'gender';
   final String address = 'Address1';
   final String address1 = 'Address2';
   final String city = 'City';

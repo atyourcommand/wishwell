@@ -4,10 +4,13 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wishwell/client_screen.dart';
 import 'package:wishwell/shared_preferences.dart';
 import 'form_validator.dart';
 
 class ClientAdd extends StatefulWidget {
+  const ClientAdd({super.key});
+
   @override
   State<ClientAdd> createState() => _ClientAddState();
 }
@@ -61,6 +64,9 @@ class _ClientAddState extends State<ClientAdd> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Processing Data')),
       );
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => const ClientScreen(),
+      ));
     }
 
     // if (_formKey.currentState == null) {
@@ -148,7 +154,7 @@ class _ClientAddState extends State<ClientAdd> {
     prefs.setString('lastname', _lastNameController.text.toString().trim());
     prefs.setString('gender', _dropDownValue.toString().trim());
 
-    print("=============storedata======>${_dropDownValue.toString()}");
+    debugPrint("=============storedata======>${_dropDownValue.toString()}");
   }
 
   @override
@@ -167,22 +173,22 @@ class _ClientAddState extends State<ClientAdd> {
             child: Column(
               children: [
                 const SizedBox(
-                  height: 80,
+                  height: 20,
                 ),
-                const Text("Why not,",
+                const Text("Add a Client",
                     style: TextStyle(
                       fontSize: 40,
                       fontWeight: FontWeight.w300,
                     )),
-                const Text(
-                  "Add a client.",
-                  style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                // const Text(
+                //   "Add a client.",
+                //   style: TextStyle(
+                //     fontSize: 40,
+                //     fontWeight: FontWeight.bold,
+                //   ),
+                //),
                 const SizedBox(
-                  height: 50,
+                  height: 10,
                 ),
                 //=========frist name textFeild========//
                 TextFormField(
@@ -211,13 +217,13 @@ class _ClientAddState extends State<ClientAdd> {
                 ),
 
                 //=========Client ID textFeild========//
-                FormBuilderTextField(
-                  controller: _clientIdController,
-                  name: city,
-                  decoration: const InputDecoration(labelText: 'Client Id'),
-                  validator: FormBuilderValidators.required(),
-                  onSaved: (val) => _clientObject['lastName'] = val ?? '',
-                ),
+                // FormBuilderTextField(
+                //   controller: _clientIdController,
+                //   name: city,
+                //   decoration: const InputDecoration(labelText: 'Client Id'),
+                //   validator: FormBuilderValidators.required(),
+                //   onSaved: (val) => _clientObject['lastName'] = val ?? '',
+                // ),
                 //===============Gender =========//
                 const SizedBox(height: 10),
                 DropdownButton(
@@ -249,7 +255,8 @@ class _ClientAddState extends State<ClientAdd> {
                         () {
                           _dropDownValue = val.toString();
 
-                          print("============chekcypu ====>$_dropDownValue");
+                          debugPrint(
+                              "============chekcypu ====>$_dropDownValue");
                         },
                       );
                     }),

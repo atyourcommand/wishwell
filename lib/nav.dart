@@ -25,7 +25,7 @@ class _NavState extends State<Nav> {
     const Home(),
     const DetailsScreen(),
     const ClientScreen(),
-    ClientAdd(),
+    const ClientAdd(),
   ];
   void _onItemTap(int index) {
     setState(() {

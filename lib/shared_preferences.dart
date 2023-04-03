@@ -40,13 +40,20 @@ class AllData {
   }
 
   static Future deleteClient(cid) async {
+    var raw = {};
     final prefs = await SharedPreferences.getInstance();
     final currentData = prefs.getString('jsonData');
     String jsonDataString = currentData.toString();
     final decodedJson = jsonDecode(jsonDataString);
-    var clientData = decodedJson['clients'];
-    debugPrint('delete client no:$cid');
-    await clientData.remove((item) => item.clientId == cid);
+    var clientList = decodedJson['clients'];
+    clientList.removeAt(cid);
+    //debugPrint(clientList.toString());
+    var clients = {'clients': clientList};
+    if (decodedJson != null) {
+      raw.addAll(decodedJson);
+    }
+    raw.addAll(clients);
+    await prefs.setString('jsonData', jsonEncode(raw));
   }
 
   // SAVE THE USER DETAILS WITH PREVIOUS DATA
