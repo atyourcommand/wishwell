@@ -5,6 +5,7 @@ import 'package:wishwell/home_screen.dart';
 
 //import 'package:wishwell/legatee_screen.dart';
 import 'package:wishwell/client_screen.dart';
+//import 'package:wishwell/asset_screen.dart';
 
 class Nav2 extends StatefulWidget {
   const Nav2({Key? key}) : super(key: key);
@@ -26,6 +27,7 @@ class _NavState extends State<Nav2> {
     const DetailsScreen(),
     const ClientScreen(),
     const ClientAdd(),
+    //const AssetScreen(),
   ];
   void _onItemTap(int index) {
     setState(() {
@@ -72,10 +74,10 @@ class _NavState extends State<Nav2> {
             BottomNavigationBarItem(
               // backgroundColor: Colors.blue,
               icon: Icon(
-                Icons.person_add,
+                Icons.card_giftcard,
                 color: Colors.grey.shade600,
               ),
-              label: 'Add Client',
+              label: 'Assets',
             ),
           ],
           currentIndex: _selectedIndex,

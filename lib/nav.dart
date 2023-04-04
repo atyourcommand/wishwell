@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:wishwell/add_client.dart';
+//import 'package:wishwell/add_client.dart';
 import 'package:wishwell/user_screen.dart';
 import 'package:wishwell/home_screen.dart';
+import 'package:wishwell/asset_screen.dart';
 //import './common_controller.dart';
 //import 'package:wishwell/legatee_screen.dart';
 import 'package:wishwell/client_screen.dart';
@@ -25,7 +26,7 @@ class _NavState extends State<Nav> {
     const Home(),
     const DetailsScreen(),
     const ClientScreen(),
-    const ClientAdd(),
+    const AssetScreen(),
   ];
   void _onItemTap(int index) {
     setState(() {
@@ -72,10 +73,10 @@ class _NavState extends State<Nav> {
             BottomNavigationBarItem(
               // backgroundColor: Colors.blue,
               icon: Icon(
-                Icons.person_add,
+                Icons.hotel_class_rounded,
                 color: Colors.grey.shade600,
               ),
-              label: 'Add Client',
+              label: 'Assets',
             ),
           ],
           currentIndex: _selectedIndex,
