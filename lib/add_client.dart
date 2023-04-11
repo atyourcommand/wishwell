@@ -4,7 +4,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+//import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wishwell/client_screen.dart';
 import 'package:wishwell/provider/client_provider.dart';
 import 'form_validator.dart';
@@ -17,7 +17,7 @@ class ClientAdd extends StatefulWidget {
 }
 
 class _ClientAddState extends State<ClientAdd> {
-  final Map _clientObject = <String, String>{};
+  //final Map _clientObject = <String, String>{};
 
   final String firstName = 'firstName';
   final String lastName = 'lastName';
@@ -58,180 +58,175 @@ class _ClientAddState extends State<ClientAdd> {
   //
 
   List<Step> stepList() => [
-    Step(
-        state:
-        _activeStepIndex <= 0 ? StepState.editing : StepState.complete,
-        isActive: _activeStepIndex >= 0,
-        title: Text('Account'),
-        content: Container(
-          child: Column(
-            children: [
-              TextFormField(
-                controller: _firstNameController,
-                decoration: const InputDecoration(
-                    labelText: 'First Name', border: OutlineInputBorder()),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    ///--- toast
-                    return '';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 10),
-              TextFormField(
-                controller: _lastNameController,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(), labelText: 'Last Name'),
-                validator: (value) {
-                  if (value == null && value!.isEmpty) {
-                    ///--- toast
-                  }
-                  return null;
-                },
-              ),
-              //===============Gender =========//
-              const SizedBox(height: 10),
-              DecoratedBox(
-                decoration: const ShapeDecoration(
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(
-                        width: 1.0,
-                        style: BorderStyle.solid,
-                        color: Colors.grey),
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+        Step(
+            state:
+                _activeStepIndex <= 0 ? StepState.editing : StepState.complete,
+            isActive: _activeStepIndex >= 0,
+            title: const Text('Account'),
+            content: Column(
+              children: [
+                TextFormField(
+                  controller: _firstNameController,
+                  decoration: const InputDecoration(
+                      labelText: 'First Name', border: OutlineInputBorder()),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      ///--- toast
+                      return '';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 10),
+                TextFormField(
+                  controller: _lastNameController,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(), labelText: 'Last Name'),
+                  validator: (value) {
+                    if (value == null && value!.isEmpty) {
+                      ///--- toast
+                    }
+                    return null;
+                  },
+                ),
+                //===============Gender =========//
+                const SizedBox(height: 10),
+                DecoratedBox(
+                  decoration: const ShapeDecoration(
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                          width: 1.0,
+                          style: BorderStyle.solid,
+                          color: Colors.grey),
+                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: DropdownButton(
+                        hint: _dropDownValue == null
+                            ? const Text('Gender')
+                            : Text(
+                                _dropDownValue!,
+                                style: const TextStyle(color: Colors.black38),
+                              ),
+                        isExpanded: true,
+                        iconSize: 30.0,
+                        style: const TextStyle(color: Colors.black38),
+                        items: [
+                          'Male',
+                          'Female',
+                        ].map(
+                          (val) {
+                            return DropdownMenuItem<String>(
+                              value: val,
+                              child: Text(val),
+                            );
+                          },
+                        ).toList(),
+                        onChanged: (val) {
+                          setState(
+                            () {
+                              _dropDownValue = val;
+                            },
+                          );
+                        }),
                   ),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: DropdownButton(
-                      hint: _dropDownValue == null
-                          ? const Text('Gender')
-                          : Text(
-                        _dropDownValue!,
-                        style: const TextStyle(color: Colors.black38),
-                      ),
-                      isExpanded: true,
-                      iconSize: 30.0,
-                      style: const TextStyle(color: Colors.black38),
-                      items: [
-                        'Male',
-                        'Female',
-                      ].map(
-                            (val) {
-                          return DropdownMenuItem<String>(
-                            value: val,
-                            child: Text(val),
-                          );
-                        },
-                      ).toList(),
-                      onChanged: (val) {
-                        setState(
-                              () {
-                            _dropDownValue = val;
-                          },
-                        );
-                      }),
+                const SizedBox(height: 10),
+                FormBuilderTextField(
+                  controller: _dob,
+                  name: lastName,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(), labelText: 'Date of Birth'),
+                  validator: FormBuilderValidators.required(),
+                  onTap: () async {
+                    DateTime? pickedDate = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(1950),
+                        lastDate: DateTime(2100));
+
+                    if (pickedDate != null) {
+                      debugPrint(pickedDate.toString());
+                      String formattedDate =
+                          DateFormat('yyyy-MM-dd').format(pickedDate);
+                      //formatted date output using intl package =>  2021-03-16
+                      setState(() {
+                        _dob.text = formattedDate
+                            .toString(); //set output date to TextField value.
+                      });
+                    } else {
+                      debugPrint("===============working data");
+                    }
+                  },
                 ),
-              ),
-              const SizedBox(height: 10),
-              FormBuilderTextField(
-                controller: _dob,
-                name: lastName,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Date of Birth'),
-                validator: FormBuilderValidators.required(),
-                onTap: () async {
-                  DateTime? pickedDate = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(1950),
-                      lastDate: DateTime(2100));
+              ],
+            )),
+        Step(
+            state:
+                _activeStepIndex <= 1 ? StepState.editing : StepState.complete,
+            isActive: _activeStepIndex >= 1,
+            title: const Text('Address'),
+            content: Column(
+              children: [
+                //=========Address  textFeild========//
 
-                  if (pickedDate != null) {
-                    debugPrint(pickedDate.toString());
-                    String formattedDate =
-                    DateFormat('yyyy-MM-dd').format(pickedDate);
-                    //formatted date output using intl package =>  2021-03-16
-                    setState(() {
-                      _dob.text = formattedDate
-                          .toString(); //set output date to TextField value.
-                    });
-                  } else {
-                    debugPrint("===============working data");
-                  }
-                },
-              ),
-            ],
-          ),
-        )),
-    Step(
-        state:
-        _activeStepIndex <= 1 ? StepState.editing : StepState.complete,
-        isActive: _activeStepIndex >= 1,
-        title: const Text('Address'),
-        content: Container(
-          child: Column(
-            children: [
-              //=========Address  textFeild========//
-
-              FormBuilderTextField(
-                controller: _address1,
-                name: address,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(), labelText: 'Address1'),
-                validator: FormBuilderValidators.required(),
-              ),
-              //=========Address1  textFeild========//
-              const SizedBox(height: 10),
-              FormBuilderTextField(
-                controller: _address2,
-                name: address1,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(), labelText: 'Address2'),
-                validator: FormBuilderValidators.required(),
-              ),
-              //=========Address2  textFeild========//
-              const SizedBox(height: 10),
-              FormBuilderTextField(
-                controller: _city,
-                name: city,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(), labelText: 'City'),
-                validator: FormBuilderValidators.required(),
-              ),
-              //============city==========//
-              const SizedBox(height: 10),
-              FormBuilderTextField(
-                controller: _country,
-                name: country,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(), labelText: 'Country'),
-                validator: FormBuilderValidators.required(),
-              ),
-            ],
-          ),
-        )),
-    Step(
-        state: StepState.complete,
-        isActive: _activeStepIndex >= 2,
-        title: const Text('Confirm'),
-        content: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text('FirstName : ${_firstNameController.text}'),
-            Text('LastName : ${_lastNameController.text}'),
-            Text('Gender : ${_dropDownValue.toString()}'),
-            Text('Dob : ${_dob.text}'),
-            Text('Address1 : ${_address1.text}'),
-            Text('Address2 : ${_address2.text}'),
-            Text('City : ${_city.text}'),
-            Text('Country : ${_country.text}')
-          ],
-        ))
-  ];
+                FormBuilderTextField(
+                  controller: _address1,
+                  name: address,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(), labelText: 'Address1'),
+                  validator: FormBuilderValidators.required(),
+                ),
+                //=========Address1  textFeild========//
+                const SizedBox(height: 10),
+                FormBuilderTextField(
+                  controller: _address2,
+                  name: address1,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(), labelText: 'Address2'),
+                  validator: FormBuilderValidators.required(),
+                ),
+                //=========Address2  textFeild========//
+                const SizedBox(height: 10),
+                FormBuilderTextField(
+                  controller: _city,
+                  name: city,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(), labelText: 'City'),
+                  validator: FormBuilderValidators.required(),
+                ),
+                //============city==========//
+                const SizedBox(height: 10),
+                FormBuilderTextField(
+                  controller: _country,
+                  name: country,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(), labelText: 'Country'),
+                  validator: FormBuilderValidators.required(),
+                ),
+              ],
+            )),
+        Step(
+            state: StepState.complete,
+            isActive: _activeStepIndex >= 2,
+            title: const Text('Confirm'),
+            content: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text('FirstName : ${_firstNameController.text}'),
+                Text('LastName : ${_lastNameController.text}'),
+                Text('Gender : ${_dropDownValue.toString()}'),
+                Text('Dob : ${_dob.text}'),
+                Text('Address1 : ${_address1.text}'),
+                Text('Address2 : ${_address2.text}'),
+                Text('City : ${_city.text}'),
+                Text('Country : ${_country.text}')
+              ],
+            ))
+      ];
 
   int _activeStepIndex = 0;
   bool isCompleted = false;
@@ -267,12 +262,14 @@ class _ClientAddState extends State<ClientAdd> {
                   _country.text,
                   _dob.text,
                 );
+                // ignore: use_build_context_synchronously
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text('client add scuccessfully.'),
                     backgroundColor: Colors.green,
                   ),
                 );
+                // ignore: use_build_context_synchronously
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
                   builder: (context) => const ClientScreen(),
                 ));
@@ -293,13 +290,14 @@ class _ClientAddState extends State<ClientAdd> {
           controlsBuilder: (context, details) {
             final isLastStep = _activeStepIndex == stepList().length - 1;
             return Container(
-              margin: EdgeInsets.only(top: 50),
+              margin: const EdgeInsets.only(top: 50),
               child: Row(
                 children: [
                   if (_activeStepIndex != 0)
                     Expanded(
                       child: ElevatedButton(
-                          onPressed: details.onStepCancel, child: Text('BACK')),
+                          onPressed: details.onStepCancel,
+                          child: const Text('BACK')),
                     ),
                   const SizedBox(
                     width: 12,

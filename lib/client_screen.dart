@@ -1,8 +1,8 @@
-import 'dart:convert';
+//import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:wishwell/client_model.dart';
+//import 'package:wishwell/client_model.dart';
 import 'package:wishwell/provider/client_provider.dart';
-import 'package:wishwell/shared_preferences.dart';
+//import 'package:wishwell/shared_preferences.dart';
 import 'package:wishwell/client_detail.dart';
 import 'components/nav2.dart';
 import 'package:provider/provider.dart';
@@ -62,158 +62,158 @@ class ClientScreenState extends State<ClientScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    // bottomNavigationBar: BottomAppBar(
-    //   child: SizedBox(
-    //     child: ElevatedButton(
-    //       onPressed: () {
-    //         Navigator.push(context,
-    //             MaterialPageRoute(builder: (context) => const Nav2()));
-    //       },
-    //       child: const Text("Add another client"),
-    //     ),
-    //   ),
-    // ),
-    body: SafeArea(
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height,
-        child: Column(
-          // ignore: prefer_const_literals_to_create_immutables
-          children: [
-            const SizedBox(
-              height: 50,
-            ),
-            const Text("Clients",
-                style: TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.w300,
-                )),
-            OutlinedButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Nav2()));
-              },
-              child: const Text('+ Client'),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Expanded(
-              child: FutureBuilder(
-                future: Provider.of<ClientProvider>(context, listen: false)
-                    .selectData(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    return Consumer<ClientProvider>(
-                        builder: (context, clientProvider, child) {
+        // bottomNavigationBar: BottomAppBar(
+        //   child: SizedBox(
+        //     child: ElevatedButton(
+        //       onPressed: () {
+        //         Navigator.push(context,
+        //             MaterialPageRoute(builder: (context) => const Nav2()));
+        //       },
+        //       child: const Text("Add another client"),
+        //     ),
+        //   ),
+        // ),
+        body: SafeArea(
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height,
+            child: Column(
+              // ignore: prefer_const_literals_to_create_immutables
+              children: [
+                const SizedBox(
+                  height: 50,
+                ),
+                const Text("Clients",
+                    style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.w300,
+                    )),
+                OutlinedButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Nav2()));
+                  },
+                  child: const Text('+ Client'),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Expanded(
+                  child: FutureBuilder(
+                    future: Provider.of<ClientProvider>(context, listen: false)
+                        .selectData(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return Consumer<ClientProvider>(
+                            builder: (context, clientProvider, child) {
                           return clientProvider.clientItem.isNotEmpty
                               ? ListView.builder(
-                              itemCount: clientProvider.clientItem.length,
-                              itemBuilder: (context, index) {
-                                return Card(
-                                  child: ListTile(
-                                    trailing:
-                                    const Icon(Icons.arrow_forward_ios),
-                                    // isThreeLine: true,
-                                    title: Column(
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          '${clientProvider.clientItem[index].firstName} ${clientProvider.clientItem[index].lastName}',
-                                          style: const TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.normal,
-                                          ),
+                                  itemCount: clientProvider.clientItem.length,
+                                  itemBuilder: (context, index) {
+                                    return Card(
+                                      child: ListTile(
+                                        trailing:
+                                            const Icon(Icons.arrow_forward_ios),
+                                        // isThreeLine: true,
+                                        title: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              '${clientProvider.clientItem[index].firstName} ${clientProvider.clientItem[index].lastName}',
+                                              style: const TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                            ),
+                                            // Row(
+                                            //   children: [
+                                            //     const Text("Name :"),
+                                            //     Text(clientProvider
+                                            //         .clientItem[index]
+                                            //         .firstName),
+                                            //   ],
+                                            // ),
+                                            // Row(
+                                            //   children: [
+                                            //     const Text(" Last Name :"),
+                                            //     Text(clientProvider
+                                            //         .clientItem[index]
+                                            //         .lastName),
+                                            //   ],
+                                            // ),
+                                            // Row(
+                                            //   children: [
+                                            //     const Text("city :"),
+                                            //     Text(clientProvider
+                                            //         .clientItem[index].city),
+                                            //   ],
+                                            // ),
+                                            // Row(
+                                            //   children: [
+                                            //     const Text("address1 :"),
+                                            //     Text(clientProvider
+                                            //         .clientItem[index]
+                                            //         .address1),
+                                            //   ],
+                                            // ),
+                                            // Row(
+                                            //   children: [
+                                            //     const Text("address2 :"),
+                                            //     Text(clientProvider
+                                            //         .clientItem[index]
+                                            //         .address2),
+                                            //   ],
+                                            // ),
+                                            // Row(
+                                            //   children: [
+                                            //     const Text("country :"),
+                                            //     Text(clientProvider
+                                            //         .clientItem[index].country),
+                                            //   ],
+                                            // ),
+                                            // Row(
+                                            //   children: [
+                                            //     const Text("postcode :"),
+                                            //     Text(client.postcode),
+                                            //   ],
+                                            // ),
+                                            // Row(
+                                            //   children: [
+                                            //     Text("DOB :"),
+                                            //     Text(client.dob),
+                                            //   ],
+                                            // ),
+                                          ],
                                         ),
-                                        // Row(
-                                        //   children: [
-                                        //     const Text("Name :"),
-                                        //     Text(clientProvider
-                                        //         .clientItem[index]
-                                        //         .firstName),
-                                        //   ],
-                                        // ),
-                                        // Row(
-                                        //   children: [
-                                        //     const Text(" Last Name :"),
-                                        //     Text(clientProvider
-                                        //         .clientItem[index]
-                                        //         .lastName),
-                                        //   ],
-                                        // ),
-                                        // Row(
-                                        //   children: [
-                                        //     const Text("city :"),
-                                        //     Text(clientProvider
-                                        //         .clientItem[index].city),
-                                        //   ],
-                                        // ),
-                                        // Row(
-                                        //   children: [
-                                        //     const Text("address1 :"),
-                                        //     Text(clientProvider
-                                        //         .clientItem[index]
-                                        //         .address1),
-                                        //   ],
-                                        // ),
-                                        // Row(
-                                        //   children: [
-                                        //     const Text("address2 :"),
-                                        //     Text(clientProvider
-                                        //         .clientItem[index]
-                                        //         .address2),
-                                        //   ],
-                                        // ),
-                                        // Row(
-                                        //   children: [
-                                        //     const Text("country :"),
-                                        //     Text(clientProvider
-                                        //         .clientItem[index].country),
-                                        //   ],
-                                        // ),
-                                        // Row(
-                                        //   children: [
-                                        //     const Text("postcode :"),
-                                        //     Text(client.postcode),
-                                        //   ],
-                                        // ),
-                                        // Row(
-                                        //   children: [
-                                        //     Text("DOB :"),
-                                        //     Text(client.dob),
-                                        //   ],
-                                        // ),
-                                      ],
-                                    ),
-                                    onTap: () {
-                                      Navigator.of(context)
-                                          .push(MaterialPageRoute(
-                                        builder: (context) => ClientPage(
-                                            client: clientProvider
-                                                .clientItem[index]),
-                                      ));
-                                    },
-                                  ),
-                                );
-                              })
+                                        onTap: () {
+                                          Navigator.of(context)
+                                              .push(MaterialPageRoute(
+                                            builder: (context) => ClientPage(
+                                                client: clientProvider
+                                                    .clientItem[index]),
+                                          ));
+                                        },
+                                      ),
+                                    );
+                                  })
                               : const Center(
-                            child: Text('No details found!!!'),
-                          );
+                                  child: Text('No details found!!!'),
+                                );
                         });
-                  } else {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                },
-              ),
-            )
-            // buildClients(clientList),
-          ],
+                      } else {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    },
+                  ),
+                )
+                // buildClients(clientList),
+              ],
+            ),
+          ),
         ),
-      ),
-    ),
-  );
+      );
 
 // @override
 // initState() {

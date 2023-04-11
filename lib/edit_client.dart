@@ -161,9 +161,9 @@ class _ClientEditState extends State<ClientEdit> {
                     hint: _dropDownValue == null
                         ? const Text('Gender')
                         : Text(
-                      _dropDownValue!,
-                      style: const TextStyle(color: Colors.black38),
-                    ),
+                            _dropDownValue!,
+                            style: const TextStyle(color: Colors.black38),
+                          ),
                     isExpanded: true,
                     iconSize: 30.0,
                     style: const TextStyle(color: Colors.black38),
@@ -171,7 +171,7 @@ class _ClientEditState extends State<ClientEdit> {
                       'Male',
                       'Female',
                     ].map(
-                          (val) {
+                      (val) {
                         return DropdownMenuItem<String>(
                           value: val,
                           child: Text(val),
@@ -180,7 +180,7 @@ class _ClientEditState extends State<ClientEdit> {
                     ).toList(),
                     onChanged: (val) {
                       setState(
-                            () {
+                        () {
                           _dropDownValue = val;
                         },
                       );
@@ -255,7 +255,7 @@ class _ClientEditState extends State<ClientEdit> {
                     if (pickedDate != null) {
                       debugPrint(pickedDate.toString());
                       String formattedDate =
-                      DateFormat('yyyy-MM-dd').format(pickedDate);
+                          DateFormat('yyyy-MM-dd').format(pickedDate);
                       //formatted date output using intl package =>  2021-03-16
                       setState(() {
                         _dob.text = formattedDate
@@ -293,7 +293,7 @@ class _ClientEditState extends State<ClientEdit> {
                         ),
                       );
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => ClientScreen(),
+                        builder: (context) => const ClientScreen(),
                       ));
                     }
                   },
