@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-//import 'package:wishwell/add_client.dart';
+import 'package:wishwell/asset_screen.dart';
 import 'package:wishwell/user_screen.dart';
 import 'package:wishwell/home_screen.dart';
-import 'package:wishwell/asset_screen.dart';
 //import './common_controller.dart';
 //import 'package:wishwell/legatee_screen.dart';
 import 'package:wishwell/client_screen.dart';
@@ -37,9 +36,9 @@ class _NavState extends State<Nav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        //appBar: AppBar(
-        //  title: const Text('Bottom Nav Bar'),
-        //),
+      //appBar: AppBar(
+      //  title: const Text('Bottom Nav Bar'),
+      //),
         body: Center(
           child: _widgetOptions.elementAt(_selectedIndex),
         ),

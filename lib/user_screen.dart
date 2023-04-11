@@ -73,23 +73,23 @@ class DetailsScreenState extends State<DetailsScreen> {
   }
 
   Widget saveNameBtn() => OutlinedButton(
-        //onPressed: () async {
-        //  final dataStore = <String, dynamic>{
-        //    'firstName': _firstNameController.text,
-        //    'lastName': _lastNameController.text,
-        //  };
-        //  await AllData.saveJsonData(dataStore);
-        //  //AllData.getJsonData();
-        //},
-        onPressed: () {
-          _createUser();
-        },
-        child: const Text('Save data'),
-      );
+    //onPressed: () async {
+    //  final dataStore = <String, dynamic>{
+    //    'firstName': _firstNameController.text,
+    //    'lastName': _lastNameController.text,
+    //  };
+    //  await AllData.saveJsonData(dataStore);
+    //  //AllData.getJsonData();
+    //},
+    onPressed: () {
+      _createUser();
+    },
+    child: const Text('Save data'),
+  );
   Widget clearDataBtn() => OutlinedButton(
-        onPressed: clearSharedPrefs,
-        child: const Text('Add some default data'),
-      );
+    onPressed: clearSharedPrefs,
+    child: const Text('Add some default data'),
+  );
 
   @override
   void dispose() {
@@ -105,9 +105,9 @@ class DetailsScreenState extends State<DetailsScreen> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Form(
-          //appBar: AppBar(
-          //  title: const Text('My Details'),
-          //),
+        //appBar: AppBar(
+        //  title: const Text('My Details'),
+        //),
           autovalidateMode: AutovalidateMode.onUserInteraction,
           key: key,
           child: Padding(

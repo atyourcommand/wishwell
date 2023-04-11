@@ -23,36 +23,36 @@ class AssetScreenState extends State<AssetScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        body: SafeArea(
-          child: SizedBox(
-            height: MediaQuery.of(context).size.height,
-            child: SingleChildScrollView(
-              child: Column(
-                children: const [
-                  SizedBox(
-                    height: 50,
-                  ),
-                  Text("Assets",
-                      style: TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.w300,
-                      )),
-                  // OutlinedButton(
-                  //   onPressed: () {
-                  //     Navigator.push(
-                  //         context,
-                  //         MaterialPageRoute(
-                  //             builder: (context) => const Nav2()));
-                  //   },
-                  //   child: const Text('+ Client'),
-                  // ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                ],
+    body: SafeArea(
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height,
+        child: SingleChildScrollView(
+          child: Column(
+            children: const [
+              SizedBox(
+                height: 50,
               ),
-            ),
+              Text("Assets",
+                  style: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.w300,
+                  )),
+              // OutlinedButton(
+              //   onPressed: () {
+              //     Navigator.push(
+              //         context,
+              //         MaterialPageRoute(
+              //             builder: (context) => const Nav2()));
+              //   },
+              //   child: const Text('+ Client'),
+              // ),
+              SizedBox(
+                height: 20,
+              ),
+            ],
           ),
         ),
-      );
+      ),
+    ),
+  );
 }

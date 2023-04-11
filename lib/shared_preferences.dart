@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 //import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,14 +21,14 @@ class AllData {
     clientList.add(Client(
         firstName: clientData['firstName'],
         lastName: clientData['lastName'],
+        gender: clientData['gender'],
         clientId: clientData['clientId'],
         address1: clientData['address1'],
-        gender: clientData['gender'] ?? "",
         address2: clientData['address2'],
         city: clientData['city'],
         dob: clientData['dob'],
-        //dob: '24.08.62',
-        postcode: clientData['postcode'],
+        // dob: '24.08.62',
+        //postcode: clientData['postcode'],
         country: clientData['country']));
     var clients = {'clients': clientList};
     //debugPrint("objData===> $clientList");
@@ -41,20 +40,13 @@ class AllData {
   }
 
   static Future deleteClient(cid) async {
-    var raw = {};
     final prefs = await SharedPreferences.getInstance();
     final currentData = prefs.getString('jsonData');
     String jsonDataString = currentData.toString();
     final decodedJson = jsonDecode(jsonDataString);
-    var clientList = decodedJson['clients'];
-    clientList.removeAt(cid);
-    //debugPrint(clientList.toString());
-    var clients = {'clients': clientList};
-    if (decodedJson != null) {
-      raw.addAll(decodedJson);
-    }
-    raw.addAll(clients);
-    await prefs.setString('jsonData', jsonEncode(raw));
+    var clientData = decodedJson['clients'];
+    debugPrint('delete client no:$cid');
+    await clientData.remove((item) => item.clientId == cid);
   }
 
   // SAVE THE USER DETAILS WITH PREVIOUS DATA
@@ -68,7 +60,7 @@ class AllData {
 
     raw.addAll(decodedJson);
     raw.addAll(objData);
-    log(jsonEncode(raw));
+
     prefs.setString('jsonData', jsonEncode(raw));
     debugPrint('SAVING USER DETAILS AND PREVIOUS DATA: $raw');
   }
