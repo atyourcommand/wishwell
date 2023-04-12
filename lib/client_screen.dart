@@ -5,7 +5,7 @@ import 'package:wishwell/add_client.dart';
 import 'package:wishwell/provider/client_provider.dart';
 //import 'package:wishwell/shared_preferences.dart';
 import 'package:wishwell/client_detail.dart';
-import 'components/nav2.dart';
+//import 'components/nav2.dart';
 import 'package:provider/provider.dart';
 
 class ClientScreen extends StatefulWidget {
@@ -90,8 +90,10 @@ class ClientScreenState extends State<ClientScreen> {
                     )),
                 OutlinedButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const ClientAdd()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ClientAdd()));
                   },
                   child: const Text('+ Client'),
                 ),
