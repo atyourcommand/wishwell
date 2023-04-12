@@ -1,5 +1,6 @@
 //import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:wishwell/add_client.dart';
 //import 'package:wishwell/client_model.dart';
 import 'package:wishwell/provider/client_provider.dart';
 //import 'package:wishwell/shared_preferences.dart';
@@ -90,7 +91,7 @@ class ClientScreenState extends State<ClientScreen> {
                 OutlinedButton(
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const Nav2()));
+                        MaterialPageRoute(builder: (context) => const ClientAdd()));
                   },
                   child: const Text('+ Client'),
                 ),

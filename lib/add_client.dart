@@ -270,9 +270,7 @@ class _ClientAddState extends State<ClientAdd> {
                   ),
                 );
                 // ignore: use_build_context_synchronously
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => const ClientScreen(),
-                ));
+                Navigator.of(context).pop();
               } else {
                 setState(() {
                   _activeStepIndex += 1;
