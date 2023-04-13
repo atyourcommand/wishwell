@@ -20,15 +20,15 @@ class ClientPage extends StatelessWidget {
           ),
           backgroundColor: Colors.transparent,
           elevation: 0.0,
-          title: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                client.firstName,
-                style: const TextStyle(color: Colors.black45),
-              ),
-            ],
-          ),
+          // title: Row(
+          //   crossAxisAlignment: CrossAxisAlignment.center,
+          //   children: [
+          //     Text(
+          //       ///client.firstName,
+          //       style: const TextStyle(color: Colors.black45),
+          //     ),
+          //   ],
+          // ),
           centerTitle: true,
           actions: [
             IconButton(
@@ -50,76 +50,72 @@ class ClientPage extends StatelessWidget {
                 icon: const Icon(Icons.edit))
           ],
         ),
-        body: Container(
-          alignment: Alignment.center,
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              //Image.network(
-              //  'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif',
-              //  height: 400,
-              // width: double.infinity,
-              //  fit: BoxFit.cover,
-              //),
+        body: SizedBox.expand(
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height,
+            child: Column(children: [
               const SizedBox(
                 height: 10,
               ),
-              Text(
-                '${client.firstName} ${client.lastName}',
-                style: const TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.normal,
-                ),
+              Icon(
+                Icons.account_circle_outlined,
+                color: Colors.grey.shade400,
+                size: 80,
               ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text('${client.firstName} ${client.lastName}',
+                  style: const TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w300,
+                  )),
               const SizedBox(
                 height: 20,
               ),
               Text(
                 client.gender,
                 style: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 18,
                   fontWeight: FontWeight.w300,
                 ),
               ),
               Text(
                 client.dob,
                 style: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 18,
                   fontWeight: FontWeight.w300,
                 ),
               ),
               Text(
                 client.address1,
                 style: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 18,
                   fontWeight: FontWeight.w300,
                 ),
               ),
               Text(
                 client.address2,
                 style: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 18,
                   fontWeight: FontWeight.w300,
                 ),
               ),
               Text(
                 client.city,
                 style: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 18,
                   fontWeight: FontWeight.w300,
                 ),
               ),
               Text(
                 client.country,
                 style: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 18,
                   fontWeight: FontWeight.w300,
                 ),
               ),
-
               const SizedBox(height: 30),
-
               OutlinedButton(
                 onPressed: () async {
                   showDialog(
@@ -161,8 +157,24 @@ class ClientPage extends StatelessWidget {
                   // AllData.deleteClient('1');
                 },
                 child: const Text('Delete this person from your Will'),
-              )
-            ],
+              ),
+              Container(
+                  child: (const Padding(
+                padding: EdgeInsets.only(
+                    left: 15.0, right: 15.0, bottom: 1.0, top: 0.0),
+                child: Card(
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                    color: Colors.black12,
+                  )),
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text('Add assets list view here'),
+                  ),
+                ),
+              ))),
+            ]),
           ),
         ),
       );
