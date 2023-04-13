@@ -15,7 +15,21 @@ class ClientPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text(client.firstName),
+          iconTheme: const IconThemeData(
+            color: Colors.black, //change your color here
+          ),
+          backgroundColor: Colors.transparent,
+          elevation: 0.0,
+          title: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                client.firstName,
+                style: const TextStyle(color: Colors.black45),
+              ),
+            ],
+          ),
+          centerTitle: true,
           actions: [
             IconButton(
                 onPressed: () {
@@ -54,8 +68,8 @@ class ClientPage extends StatelessWidget {
               Text(
                 '${client.firstName} ${client.lastName}',
                 style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
+                  fontWeight: FontWeight.normal,
                 ),
               ),
               const SizedBox(
@@ -146,7 +160,7 @@ class ClientPage extends StatelessWidget {
                   );
                   // AllData.deleteClient('1');
                 },
-                child: const Text('Deleted this client'),
+                child: const Text('Delete this person from your Will'),
               )
             ],
           ),
