@@ -65,6 +65,15 @@ class _ClientAddState extends State<ClientAdd> {
             title: const Text('Account'),
             content: Column(
               children: [
+                const Text(
+                    "You can add a person here. Return later to complete all the details in order to prepare your PDF.",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w300,
+                    )),
+                const SizedBox(
+                  height: 40,
+                ),
                 TextFormField(
                   controller: _firstNameController,
                   decoration: const InputDecoration(
@@ -237,12 +246,27 @@ class _ClientAddState extends State<ClientAdd> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        centerTitle: true,
         leading: const BackButton(),
-        title: const Text('My App'),
+        //title: const Text('My App'),
+        iconTheme: const IconThemeData(
+          color: Colors.black, //change your color here
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        title:
+            // ignore: prefer_const_literals_to_create_immutables
+
+            const Text("Add a person",
+                style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w300,
+                    color: Colors.black)),
       ),
       body: Form(
         key: _formKey,
         child: Stepper(
+          elevation: 0.0,
           currentStep: _activeStepIndex,
           type: StepperType.horizontal,
           steps: stepList(),
@@ -265,7 +289,8 @@ class _ClientAddState extends State<ClientAdd> {
                 // ignore: use_build_context_synchronously
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
-                    content: Text('client add scuccessfully.'),
+                    content: Text('Client added successfully',
+                        textAlign: TextAlign.center),
                     backgroundColor: Colors.green,
                   ),
                 );
@@ -293,15 +318,16 @@ class _ClientAddState extends State<ClientAdd> {
                 children: [
                   if (_activeStepIndex != 0)
                     Expanded(
-                      child: ElevatedButton(
+                      child: OutlinedButton(
                           onPressed: details.onStepCancel,
                           child: const Text('BACK')),
                     ),
-                  const SizedBox(
-                    width: 12,
-                  ),
+                  if (_activeStepIndex != 0)
+                    const SizedBox(
+                      width: 12,
+                    ),
                   Expanded(
-                    child: ElevatedButton(
+                    child: OutlinedButton(
                         onPressed: details.onStepContinue,
                         child: Text(isLastStep ? 'CONFIRM' : 'NEXT')),
                   ),
@@ -537,53 +563,85 @@ class _ClientAddState extends State<ClientAdd> {
     if (_activeStepIndex == 0) {
       if (_firstNameController.text.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Enter Name')),
+          const SnackBar(
+              content: Text(
+            'Enter first name',
+            textAlign: TextAlign.center,
+          )),
         );
         return false;
       }
       if (_lastNameController.text.toString().isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Enter last name')),
+          const SnackBar(
+              content: Text(
+            'Enter last name',
+            textAlign: TextAlign.center,
+          )),
         );
         return false;
       }
       if (_dropDownValue == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Select $gender')),
+          SnackBar(
+              content: Text(
+            'Select $gender',
+            textAlign: TextAlign.center,
+          )),
         );
         return false;
       }
       if (_dob.text.toString().isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Enter DOB')),
+          const SnackBar(
+              content: Text(
+            'Enter DOB',
+            textAlign: TextAlign.center,
+          )),
         );
         return false;
       }
     } else if (_activeStepIndex == 1) {
       if (_address1.text.toString().isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Enter address1')),
+          const SnackBar(
+              content: Text(
+            'Enter address1',
+            textAlign: TextAlign.center,
+          )),
         );
         return false;
       }
 
       if (_address2.text.toString().isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Enter address2')),
+          const SnackBar(
+              content: Text(
+            'Enter address2',
+            textAlign: TextAlign.center,
+          )),
         );
         return false;
       }
 
       if (_city.text.toString().isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Enter City')),
+          const SnackBar(
+              content: Text(
+            'Enter City',
+            textAlign: TextAlign.center,
+          )),
         );
         return false;
       }
 
       if (_country.text.toString().isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Enter Country')),
+          const SnackBar(
+              content: Text(
+            'Enter Country',
+            textAlign: TextAlign.center,
+          )),
         );
         return false;
       }
@@ -594,56 +652,88 @@ class _ClientAddState extends State<ClientAdd> {
   bool validateForm() {
     if (_firstNameController.text.toString().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Enter Name')),
+        const SnackBar(
+            content: Text(
+          'Enter first name',
+          textAlign: TextAlign.center,
+        )),
       );
       return false;
     }
 
     if (_lastNameController.text.toString().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Enter last name')),
+        const SnackBar(
+            content: Text(
+          'Enter last name',
+          textAlign: TextAlign.center,
+        )),
       );
       return false;
     }
 
     if (_dropDownValue == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Select $gender')),
+        SnackBar(
+            content: Text(
+          'Select $gender',
+          textAlign: TextAlign.center,
+        )),
       );
       return false;
     }
 
     if (_address1.text.toString().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Enter address1')),
+        const SnackBar(
+            content: Text(
+          'Enter address1',
+          textAlign: TextAlign.center,
+        )),
       );
       return false;
     }
 
     if (_address2.text.toString().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Enter address2')),
+        const SnackBar(
+            content: Text(
+          'Enter address2',
+          textAlign: TextAlign.center,
+        )),
       );
       return false;
     }
 
     if (_city.text.toString().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Enter City')),
+        const SnackBar(
+            content: Text(
+          'Enter City',
+          textAlign: TextAlign.center,
+        )),
       );
       return false;
     }
 
     if (_country.text.toString().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Enter Country')),
+        const SnackBar(
+            content: Text(
+          'Enter Country',
+          textAlign: TextAlign.center,
+        )),
       );
       return false;
     }
 
     if (_dob.text.toString().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Enter DOB')),
+        const SnackBar(
+            content: Text(
+          'Enter DOB',
+          textAlign: TextAlign.center,
+        )),
       );
       return false;
     }
