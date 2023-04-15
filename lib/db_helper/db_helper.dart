@@ -5,6 +5,7 @@ import 'package:path/path.dart';
 
 class DBHelper {
   static const clients = 'clients';
+  static const shares = 'shares';
 
   static Future<Database> database() async {
     final dbPath = await getDatabasesPath();
@@ -14,6 +15,16 @@ class DBHelper {
       onCreate: (db, version) async {
         await db.execute(
             "CREATE TABLE IF NOT EXISTS $clients(clientId TEXT PRIMARY KEY,"
+                "firstName TEXT,"
+                "lastName TEXT,"
+                "gender TEXT,"
+                "address1 TEXT,"
+                "address2 TEXT,"
+                "city TEXT,"
+                "country TEXT,"
+                "dob TEXT)");
+                await db.execute(
+            "CREATE TABLE IF NOT EXISTS $shares(clientId TEXT PRIMARY KEY,"
                 "firstName TEXT,"
                 "lastName TEXT,"
                 "gender TEXT,"

@@ -5,6 +5,10 @@
 //import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:wishwell/provider/client_provider.dart';
+
+import 'add-assets.dart';
 
 class Assets {
   String? id;
@@ -139,15 +143,205 @@ class AssetScreenState extends State<AssetScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        padding: const EdgeInsets.all(8),
-        itemCount: 2,
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
-            height: 50,
-            color: Colors.amber,
-            //child: Center(child: Text('Asset: ${_data['']}')),
-          );
-        });
+    return Scaffold(
+      // bottomNavigationBar: BottomAppBar(
+      //   child: SizedBox(
+      //     child: ElevatedButton(
+      //       onPressed: () {
+      //         Navigator.push(context,
+      //             MaterialPageRoute(builder: (context) => const Nav2()));
+      //       },
+      //       child: const Text("Add another client"),
+      //     ),
+      //   ),
+      // ),
+      body: SafeArea(
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height,
+          child: Column(
+            // ignore: prefer_const_literals_to_create_immutables
+            children: [
+              const SizedBox(
+                height: 50,
+              ),
+              const Text("Assets",
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w300,
+                  )),
+              const SizedBox(
+                height: 10,
+              ),
+
+              OutlinedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AssetsAdd()));
+                },
+                child: const Text('+ Add assets'),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Expanded(
+                child: FutureBuilder(
+                  future: Provider.of<ClientProvider>(context, listen: false)
+                      .selectData(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return Consumer<ClientProvider>(
+                          builder: (context, clientProvider, child) {
+                        return clientProvider.clientItem.isNotEmpty
+                            ? ListView.builder(
+                                itemCount: clientProvider.clientItem.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 15.0,
+                                        right: 15.0,
+                                        bottom: 1.0,
+                                        top: 0.0),
+                                    child: Card(
+                                      elevation: 0,
+                                      shape: const RoundedRectangleBorder(
+                                          side: BorderSide(
+                                        color: Colors.black12,
+                                      )),
+                                      child: ListTile(
+                                        //dense: true,
+                                        contentPadding: const EdgeInsets.only(
+                                            top: 10.0,
+                                            bottom: 10.0,
+                                            left: 10.0,
+                                            right: 10.0),
+                                        trailing: const Icon(
+                                          Icons.arrow_forward_ios,
+                                          color: Colors.black26,
+                                        ),
+                                        leading: Icon(
+                                          Icons.account_circle_outlined,
+                                          color: Colors.grey.shade400,
+                                          size: 45,
+                                        ),
+
+                                        title: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              '${clientProvider.clientItem[index].firstName} ${clientProvider.clientItem[index].lastName}',
+                                              style: const TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              height: 3,
+                                            ),
+
+                                            Row(
+                                              children: const [
+                                                Text(
+                                                  "Incomplete details",
+                                                  style: TextStyle(
+                                                    color: Colors.grey,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: const [
+                                                Text(
+                                                  "No assets allocated yet",
+                                                  style: TextStyle(
+                                                    color: Colors.grey,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            // Row(
+                                            //   children: [
+                                            //     const Text(" Last Name :"),
+                                            //     Text(clientProvider
+                                            //         .clientItem[index]
+                                            //         .lastName),
+                                            //   ],
+                                            // ),
+                                            // Row(
+                                            //   children: [
+                                            //     const Text("city :"),
+                                            //     Text(clientProvider
+                                            //         .clientItem[index].city),
+                                            //   ],
+                                            // ),
+                                            // Row(
+                                            //   children: [
+                                            //     const Text("address1 :"),
+                                            //     Text(clientProvider
+                                            //         .clientItem[index]
+                                            //         .address1),
+                                            //   ],
+                                            // ),
+                                            // Row(
+                                            //   children: [
+                                            //     const Text("address2 :"),
+                                            //     Text(clientProvider
+                                            //         .clientItem[index]
+                                            //         .address2),
+                                            //   ],
+                                            // ),
+                                            // Row(
+                                            //   children: [
+                                            //     const Text("country :"),
+                                            //     Text(clientProvider
+                                            //         .clientItem[index].country),
+                                            //   ],
+                                            // ),
+                                            // Row(
+                                            //   children: [
+                                            //     const Text("postcode :"),
+                                            //     Text(client.postcode),
+                                            //   ],
+                                            // ),
+                                            // Row(
+                                            //   children: [
+                                            //     Text("DOB :"),
+                                            //     Text(client.dob),
+                                            //   ],
+                                            // ),
+                                          ],
+                                        ),
+                                        // onTap: () {
+                                        //   Navigator.of(context)
+                                        //       .push(MaterialPageRoute(
+                                        //     builder: (context) => ClientPage(
+                                        //         client: clientProvider
+                                        //             .clientItem[index]),
+                                        //   ));
+                                        // },
+                                      ),
+                                    ),
+                                  );
+                                })
+                            : const Center(
+                                child: Text('No details found!!!'),
+                              );
+                      });
+                    } else {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  },
+                ),
+              )
+              // buildClients(clientList),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
