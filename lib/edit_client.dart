@@ -103,32 +103,28 @@ class _ClientEditState extends State<ClientEdit> {
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
         leading: const BackButton(),
-        title: const Text('Edit Client'),
+        title: const Text('Edit client',
+            style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.w300,
+                color: Colors.black)),
+        iconTheme: const IconThemeData(
+          color: Colors.black, //change your color here
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        centerTitle: true,
       ),
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.only(
+              left: 20.0, right: 20.0, bottom: 1.0, top: 0.0),
           child: SingleChildScrollView(
             child: Column(
               children: [
                 const SizedBox(
-                  height: 80,
-                ),
-                const Text("Why not,",
-                    style: TextStyle(
-                      fontSize: 40,
-                      fontWeight: FontWeight.w300,
-                    )),
-                const Text(
-                  "Update a client.",
-                  style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(
-                  height: 50,
+                  height: 30,
                 ),
                 //=========frist name textFeild========//
                 TextFormField(
@@ -288,7 +284,10 @@ class _ClientEditState extends State<ClientEdit> {
                       clientProvider.updateDob(widget.clientId, _dob.text);
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content: Text('client Updated scuccessfully.'),
+                          content: Text(
+                            'Client updated successfully',
+                            textAlign: TextAlign.center,
+                          ),
                           backgroundColor: Colors.green,
                         ),
                       );
@@ -297,7 +296,7 @@ class _ClientEditState extends State<ClientEdit> {
                       ));
                     }
                   },
-                  child: const Text('Edit'),
+                  child: const Text('Save changes'),
                 )
                 //saveNameBtn(),
               ],
@@ -311,56 +310,88 @@ class _ClientEditState extends State<ClientEdit> {
   bool validateForm() {
     if (_firstNameController.text.toString().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Enter Name')),
+        const SnackBar(
+            content: Text(
+          'Enter Name',
+          textAlign: TextAlign.center,
+        )),
       );
       return false;
     }
 
     if (_lastNameController.text.toString().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Enter last name')),
+        const SnackBar(
+            content: Text(
+          'Enter last name',
+          textAlign: TextAlign.center,
+        )),
       );
       return false;
     }
 
     if (_dropDownValue == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Select $gender')),
+        SnackBar(
+            content: Text(
+          'Select $gender',
+          textAlign: TextAlign.center,
+        )),
       );
       return false;
     }
 
     if (_address1.text.toString().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Enter address1')),
+        const SnackBar(
+            content: Text(
+          'Enter address1',
+          textAlign: TextAlign.center,
+        )),
       );
       return false;
     }
 
     if (_address2.text.toString().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Enter address2')),
+        const SnackBar(
+            content: Text(
+          'Enter address2',
+          textAlign: TextAlign.center,
+        )),
       );
       return false;
     }
 
     if (_city.text.toString().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Enter City')),
+        const SnackBar(
+            content: Text(
+          'Enter City',
+          textAlign: TextAlign.center,
+        )),
       );
       return false;
     }
 
     if (_country.text.toString().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Enter Country')),
+        const SnackBar(
+            content: Text(
+          'Enter Country',
+          textAlign: TextAlign.center,
+        )),
       );
       return false;
     }
 
     if (_dob.text.toString().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Enter DOB')),
+        const SnackBar(
+            content: Text(
+          'Enter DOB',
+          textAlign: TextAlign.center,
+        )),
       );
       return false;
     }
