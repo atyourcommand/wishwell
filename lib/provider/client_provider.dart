@@ -6,34 +6,55 @@ import '../db_helper/db_helper.dart';
 
 class ClientProvider extends ChangeNotifier {
   List<Client> clientItem = [];
+  List<Assets> clienAssets = [];
 
   Future<void> selectData() async {
     final dataList = await DBHelper.selectAll(DBHelper.clients);
 
     clientItem = dataList
         .map((item) => Client(
-        clientId: item['clientId'],
-        firstName: item['firstName'],
-        lastName: item['lastName'],
-        gender: item['gender'],
-        address1: item['address1'],
-        address2: item['address2'],
-        city: item['city'],
-        country: item['country'],
-        dob: item['dob']))
+            clientId: item['clientId'],
+            firstName: item['firstName'],
+            lastName: item['lastName'],
+            gender: item['gender'],
+            address1: item['address1'],
+            address2: item['address2'],
+            city: item['city'],
+            country: item['country'],
+            dob: item['dob']))
+        .toList();
+  }
+
+  Future<void> selectAsset() async {
+    final dataList = await DBHelper.selectAssets(DBHelper.shares);
+
+    clienAssets = dataList
+        .map(
+          (item) => Assets(
+            clientId: item['clientId'],
+            firstName: item['firstName'],
+            lastName: item['lastName'],
+            gender: item['gender'],
+            address1: item['address1'],
+            address2: item['address2'],
+            city: item['city'],
+            country: item['country'],
+            dob: item['dob'],
+          ),
+        )
         .toList();
   }
 
   Future insertData(
-      String firstName,
-      String lastName,
-      String gender,
-      String address1,
-      String address2,
-      String city,
-      String country,
-      String dob,
-      ) async {
+    String firstName,
+    String lastName,
+    String gender,
+    String address1,
+    String address2,
+    String city,
+    String country,
+    String dob,
+  ) async {
     final newClient = Client(
       clientId: const Uuid().v1(),
       firstName: firstName,
@@ -46,8 +67,44 @@ class ClientProvider extends ChangeNotifier {
       dob: dob,
     );
     clientItem.add(newClient);
-
     DBHelper.insert(DBHelper.clients, {
+      'clientId': newClient.clientId,
+      'firstName': newClient.firstName,
+      'lastName': newClient.lastName,
+      'gender': newClient.gender,
+      'address1': newClient.address1,
+      'address2': newClient.address2,
+      'city': newClient.city,
+      'country': newClient.country,
+      'dob': newClient.dob,
+    });
+    notifyListeners();
+  }
+
+  Future insertAssets(
+    String firstName,
+    String lastName,
+    String gender,
+    String address1,
+    String address2,
+    String city,
+    String country,
+    String dob,
+  ) async {
+    final newClient = Assets(
+      clientId: const Uuid().v1(),
+      firstName: firstName,
+      lastName: lastName,
+      gender: gender,
+      address1: address1,
+      address2: address2,
+      city: city,
+      country: country,
+      dob: dob,
+    );
+    clienAssets.add(newClient);
+
+    DBHelper.insert(DBHelper.shares, {
       'clientId': newClient.clientId,
       'firstName': newClient.firstName,
       'lastName': newClient.lastName,
@@ -63,7 +120,7 @@ class ClientProvider extends ChangeNotifier {
 
   Future deleteById(clientId) async {
     DBHelper.deleteById(
-      DBHelper.clients,
+      DBHelper.shares,
       'clientId',
       clientId,
     );

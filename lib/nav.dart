@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wishwell/asset_screen.dart';
+import 'package:wishwell/Assets/asset_screen.dart';
 import 'package:wishwell/user_screen.dart';
 import 'package:wishwell/home_screen.dart';
 //import './common_controller.dart';
@@ -39,47 +39,48 @@ class _NavState extends State<Nav> {
       //appBar: AppBar(
       //  title: const Text('Bottom Nav Bar'),
       //),
-        body: Center(
-          child: _widgetOptions.elementAt(_selectedIndex),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                color: Colors.grey.shade600,
-              ),
-              // backgroundColor: Colors.blue,
-              label: 'Home',
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+              color: Colors.grey.shade600,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.message,
-                color: Colors.grey.shade600,
-              ),
-              // backgroundColor: Colors.white,
-              label: 'User Details',
+            // backgroundColor: Colors.blue,
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.message,
+              color: Colors.grey.shade600,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.person,
-                color: Colors.grey.shade600,
-              ),
-              // backgroundColor: Colors.blue,
-              label: 'Clients',
+            // backgroundColor: Colors.white,
+            label: 'User Details',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.person,
+              color: Colors.grey.shade600,
             ),
-            BottomNavigationBarItem(
-              // backgroundColor: Colors.blue,
-              icon: Icon(
-                Icons.hotel_class_rounded,
-                color: Colors.grey.shade600,
-              ),
-              label: 'Assets',
+            // backgroundColor: Colors.blue,
+            label: 'Clients',
+          ),
+          BottomNavigationBarItem(
+            // backgroundColor: Colors.blue,
+            icon: Icon(
+              Icons.hotel_class_rounded,
+              color: Colors.grey.shade600,
             ),
-          ],
-          currentIndex: _selectedIndex,
-          onTap: _onItemTap,
-        ));
+            label: 'Assets',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        onTap: _onItemTap,
+      ),
+    );
   }
 }
