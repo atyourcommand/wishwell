@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wishwell/provider/client_provider.dart';
 
-import 'add-assets.dart';
+import 'add_assets.dart';
 
 class Assets {
   String? id;
