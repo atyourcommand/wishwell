@@ -75,7 +75,7 @@ class _AssetsAddState extends State<AssetsAdd> {
   }
 
   removeTextField() {
-    print("removeTextField");
+    debugPrint("removeTextField");
 
     if (noOfTextField > 1) {
       setState(() {
