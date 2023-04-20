@@ -27,12 +27,11 @@ List<String> list = <String>[
   'Cornado',
 ];
 
-
 class _AssetsAddState extends State<AssetsAdd> {
   //final Map _clientObject = <String, String>{};
 
   List<Forbin> words = List.empty(growable: true);
-  List<double> _sliderValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  final List<double> _sliderValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   final String firstName = 'Type';
   final String lastName = 'Name';
   final String value = 'Value';
@@ -66,7 +65,7 @@ class _AssetsAddState extends State<AssetsAdd> {
   }
 
   removeTextField() {
-    print("removeTextField");
+    debugPrint("removeTextField");
 
     if (noOfTextField > 1) {
       setState(() {
@@ -419,7 +418,7 @@ class _AssetsAddState extends State<AssetsAdd> {
             bool isDetaildValid = isDetialCompleted();
             if (isDetaildValid) {
               if (isLastStep) {
-                for (int i = 0; i < noOfTextField; i++)
+                for (int i = 0; i < noOfTextField; i++) {
                   await clientProvider.insertAssets(
                     dropdoen[i],
                     controllers[i].text,
@@ -430,6 +429,7 @@ class _AssetsAddState extends State<AssetsAdd> {
                     _country.text,
                     _dob.text,
                   );
+                }
                 // ignore: use_build_context_synchronously
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(

@@ -137,6 +137,7 @@ class AssetsPage extends StatelessWidget {
                             context
                                 .read<ClientProvider>()
                                 .clientItem
+                                // ignore: list_remove_unrelated_type
                                 .remove(client);
                             Navigator.of(context).pop();
                             ScaffoldMessenger.of(context).showSnackBar(
