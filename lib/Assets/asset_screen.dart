@@ -8,10 +8,12 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wishwell/provider/asset_provider.dart';
 import 'package:wishwell/provider/client_provider.dart';
 
 import 'add_assets.dart';
 import 'assets_detail.dart';
+import 'dart:developer' as dev;
 
 class Assets {
   String? id;
@@ -167,11 +169,13 @@ class AssetScreenState extends State<AssetScreen> {
               const SizedBox(
                 height: 50,
               ),
-              const Text("Assets",
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w300,
-                  )),
+              const Text(
+                "Assets",
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
               const SizedBox(
                 height: 10,
               ),
@@ -190,17 +194,18 @@ class AssetScreenState extends State<AssetScreen> {
               ),
               Expanded(
                 child: FutureBuilder(
-                  future: Provider.of<ClientProvider>(context, listen: false)
+                  future: Provider.of<AssetsProvider>(context, listen: false)
                       .selectAsset(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
-                      return Consumer<ClientProvider>(
+                      return Consumer<AssetsProvider>(
                           builder: (context, assetProvider, child) {
                         return assetProvider.clienAssets.isNotEmpty
                             ? ListView.builder(
                                 itemCount: assetProvider.clienAssets.length,
                                 itemBuilder: (context, index) {
                                   log(assetProvider.clienAssets.length);
+
                                   return Padding(
                                     padding: const EdgeInsets.only(
                                       left: 15.0,
@@ -237,7 +242,7 @@ class AssetScreenState extends State<AssetScreen> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              '${assetProvider.clienAssets[index].firstName} ${assetProvider.clienAssets[index].lastName}',
+                                              '${assetProvider.clienAssets[index].assetsType} ${assetProvider.clienAssets[index].assetsName}',
                                               style: const TextStyle(
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.normal,
@@ -323,7 +328,7 @@ class AssetScreenState extends State<AssetScreen> {
                                           Navigator.of(context)
                                               .push(MaterialPageRoute(
                                             builder: (context) => AssetsPage(
-                                                client: assetProvider
+                                                asset: assetProvider
                                                     .clienAssets[index]),
                                           ));
                                         },

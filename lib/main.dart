@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wishwell/nav.dart';
+import 'package:wishwell/provider/asset_provider.dart';
 import 'package:wishwell/provider/client_provider.dart';
 
 void main() => runApp(const MyApp());
@@ -15,7 +16,10 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => ClientProvider(),
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AssetsProvider(),
+        ),
       ],
       child: MaterialApp(
           title: "ListView.builder",

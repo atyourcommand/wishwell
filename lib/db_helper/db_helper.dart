@@ -25,10 +25,33 @@ class DBHelper {
           "country TEXT,"
           "dob TEXT)",
         );
-        await db.execute(
-            "CREATE TABLE IF NOT EXISTS $shares(clientId TEXT PRIMARY KEY,"
-            "firstName TEXT,"
-            "lastName TEXT,");
+        // await db.execute(
+        //     "CREATE TABLE IF NOT EXISTS $shares(clientId TEXT PRIMARY KEY,"
+        //     "firstName TEXT,"
+        //     "lastName TEXT,");
+      },
+      version: 2,
+    ).then((value) {
+      log("table created $value");
+      return value;
+    });
+  }
+
+  static Future<Database> databaseAssets() async {
+    final dbPath = await getDatabasesPath();
+
+    return await openDatabase(
+      join(dbPath, 'shares.db'),
+      onCreate: (db, version) async {
+        await db.execute('''
+            CREATE TABLE IF NOT EXISTS $shares (
+            shareId TEXT PRIMARY KEY,
+            assetType TEXT,
+            assetName TEXT,
+            value NUMBER,
+            share TEXT
+            );
+            ''');
       },
       version: 2,
     ).then((value) {
@@ -46,15 +69,28 @@ class DBHelper {
   }
 
   static Future<List<Map<String, dynamic>>> selectAssets(String table) async {
-    final db = await DBHelper.database();
+    final db = await DBHelper.databaseAssets();
     //without query
-    return db.query(table);
+
+    final query = await db.query(table);
+
+    return query;
     // with query
     //return db.rawQuery("SELECT * FROM $clients");
   }
 
   static Future insert(String table, Map<String, Object> data) async {
     final db = await DBHelper.database();
+
+    return db.insert(
+      table,
+      data,
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  static Future insertAssets(String table, Map<String, Object> data) async {
+    final db = await DBHelper.databaseAssets();
 
     return db.insert(
       table,
@@ -78,7 +114,36 @@ class DBHelper {
     );
   }
 
-  static Future deleteById(
+  static Future updateAssets(
+    String tableName,
+    String columnName,
+    String value,
+    String id,
+  ) async {
+    final db = await DBHelper.database();
+    return db.update(
+      tableName,
+      {columnName: value},
+      where: 'clientId = ?',
+      whereArgs: [id],
+    );
+  }
+
+   static Future deleteById(
+      String tableName,
+      String columnName,
+      String id,
+      ) async {
+    final db = await DBHelper.database();
+
+    return db.delete(
+      tableName,
+      where: '$columnName = ?',
+      whereArgs: [id],
+    );
+  }
+
+  static Future deleteByIdAssets(
     String tableName,
     String columnName,
     String id,
@@ -95,6 +160,14 @@ class DBHelper {
   Future<Client?> display() async {
     final db = await DBHelper.database();
     final List<Map<String, dynamic>> maps = await db.query('client');
+    print("games in display method $maps");
+
+    return null;
+  }
+
+  Future<Client?> displayAssets() async {
+    final db = await DBHelper.database();
+    final List<Map<String, dynamic>> maps = await db.query('shares');
     print("games in display method $maps");
 
     return null;

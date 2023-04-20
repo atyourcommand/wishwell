@@ -1,12 +1,16 @@
 //import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 import 'package:provider/provider.dart';
+import 'package:wishwell/provider/asset_provider.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
 //import 'package:wishwell/client_screen.dart';
 import 'package:wishwell/provider/client_provider.dart';
+import '../client_model.dart';
 import '../form_validator.dart';
 
 class AssetsAdd extends StatefulWidget {
@@ -27,12 +31,11 @@ List<String> list = <String>[
   'Cornado',
 ];
 
-
 class _AssetsAddState extends State<AssetsAdd> {
   //final Map _clientObject = <String, String>{};
 
   List<Forbin> words = List.empty(growable: true);
-  List<double> _sliderValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  List<double> _sliderValues = [0];
   final String firstName = 'Type';
   final String lastName = 'Name';
   final String value = 'Value';
@@ -60,8 +63,14 @@ class _AssetsAddState extends State<AssetsAdd> {
   int noOfTextField = 1;
 
   addTextField() {
+    if (noOfTextField == list.length) {
+      return;
+    }
     setState(() {
       noOfTextField += 1;
+      _sliderValues.add(0);
+      _shareValues.add(Share(clientName: null, shareValue: 0.0));
+      dropdoen.add(null);
     });
   }
 
@@ -71,6 +80,9 @@ class _AssetsAddState extends State<AssetsAdd> {
     if (noOfTextField > 1) {
       setState(() {
         noOfTextField -= 1;
+        _sliderValues.removeLast();
+        dropdoen.removeLast();
+        _shareValues.removeLast();
       });
     }
   }
@@ -93,11 +105,8 @@ class _AssetsAddState extends State<AssetsAdd> {
     10,
     (int i) => TextEditingController(),
   );
-  List<String> dropdoen = List.generate(list.length, (index) => list.first);
-
-  String dropdownValue = list.first;
-  String dropdownValue1 = list.first;
-  String dropdownValue2 = list.first;
+  List<String?> dropdoen = [null];
+  List<Share> _shareValues = [Share(clientName: null, shareValue: 0.0)];
   List<Step> stepList() => [
         Step(
             state:
@@ -119,7 +128,8 @@ class _AssetsAddState extends State<AssetsAdd> {
                 TextFormField(
                   controller: _firstNameController,
                   decoration: const InputDecoration(
-                      labelText: 'Type', border: OutlineInputBorder()),
+                      labelText: 'Enter assets Type',
+                      border: OutlineInputBorder()),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       ///--- toast
@@ -132,7 +142,7 @@ class _AssetsAddState extends State<AssetsAdd> {
                 TextFormField(
                   controller: _lastNameController,
                   decoration: const InputDecoration(
-                      border: OutlineInputBorder(), labelText: 'name'),
+                      border: OutlineInputBorder(), labelText: 'Enter name'),
                   validator: (value) {
                     if (value == null && value!.isEmpty) {
                       ///--- toast
@@ -146,7 +156,8 @@ class _AssetsAddState extends State<AssetsAdd> {
                   keyboardType: TextInputType.number,
                   controller: _valueController,
                   decoration: const InputDecoration(
-                      border: OutlineInputBorder(), labelText: 'Value'),
+                      border: OutlineInputBorder(),
+                      labelText: 'Enter Assets Value'),
                   validator: (value) {
                     if (value == null && value!.isEmpty) {
                       ///--- toast
@@ -259,18 +270,22 @@ class _AssetsAddState extends State<AssetsAdd> {
                               padding: const EdgeInsets.all(8.0),
                               child: DropdownButton<String>(
                                 isExpanded: true,
-                                value: dropdoen[i],
+                                value: _shareValues[i].clientName,
                                 icon: const Icon(
                                   Icons.arrow_downward,
                                   color: Colors.black,
                                 ),
                                 elevation: 16,
-                                style: const TextStyle(color: Colors.black),
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                ),
                                 onChanged: (String? value) {
                                   // This is called when the user selects an item.
-                                  setState(() {
-                                    dropdoen[i] = value!;
-                                  });
+                                  if (value != null) {
+                                    setState(() {
+                                      _shareValues[i].clientName = value;
+                                    });
+                                  }
                                 },
                                 items: list.map<DropdownMenuItem<String>>(
                                     (String value) {
@@ -298,16 +313,16 @@ class _AssetsAddState extends State<AssetsAdd> {
                         ],
                       ),
                       Slider(
-                        value: _sliderValues[i],
+                        value: _shareValues[i].shareValue,
                         min: 0.0,
                         max: 100.0,
                         divisions: 10,
-                        label: ' ${_sliderValues[i].round()}',
+                        label: ' ${_shareValues[i].shareValue.round()}',
                         onChanged: (double value) {
                           setState(() {
-                            _sliderValues[i] = value;
+                            _shareValues[i].shareValue = value;
                             controllers[i].text =
-                                _sliderValues[i].toInt().toString();
+                                _shareValues[i].shareValue.toInt().toString();
                           });
                         },
                       ),
@@ -382,7 +397,7 @@ class _AssetsAddState extends State<AssetsAdd> {
 
   @override
   Widget build(BuildContext context) {
-    final clientProvider = Provider.of<ClientProvider>(context, listen: false);
+    final assetsProvider = Provider.of<AssetsProvider>(context, listen: false);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -419,17 +434,18 @@ class _AssetsAddState extends State<AssetsAdd> {
             bool isDetaildValid = isDetialCompleted();
             if (isDetaildValid) {
               if (isLastStep) {
-                for (int i = 0; i < noOfTextField; i++)
-                  await clientProvider.insertAssets(
-                    dropdoen[i],
-                    controllers[i].text,
-                    _valueController.toString(),
-                    _address1.text,
-                    _address2.text,
-                    _city.text,
-                    _country.text,
-                    _dob.text,
-                  );
+                // for (int i = 0; i < noOfTextField; i++) {
+                //
+                // }
+
+                await assetsProvider.insertAssets(
+                    _firstNameController.text,
+                    _lastNameController.text,
+                    double.parse(_valueController.text),
+                    _shareValues);
+
+                log("data ${_shareValues.toString()}");
+                // log(_sliderValues.toString());
                 // ignore: use_build_context_synchronously
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
@@ -441,7 +457,7 @@ class _AssetsAddState extends State<AssetsAdd> {
                   ),
                 );
                 // ignore: use_build_context_synchronously
-                Navigator.of(context).pop();
+                // Navigator.of(context).pop();
               } else {
                 setState(() {
                   _activeStepIndex += 1;
