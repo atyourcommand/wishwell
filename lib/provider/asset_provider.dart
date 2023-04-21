@@ -49,6 +49,12 @@ class AssetsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future updateAssetById(Assets assets) async {
+    await DBHelper.updateAsset(assets.toJson(), assets.id);
+    selectAsset();
+    notifyListeners();
+  }
+
   Future deleteByIdAssets(shareId) async {
     DBHelper.deleteByIdAssets(
       DBHelper.shares,
@@ -58,7 +64,7 @@ class AssetsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future updateFirstNameAssets(String clientId, String firstName) async {
+  Future updateAssetstype(String clientId, String firstName) async {
     DBHelper.updateAssets(
       DBHelper.clients,
       'firstName',
@@ -68,7 +74,7 @@ class AssetsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future updateLastNameAssets(String clientId, String lastName) async {
+  Future updateAssetsname(String clientId, String lastName) async {
     DBHelper.updateAssets(
       DBHelper.clients,
       'lastName',
@@ -78,7 +84,7 @@ class AssetsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future updateAddress1Assets(String clientId, String address1) async {
+  Future updateAssetsvalue(String clientId, String address1) async {
     DBHelper.updateAssets(
       DBHelper.clients,
       'address1',
@@ -88,7 +94,7 @@ class AssetsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future updateAddress2Assets(String clientId, String address2) async {
+  Future updateClientname(String clientId, String address2) async {
     DBHelper.updateAssets(
       DBHelper.clients,
       'address2',
@@ -98,31 +104,11 @@ class AssetsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future updateCityAssets(String clientId, String city) async {
+  Future updateAssetcontity(String clientId, String city) async {
     DBHelper.updateAssets(
       DBHelper.clients,
       'city',
       city,
-      clientId,
-    );
-    notifyListeners();
-  }
-
-  Future updateCountryAssets(String clientId, String country) async {
-    DBHelper.updateAssets(
-      DBHelper.clients,
-      'country',
-      country,
-      clientId,
-    );
-    notifyListeners();
-  }
-
-  Future updateDobAssets(String clientId, String dob) async {
-    DBHelper.updateAssets(
-      DBHelper.clients,
-      'dob',
-      dob,
       clientId,
     );
     notifyListeners();

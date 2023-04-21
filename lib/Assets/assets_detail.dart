@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wishwell/client_model.dart';
 import '../provider/asset_provider.dart';
+import 'edit_assets.dart';
 
 class AssetsPage extends StatelessWidget {
   final Assets asset;
@@ -13,7 +14,6 @@ class AssetsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
@@ -34,16 +34,19 @@ class AssetsPage extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                // Navigator.of(context).push(
-                //   MaterialPageRoute(
-                //     builder: (context) => ClientEdit(
-                //       clientId: asset.id,
-                //       firstName: asset.assetsType,
-                //       lastName: asset.assetsName,
-                 
-                //     ),
-                //   ),
-                // );
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => AssetsEdit(
+                      // assetsId: asset.id,
+                      // assetsType: asset.assetsType,
+                      // assetsName: asset.assetsName,
+                      // assetsValue: asset.value.toString(),
+                      // clientName: asset.shares[0].clientName.toString(),
+                      // assetsContity: asset.shares[0].shareValue.toString(),
+                      asset: asset,
+                    ),
+                  ),
+                );
               },
               icon: const Icon(Icons.edit))
         ],
@@ -188,21 +191,22 @@ class AssetsPage extends StatelessWidget {
               child: const Text('Delete this person from your Will'),
             ),
             Container(
-                child: (const Padding(
-              padding: EdgeInsets.only(
-                  left: 15.0, right: 15.0, bottom: 1.0, top: 0.0),
-              child: Card(
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                    side: BorderSide(
-                  color: Colors.black12,
-                )),
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('Add assets list view here'),
+              child: (const Padding(
+                padding: EdgeInsets.only(
+                    left: 15.0, right: 15.0, bottom: 1.0, top: 0.0),
+                child: Card(
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                    color: Colors.black12,
+                  )),
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text('Add assets list view here'),
+                  ),
                 ),
-              ),
-            ))),
+              )),
+            ),
           ]),
         ),
       ),

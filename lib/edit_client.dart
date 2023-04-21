@@ -291,9 +291,11 @@ class _ClientEditState extends State<ClientEdit> {
                           backgroundColor: Colors.green,
                         ),
                       );
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => const ClientScreen(),
-                      ));
+                      // Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      //   builder: (context) => const ClientScreen(),
+                      // ));
+                      int count = 0;
+                      Navigator.of(context).popUntil((_) => count++ >= 2);
                     }
                   },
                   child: const Text('Save changes'),

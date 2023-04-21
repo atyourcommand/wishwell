@@ -115,13 +115,26 @@ class DBHelper {
     );
   }
 
+  static Future updateAsset(
+    Map<String, Object> value,
+    String id,
+  ) async {
+    final db = await DBHelper.databaseAssets();
+    return db.update(
+      "shares",
+      value,
+      where: 'shareId = ?',
+      whereArgs: [id],
+    );
+  }
+
   static Future updateAssets(
     String tableName,
     String columnName,
     String value,
     String id,
   ) async {
-    final db = await DBHelper.database();
+    final db = await DBHelper.databaseAssets();
     return db.update(
       tableName,
       {columnName: value},
@@ -130,11 +143,11 @@ class DBHelper {
     );
   }
 
-   static Future deleteById(
-      String tableName,
-      String columnName,
-      String id,
-      ) async {
+  static Future deleteById(
+    String tableName,
+    String columnName,
+    String id,
+  ) async {
     final db = await DBHelper.database();
 
     return db.delete(
@@ -149,7 +162,7 @@ class DBHelper {
     String columnName,
     String id,
   ) async {
-    final db = await DBHelper.database();
+    final db = await DBHelper.databaseAssets();
 
     return db.delete(
       tableName,

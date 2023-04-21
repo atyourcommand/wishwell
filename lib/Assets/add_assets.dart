@@ -35,7 +35,7 @@ class _AssetsAddState extends State<AssetsAdd> {
   //final Map _clientObject = <String, String>{};
 
   List<Forbin> words = List.empty(growable: true);
-  List<double> _sliderValues = [0];
+
   final String firstName = 'Type';
   final String lastName = 'Name';
   final String value = 'Value';
@@ -68,7 +68,7 @@ class _AssetsAddState extends State<AssetsAdd> {
     }
     setState(() {
       noOfTextField += 1;
-      _sliderValues.add(0);
+
       _shareValues.add(Share(clientName: null, shareValue: 0.0));
       dropdoen.add(null);
     });
@@ -80,7 +80,7 @@ class _AssetsAddState extends State<AssetsAdd> {
     if (noOfTextField > 1) {
       setState(() {
         noOfTextField -= 1;
-        _sliderValues.removeLast();
+
         dropdoen.removeLast();
         _shareValues.removeLast();
       });
@@ -102,7 +102,7 @@ class _AssetsAddState extends State<AssetsAdd> {
   String? _dropDownValue;
   //
   List<TextEditingController> controllers = List.generate(
-    10,
+    list.length,
     (int i) => TextEditingController(),
   );
   List<String?> dropdoen = [null];
@@ -156,6 +156,7 @@ class _AssetsAddState extends State<AssetsAdd> {
                   keyboardType: TextInputType.number,
                   controller: _valueController,
                   decoration: const InputDecoration(
+                      prefixIcon: Icon(Icons.attach_money_outlined),
                       border: OutlineInputBorder(),
                       labelText: 'Enter Assets Value'),
                   validator: (value) {
@@ -329,6 +330,7 @@ class _AssetsAddState extends State<AssetsAdd> {
                     ],
                   ),
                 ),
+
               // const SizedBox(height: 10),
               // FormBuilderTextField(
               //   controller: _address1,
@@ -378,13 +380,11 @@ class _AssetsAddState extends State<AssetsAdd> {
               for (int i = 0; i < noOfTextField; i++)
                 Column(
                   children: [
-                    Text('FirstName : ${dropdoen[i]}'),
-                    Text('LastName : ${controllers[i].text}'),
+                    Text('Assets type : ${_firstNameController.text}'),
+                    Text('assets name : ${_lastNameController.text}'),
                     Text('Value : ${_valueController.text}'),
-                    Text('Address1 : ${_address1.text}'),
-                    Text('Address2 : ${_address2.text}'),
-                    Text('City : ${_city.text}'),
-                    Text('Country : ${_country.text}'),
+                    Text('Client name : ${_shareValues[i].clientName}'),
+                    Text('Assets % : ${_shareValues[i].shareValue}'),
                   ],
                 ),
             ],
@@ -457,7 +457,7 @@ class _AssetsAddState extends State<AssetsAdd> {
                   ),
                 );
                 // ignore: use_build_context_synchronously
-                // Navigator.of(context).pop();
+                Navigator.of(context).pop();
               } else {
                 setState(() {
                   _activeStepIndex += 1;
