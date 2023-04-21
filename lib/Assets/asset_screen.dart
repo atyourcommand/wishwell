@@ -150,17 +150,6 @@ class AssetScreenState extends State<AssetScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // bottomNavigationBar: BottomAppBar(
-      //   child: SizedBox(
-      //     child: ElevatedButton(
-      //       onPressed: () {
-      //         Navigator.push(context,
-      //             MaterialPageRoute(builder: (context) => const Nav2()));
-      //       },
-      //       child: const Text("Add another assets"),
-      //     ),
-      //   ),
-      // ),
       body: SafeArea(
         child: SizedBox(
           height: MediaQuery.of(context).size.height,
@@ -252,7 +241,6 @@ class AssetScreenState extends State<AssetScreen> {
                                             const SizedBox(
                                               height: 3,
                                             ),
-
                                             Row(
                                               children: const [
                                                 Text(
@@ -273,56 +261,6 @@ class AssetScreenState extends State<AssetScreen> {
                                                 ),
                                               ],
                                             ),
-                                            // Row(
-                                            //   children: [
-                                            //     const Text(" Last Name :"),
-                                            //     Text(clientProvider
-                                            //         .clientItem[index]
-                                            //         .lastName),
-                                            //   ],
-                                            // ),
-                                            // Row(
-                                            //   children: [
-                                            //     const Text("city :"),
-                                            //     Text(clientProvider
-                                            //         .clientItem[index].city),
-                                            //   ],
-                                            // ),
-                                            // Row(
-                                            //   children: [
-                                            //     const Text("address1 :"),
-                                            //     Text(clientProvider
-                                            //         .clientItem[index]
-                                            //         .address1),
-                                            //   ],
-                                            // ),
-                                            // Row(
-                                            //   children: [
-                                            //     const Text("address2 :"),
-                                            //     Text(clientProvider
-                                            //         .clientItem[index]
-                                            //         .address2),
-                                            //   ],
-                                            // ),
-                                            // Row(
-                                            //   children: [
-                                            //     const Text("country :"),
-                                            //     Text(clientProvider
-                                            //         .clientItem[index].country),
-                                            //   ],
-                                            // ),
-                                            // Row(
-                                            //   children: [
-                                            //     const Text("postcode :"),
-                                            //     Text(client.postcode),
-                                            //   ],
-                                            // ),
-                                            // Row(
-                                            //   children: [
-                                            //     Text("DOB :"),
-                                            //     Text(client.dob),
-                                            //   ],
-                                            // ),
                                           ],
                                         ),
                                         onTap: () {

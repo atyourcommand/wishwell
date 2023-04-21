@@ -13,20 +13,9 @@ import '../client_model.dart';
 class AssetsEdit extends StatefulWidget {
   const AssetsEdit({
     super.key,
-    // required this.assetsId,
-    // required this.assetsType,
-    // required this.assetsName,
-    // required this.assetsValue,
-    // required this.clientName,
-    // required this.assetsContity,
     required this.asset,
   });
-  // final String assetsId;
-  // final String assetsType;
-  // final String assetsName;
-  // final String assetsValue;
-  // final String clientName;
-  // final String assetsContity;
+
   final Assets asset;
   @override
   State<AssetsEdit> createState() => _ClientEditState();
@@ -35,6 +24,7 @@ class AssetsEdit extends StatefulWidget {
 class _ClientEditState extends State<AssetsEdit> {
   final FormValidator formValidator = FormValidator();
   late Assets _asset;
+  
   // ignore: unused_field
   final _formKey = GlobalKey<FormBuilderState>();
 
@@ -55,6 +45,7 @@ class _ClientEditState extends State<AssetsEdit> {
     'John',
     'Cornado',
   ];
+
   List<TextEditingController> controllers = [];
   int noOfTextField = 1;
   String? _dropDownValue;
@@ -63,6 +54,7 @@ class _ClientEditState extends State<AssetsEdit> {
 
   @override
   void initState() {
+   
     _asset = widget.asset;
     controllers = List.generate(
       list.length,
@@ -119,7 +111,7 @@ class _ClientEditState extends State<AssetsEdit> {
                 const SizedBox(
                   height: 30,
                 ),
-                //=========frist name textFeild========//
+
                 TextFormField(
                   controller: _assetType,
                   decoration: const InputDecoration(labelText: 'Assets type'),
@@ -130,7 +122,7 @@ class _ClientEditState extends State<AssetsEdit> {
                     return null;
                   },
                 ),
-                //=========last name textFeild========//
+
                 const SizedBox(height: 10),
                 TextFormField(
                   controller: _assewtName,
@@ -142,9 +134,7 @@ class _ClientEditState extends State<AssetsEdit> {
                     return null;
                   },
                 ),
-                //===============Gender =========//
 
-                //=========Address  textFeild========//
                 const SizedBox(height: 10),
 
                 FormBuilderTextField(
@@ -243,16 +233,6 @@ class _ClientEditState extends State<AssetsEdit> {
 
                 OutlinedButton(
                   onPressed: () async {
-                    // assetProvider.updateAssetstype(
-                    //     widget.asset.id, _assetType.text);
-                    // assetProvider.updateAssetsname(
-                    //     widget.asset.id, _assewtName.text);
-                    // assetProvider.updateAssetsvalue(
-                    //     widget.asset.id, _assetValue.text.toString());
-                    // assetProvider.updateClientname(widget.asset.id,
-                    //     _shareValues[i].clientName.toString());
-                    // assetProvider.updateAssetcontity(
-                    //     widget.asset.id, controllers[i].toString());
                     Assets newAsset = Assets(
                         value: double.parse(_assetValue.text),
                         id: _asset.id,
@@ -271,10 +251,6 @@ class _ClientEditState extends State<AssetsEdit> {
                     );
                     int count = 0;
                     Navigator.of(context).popUntil((_) => count++ >= 2);
-                    // Navigator.of(context).push(MaterialPageRoute(
-                    //   builder: (context) => aseets.AssetScreen(),
-                    // ));
-                    // Navigator.pop(context);
                   },
                   child: const Text('Save changes'),
                 )
@@ -310,62 +286,4 @@ class _ClientEditState extends State<AssetsEdit> {
       });
     }
   }
-  // bool validateForm() {
-  //   if (_firstNameController.text.toString().isEmpty) {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       const SnackBar(
-  //           content: Text(
-  //         'Enter Name',
-  //         textAlign: TextAlign.center,
-  //       )),
-  //     );
-  //     return false;
-  //   }
-
-  //   if (_lastNameController.text.toString().isEmpty) {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       const SnackBar(
-  //           content: Text(
-  //         'Enter last name',
-  //         textAlign: TextAlign.center,
-  //       )),
-  //     );
-  //     return false;
-  //   }
-
-  //   if (_dropDownValue == null) {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(
-  //           content: Text(
-  //         'Select $_address1',
-  //         textAlign: TextAlign.center,
-  //       )),
-  //     );
-  //     return false;
-  //   }
-
-  //   if (_address2.text.toString().isEmpty) {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       const SnackBar(
-  //           content: Text(
-  //         'Enter address2',
-  //         textAlign: TextAlign.center,
-  //       )),
-  //     );
-  //     return false;
-  //   }
-
-  //   if (_address1.text.toString().isEmpty) {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       const SnackBar(
-  //           content: Text(
-  //         'Enter DOB',
-  //         textAlign: TextAlign.center,
-  //       )),
-  //     );
-  //     return false;
-  //   }
-
-  //   return true;
-  // }
 }

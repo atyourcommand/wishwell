@@ -1,9 +1,11 @@
 //import 'dart:convert';
 import 'dart:developer';
+import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:intl/intl.dart';
 
 import 'package:provider/provider.dart';
 import 'package:wishwell/provider/asset_provider.dart';
@@ -33,7 +35,7 @@ List<String> list = <String>[
 
 class _AssetsAddState extends State<AssetsAdd> {
   //final Map _clientObject = <String, String>{};
-
+  List<Client>? client;
   List<Forbin> words = List.empty(growable: true);
   final List<double> _sliderValues = [0];
   final String firstName = 'Type';
@@ -87,6 +89,13 @@ class _AssetsAddState extends State<AssetsAdd> {
     }
   }
 
+  convertPrice() {}
+
+  static const _locale = 'en';
+  String _formatNumber(String s) =>
+      NumberFormat.decimalPattern(_locale).format(int.parse(s));
+  String get _currency =>
+      NumberFormat.compactSimpleCurrency(locale: _locale).currencySymbol;
   final FormValidator formValidator = FormValidator();
 
   // ignore: unused_field
@@ -101,6 +110,8 @@ class _AssetsAddState extends State<AssetsAdd> {
   late TextEditingController _dob;
   String? _dropDownValue;
   //
+  double number = 0.0;
+  double max = 100.0;
   List<TextEditingController> controllers = List.generate(
     list.length,
     (int i) => TextEditingController(),
@@ -125,6 +136,48 @@ class _AssetsAddState extends State<AssetsAdd> {
                 const SizedBox(
                   height: 40,
                 ),
+                // for (int i = 0; i < noOfTextField; i++)
+                //   Container(
+                //     height: 50,
+                //     decoration: BoxDecoration(
+                //       border: Border.all(
+                //         color: Colors.grey,
+                //       ),
+                //       borderRadius: BorderRadius.circular(5),
+                //     ),
+                //     child: Padding(
+                //       padding: const EdgeInsets.all(8.0),
+                //       child: DropdownButton<String>(
+                //         isExpanded: true,
+                //         value: _shareValues[i].clientName,
+                //         icon: const Icon(
+                //           Icons.arrow_downward,
+                //           color: Colors.black,
+                //         ),
+                //         elevation: 16,
+                //         style: const TextStyle(
+                //           color: Colors.black,
+                //         ),
+                //         onChanged: (String? value) {
+                //           // This is called when the user selects an item.
+                //           if (value != null) {
+                //             setState(() {
+                //               _shareValues[i].clientName = value;
+                //             });
+                //           }
+                //         },
+                //         items: list.map<DropdownMenuItem<String>>((value) {
+                //           return DropdownMenuItem<String>(
+                //             value: value,
+                //             child: Text(value),
+                //           );
+                //         }).toList(),
+                //       ),
+                //     ),
+                //   ),
+                // const SizedBox(
+                //   height: 10,
+                // ),
                 TextFormField(
                   controller: _firstNameController,
                   decoration: const InputDecoration(
@@ -155,10 +208,17 @@ class _AssetsAddState extends State<AssetsAdd> {
                 TextFormField(
                   keyboardType: TextInputType.number,
                   controller: _valueController,
-                  decoration: const InputDecoration(
-                      prefixIcon: Icon(Icons.attach_money_outlined),
+                  decoration: InputDecoration(
+                      prefixText: _currency,
                       border: OutlineInputBorder(),
                       labelText: 'Enter Assets Value'),
+                  // onChanged: (string) {
+                  //   string = '${_formatNumber(string.replaceAll(',', ''))}';
+                  //   _valueController.value = TextEditingValue(
+                  //     text: string,
+                  //     selection: TextSelection.collapsed(offset: string.length),
+                  //   );
+                  // },
                   validator: (value) {
                     if (value == null && value!.isEmpty) {
                       ///--- toast
@@ -166,76 +226,6 @@ class _AssetsAddState extends State<AssetsAdd> {
                     return null;
                   },
                 ),
-                // DecoratedBox(
-                //   decoration: const ShapeDecoration(
-                //     shape: RoundedRectangleBorder(
-                //       side: BorderSide(
-                //           width: 1.0,
-                //           style: BorderStyle.solid,
-                //           color: Colors.grey),
-                //       borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                //     ),
-                //   ),
-                //   child: Padding(
-                //     padding: const EdgeInsets.all(5.0),
-                //     child: DropdownButton(
-                //         hint: _dropDownValue == null
-                //             ? const Text('Value')
-                //             : Text(
-                //                 _dropDownValue!,
-                //                 style: const TextStyle(color: Colors.black38),
-                //               ),
-                //         isExpanded: true,
-                //         iconSize: 30.0,
-                //         style: const TextStyle(color: Colors.black38),
-                //         items: [
-                //           'Male',
-                //           'Female',
-                //         ].map(
-                //           (val) {
-                //             return DropdownMenuItem<String>(
-                //               value: val,
-                //               child: Text(val),
-                //             );
-                //           },
-                //         ).toList(),
-                //         onChanged: (val) {
-                //           setState(
-                //             () {
-                //               _dropDownValue = val;
-                //             },
-                //           );
-                //         }),
-                //   ),
-                // ),
-                // const SizedBox(height: 10),
-                // FormBuilderTextField(
-                //   controller: _dob,
-                //   name: lastName,
-                //   decoration: const InputDecoration(
-                //       border: OutlineInputBorder(), labelText: 'Date of Birth'),
-                //   validator: FormBuilderValidators.required(),
-                //   onTap: () async {
-                //     DateTime? pickedDate = await showDatePicker(
-                //         context: context,
-                //         initialDate: DateTime.now(),
-                //         firstDate: DateTime(1950),
-                //         lastDate: DateTime(2100));
-
-                //     if (pickedDate != null) {
-                //       debugPrint(pickedDate.toString());
-                //       String formattedDate =
-                //           DateFormat('yyyy-MM-dd').format(pickedDate);
-                //       //formatted date output using intl package =>  2021-03-16
-                //       setState(() {
-                //         _dob.text = formattedDate
-                //             .toString(); //set output date to TextField value.
-                //       });
-                //     } else {
-                //       debugPrint("===============working data");
-                //     }
-                //   },
-                // ),
               ],
             )),
         Step(
@@ -243,10 +233,31 @@ class _AssetsAddState extends State<AssetsAdd> {
           isActive: _activeStepIndex >= 1,
           title: const Text('Shares'),
           content: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(
                 height: 15,
+              ),
+              const Icon(
+                Icons.home,
+                size: 40,
+              ),
+              Text(
+                _lastNameController.text,
+                style: const TextStyle(
+                  fontSize: 28,
+                  color: Color.fromARGB(255, 114, 114, 114),
+                ),
+              ),
+              Text(
+                "\$${_valueController.text}",
+                style: const TextStyle(
+                  fontSize: 28,
+                  color: Color.fromARGB(255, 114, 114, 114),
+                ),
+              ),
+              const SizedBox(
+                height: 30,
               ),
               //=========Address  textFeild========//
               for (int i = 0; i < noOfTextField; i++)
@@ -288,8 +299,8 @@ class _AssetsAddState extends State<AssetsAdd> {
                                     });
                                   }
                                 },
-                                items: list.map<DropdownMenuItem<String>>(
-                                    (String value) {
+                                items:
+                                    list.map<DropdownMenuItem<String>>((value) {
                                   return DropdownMenuItem<String>(
                                     value: value,
                                     child: Text(value),
@@ -316,56 +327,26 @@ class _AssetsAddState extends State<AssetsAdd> {
                       Slider(
                         value: _shareValues[i].shareValue,
                         min: 0.0,
-                        max: 100.0,
+                        max: max,
                         divisions: 10,
                         label: ' ${_shareValues[i].shareValue.round()}',
                         onChanged: (double value) {
                           setState(() {
                             _shareValues[i].shareValue = value;
-                            controllers[i].text =
-                                _shareValues[i].shareValue.toInt().toString();
+                            final share = _shareValues[i].shareValue *
+                                double.parse(_valueController.text) /
+                                100;
+                            controllers[i].text = share.toString();
+                            double deduxtMax = max -
+                                double.parse(
+                                    _shareValues[i].shareValue.toString());
+                            log("deductmax ${deduxtMax}");
                           });
                         },
                       ),
                     ],
                   ),
                 ),
-
-              // const SizedBox(height: 10),
-              // FormBuilderTextField(
-              //   controller: _address1,
-              //   name: address,
-              //   decoration: const InputDecoration(
-              //       border: OutlineInputBorder(), labelText: 'Address1'),
-              //   validator: FormBuilderValidators.required(),
-              // ),
-              // //=========Address1  textFeild========//
-              // const SizedBox(height: 10),
-              // FormBuilderTextField(
-              //   controller: _address2,
-              //   name: address1,
-              //   decoration: const InputDecoration(
-              //       border: OutlineInputBorder(), labelText: 'Address2'),
-              //   validator: FormBuilderValidators.required(),
-              // ),
-              // //=========Address2  textFeild========//
-              // const SizedBox(height: 10),
-              // FormBuilderTextField(
-              //   controller: _city,
-              //   name: city,
-              //   decoration: const InputDecoration(
-              //       border: OutlineInputBorder(), labelText: 'City'),
-              //   validator: FormBuilderValidators.required(),
-              // ),
-              // //============city==========//
-              // const SizedBox(height: 10),
-              // FormBuilderTextField(
-              //   controller: _country,
-              //   name: country,
-              //   decoration: const InputDecoration(
-              //       border: OutlineInputBorder(), labelText: 'Country'),
-              //   validator: FormBuilderValidators.required(),
-              // ),
             ],
           ),
         ),
@@ -439,10 +420,11 @@ class _AssetsAddState extends State<AssetsAdd> {
                 // }
 
                 await assetsProvider.insertAssets(
-                    _firstNameController.text,
-                    _lastNameController.text,
-                    double.parse(_valueController.text),
-                    _shareValues);
+                  _firstNameController.text,
+                  _lastNameController.text,
+                  double.parse(_valueController.text),
+                  _shareValues,
+                );
 
                 log("data ${_shareValues.toString()}");
                 // log(_sliderValues.toString());
@@ -527,225 +509,6 @@ class _AssetsAddState extends State<AssetsAdd> {
           },
         ),
       ),
-      // body: SizedBox(
-      //   height: MediaQuery.of(context).size.height,
-      //   child: Padding(
-      //     padding: const EdgeInsets.symmetric(horizontal: 10),
-      //     child: SingleChildScrollView(
-      //       child: Column(
-      //         children: [
-      //           const SizedBox(
-      //             height: 80,
-      //           ),
-      //           const Text("Why not,",
-      //               style: TextStyle(
-      //                 fontSize: 40,
-      //                 fontWeight: FontWeight.w300,
-      //               )),
-      //           const Text(
-      //             "add a client.",
-      //             style: TextStyle(
-      //               fontSize: 40,
-      //               fontWeight: FontWeight.bold,
-      //             ),
-      //           ),
-      //           const SizedBox(
-      //             height: 50,
-      //           ),
-      //           //=========frist name textFeild========//
-      //           TextFormField(
-      //             controller: _firstNameController,
-      //             decoration: const InputDecoration(labelText: 'First Name'),
-      //             validator: (value) {
-      //               if (value == null && value!.isEmpty) {
-      //                 ///--- toast
-      //               }
-      //               return null;
-      //             },
-      //             onSaved: (val) => _clientObject['firstName'] = val ?? '',
-      //           ),
-      //           //=========last name textFeild========//
-      //           const SizedBox(height: 10),
-      //           TextFormField(
-      //             controller: _lastNameController,
-      //             decoration: const InputDecoration(labelText: 'Last Name'),
-      //             validator: (value) {
-      //               if (value == null && value!.isEmpty) {
-      //                 ///--- toast
-      //               }
-      //               return null;
-      //             },
-      //             onSaved: (val) => _clientObject['lastName'] = val ?? '',
-      //           ),
-      //           //===============Gender =========//
-      //           const SizedBox(height: 10),
-      //           DropdownButton(
-      //               hint: _dropDownValue == null
-      //                   ? const Text('Gender')
-      //                   : Text(
-      //                       _dropDownValue!,
-      //                       style: const TextStyle(color: Colors.black38),
-      //                     ),
-      //               isExpanded: true,
-      //               iconSize: 30.0,
-      //               style: const TextStyle(color: Colors.black38),
-      //               items: [
-      //                 'Male',
-      //                 'Female',
-      //               ].map(
-      //                 (val) {
-      //                   return DropdownMenuItem<String>(
-      //                     value: val,
-      //                     child: Text(val),
-      //                   );
-      //                 },
-      //               ).toList(),
-      //               onChanged: (val) {
-      //                 setState(
-      //                   () {
-      //                     _dropDownValue = val;
-      //                   },
-      //                 );
-      //               }),
-
-      //           Divider(
-      //             height: 1,
-      //             color: Colors.grey.shade700,
-
-      //             //  thickness: 10,
-      //           ),
-      //           //=========Address  textFeild========//
-      //           const SizedBox(height: 10),
-      //           FormBuilderTextField(
-      //             controller: _address1,
-      //             name: address,
-      //             decoration: const InputDecoration(labelText: 'Address1'),
-      //             validator: FormBuilderValidators.required(),
-      //             onSaved: (val) => _clientObject['lastName'] = val ?? '',
-      //           ),
-      //           //=========Address1  textFeild========//
-      //           const SizedBox(height: 10),
-      //           FormBuilderTextField(
-      //             controller: _address2,
-      //             name: address1,
-      //             decoration: const InputDecoration(labelText: 'Address2'),
-      //             validator: FormBuilderValidators.required(),
-      //             onSaved: (val) => _clientObject['lastName'] = val ?? '',
-      //           ),
-      //           //=========Address2  textFeild========//
-      //           const SizedBox(height: 10),
-      //           FormBuilderTextField(
-      //             controller: _city,
-      //             name: city,
-      //             decoration: const InputDecoration(labelText: 'City'),
-      //             validator: FormBuilderValidators.required(),
-      //             onSaved: (val) => _clientObject['lastName'] = val ?? '',
-      //           ),
-      //           //============city==========//
-      //           const SizedBox(height: 10),
-      //           FormBuilderTextField(
-      //             controller: _country,
-      //             name: country,
-      //             decoration: const InputDecoration(labelText: 'Country'),
-      //             validator: FormBuilderValidators.required(),
-      //             onSaved: (val) => _clientObject['lastName'] = val ?? '',
-      //           ),
-      //           //============country=============//
-      //           // FormBuilderTextField(
-      //           //   controller: _dob,
-      //           //   name: dob,
-      //           //   decoration: const InputDecoration(labelText: 'Date of Birth'),
-      //           //   validator: FormBuilderValidators.required(),
-      //           //   onSaved: (val) => _clientObject['lastName'] = val ?? '',
-      //           // ),
-
-      //           //============Date of birth=============//
-      //           const SizedBox(height: 10),
-      //           FormBuilderTextField(
-      //             controller: _dob,
-      //             name: lastName,
-      //             decoration: const InputDecoration(labelText: 'Date of Birth'),
-      //             validator: FormBuilderValidators.required(),
-      //             onSaved: (val) => _clientObject['lastName'] = val ?? '',
-      //             onTap: () async {
-      //               DateTime? pickedDate = await showDatePicker(
-      //                   context: context,
-      //                   initialDate: DateTime.now(),
-      //                   firstDate: DateTime(1950),
-      //                   lastDate: DateTime(2100));
-
-      //               if (pickedDate != null) {
-      //                 debugPrint(pickedDate.toString());
-      //                 String formattedDate =
-      //                     DateFormat('yyyy-MM-dd').format(pickedDate);
-      //                 //formatted date output using intl package =>  2021-03-16
-      //                 setState(() {
-      //                   _dob.text = formattedDate
-      //                       .toString(); //set output date to TextField value.
-      //                 });
-      //               } else {
-      //                 debugPrint("===============working data");
-      //               }
-      //             },
-      //           ),
-      //           const SizedBox(
-      //             height: 50,
-      //           ),
-      //           OutlinedButton(
-      //             onPressed: () async {
-      //               if (validateForm()) {
-      //                 await clientProvider.insertData(
-      //                   _firstNameController.text,
-      //                   _lastNameController.text,
-      //                   _dropDownValue.toString(),
-      //                   _address1.text,
-      //                   _address2.text,
-      //                   _city.text,
-      //                   _country.text,
-      //                   _dob.text,
-      //                 );
-      //                 _firstNameController.clear();
-      //                 _lastNameController.clear();
-      //                 _address1.clear();
-      //                 _address2.clear();
-      //                 _city.clear();
-      //                 _country.clear();
-      //                 _dob.clear();
-      //                 ScaffoldMessenger.of(context).showSnackBar(
-      //                   const SnackBar(
-      //                     content: Text('client add scuccessfully.'),
-      //                     backgroundColor: Colors.green,
-      //                   ),
-      //                 );
-      //                 Navigator.of(context).push(MaterialPageRoute(
-      //                   builder: (context) => const ClientScreen(),
-      //                 ));
-      //               }
-
-      //               // _clientObject['firstName'] =
-      //               //     _firstNameController.text.toString().trim();
-      //               // _clientObject['lastName'] =
-      //               //     _lastNameController.text.toString().trim();
-      //               // _clientObject['clientId'] = "1";
-      //               // _clientObject['address1'] = _address1.text.toString().trim();
-      //               // _clientObject['address2'] = _address2.text.toString().trim();
-      //               // _clientObject['city'] = _city.text.toString().trim();
-      //               // _clientObject['postcode'] = "";
-      //               // _clientObject['country'] = _country.text.toString().trim();
-      //               // _clientObject['gender'] = _dropDownValue.toString();
-      //               // _clientObject['dob'] = _dob.text.toString().trim();
-      //               // storedata();
-
-      //               // _createClient();
-      //             },
-      //             child: const Text('Create client'),
-      //           )
-      //           //saveNameBtn(),
-      //         ],
-      //       ),
-      //     ),
-      //   ),
-      // ),
     );
   }
 
@@ -771,61 +534,7 @@ class _AssetsAddState extends State<AssetsAdd> {
         );
         return false;
       }
-      // if (_valueController.text.toString().isEmpty) {
-      //   ScaffoldMessenger.of(context).showSnackBar(
-      //     const SnackBar(
-      //         content: Text(
-      //       'Enter value  dewwed',
-      //       textAlign: TextAlign.center,
-      //     )),
-      //   );
-      //   return false;
-      // }
-    } else if (_activeStepIndex == 1) {
-      // if (_address1.text.toString().isEmpty) {
-      //   ScaffoldMessenger.of(context).showSnackBar(
-      //     const SnackBar(
-      //         content: Text(
-      //       'Enter address1',
-      //       textAlign: TextAlign.center,
-      //     )),
-      //   );
-      //   return false;
-      // }
-
-      // if (_address2.text.toString().isEmpty) {
-      //   ScaffoldMessenger.of(context).showSnackBar(
-      //     const SnackBar(
-      //         content: Text(
-      //       'Enter address2',
-      //       textAlign: TextAlign.center,
-      //     )),
-      //   );
-      //   return false;
-      // }
-
-      // if (_city.text.toString().isEmpty) {
-      //   ScaffoldMessenger.of(context).showSnackBar(
-      //     const SnackBar(
-      //         content: Text(
-      //       'Enter City',
-      //       textAlign: TextAlign.center,
-      //     )),
-      //   );
-      //   return false;
-      // }
-
-      // if (_country.text.toString().isEmpty) {
-      //   ScaffoldMessenger.of(context).showSnackBar(
-      //     const SnackBar(
-      //         content: Text(
-      //       'Enter Country',
-      //       textAlign: TextAlign.center,
-      //     )),
-      //   );
-      //   return false;
-      // }
-    }
+    } else if (_activeStepIndex == 1) {}
     return true;
   }
 

@@ -21,15 +21,6 @@ class AssetsPage extends StatelessWidget {
         ),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        // title: Row(
-        //   crossAxisAlignment: CrossAxisAlignment.center,
-        //   children: [
-        //     Text(
-        //       ///client.firstName,
-        //       style: const TextStyle(color: Colors.black45),
-        //     ),
-        //   ],
-        // ),
         centerTitle: true,
         actions: [
           IconButton(
@@ -37,12 +28,6 @@ class AssetsPage extends StatelessWidget {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => AssetsEdit(
-                      // assetsId: asset.id,
-                      // assetsType: asset.assetsType,
-                      // assetsName: asset.assetsName,
-                      // assetsValue: asset.value.toString(),
-                      // clientName: asset.shares[0].clientName.toString(),
-                      // assetsContity: asset.shares[0].shareValue.toString(),
                       asset: asset,
                     ),
                   ),
@@ -119,34 +104,6 @@ class AssetsPage extends StatelessWidget {
                     ),
                   );
                 }),
-            // Text(
-            //   client.address1,
-            //   style: const TextStyle(
-            //     fontSize: 18,
-            //     fontWeight: FontWeight.w300,
-            //   ),
-            // ),
-            // Text(
-            //   client.address2,
-            //   style: const TextStyle(
-            //     fontSize: 18,
-            //     fontWeight: FontWeight.w300,
-            //   ),
-            // ),
-            // Text(
-            //   client.city,
-            //   style: const TextStyle(
-            //     fontSize: 18,
-            //     fontWeight: FontWeight.w300,
-            //   ),
-            // ),
-            // Text(
-            //   client.country,
-            //   style: const TextStyle(
-            //     fontSize: 18,
-            //     fontWeight: FontWeight.w300,
-            //   ),
-            // ),
             const SizedBox(height: 30),
             OutlinedButton(
               onPressed: () async {
