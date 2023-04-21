@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:wishwell/provider/asset_provider.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
 //import 'package:wishwell/client_screen.dart';
-import 'package:wishwell/provider/client_provider.dart';
+//import 'package:wishwell/provider/client_provider.dart';
 import '../client_model.dart';
 import '../form_validator.dart';
 
@@ -35,7 +35,7 @@ class _AssetsAddState extends State<AssetsAdd> {
   //final Map _clientObject = <String, String>{};
 
   List<Forbin> words = List.empty(growable: true);
-  List<double> _sliderValues = [0];
+  final List<double> _sliderValues = [0];
   final String firstName = 'Type';
   final String lastName = 'Name';
   final String value = 'Value';
@@ -106,7 +106,7 @@ class _AssetsAddState extends State<AssetsAdd> {
     (int i) => TextEditingController(),
   );
   List<String?> dropdoen = [null];
-  List<Share> _shareValues = [Share(clientName: null, shareValue: 0.0)];
+  final List<Share> _shareValues = [Share(clientName: null, shareValue: 0.0)];
   List<Step> stepList() => [
         Step(
             state:

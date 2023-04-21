@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:developer';
+//import 'dart:developer';
 
 class Client {
   final String clientId;
@@ -46,11 +46,9 @@ class Client {
         'firstName': firstName,
         'lastName': lastName,
         'gender': gender,
-
         'address1': address1,
         'address2': address2,
         'city': city,
-      
         'country': country,
         'dob': dob,
       };
@@ -79,7 +77,7 @@ class Assets {
   });
 //constructor to convert json to object instance
 
-  static Assets fromJson(Map<String, dynamic> json,List<Share> shares) {
+  static Assets fromJson(Map<String, dynamic> json, List<Share> shares) {
     // log(json.toString());
     return Assets(
         id: json["shareId"],

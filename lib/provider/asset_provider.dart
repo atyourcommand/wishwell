@@ -14,6 +14,7 @@ class AssetsProvider extends ChangeNotifier {
     final dataList = await DBHelper.selectAssets(DBHelper.shares);
 
     final assets = dataList.map((item) {
+      // ignore: no_leading_underscores_for_local_identifiers
       List<Share> _shares = [];
       final shares = jsonDecode(item['share']) as List<dynamic>;
       for (var element in shares) {
