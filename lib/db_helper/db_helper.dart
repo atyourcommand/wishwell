@@ -182,7 +182,7 @@ class DBHelper {
   Future<Client?> displayAssets() async {
     final db = await DBHelper.database();
     final List<Map<String, dynamic>> maps = await db.query('shares');
-    print("games in display method $maps");
+    debugPrint("games in display method $maps");
 
     return null;
   }

@@ -9,12 +9,12 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wishwell/provider/asset_provider.dart';
-import 'package:wishwell/provider/client_provider.dart';
+//import 'package:wishwell/provider/client_provider.dart';
 
 import '../components/nav2.dart';
 import 'add_assets.dart';
 import 'assets_detail.dart';
-import 'dart:developer' as dev;
+//import 'dart:developer' as dev;
 
 class Assets {
   String? id;
