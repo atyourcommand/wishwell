@@ -1,4 +1,6 @@
 //import 'dart:convert';
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:developer';
 import 'dart:ffi';
 
@@ -111,271 +113,296 @@ class _AssetsAddState extends State<AssetsAdd> {
   String? _dropDownValue;
   //
   double number = 0.0;
-  double max = 100.0;
+
+  double max = 1.0;
   List<TextEditingController> controllers = List.generate(
     list.length,
     (int i) => TextEditingController(),
   );
   List<String?> dropdoen = [null];
   final List<Share> _shareValues = [Share(clientName: null, shareValue: 0.0)];
-  List<Step> stepList() => [
-        Step(
-            state:
-                _activeStepIndex <= 0 ? StepState.editing : StepState.complete,
-            isActive: _activeStepIndex >= 0,
-            title: const Text('Assets'),
-            content: Column(
-              children: [
-                const Text(
-                  "You can add a person here. Return later to complete all the details in order to prepare your PDF.",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w300,
-                  ),
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
-                // for (int i = 0; i < noOfTextField; i++)
-                //   Container(
-                //     height: 50,
-                //     decoration: BoxDecoration(
-                //       border: Border.all(
-                //         color: Colors.grey,
-                //       ),
-                //       borderRadius: BorderRadius.circular(5),
-                //     ),
-                //     child: Padding(
-                //       padding: const EdgeInsets.all(8.0),
-                //       child: DropdownButton<String>(
-                //         isExpanded: true,
-                //         value: _shareValues[i].clientName,
-                //         icon: const Icon(
-                //           Icons.arrow_downward,
-                //           color: Colors.black,
-                //         ),
-                //         elevation: 16,
-                //         style: const TextStyle(
-                //           color: Colors.black,
-                //         ),
-                //         onChanged: (String? value) {
-                //           // This is called when the user selects an item.
-                //           if (value != null) {
-                //             setState(() {
-                //               _shareValues[i].clientName = value;
-                //             });
-                //           }
-                //         },
-                //         items: list.map<DropdownMenuItem<String>>((value) {
-                //           return DropdownMenuItem<String>(
-                //             value: value,
-                //             child: Text(value),
-                //           );
-                //         }).toList(),
-                //       ),
-                //     ),
-                //   ),
-                // const SizedBox(
-                //   height: 10,
-                // ),
-                TextFormField(
-                  controller: _firstNameController,
-                  decoration: const InputDecoration(
-                      labelText: 'Enter assets Type',
-                      border: OutlineInputBorder()),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      ///--- toast
-                      return '';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 10),
-                TextFormField(
-                  controller: _lastNameController,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(), labelText: 'Enter name'),
-                  validator: (value) {
-                    if (value == null && value!.isEmpty) {
-                      ///--- toast
-                    }
-                    return null;
-                  },
-                ),
-                //===============Gender =========//
-                const SizedBox(height: 10),
-                TextFormField(
-                  keyboardType: TextInputType.number,
-                  controller: _valueController,
-                  decoration: InputDecoration(
-                      prefixText: _currency,
-                      border: OutlineInputBorder(),
-                      labelText: 'Enter Assets Value'),
-                  // onChanged: (string) {
-                  //   string = '${_formatNumber(string.replaceAll(',', ''))}';
-                  //   _valueController.value = TextEditingValue(
-                  //     text: string,
-                  //     selection: TextSelection.collapsed(offset: string.length),
-                  //   );
-                  // },
-                  validator: (value) {
-                    if (value == null && value!.isEmpty) {
-                      ///--- toast
-                    }
-                    return null;
-                  },
-                ),
-              ],
-            )),
-        Step(
-          state: _activeStepIndex <= 1 ? StepState.editing : StepState.complete,
-          isActive: _activeStepIndex >= 1,
-          title: const Text('Shares'),
+  List<Step> stepList() {
+    double value = double.tryParse(_valueController.text) ?? 0.0;
+    double _remainingValue = value;
+    for (var element in _shareValues) {
+      _remainingValue -= element.shareValue * value / 100;
+    }
+    log(_remainingValue.toString());
+    return [
+      Step(
+          state: _activeStepIndex <= 0 ? StepState.editing : StepState.complete,
+          isActive: _activeStepIndex >= 0,
+          title: const Text('Assets'),
           content: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(
-                height: 15,
-              ),
-              const Icon(
-                Icons.home,
-                size: 40,
-              ),
-              Text(
-                _lastNameController.text,
-                style: const TextStyle(
-                  fontSize: 28,
-                  color: Color.fromARGB(255, 114, 114, 114),
-                ),
-              ),
-              Text(
-                "\$${_valueController.text}",
-                style: const TextStyle(
-                  fontSize: 28,
-                  color: Color.fromARGB(255, 114, 114, 114),
+              const Text(
+                "You can add a person here. Return later to complete all the details in order to prepare your PDF.",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w300,
                 ),
               ),
               const SizedBox(
-                height: 30,
+                height: 40,
               ),
-              //=========Address  textFeild========//
-              for (int i = 0; i < noOfTextField; i++)
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: 50,
-                            width: 150,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Colors.grey,
-                              ),
-                              borderRadius: BorderRadius.circular(5),
+              // for (int i = 0; i < noOfTextField; i++)
+              //   Container(
+              //     height: 50,
+              //     decoration: BoxDecoration(
+              //       border: Border.all(
+              //         color: Colors.grey,
+              //       ),
+              //       borderRadius: BorderRadius.circular(5),
+              //     ),
+              //     child: Padding(
+              //       padding: const EdgeInsets.all(8.0),
+              //       child: DropdownButton<String>(
+              //         isExpanded: true,
+              //         value: _shareValues[i].clientName,
+              //         icon: const Icon(
+              //           Icons.arrow_downward,
+              //           color: Colors.black,
+              //         ),
+              //         elevation: 16,
+              //         style: const TextStyle(
+              //           color: Colors.black,
+              //         ),
+              //         onChanged: (String? value) {
+              //           // This is called when the user selects an item.
+              //           if (value != null) {
+              //             setState(() {
+              //               _shareValues[i].clientName = value;
+              //             });
+              //           }
+              //         },
+              //         items: list.map<DropdownMenuItem<String>>((value) {
+              //           return DropdownMenuItem<String>(
+              //             value: value,
+              //             child: Text(value),
+              //           );
+              //         }).toList(),
+              //       ),
+              //     ),
+              //   ),
+              // const SizedBox(
+              //   height: 10,
+              // ),
+              TextFormField(
+                controller: _firstNameController,
+                decoration: const InputDecoration(
+                    labelText: 'Enter assets Type',
+                    border: OutlineInputBorder()),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    ///--- toast
+                    return '';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 10),
+              TextFormField(
+                controller: _lastNameController,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(), labelText: 'Enter name'),
+                validator: (value) {
+                  if (value == null && value!.isEmpty) {
+                    ///--- toast
+                  }
+                  return null;
+                },
+              ),
+              //===============Gender =========//
+              const SizedBox(height: 10),
+              TextFormField(
+                keyboardType: TextInputType.number,
+                controller: _valueController,
+                decoration: InputDecoration(
+                  prefixText: _currency,
+                  border: OutlineInputBorder(),
+                  labelText: 'Enter Assets Value',
+                ),
+                validator: (value) {
+                  if (value == null && value!.isEmpty) {
+                    ///--- toast
+                  }
+                  return null;
+                },
+              ),
+            ],
+          )),
+      Step(
+        state: _activeStepIndex <= 1 ? StepState.editing : StepState.complete,
+        isActive: _activeStepIndex >= 1,
+        title: const Text('Shares'),
+        content: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(
+              height: 15,
+            ),
+            const Icon(
+              Icons.home,
+              size: 40,
+            ),
+            Text(
+              _lastNameController.text,
+              style: const TextStyle(
+                fontSize: 28,
+                color: Color.fromARGB(255, 114, 114, 114),
+              ),
+            ),
+            Text(
+              "\$${_valueController.text}",
+              style: const TextStyle(
+                fontSize: 28,
+                color: Color.fromARGB(255, 114, 114, 114),
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            //=========Address  textFeild========//
+            for (int i = 0; i < noOfTextField; i++)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 50,
+                          width: 150,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.grey,
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: DropdownButton<String>(
-                                isExpanded: true,
-                                value: _shareValues[i].clientName,
-                                icon: const Icon(
-                                  Icons.arrow_downward,
-                                  color: Colors.black,
-                                ),
-                                elevation: 16,
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                ),
-                                onChanged: (String? value) {
-                                  // This is called when the user selects an item.
-                                  if (value != null) {
-                                    setState(() {
-                                      _shareValues[i].clientName = value;
-                                    });
-                                  }
-                                },
-                                items:
-                                    list.map<DropdownMenuItem<String>>((value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value),
-                                  );
-                                }).toList(),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: DropdownButton<String>(
+                              isExpanded: true,
+                              value: _shareValues[i].clientName,
+                              icon: const Icon(
+                                Icons.arrow_downward,
+                                color: Colors.black,
                               ),
+                              elevation: 16,
+                              style: const TextStyle(
+                                color: Colors.black,
+                              ),
+                              onChanged: (String? value) {
+                                // This is called when the user selects an item.
+                                if (value != null) {
+                                  setState(() {
+                                    _shareValues[i].clientName = value;
+                                  });
+                                }
+                              },
+                              items:
+                                  list.map<DropdownMenuItem<String>>((value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
                             ),
                           ),
-                          SizedBox(
-                            height: 50,
-                            width: 100,
-                            child: FormBuilderTextField(
-                              controller: controllers[i],
-                              name: address,
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                hintText: "0",
-                              ),
-                              validator: FormBuilderValidators.required(),
+                        ),
+                        SizedBox(
+                          height: 50,
+                          width: 100,
+                          child: FormBuilderTextField(
+                            controller: controllers[i],
+                            name: address,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: "0",
                             ),
+                            validator: FormBuilderValidators.required(),
                           ),
-                        ],
-                      ),
-                      Slider(
-                        value: _shareValues[i].shareValue,
-                        min: 0.0,
-                        max: max,
-                        divisions: 10,
-                        label: ' ${_shareValues[i].shareValue.round()}',
-                        onChanged: (double value) {
+                        ),
+                      ],
+                    ),
+                    Text(
+                      "${_shareValues[i].shareValue.toString()}%",
+                      style: const TextStyle(
+                          fontSize: 17,
+                          color: Color.fromARGB(255, 114, 114, 114)),
+                    ),
+                    // Slider(
+                    //   value: _shareValues[i].shareValue,
+                    //   min: 0.0,
+                    //   max: noOfTextField == 0 ? 50.0 : 100.0,
+                    //   divisions: 10,
+                    //   label: ' ${_shareValues[i].shareValue.round()}',
+                    //   onChanged: (double value) {
+                    //     setState(() {
+                    //       _shareValues[i].shareValue = value;
+                    //       final share = _shareValues[i].shareValue *
+                    //           double.parse(_valueController.text) /
+                    //           100;
+                    //       controllers[i].text = share.toString();
+                    //       double deduxtMax = max -
+                    //           double.parse(
+                    //               _shareValues[i].shareValue.toString());
+                    //       log("deductmax ${deduxtMax}");
+                    //     });
+                    //   },
+                    // ),
+                    Slider(
+                      min: 0,
+                      max: 100,
+                      divisions: 10,
+                      value: _shareValues[i].shareValue,
+                      onChanged: (value) {
+                        if (value < _shareValues[i].shareValue) {
                           setState(() {
                             _shareValues[i].shareValue = value;
-                            final share = _shareValues[i].shareValue *
-                                double.parse(_valueController.text) /
-                                100;
-                            controllers[i].text = share.toString();
-                            double deduxtMax = max -
-                                double.parse(
-                                    _shareValues[i].shareValue.toString());
-                            log("deductmax ${deduxtMax}");
                           });
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-            ],
-          ),
-        ),
-        Step(
-          state: StepState.complete,
-          isActive: _activeStepIndex >= 2,
-          title: const Text('Confirm'),
-          content: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              for (int i = 0; i < noOfTextField; i++)
-                Column(
-                  children: [
-                    Text('Assets type : ${_firstNameController.text}'),
-                    Text('assets name : ${_lastNameController.text}'),
-                    Text('Value : ${_valueController.text}'),
-                    Text('Client name : ${_shareValues[i].clientName}'),
-                    Text('Assets % : ${_shareValues[i].shareValue}'),
+                        }
+                        if (_remainingValue > 0) {
+                          setState(() {
+                            _shareValues[i].shareValue = value;
+                          });
+                        }
+                      },
+                    ),
                   ],
                 ),
-            ],
-          ),
+              ),
+          ],
         ),
-      ];
+      ),
+      Step(
+        state: StepState.complete,
+        isActive: _activeStepIndex >= 2,
+        title: const Text('Confirm'),
+        content: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            for (int i = 0; i < noOfTextField; i++)
+              Column(
+                children: [
+                  Text('Assets type : ${_firstNameController.text}'),
+                  Text('assets name : ${_lastNameController.text}'),
+                  Text('Value : ${_valueController.text}'),
+                  Text('Client name : ${_shareValues[i].clientName}'),
+                  Text('Assets % : ${_shareValues[i].shareValue}'),
+                ],
+              ),
+          ],
+        ),
+      ),
+    ];
+  }
 
   int _activeStepIndex = 0;
   bool isCompleted = false;
-
   @override
   Widget build(BuildContext context) {
     final assetsProvider = Provider.of<AssetsProvider>(context, listen: false);
@@ -415,10 +442,6 @@ class _AssetsAddState extends State<AssetsAdd> {
             bool isDetaildValid = isDetialCompleted();
             if (isDetaildValid) {
               if (isLastStep) {
-                // for (int i = 0; i < noOfTextField; i++) {
-                //
-                // }
-
                 await assetsProvider.insertAssets(
                   _firstNameController.text,
                   _lastNameController.text,
@@ -427,8 +450,7 @@ class _AssetsAddState extends State<AssetsAdd> {
                 );
 
                 log("data ${_shareValues.toString()}");
-                // log(_sliderValues.toString());
-                // ignore: use_build_context_synchronously
+
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text(
@@ -438,7 +460,7 @@ class _AssetsAddState extends State<AssetsAdd> {
                     backgroundColor: Colors.green,
                   ),
                 );
-                // ignore: use_build_context_synchronously
+
                 Navigator.of(context).pop();
               } else {
                 setState(() {
@@ -534,16 +556,26 @@ class _AssetsAddState extends State<AssetsAdd> {
         );
         return false;
       }
+      if (_valueController.text.toString().isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              content: Text(
+            'Enter Asset value',
+            textAlign: TextAlign.center,
+          )),
+        );
+        return false;
+      }
     } else if (_activeStepIndex == 1) {}
     return true;
   }
 
   bool validateForm() {
-    if (_firstNameController.text.toString().isEmpty) {
+    if (_valueController.text.toString().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
             content: Text(
-          'Enter first name',
+          'Enter Asset value',
           textAlign: TextAlign.center,
         )),
       );

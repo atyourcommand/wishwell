@@ -1,13 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-
 import 'package:provider/provider.dart';
 import 'package:wishwell/Assets/asset_screen.dart' as aseets;
-
 import 'package:wishwell/form_validator.dart';
 import 'package:wishwell/provider/asset_provider.dart';
-
 import '../client_model.dart';
 
 class AssetsEdit extends StatefulWidget {
@@ -24,7 +23,7 @@ class AssetsEdit extends StatefulWidget {
 class _ClientEditState extends State<AssetsEdit> {
   final FormValidator formValidator = FormValidator();
   late Assets _asset;
-  
+
   // ignore: unused_field
   final _formKey = GlobalKey<FormBuilderState>();
 
@@ -54,7 +53,6 @@ class _ClientEditState extends State<AssetsEdit> {
 
   @override
   void initState() {
-   
     _asset = widget.asset;
     controllers = List.generate(
       list.length,
