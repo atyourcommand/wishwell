@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:provider/provider.dart';
-import 'package:wishwell/Assets/asset_screen.dart' as aseets;
+//import 'package:wishwell/Assets/asset_screen.dart' as aseets;
 import 'package:wishwell/form_validator.dart';
 import 'package:wishwell/provider/asset_provider.dart';
 import '../client_model.dart';
@@ -37,6 +37,8 @@ class _ClientEditState extends State<AssetsEdit> {
   late TextEditingController _assetType;
   late TextEditingController _assewtName;
   late TextEditingController _assetValue;
+
+  // ignore: unused_field
   late TextEditingController _sliderValue;
 
   List<String> list = <String>[
@@ -47,6 +49,8 @@ class _ClientEditState extends State<AssetsEdit> {
 
   List<TextEditingController> controllers = [];
   int noOfTextField = 1;
+
+  // ignore: unused_field
   String? _dropDownValue;
   List<String?> dropdoen = [null];
   late List<Share> _shareValues;

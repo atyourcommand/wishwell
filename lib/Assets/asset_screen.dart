@@ -11,7 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:wishwell/provider/asset_provider.dart';
 //import 'package:wishwell/provider/client_provider.dart';
 
-import '../components/nav2.dart';
+//import '../components/nav2.dart';
 import 'add_assets.dart';
 import 'assets_detail.dart';
 //import 'dart:developer' as dev;

@@ -2,7 +2,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:developer';
-import 'dart:ffi';
+//import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -39,6 +39,8 @@ class _AssetsAddState extends State<AssetsAdd> {
   //final Map _clientObject = <String, String>{};
   List<Client>? client;
   List<Forbin> words = List.empty(growable: true);
+
+  // ignore: unused_field
   final List<double> _sliderValues = [0];
   final String firstName = 'Type';
   final String lastName = 'Name';
@@ -94,6 +96,8 @@ class _AssetsAddState extends State<AssetsAdd> {
   convertPrice() {}
 
   static const _locale = 'en';
+
+  // ignore: unused_element
   String _formatNumber(String s) =>
       NumberFormat.decimalPattern(_locale).format(int.parse(s));
   String get _currency =>
@@ -123,6 +127,7 @@ class _AssetsAddState extends State<AssetsAdd> {
   final List<Share> _shareValues = [Share(clientName: null, shareValue: 0.0)];
   List<Step> stepList() {
     double value = double.tryParse(_valueController.text) ?? 0.0;
+    // ignore: no_leading_underscores_for_local_identifiers
     double _remainingValue = value;
     for (var element in _shareValues) {
       _remainingValue -= element.shareValue * value / 100;
@@ -219,7 +224,7 @@ class _AssetsAddState extends State<AssetsAdd> {
                 controller: _valueController,
                 decoration: InputDecoration(
                   prefixText: _currency,
-                  border: OutlineInputBorder(),
+                  border: const OutlineInputBorder(),
                   labelText: 'Enter Assets Value',
                 ),
                 validator: (value) {
