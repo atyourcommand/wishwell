@@ -7,14 +7,13 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:wishwell/provider/asset_provider.dart';
-//import 'package:wishwell/provider/client_provider.dart';
-
 import '../components/nav2.dart';
+import '../utils/enums.dart';
 import 'add_assets.dart';
 import 'assets_detail.dart';
-//import 'dart:developer' as dev;
 
 class Assets {
   String? id;
@@ -147,6 +146,8 @@ class AssetScreenState extends State<AssetScreen> {
     super.initState();
   }
 
+  RegExp regex = RegExp(r'([.]*0)(?!.*\d)');
+  final formatCurrency = NumberFormat.simpleCurrency();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -194,12 +195,17 @@ class AssetScreenState extends State<AssetScreen> {
                             ? ListView.builder(
                                 itemCount: assetProvider.clienAssets.length,
                                 itemBuilder: (context, index) {
+                                  double totalPercentage = 0;
+                                  for (var element in assetProvider
+                                      .clienAssets[index].shares) {
+                                    totalPercentage += element.shareValue;
+                                  }
                                   log(assetProvider.clienAssets.length);
 
                                   return Padding(
                                     padding: const EdgeInsets.only(
-                                      left: 15.0,
-                                      right: 15.0,
+                                      left: 10,
+                                      right: 5,
                                       bottom: 1.0,
                                       top: 0.0,
                                     ),
@@ -215,16 +221,19 @@ class AssetScreenState extends State<AssetScreen> {
                                         contentPadding: const EdgeInsets.only(
                                             top: 10.0,
                                             bottom: 10.0,
-                                            left: 10.0,
-                                            right: 10.0),
+                                            left: 5,
+                                            right: 2),
                                         trailing: const Icon(
                                           Icons.arrow_forward_ios,
                                           color: Colors.black26,
                                         ),
-                                        leading: Icon(
-                                          Icons.account_circle_outlined,
-                                          color: Colors.grey.shade400,
-                                          size: 45,
+                                        leading: Image.network(
+                                          mapOfAssetType[assetProvider
+                                                      .clienAssets[index]
+                                                      .assetsType]
+                                                  ?.imagePath ??
+                                              '',
+                                          scale: 4.5,
                                         ),
 
                                         title: Column(
@@ -232,7 +241,7 @@ class AssetScreenState extends State<AssetScreen> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              '${assetProvider.clienAssets[index].assetsType} ${assetProvider.clienAssets[index].assetsName}',
+                                              '${assetProvider.clienAssets[index].assetsName}',
                                               style: const TextStyle(
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.normal,
@@ -242,24 +251,46 @@ class AssetScreenState extends State<AssetScreen> {
                                               height: 3,
                                             ),
                                             Row(
-                                              children: const [
-                                                Text(
-                                                  "Incomplete details",
+                                              children: [
+                                                const Text(
+                                                  "Total approximate value:",
                                                   style: TextStyle(
+                                                    color: Colors.grey,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  "${formatCurrency.format(assetProvider.clienAssets[index].value).toString().replaceAll(regex, '')}",
+                                                  maxLines: 2,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: const TextStyle(
                                                     color: Colors.grey,
                                                   ),
                                                 ),
                                               ],
                                             ),
-                                            Row(
-                                              children: const [
-                                                Text(
-                                                  "No assets allocated yet",
-                                                  style: TextStyle(
+
+                                            // print(
+                                            //     "${assetProvider.clienAssets[index].value.toString().replaceAll(regex, '')}");
+                                            RichText(
+                                              text: TextSpan(children: [
+                                                TextSpan(
+                                                  text:
+                                                      "${totalPercentage.toString().replaceAll(regex, '')}% shared to ${assetProvider.clienAssets[index].shares.length} person",
+                                                  style: const TextStyle(
                                                     color: Colors.grey,
                                                   ),
                                                 ),
-                                              ],
+                                                totalPercentage < 100
+                                                    ? TextSpan(
+                                                        text:
+                                                            "  ${(100 - totalPercentage).toString().replaceAll(regex, '')}% unallocated",
+                                                        style: const TextStyle(
+                                                          color: Colors.grey,
+                                                        ),
+                                                      )
+                                                    :const TextSpan(),
+                                              ]),
                                             ),
                                           ],
                                         ),

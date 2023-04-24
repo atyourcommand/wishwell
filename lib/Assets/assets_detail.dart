@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:wishwell/client_model.dart';
 import '../provider/asset_provider.dart';
+import '../utils/enums.dart';
 import 'edit_assets.dart';
 
 class AssetsPage extends StatelessWidget {
@@ -14,6 +16,7 @@ class AssetsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formatCurrency = NumberFormat.simpleCurrency();
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
@@ -43,10 +46,19 @@ class AssetsPage extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            Icon(
-              Icons.account_circle_outlined,
-              color: Colors.grey.shade400,
-              size: 80,
+            Image.network(
+              mapOfAssetType[asset.assetsType]?.imagePath ?? '',
+              scale: 4.5,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              asset.assetsName,
+              style: const TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.w300,
+                  color: Colors.black),
             ),
             const SizedBox(
               height: 10,
@@ -54,52 +66,85 @@ class AssetsPage extends StatelessWidget {
             Text(
               asset.assetsType,
               style: const TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.w300,
-              ),
+                  fontSize: 25,
+                  fontWeight: FontWeight.w300,
+                  color: Colors.grey),
+            ),
+            const SizedBox(
+              height: 20,
             ),
             Text(
-              asset.assetsName,
+              "\$${asset.value.toDouble().toString()}",
               style: const TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.w300,
+                fontSize: 18,
+                color: Colors.black,
               ),
             ),
             const SizedBox(
               height: 20,
             ),
             Text(
-              "Asset value: ${asset.value.toDouble().toString()}",
+              "allocated to",
               style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w300,
-              ),
+                  fontSize: 18,
+                  fontWeight: FontWeight.w300,
+                  color: Colors.grey),
             ),
             const SizedBox(
-              height: 10,
+              height: 20,
             ),
             ListView.builder(
                 shrinkWrap: true,
                 itemCount: asset.shares.length,
                 itemBuilder: (context, index) {
                   return Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    child: Column(
                       children: [
-                        Text(
-                          "${asset.shares[index].clientName.toString()} :",
-                          style: const TextStyle(
-                            fontSize: 18,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "${asset.shares[index].clientName.toString()} ",
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w300,
+                              ),
+                            ),
+                            Text(
+                              " ${asset.shares[index].shareValue.toString()}\%",
+                              style: const TextStyle(
+                                fontSize: 22,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w300,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Text(
+                          "Approximate value",
+                          style: TextStyle(
+                            fontSize: 22,
+                            color: Colors.grey,
                             fontWeight: FontWeight.w300,
                           ),
                         ),
+                        const SizedBox(
+                          height: 10,
+                        ),
                         Text(
-                          " ${asset.shares[index].shareValue.toString()}",
+                          "${formatCurrency.format(asset.shares[index].shareValue * asset.value * 0.01)}",
                           style: const TextStyle(
-                            fontSize: 18,
+                            fontSize: 22,
+                            color: Colors.grey,
                             fontWeight: FontWeight.w300,
                           ),
                         ),
+                        const SizedBox(
+                          height: 30,
+                        )
                       ],
                     ),
                   );
@@ -145,25 +190,28 @@ class AssetsPage extends StatelessWidget {
                 );
                 // AllData.deleteClient('1');
               },
-              child: const Text('Delete this person from your Will'),
+              child: const Text(
+                'Delete this asset',
+                style: TextStyle(color: Colors.grey),
+              ),
             ),
-            Container(
-              child: (const Padding(
-                padding: EdgeInsets.only(
-                    left: 15.0, right: 15.0, bottom: 1.0, top: 0.0),
-                child: Card(
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                    color: Colors.black12,
-                  )),
-                  child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text('Add assets list view here'),
-                  ),
-                ),
-              )),
-            ),
+            // Container(
+            //   child: (const Padding(
+            //     padding: EdgeInsets.only(
+            //         left: 15.0, right: 15.0, bottom: 1.0, top: 0.0),
+            //     child: Card(
+            //       elevation: 0,
+            //       shape: RoundedRectangleBorder(
+            //           side: BorderSide(
+            //         color: Colors.black12,
+            //       )),
+            //       child: Padding(
+            //         padding: EdgeInsets.all(8.0),
+            //         child: Text('Add assets list view here'),
+            //       ),
+            //     ),
+            //   )),
+            // ),
           ]),
         ),
       ),
