@@ -1,6 +1,6 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
+//import 'package:wishwell/pdf.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -15,7 +15,6 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-
     var threshold = 100;
 
     return Center(
@@ -176,6 +175,7 @@ class DrawerWidget extends StatelessWidget {
             SizedBox(
               height: 30,
             ),
+            SizedBox(),
             Text(
               "The document can live in this container",
               textAlign: TextAlign.center,
