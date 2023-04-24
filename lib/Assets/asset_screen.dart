@@ -13,6 +13,7 @@ import 'package:wishwell/provider/asset_provider.dart';
 //import 'package:wishwell/provider/client_provider.dart';
 
 import '../components/nav2.dart';
+import '../utils/enums.dart';
 import 'add_assets.dart';
 import 'assets_detail.dart';
 
@@ -290,7 +291,7 @@ class AssetScreenState extends State<AssetScreen> {
                                                           color: Colors.grey,
                                                         ),
                                                       )
-                                                    :const TextSpan(),
+                                                    : const TextSpan(),
                                               ]),
                                             ),
                                           ],
