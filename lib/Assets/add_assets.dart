@@ -72,6 +72,7 @@ class _AssetsAddState extends State<AssetsAdd> {
       loading = true;
     });
     await context.read<ClientProvider>().selectData();
+    // ignore: use_build_context_synchronously
     clients = context.read<ClientProvider>().clientItem;
     setState(() {
       loading = false;
@@ -333,8 +334,10 @@ class _AssetsAddState extends State<AssetsAdd> {
                           width: 100,
                           decoration: BoxDecoration(border: Border.all()),
                           child: Center(
-                            child: Text(
-                                "${formatCurrency.format(_shareValues[i].shareValue * (double.tryParse(_valueController.text) ?? 0) / 100)}"),
+                            child: Text(formatCurrency.format(_shareValues[i]
+                                    .shareValue *
+                                (double.tryParse(_valueController.text) ?? 0) /
+                                100)),
                           ),
                         ),
                       ],
@@ -381,7 +384,7 @@ class _AssetsAddState extends State<AssetsAdd> {
             for (int i = 0; i < noOfTextField; i++)
               Column(
                 children: [
-                  Text('Assets type : ${_selectedType}'),
+                  Text('Assets type : $_selectedType'),
                   Text('assets name : ${_lastNameController.text}'),
                   Text('Value : ${_valueController.text}'),
                   Text('Client name : ${_shareValues[i].clientName}'),
@@ -450,6 +453,7 @@ class _AssetsAddState extends State<AssetsAdd> {
 
                   log("data ${_shareValues.toString()}");
 
+                  // ignore: use_build_context_synchronously
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text(
@@ -460,6 +464,7 @@ class _AssetsAddState extends State<AssetsAdd> {
                     ),
                   );
 
+                  // ignore: use_build_context_synchronously
                   Navigator.of(context).pop();
                 } else {
                   setState(() {

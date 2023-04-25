@@ -12,7 +12,8 @@ import 'package:provider/provider.dart';
 import 'package:wishwell/provider/asset_provider.dart';
 //import 'package:wishwell/provider/client_provider.dart';
 
-import '../pdf/pdf.dart';
+//import '../components/nav2.dart';
+//import '../pdf/pdf.dart';
 import '../utils/enums.dart';
 import 'add_assets.dart';
 import 'assets_detail.dart';
@@ -243,7 +244,8 @@ class AssetScreenState extends State<AssetScreen> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              '${assetProvider.clienAssets[index].assetsName}',
+                                              assetProvider.clienAssets[index]
+                                                  .assetsName,
                                               style: const TextStyle(
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.normal,
@@ -261,7 +263,12 @@ class AssetScreenState extends State<AssetScreen> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  "${formatCurrency.format(assetProvider.clienAssets[index].value).toString().replaceAll(regex, '')}",
+                                                  formatCurrency
+                                                      .format(assetProvider
+                                                          .clienAssets[index]
+                                                          .value)
+                                                      .toString()
+                                                      .replaceAll(regex, ''),
                                                   maxLines: 2,
                                                   overflow:
                                                       TextOverflow.ellipsis,

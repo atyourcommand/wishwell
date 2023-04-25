@@ -251,14 +251,14 @@ class _ClientEditState extends State<AssetsEdit> {
                         });
                       }
                     },
-                    child: Text("Add")),
+                    child: const Text("Add")),
                 OutlinedButton(
                     onPressed: () {
                       setState(() {
                         _shareValues.removeLast();
                       });
                     },
-                    child: Text("Remove")),
+                    child: const Text("Remove")),
                 const SizedBox(
                   height: 50,
                 ),

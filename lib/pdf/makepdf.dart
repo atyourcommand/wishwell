@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
-import 'package:flutter/services.dart' show rootBundle;
+//import 'package:flutter/services.dart' show rootBundle;
 import 'package:wishwell/document_model.dart';
 
 Future<Uint8List> makePdf(Doc doc) async {
@@ -25,7 +25,7 @@ Future<Uint8List> makePdf(Doc doc) async {
                   height: 150,
                   width: 150,
                   child: Text(
-                    'LOGO GOES HERE',
+                    'LOGO goes here',
                     style: Theme.of(context).header4,
                     textAlign: TextAlign.center,
                   ),
@@ -142,6 +142,7 @@ Future<Uint8List> makePdf(Doc doc) async {
   return pdf.save();
 }
 
+// ignore: non_constant_identifier_names
 Widget PaddedText(
   final String text, {
   final TextAlign align = TextAlign.left,

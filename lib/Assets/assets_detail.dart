@@ -83,9 +83,9 @@ class AssetsPage extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-           const Text(
+            const Text(
               "allocated to",
-              style:  TextStyle(
+              style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w300,
                   color: Colors.grey),
@@ -94,7 +94,7 @@ class AssetsPage extends StatelessWidget {
               height: 20,
             ),
             ListView.builder(
-                physics:const NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: asset.shares.length,
                 itemBuilder: (context, index) {
@@ -112,7 +112,7 @@ class AssetsPage extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              " ${asset.shares[index].shareValue.toString()}\%",
+                              "${asset.shares[index].shareValue.toString()}%",
                               style: const TextStyle(
                                 fontSize: 22,
                                 color: Colors.black,
@@ -136,7 +136,9 @@ class AssetsPage extends StatelessWidget {
                           height: 10,
                         ),
                         Text(
-                          "${formatCurrency.format(asset.shares[index].shareValue * asset.value * 0.01)}",
+                          formatCurrency.format(asset.shares[index].shareValue *
+                              asset.value *
+                              0.01),
                           style: const TextStyle(
                             fontSize: 22,
                             color: Colors.grey,
