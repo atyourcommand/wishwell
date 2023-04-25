@@ -1,10 +1,11 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:wishwell/document_model.dart';
 //import 'package:wishwell/pdf.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
-
+  const Home({Key? key, required this.doc}) : super(key: key);
+  final Doc doc;
   @override
   State<Home> createState() => _HomeState();
 }
@@ -143,6 +144,10 @@ class DrawerWidget extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
 
+    const icon = Icon(
+      Icons.keyboard_arrow_up,
+      size: 30,
+    );
     return ClipRRect(
       borderRadius: const BorderRadius.only(
         topRight: Radius.circular(
@@ -159,10 +164,7 @@ class DrawerWidget extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 10.0),
           child: Column(children: const <Widget>[
-            Icon(
-              Icons.keyboard_arrow_up,
-              size: 30,
-            ),
+            icon,
             Text(
               "View your PDF document",
               textAlign: TextAlign.center,
@@ -175,7 +177,6 @@ class DrawerWidget extends StatelessWidget {
             SizedBox(
               height: 30,
             ),
-            SizedBox(),
             Text(
               "The document can live in this container",
               textAlign: TextAlign.center,
