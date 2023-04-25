@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:provider/provider.dart';
-//import 'package:wishwell/Assets/asset_screen.dart' as aseets;
 import 'package:wishwell/form_validator.dart';
 import 'package:wishwell/provider/asset_provider.dart';
 import '../client_model.dart';
+import '../provider/client_provider.dart';
 
 class AssetsEdit extends StatefulWidget {
   const AssetsEdit({
@@ -46,7 +46,7 @@ class _ClientEditState extends State<AssetsEdit> {
     'John',
     'Cornado',
   ];
-
+  List<Client> clients = [];
   List<TextEditingController> controllers = [];
   int noOfTextField = 1;
 
@@ -57,6 +57,7 @@ class _ClientEditState extends State<AssetsEdit> {
 
   @override
   void initState() {
+    getClients();
     _asset = widget.asset;
     controllers = List.generate(
       list.length,
@@ -83,8 +84,21 @@ class _ClientEditState extends State<AssetsEdit> {
     super.dispose();
   }
 
+  bool loading = false;
+  getClients() async {
+    setState(() {
+      loading = true;
+    });
+    await context.read<ClientProvider>().selectData();
+    clients = context.read<ClientProvider>().clientItem;
+    setState(() {
+      loading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    noOfTextField = _shareValues.length;
     final assetProvider = Provider.of<AssetsProvider>(context, listen: false);
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -186,11 +200,11 @@ class _ClientEditState extends State<AssetsEdit> {
                                       });
                                     }
                                   },
-                                  items: list.map<DropdownMenuItem<String>>(
-                                      (String value) {
+                                  items: clients
+                                      .map<DropdownMenuItem<String>>((value) {
                                     return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(value),
+                                      value: value.firstName,
+                                      child: Text(value.firstName),
                                     );
                                   }).toList(),
                                 ),
@@ -228,7 +242,23 @@ class _ClientEditState extends State<AssetsEdit> {
                       ],
                     ),
                   ),
-
+                OutlinedButton(
+                    onPressed: () {
+                      if (_shareValues.length < clients.length) {
+                        setState(() {
+                          _shareValues
+                              .add(Share(clientName: null, shareValue: 0.0));
+                        });
+                      }
+                    },
+                    child: Text("Add")),
+                OutlinedButton(
+                    onPressed: () {
+                      setState(() {
+                        _shareValues.removeLast();
+                      });
+                    },
+                    child: Text("Remove")),
                 const SizedBox(
                   height: 50,
                 ),

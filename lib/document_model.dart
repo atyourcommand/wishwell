@@ -12,6 +12,7 @@ class Doc {
   double totalCost() {
     return items.fold(
         0, (previousValue, element) => previousValue + element.cost);
+        
   }
 }
 

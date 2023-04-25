@@ -48,7 +48,6 @@ class _ClientAddState extends State<ClientAdd> {
   final _formKey = GlobalKey<FormBuilderState>();
   late TextEditingController _firstNameController;
   late TextEditingController _lastNameController;
-
   late TextEditingController _address1;
   late TextEditingController _address2;
   late TextEditingController _city;
@@ -107,7 +106,9 @@ class _ClientAddState extends State<ClientAdd> {
                           width: 1.0,
                           style: BorderStyle.solid,
                           color: Colors.grey),
-                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(5.0),
+                      ),
                     ),
                   ),
                   child: Padding(

@@ -89,3 +89,37 @@ class DetailPage extends StatelessWidget {
     );
   }
 }
+
+// Thanks Ajay for your hard work here! I think we should move onto other parts of the app and bug fix later.
+// Please can I ask you to see if you can get the PDF function running on the home page drawer for an hour or so. Then I would like to start a refactored user crud to replace current.
+// I have worked out all the fields. If possible can we create a multi page form if possible with around 11 pages.
+// The bread crumb at the top may not be required but perhaps just dots as each step on the top.
+// . . . . . . . . . . . . . .
+// Only the users name would be required at first though we may need to access entire validated boolean later.
+// Swipe between all these screens would be a very "nice to have"!
+// We want the user to have completed most sections before we let them see a rendered PDF of their will I think. We also want it to be as easy as possible to create a simple will!
+// here are the groups of fields
+// *The Following groups of fields to have their page.
+// first name
+// last name
+// date of birth (find a more appropriate date selector to cover persons born in the 1900's)
+// gender
+// address 1
+// address 2
+// city
+// country
+// Executor 1 Name (1 text field)
+// Executor 1 Address (1 text field)
+// Executor 2 Name (1 text field)
+// Executor 2 Address (1 text field)
+// Guardian 1 Name (1 text field)
+// Guardian 1 Address (1 text field)
+// Guardian 2 Name (1 text field)
+// Guardian 2 Address (1 text field)
+// Age of trust (Drop down of years ie [1-30] years)
+// Simultaneous Clause (free integer field ie [1-1000] days)
+// Cremation (Y/N radio slider)
+// if Y
+// ashes wishes (text field)
+// if N
+// funeral & burial wishes (text field)

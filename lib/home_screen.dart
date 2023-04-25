@@ -1,15 +1,55 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:wishwell/client_model.dart';
 import 'package:wishwell/document_model.dart';
-//import 'package:wishwell/pdf.dart';
+import 'package:wishwell/pdf/detail_page.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key, required this.doc}) : super(key: key);
-  final Doc doc;
+  const Home({
+    Key? key,
+  }) : super(key: key);
+
   @override
   State<Home> createState() => _HomeState();
 }
 
+Client? client;
+
+final docs = <Doc>[
+  Doc(
+      client: 'David Thomas',
+      address: '123 Fake St\r\nBermuda Triangle',
+      items: [
+        LineItem(
+          'Technical Engagement',
+          120,
+        ),
+        LineItem('Deployment Assistance', 200),
+        LineItem('Develop Software Solution', 3020.45),
+        LineItem('Produce Documentation', 840.50),
+      ],
+      name: 'Create and deploy software package'),
+  Doc(
+    client: 'Michael Ambiguous',
+    address: '82 Unsure St\r\nBaggle Palace',
+    items: [
+      LineItem('Professional Advice', 100),
+      LineItem('Lunch Bill', 43.55),
+      LineItem('Remote Assistance', 50),
+    ],
+    name: 'Provide remote support after lunch',
+  ),
+  Doc(
+    client: 'Marty McDanceFace',
+    address: '55 Dancing Parade\r\nDance Place',
+    items: [
+      LineItem('Program the robots', 400.50),
+      LineItem('Find tasteful dance moves for the robots', 80.55),
+      LineItem('General quality assurance', 80),
+    ],
+    name: 'Create software to teach robots how to dance',
+  ),
+];
 bool showBottomMenu = false;
 
 class _HomeState extends State<Home> {
@@ -163,9 +203,9 @@ class DrawerWidget extends StatelessWidget {
         height: height / 3 + 70,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 10.0),
-          child: Column(children: const <Widget>[
+          child: Column(children: <Widget>[
             icon,
-            Text(
+            const Text(
               "View your PDF document",
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -174,10 +214,10 @@ class DrawerWidget extends StatelessWidget {
                 color: Colors.black45,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
-            Text(
+            const Text(
               "The document can live in this container",
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -186,6 +226,46 @@ class DrawerWidget extends StatelessWidget {
                 color: Colors.black45,
               ),
             ),
+            const SizedBox(
+              height: 10,
+            ),
+            ListView(
+              padding: EdgeInsets.zero,
+              shrinkWrap: true,
+              children: [
+                ...docs.map(
+                  (e) => ListTile(
+                    title: Text(e.name),
+                    subtitle: Text(e.name),
+                    trailing: Text('\$${e.totalCost().toStringAsFixed(2)}'),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (builder) => DetailPage(doc: e),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+            // ListView.builder(
+            //   itemCount: 1,
+            //   itemBuilder: (context, index) {
+
+            //   return ListTile(
+
+            //       title: Text(client?.firstName??""),
+            //       subtitle: Text(client?.address1 ??""),
+            //       trailing: Text('\$${client?.firstName??""}'),
+            //       onTap: () {
+            //         Navigator.of(context).push(
+            //           MaterialPageRoute(
+            //             builder: (builder) => DetailPage(doc: client),
+            //           ),
+            //         );
+            //       });
+            // })
           ]),
         ),
       ),

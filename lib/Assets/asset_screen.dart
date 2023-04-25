@@ -12,7 +12,6 @@ import 'package:provider/provider.dart';
 import 'package:wishwell/provider/asset_provider.dart';
 //import 'package:wishwell/provider/client_provider.dart';
 
-import '../components/nav2.dart';
 import '../pdf/pdf.dart';
 import '../utils/enums.dart';
 import 'add_assets.dart';
@@ -322,12 +321,12 @@ class AssetScreenState extends State<AssetScreen> {
                 ),
               ),
               // buildClients(clientList),
-              TextButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => PdfView()));
-                  },
-                  child: Text("PDF"))
+              // TextButton(
+              //     onPressed: () {
+              //       Navigator.of(context).push(
+              //           MaterialPageRoute(builder: (context) => PdfView()));
+              //     },
+              //     child: Text("PDF"))
             ],
           ),
         ),

@@ -3,7 +3,6 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-//import 'package:wishwell/client_screen.dart';
 import 'package:wishwell/form_validator.dart';
 import 'package:wishwell/provider/client_provider.dart';
 
@@ -103,11 +102,14 @@ class _ClientEditState extends State<ClientEdit> {
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
         leading: const BackButton(),
-        title: const Text('Edit client',
-            style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.w300,
-                color: Colors.black)),
+        title: const Text(
+          'Edit client',
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.w300,
+            color: Colors.black,
+          ),
+        ),
         iconTheme: const IconThemeData(
           color: Colors.black, //change your color here
         ),

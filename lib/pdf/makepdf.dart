@@ -29,7 +29,7 @@ Future<Uint8List> makePdf(Doc doc) async {
                     style: Theme.of(context).header4,
                     textAlign: TextAlign.center,
                   ),
-                )
+                ),
               ],
             ),
             Container(height: 50),
