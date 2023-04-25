@@ -83,9 +83,9 @@ class AssetsPage extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            Text(
+           const Text(
               "allocated to",
-              style: const TextStyle(
+              style:  TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w300,
                   color: Colors.grey),
@@ -94,6 +94,7 @@ class AssetsPage extends StatelessWidget {
               height: 20,
             ),
             ListView.builder(
+                physics:const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: asset.shares.length,
                 itemBuilder: (context, index) {
