@@ -1,6 +1,9 @@
 //import 'dart:convert';
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 import 'package:wishwell/add_client.dart';
+import 'package:wishwell/pdf/pdfview.dart';
 //import 'package:wishwell/client_model.dart';
 import 'package:wishwell/provider/client_provider.dart';
 //import 'package:wishwell/shared_preferences.dart';
@@ -16,6 +19,8 @@ class ClientScreen extends StatefulWidget {
 }
 
 class ClientScreenState extends State<ClientScreen> {
+  var doc;
+
   //List<Client> clientList = [];
   // final FormValidator formValidator = FormValidator();
   // final _formKey = GlobalKey<FormBuilderState>();
@@ -101,6 +106,18 @@ class ClientScreenState extends State<ClientScreen> {
                   },
                   child: const Text('+ Add another person to your Will'),
                 ),
+                OutlinedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => PdfPreviewPage(invoice: doc),
+                      ),
+                    );
+                    // rootBundle.
+                  },
+                  child: const Icon(Icons.picture_as_pdf),
+                ),
+
                 const SizedBox(
                   height: 20,
                 ),
