@@ -1,12 +1,13 @@
 import 'dart:typed_data';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
-import 'package:wishwell/document_model.dart';
-//import 'package:wishwell/client_model.dart';
-//import 'package:wishwell/provider/client_provider.dart';
-////import 'package:provider/provider.dart';
 
-Future<Uint8List> makePdf(Doc doc) async {
+//import 'package:wishwell/document_model.dart';
+//import 'package:wishwell/client_model.dart';
+import 'package:wishwell/provider/client_provider.dart';
+//import 'package:provider/provider.dart';
+
+Future<Uint8List> makeClientPdf(ClientProvider clientProvider) async {
   final pdf = Document();
   pdf.addPage(
     Page(
@@ -52,20 +53,20 @@ Future<Uint8List> makePdf(Doc doc) async {
                 //   ],
                 // ),
                 // CAN WE PUT SOME BASIC CLIENT INFO INTO THIS LOOP LIKE LAST NAME PLEASE
-                // ...doc.items.map(
-                //   (e) => TableRow(
-                //     children: [
-                //       Expanded(
-                //         child: PaddedText(e.description),
-                //         flex: 2,
-                //       ),
-                //       Expanded(
-                //         child: PaddedText("\$${e.cost}"),
-                //         flex: 1,
-                //       )
-                //     ],
-                //   ),
-                // ),
+                ...clientProvider.clientItem.map(
+                  (e) => TableRow(
+                    children: [
+                      Expanded(
+                        child: PaddedText(e.firstName),
+                        flex: 2,
+                      ),
+                      Expanded(
+                        child: PaddedText("\$${e.lastName}"),
+                        flex: 1,
+                      )
+                    ],
+                  ),
+                ),
                 // TableRow(
                 //   children: [
                 //     PaddedText('TAX', align: TextAlign.right),

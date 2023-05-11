@@ -1,25 +1,32 @@
 //import 'dart:convert';
 // ignore_for_file: prefer_typing_uninitialized_variables
 
+//import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:wishwell/add_client.dart';
-import 'package:wishwell/pdf/pdfview.dart';
+//import 'package:wishwell/home_screen.dart';
+import 'package:wishwell/pdf/pdfview_client.dart';
 //import 'package:wishwell/client_model.dart';
 import 'package:wishwell/provider/client_provider.dart';
 //import 'package:wishwell/shared_preferences.dart';
 import 'package:wishwell/client_detail.dart';
 //import 'components/nav2.dart';
 import 'package:provider/provider.dart';
+//import 'package:wishwell/pdf/pdf_client.dart';
 
 class ClientScreen extends StatefulWidget {
-  const ClientScreen({Key? key}) : super(key: key);
+  //final ClientProvider clientDoc;
+  const ClientScreen({
+    Key? key,
+    //required this.clientDoc,
+  }) : super(key: key);
 
   @override
   State<ClientScreen> createState() => ClientScreenState();
 }
 
 class ClientScreenState extends State<ClientScreen> {
-  var doc;
+  var clientDoc;
 
   //List<Client> clientList = [];
   // final FormValidator formValidator = FormValidator();
@@ -110,7 +117,8 @@ class ClientScreenState extends State<ClientScreen> {
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => PdfPreviewPage(invoice: doc),
+                        builder: (context) =>
+                            PdfPreviewClientPage(pdf: clientDoc),
                       ),
                     );
                     // rootBundle.

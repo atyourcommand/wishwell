@@ -98,11 +98,11 @@ class _HomeState extends State<Home> {
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(0),
-                                image: const DecorationImage(
-                                  image: NetworkImage(
-                                      "https://get.pxhere.com/photo/beach-sea-coast-ocean-architecture-house-town-vacation-travel-village-mediterranean-tower-seascape-bay-island-blue-chapel-tourism-santorini-resort-greece-cape-686738.jpg"),
-                                  fit: BoxFit.cover,
-                                ),
+                                // image: const DecorationImage(
+                                //   image: NetworkImage(
+                                //       "https://get.pxhere.com/photo/beach-sea-coast-ocean-architecture-house-town-vacation-travel-village-mediterranean-tower-seascape-bay-island-blue-chapel-tourism-santorini-resort-greece-cape-686738.jpg"),
+                                //   fit: BoxFit.cover,
+                                // ),
                               ),
                             ),
                           ),
