@@ -48,6 +48,7 @@ dependencies:
   path: ^1.8.2
   pdf: 
   printing: 
+  dots_indicator: ^3.0.0
   
 
 

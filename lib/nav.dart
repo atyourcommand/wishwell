@@ -28,7 +28,7 @@ class _NavState extends State<Nav> {
   final List<Widget> _widgetOptions = <Widget>[
     //const Home(),
     const Home(),
-    const DetailsScreen(),
+    const UserScreen(),
     const ClientScreen(),
     const AssetScreen(),
   ];
