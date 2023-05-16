@@ -113,18 +113,18 @@ class ClientScreenState extends State<ClientScreen> {
                   },
                   child: const Text('+ Add another person to your Will'),
                 ),
-                OutlinedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            PdfPreviewClientPage(pdf: clientDoc),
-                      ),
-                    );
-                    // rootBundle.
-                  },
-                  child: const Icon(Icons.picture_as_pdf),
-                ),
+                // OutlinedButton(
+                //   onPressed: () {
+                //     Navigator.of(context).push(
+                //       MaterialPageRoute(
+                //         builder: (context) =>
+                //             PdfPreviewClientPage(pdf: clientDoc),
+                //       ),
+                //     );
+                //     // rootBundle.
+                //   },
+                //   child: const Icon(Icons.picture_as_pdf),
+                // ),
 
                 const SizedBox(
                   height: 20,
@@ -138,135 +138,164 @@ class ClientScreenState extends State<ClientScreen> {
                         return Consumer<ClientProvider>(
                             builder: (context, clientProvider, child) {
                           return clientProvider.clientItem.isNotEmpty
-                              ? ListView.builder(
-                                  itemCount: clientProvider.clientItem.length,
-                                  itemBuilder: (context, index) {
-                                    return Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 15.0,
-                                          right: 15.0,
-                                          bottom: 1.0,
-                                          top: 0.0),
-                                      child: Card(
-                                        elevation: 0,
-                                        shape: const RoundedRectangleBorder(
-                                            side: BorderSide(
-                                          color: Colors.black12,
-                                        )),
-                                        child: ListTile(
-                                          //dense: true,
-                                          contentPadding: const EdgeInsets.only(
-                                              top: 10.0,
-                                              bottom: 10.0,
-                                              left: 10.0,
-                                              right: 10.0),
-                                          trailing: const Icon(
-                                            Icons.arrow_forward_ios,
-                                            color: Colors.black26,
+                              ? Column(
+                                  children: [
+                                    OutlinedButton(
+                                      onPressed: () {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                PdfPreviewClientPage(
+                                                    pdf: clientProvider),
                                           ),
-                                          leading: Icon(
-                                            Icons.account_circle_outlined,
-                                            color: Colors.grey.shade400,
-                                            size: 45,
-                                          ),
-
-                                          title: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                '${clientProvider.clientItem[index].firstName} ${clientProvider.clientItem[index].lastName}',
-                                                style: const TextStyle(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.normal,
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 3,
-                                              ),
-
-                                              Row(
-                                                children: const [
-                                                  Text(
-                                                    "Incomplete details",
-                                                    style: TextStyle(
-                                                        color: Colors.grey),
-                                                  ),
-                                                ],
-                                              ),
-                                              Row(
-                                                children: const [
-                                                  Text(
-                                                    "No assets allocated yet",
-                                                    style: TextStyle(
-                                                        color: Colors.grey),
-                                                  ),
-                                                ],
-                                              ),
-                                              // Row(
-                                              //   children: [
-                                              //     const Text(" Last Name :"),
-                                              //     Text(clientProvider
-                                              //         .clientItem[index]
-                                              //         .lastName),
-                                              //   ],
-                                              // ),
-                                              // Row(
-                                              //   children: [
-                                              //     const Text("city :"),
-                                              //     Text(clientProvider
-                                              //         .clientItem[index].city),
-                                              //   ],
-                                              // ),
-                                              // Row(
-                                              //   children: [
-                                              //     const Text("address1 :"),
-                                              //     Text(clientProvider
-                                              //         .clientItem[index]
-                                              //         .address1),
-                                              //   ],
-                                              // ),
-                                              // Row(
-                                              //   children: [
-                                              //     const Text("address2 :"),
-                                              //     Text(clientProvider
-                                              //         .clientItem[index]
-                                              //         .address2),
-                                              //   ],
-                                              // ),
-                                              // Row(
-                                              //   children: [
-                                              //     const Text("country :"),
-                                              //     Text(clientProvider
-                                              //         .clientItem[index].country),
-                                              //   ],
-                                              // ),
-                                              // Row(
-                                              //   children: [
-                                              //     const Text("postcode :"),
-                                              //     Text(client.postcode),
-                                              //   ],
-                                              // ),
-                                              // Row(
-                                              //   children: [
-                                              //     Text("DOB :"),
-                                              //     Text(client.dob),
-                                              //   ],
-                                              // ),
-                                            ],
-                                          ),
-                                          onTap: () {
-                                            Navigator.of(context)
-                                                .push(MaterialPageRoute(
-                                              builder: (context) => ClientPage(
-                                                  client: clientProvider
-                                                      .clientItem[index]),
-                                            ));
-                                          },
-                                        ),
+                                        );
+                                        // rootBundle.
+                                      },
+                                      child: const Icon(
+                                        Icons.picture_as_pdf,
                                       ),
-                                    );
-                                  })
+                                    ),
+                                    ListView.builder(
+                                        shrinkWrap: true,
+                                        itemCount:
+                                            clientProvider.clientItem.length,
+                                        itemBuilder: (context, index) {
+                                          return Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 15.0,
+                                                right: 15.0,
+                                                bottom: 01.0,
+                                                top: 0.0),
+                                            child: Card(
+                                              elevation: 0,
+                                              shape:
+                                                  const RoundedRectangleBorder(
+                                                      side: BorderSide(
+                                                color: Colors.black12,
+                                              )),
+                                              child: ListTile(
+                                                //dense: true,
+                                                contentPadding:
+                                                    const EdgeInsets.only(
+                                                        top: 10.0,
+                                                        bottom: 10.0,
+                                                        left: 10.0,
+                                                        right: 10.0),
+                                                trailing: const Icon(
+                                                  Icons.arrow_forward_ios,
+                                                  color: Colors.black26,
+                                                ),
+
+                                                leading: Icon(
+                                                  Icons.account_circle_outlined,
+                                                  color: Colors.grey.shade400,
+                                                  size: 45,
+                                                ),
+
+                                                title: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      '${clientProvider.clientItem[index].firstName} ${clientProvider.clientItem[index].lastName}',
+                                                      style: const TextStyle(
+                                                        fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 3,
+                                                    ),
+
+                                                    Row(
+                                                      children: const [
+                                                        Text(
+                                                          "Incomplete details",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.grey),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      children: const [
+                                                        Text(
+                                                          "No assets allocated yet",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.grey),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    // Row(
+                                                    //   children: [
+                                                    //     const Text(" Last Name :"),
+                                                    //     Text(clientProvider
+                                                    //         .clientItem[index]
+                                                    //         .lastName),
+                                                    //   ],
+                                                    // ),
+                                                    // Row(
+                                                    //   children: [
+                                                    //     const Text("city :"),
+                                                    //     Text(clientProvider
+                                                    //         .clientItem[index].city),
+                                                    //   ],
+                                                    // ),
+                                                    // Row(
+                                                    //   children: [
+                                                    //     const Text("address1 :"),
+                                                    //     Text(clientProvider
+                                                    //         .clientItem[index]
+                                                    //         .address1),
+                                                    //   ],
+                                                    // ),
+                                                    // Row(
+                                                    //   children: [
+                                                    //     const Text("address2 :"),
+                                                    //     Text(clientProvider
+                                                    //         .clientItem[index]
+                                                    //         .address2),
+                                                    //   ],
+                                                    // ),
+                                                    // Row(
+                                                    //   children: [
+                                                    //     const Text("country :"),
+                                                    //     Text(clientProvider
+                                                    //         .clientItem[index].country),
+                                                    //   ],
+                                                    // ),
+                                                    // Row(
+                                                    //   children: [
+                                                    //     const Text("postcode :"),
+                                                    //     Text(client.postcode),
+                                                    //   ],
+                                                    // ),
+                                                    // Row(
+                                                    //   children: [
+                                                    //     Text("DOB :"),
+                                                    //     Text(client.dob),
+                                                    //   ],
+                                                    // ),
+                                                  ],
+                                                ),
+                                                onTap: () {
+                                                  Navigator.of(context)
+                                                      .push(MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ClientPage(
+                                                            client: clientProvider
+                                                                    .clientItem[
+                                                                index]),
+                                                  ));
+                                                },
+                                              ),
+                                            ),
+                                          );
+                                        }),
+                                  ],
+                                )
                               : const Center(
                                   child: Text('No details found!!!'),
                                 );

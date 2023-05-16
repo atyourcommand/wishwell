@@ -8,6 +8,7 @@ import '../client_model.dart';
 class DBHelper {
   static const clients = 'clients';
   static const shares = 'shares';
+  static const user = 'user';
 
   static Future<Database> database() async {
     final dbPath = await getDatabasesPath();
@@ -46,6 +47,29 @@ class DBHelper {
       onCreate: (db, version) async {
         await db.execute('''
             CREATE TABLE IF NOT EXISTS $shares (
+            shareId TEXT PRIMARY KEY,
+            assetType TEXT,
+            assetName TEXT,
+            value NUMBER,
+            share TEXT
+            );
+            ''');
+      },
+      version: 2,
+    ).then((value) {
+      log("table created $value");
+      return value;
+    });
+  }
+
+  static Future<Database> databaseUser() async {
+    final dbPath = await getDatabasesPath();
+
+    return await openDatabase(
+      join(dbPath, 'user.db'),
+      onCreate: (db, version) async {
+        await db.execute('''
+            CREATE TABLE IF NOT EXISTS $user (
             shareId TEXT PRIMARY KEY,
             assetType TEXT,
             assetName TEXT,

@@ -1,220 +1,198 @@
-import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:wishwell/swipable_form.dart';
+import 'package:provider/provider.dart';
+import 'package:wishwell/provider/client_provider.dart';
+import 'package:wishwell/user_add.dart';
+
+import 'client_detail.dart';
 
 class UserScreen extends StatefulWidget {
-  const UserScreen({Key? key}) : super(key: key);
+  const UserScreen({super.key});
 
   @override
   State<UserScreen> createState() => _UserScreenState();
 }
 
 class _UserScreenState extends State<UserScreen> {
-  final PageController pageController = PageController();
-  int currentIndex = 0;
-  List<GlobalKey<FormState>> formKeys = [];
-  List<Widget> formPages = [];
-  TextEditingController userFirstName = TextEditingController();
-  TextEditingController userLastName = TextEditingController();
-  TextEditingController userDob = TextEditingController();
-  TextEditingController userCity = TextEditingController();
-  TextEditingController userGender = TextEditingController();
-  TextEditingController userCountry = TextEditingController();
-
-  TextEditingController executor1FirstName = TextEditingController();
-  TextEditingController executor1LastName = TextEditingController();
-  TextEditingController executor1Address1 = TextEditingController();
-  TextEditingController executor1Address2 = TextEditingController();
-  TextEditingController executor1City = TextEditingController();
-  TextEditingController executor1Country = TextEditingController();
-
-  TextEditingController executor2FirstName = TextEditingController();
-  TextEditingController executor2LastName = TextEditingController();
-  TextEditingController executor2Address1 = TextEditingController();
-  TextEditingController executor2Address2 = TextEditingController();
-  TextEditingController executor2City = TextEditingController();
-  TextEditingController executor2Country = TextEditingController();
-
-  TextEditingController guardian1FirstName = TextEditingController();
-  TextEditingController guardian1LastName = TextEditingController();
-  TextEditingController guardian1Address1 = TextEditingController();
-  TextEditingController guardian1Address2 = TextEditingController();
-  TextEditingController guardian1City = TextEditingController();
-  TextEditingController guardian1Country = TextEditingController();
-
-  TextEditingController guardian2FirstName = TextEditingController();
-  TextEditingController guardian2LastName = TextEditingController();
-  TextEditingController guardian2Address1 = TextEditingController();
-  TextEditingController guardian2Address2 = TextEditingController();
-  TextEditingController guardian2City = TextEditingController();
-  TextEditingController guardian2Country = TextEditingController();
-
-  TextEditingController ageOfTrust = TextEditingController();
-
-  TextEditingController simultaneousClause = TextEditingController();
-
-  TextEditingController cremation = TextEditingController();
-
   @override
-  void initState() {
-    formKeys = List.generate(8, (_) => GlobalKey<FormState>());
-    formPages = [
-      // UserFormPage(
-      //   formKey: formKeys[0], userFirstName: null,
-      // ),
-      UserFormPage(
-        formKey: formKeys[0],
-        userFirstName: userFirstName,
-        userLastName: userLastName,
-        userDob: userDob,
-        userCity: userCity,
-        userGender: userGender,
-        userCountry: userCountry,
-      ),
-      // ExecutorFormPage(index: 1, formKey: formKeys[1]),
-      ExecutorFormPage(
-        index: 1,
-        formKey: formKeys[1],
-        executor1FirstName: executor1FirstName,
-        executor1LastName: executor1LastName,
-        executor1Address1: executor1Address1,
-        executor1Address2: executor1Address2,
-        executor1City: executor1City,
-        executor1Country: executor1Country,
-      ),
-      // ExecutorFormPage2(index: 2, formKey: formKeys[2]),
-      ExecutorFormPage2(
-        index: 2,
-        formKey: formKeys[2],
-        executor2FirstName: executor2FirstName,
-        executor2LastName: executor2LastName,
-        executor2Address1: executor2Address1,
-        executor2Address2: executor2Address2,
-        executor2City: executor2City,
-        executor2Country: executor2Country,
-      ),
-      // GuardianFormPage(index: 1, formKey: formKeys[3]),
-      GuardianFormPage(
-        index: 1,
-        formKey: formKeys[3],
-        guardian1FirstName: guardian1FirstName,
-        guardian1LastName: guardian1LastName,
-        guardian1Address1: guardian1Address1,
-        guardian1Address2: guardian1Address2,
-        guardian1City: guardian1City,
-        guardian1Country: guardian1Country,
-      ),
-
-      // GuardianFormPage2(index: 2, formKey: formKeys[4]),
-      GuardianFormPage2(
-        index: 2,
-        formKey: formKeys[4],
-        guardian2FirstName: guardian2FirstName,
-        guardian2LastName: guardian2LastName,
-        guardian2Address1: guardian2Address1,
-        guardian2Address2: guardian2Address2,
-        guardian2City: guardian2City,
-        guardian2Country: guardian2Country,
-      ),
-      AgeOfTrustFormPage(
-        formKey: formKeys[5],
-        ageOfTrust: ageOfTrust,
-      ),
-      SimultaneousClauseFormPage(
-        formKey: formKeys[6],
-        simultaneousClause: simultaneousClause,
-      ),
-      CremationFormPage(
-        formKey: formKeys[7],
-        cremation: cremation,
-      ),
-    ];
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    userLastName.dispose();
-    userDob.dispose();
-    userCity.dispose();
-    userGender.dispose();
-    userCountry.dispose();
-    executor1FirstName.dispose();
-    executor1LastName.dispose();
-    executor1Address1.dispose();
-    executor1Address2.dispose();
-    executor1City.dispose();
-    executor1Country.dispose();
-    executor2FirstName.dispose();
-    executor2LastName.dispose();
-    executor2Address1.dispose();
-    executor2Address2.dispose();
-    executor2City.dispose();
-    executor2Country.dispose();
-    guardian1FirstName.dispose();
-    guardian1LastName.dispose();
-    guardian1Address1.dispose();
-    guardian1Address2.dispose();
-    guardian1City.dispose();
-    guardian1Country.dispose();
-    guardian2FirstName.dispose();
-    guardian2LastName.dispose();
-    guardian2Address1.dispose();
-    guardian2Address2.dispose();
-    guardian2City.dispose();
-    guardian2Country.dispose();
-    ageOfTrust.dispose();
-    simultaneousClause.dispose();
-    cremation.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Client Form'),
-        centerTitle: true,
-      ),
-      body: Column(
-        children: [
-          const SizedBox(
-            height: 10,
-          ),
-          DotsIndicator(
-            dotsCount: formPages.length,
-            position: currentIndex,
-            decorator: DotsDecorator(
-              activeColor: Colors.blue,
-              color: Colors.grey,
-              spacing: const EdgeInsets.all(4),
-              activeSize: const Size(10, 10),
-              size: const Size(8, 8),
-              activeShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5),
+  Widget build(BuildContext context) => Scaffold(
+        body: SafeArea(
+            child: SizedBox(
+          height: MediaQuery.of(context).size.height,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(
+                height: 50,
               ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5),
+              const Text(
+                "User",
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.w300,
+                ),
               ),
-            ),
+              const SizedBox(
+                height: 10,
+              ),
+              OutlinedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const UserAdd()));
+                },
+                child: const Text('+ Add another user to your Will'),
+              ),
+              Expanded(
+                child: FutureBuilder(
+                  future: Provider.of<ClientProvider>(context, listen: false)
+                      .selectData(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return Consumer<ClientProvider>(
+                          builder: (context, clientProvider, child) {
+                        return clientProvider.clientItem.isNotEmpty
+                            ? ListView.builder(
+                                itemCount: clientProvider.clientItem.length,
+                                itemBuilder: (context, index) {
+                                  return const Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 15.0,
+                                        right: 15.0,
+                                        bottom: 1.0,
+                                        top: 0.0),
+                                    child: Card(
+                                      elevation: 0,
+                                      shape: RoundedRectangleBorder(
+                                          side: BorderSide(
+                                        color: Colors.black12,
+                                      )),
+                                      child: ListTile(
+                                          //dense: true,
+                                          // contentPadding: const EdgeInsets.only(
+                                          //     top: 10.0,
+                                          //     bottom: 10.0,
+                                          //     left: 10.0,
+                                          //     right: 10.0),
+                                          // trailing: const Icon(
+                                          //   Icons.arrow_forward_ios,
+                                          //   color: Colors.black26,
+                                          // ),
+                                          // leading: Icon(
+                                          //   Icons.account_circle_outlined,
+                                          //   color: Colors.grey.shade400,
+                                          //   size: 45,
+                                          // ),
+
+                                          // title: Column(
+                                          //   crossAxisAlignment:
+                                          //       CrossAxisAlignment.start,
+                                          //   children: [
+                                          //     Text(
+                                          //       '${clientProvider.clientItem[index].firstName} ${clientProvider.clientItem[index].lastName}',
+                                          //       style: const TextStyle(
+                                          //         fontSize: 20,
+                                          //         fontWeight: FontWeight.normal,
+                                          //       ),
+                                          //     ),
+                                          //     const SizedBox(
+                                          //       height: 3,
+                                          //     ),
+
+                                          //     Row(
+                                          //       children: const [
+                                          //         Text(
+                                          //           "Incomplete details",
+                                          //           style: TextStyle(
+                                          //               color: Colors.grey),
+                                          //         ),
+                                          //       ],
+                                          //     ),
+                                          //     Row(
+                                          //       children: const [
+                                          //         Text(
+                                          //           "No assets allocated yet",
+                                          //           style: TextStyle(
+                                          //               color: Colors.grey),
+                                          //         ),
+                                          //       ],
+                                          //     ),
+                                          //     // Row(
+                                          //     //   children: [
+                                          //     //     const Text(" Last Name :"),
+                                          //     //     Text(clientProvider
+                                          //     //         .clientItem[index]
+                                          //     //         .lastName),
+                                          //     //   ],
+                                          //     // ),
+                                          //     // Row(
+                                          //     //   children: [
+                                          //     //     const Text("city :"),
+                                          //     //     Text(clientProvider
+                                          //     //         .clientItem[index].city),
+                                          //     //   ],
+                                          //     // ),
+                                          //     // Row(
+                                          //     //   children: [
+                                          //     //     const Text("address1 :"),
+                                          //     //     Text(clientProvider
+                                          //     //         .clientItem[index]
+                                          //     //         .address1),
+                                          //     //   ],
+                                          //     // ),
+                                          //     // Row(
+                                          //     //   children: [
+                                          //     //     const Text("address2 :"),
+                                          //     //     Text(clientProvider
+                                          //     //         .clientItem[index]
+                                          //     //         .address2),
+                                          //     //   ],
+                                          //     // ),
+                                          //     // Row(
+                                          //     //   children: [
+                                          //     //     const Text("country :"),
+                                          //     //     Text(clientProvider
+                                          //     //         .clientItem[index].country),
+                                          //     //   ],
+                                          //     // ),
+                                          //     // Row(
+                                          //     //   children: [
+                                          //     //     const Text("postcode :"),
+                                          //     //     Text(client.postcode),
+                                          //     //   ],
+                                          //     // ),
+                                          //     // Row(
+                                          //     //   children: [
+                                          //     //     Text("DOB :"),
+                                          //     //     Text(client.dob),
+                                          //     //   ],
+                                          //     // ),
+                                          //   ],
+                                          // ),
+                                          // onTap: () {
+                                          //   Navigator.of(context)
+                                          //       .push(MaterialPageRoute(
+                                          //     builder: (context) => ClientPage(
+                                          //         client: clientProvider
+                                          //             .clientItem[index]),
+                                          //   ));
+                                          // },
+                                          ),
+                                    ),
+                                  );
+                                })
+                            : const Center(
+                                child: Text('No details found!!!'),
+                              );
+                      });
+                    } else {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  },
+                ),
+              )
+            ],
           ),
-          Expanded(
-            child: PageView(
-              controller: pageController,
-              onPageChanged: (int index) {
-                if (formKeys[currentIndex].currentState!.validate()) {
-                  setState(() {
-                    currentIndex = index;
-                  });
-                } else {
-                  pageController.jumpToPage(currentIndex);
-                }
-              },
-              children: formPages,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+        )),
+      );
 }

@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:printing/printing.dart';
 //import 'package:wishwell/document_model.dart';
@@ -11,6 +12,7 @@ class PdfPreviewClientPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log("pgdffff==> ${pdf}");
     return Scaffold(
       appBar: AppBar(
         title: const Text('PDF Preview'),

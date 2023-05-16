@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:typed_data';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
@@ -12,6 +13,7 @@ Future<Uint8List> makeClientPdf(ClientProvider clientProvider) async {
   pdf.addPage(
     Page(
       build: (context) {
+        log("clientProvider.clientItem ${clientProvider.clientItem}");
         return Column(
           children: [
             // Row(

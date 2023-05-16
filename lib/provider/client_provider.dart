@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 import 'package:wishwell/client_model.dart';
@@ -8,6 +10,7 @@ class ClientProvider extends ChangeNotifier {
   List<Client> clientItem = [];
 
   Future<void> selectData() async {
+    log("clientItem==>> ${clientItem.length}");
     final dataList = await DBHelper.selectAll(DBHelper.clients);
 
     clientItem = dataList
