@@ -173,7 +173,7 @@ class _UserScreenState extends State<UserScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Client Form'),
+        title: const Text('Client Form'),
         centerTitle: true,
       ),
       body: Column(
@@ -187,9 +187,9 @@ class _UserScreenState extends State<UserScreen> {
             decorator: DotsDecorator(
               activeColor: Colors.blue,
               color: Colors.grey,
-              spacing: EdgeInsets.all(4),
-              activeSize: Size(10, 10),
-              size: Size(8, 8),
+              spacing: const EdgeInsets.all(4),
+              activeSize: const Size(10, 10),
+              size: const Size(8, 8),
               activeShape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5),
               ),

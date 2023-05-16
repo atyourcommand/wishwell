@@ -9,7 +9,7 @@ class UserFormPage extends StatefulWidget {
   final TextEditingController userCity;
   final TextEditingController userGender;
   final TextEditingController userCountry;
-  const UserFormPage({
+  const UserFormPage({super.key, 
     required this.formKey,
     required this.userFirstName,
     required this.userLastName,
@@ -199,7 +199,7 @@ class ExecutorFormPage extends StatelessWidget {
   final TextEditingController executor1Address2;
   final TextEditingController executor1City;
   final TextEditingController executor1Country;
-  ExecutorFormPage({
+  const ExecutorFormPage({
     Key? key,
     required this.index,
     required this.formKey,
@@ -746,7 +746,7 @@ class AgeOfTrustFormPage extends StatefulWidget {
   final GlobalKey<FormState> formKey;
   final TextEditingController ageOfTrust;
 
-  AgeOfTrustFormPage({
+  const AgeOfTrustFormPage({
     super.key,
     required this.formKey,
     required this.ageOfTrust,
@@ -807,7 +807,7 @@ class SimultaneousClauseFormPage extends StatefulWidget {
   final GlobalKey<FormState> formKey;
   final TextEditingController simultaneousClause;
 
-  SimultaneousClauseFormPage(
+  const SimultaneousClauseFormPage(
       {super.key, required this.formKey, required this.simultaneousClause});
 
   @override
@@ -861,6 +861,7 @@ class CremationFormPage extends StatefulWidget {
   const CremationFormPage(
       {super.key, required this.formKey, required this.cremation});
   @override
+  // ignore: library_private_types_in_public_api
   _CremationFormPageState createState() => _CremationFormPageState();
 }
 
