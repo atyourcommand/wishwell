@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:wishwell/provider/client_provider.dart';
 import 'package:wishwell/user_add.dart';
 
-import 'client_detail.dart';
+//import 'client_detail.dart';
 
 class UserScreen extends StatefulWidget {
   const UserScreen({super.key});
