@@ -12,7 +12,7 @@ class PdfPreviewClientPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log("pgdffff==> ${pdf}");
+    log("pgdffff==> $pdf");
     return Scaffold(
       appBar: AppBar(
         title: const Text('PDF Preview'),
