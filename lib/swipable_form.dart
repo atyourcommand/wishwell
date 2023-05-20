@@ -9,7 +9,8 @@ class UserFormPage extends StatefulWidget {
   final TextEditingController userCity;
   final TextEditingController userGender;
   final TextEditingController userCountry;
-  const UserFormPage({super.key, 
+  const UserFormPage({
+    super.key,
     required this.formKey,
     required this.userFirstName,
     required this.userLastName,
@@ -866,7 +867,7 @@ class CremationFormPage extends StatefulWidget {
 }
 
 class _CremationFormPageState extends State<CremationFormPage> {
-  String cremationChoice = '';
+  String cremationChoice = 'Yes';
 
   @override
   Widget build(BuildContext context) {

@@ -54,10 +54,11 @@ class _UserAddState extends State<UserAdd> {
   TextEditingController simultaneousClause = TextEditingController();
 
   TextEditingController cremation = TextEditingController();
-
+  List<bool> validationBools = [];
   @override
   void initState() {
     formKeys = List.generate(8, (_) => GlobalKey<FormState>());
+    validationBools = List.generate(8, (_) => false);
     formPages = [
       // UserFormPage(
       //   formKey: formKeys[0], userFirstName: null,
@@ -173,7 +174,7 @@ class _UserAddState extends State<UserAdd> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Client Form'),
+        title: const Text('Details and Wishes'),
         centerTitle: true,
       ),
       body: Column(
@@ -202,18 +203,90 @@ class _UserAddState extends State<UserAdd> {
             child: PageView(
               controller: pageController,
               onPageChanged: (int index) {
-                if (formKeys[currentIndex].currentState!.validate()) {
-                  setState(() {
-                    currentIndex = index;
-                  });
-                } else {
-                  pageController.jumpToPage(currentIndex);
-                }
+                print("==========> $currentIndex");
+                validationBools[currentIndex] =
+                    formKeys[currentIndex].currentState!.validate();
+                // if (currentIndex < index) {
+                // validationBools[index - 1] =
+                //     formKeys[index - 1].currentState!.validate();
+                // } else {
+                //   validationBools[index] =
+                //       formKeys[index].currentState!.validate();
+                // }
+                setState(() {
+                  currentIndex = index;
+                });
+
+                // if (formKeys[currentIndex].currentState!.validate()) {
+                //   setState(() {
+                //     currentIndex = index;
+                //   });
+                // } else {
+                //   pageController.jumpToPage(currentIndex);
+                // }
               },
               children: formPages,
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          validationBools[currentIndex] =
+              formKeys[currentIndex].currentState!.validate();
+          final listOfForms = [
+            'My Detail',
+            'Executor 1',
+            'Executor 2',
+            'Guardian 1',
+            'Guardian 2',
+            'Age of Trust',
+            'Silmultaneous Clause',
+            'Burial/Cremation Wishes',
+          ];
+          // final validationBools = formKeys.map<bool>(
+          //   (e) => e.currentState!.validate(),
+          // );
+          /*
+            1 ✅ My details - complete 
+            2 ❌Executor 1 - to be completed 
+            3 ❌Executor 2 - to be completed 
+            4 ✅ Guardian 1 - complete  
+            5 ✅ Guardian 2 - complete 
+            6 ❌Age of trust - to be completed 
+            7 ❌Simultaneous clause - to be completed 
+            8 ✅ Burial/Cremation wishes - complete 
+           */
+          print(validationBools);
+          final index = await showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  for (int i = 0; i < listOfForms.length; i++)
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.pop(context, i);
+                        },
+                        child: Text(
+                            '${validationBools.elementAt(i) ? '✅' : '❌'} ${listOfForms.elementAt(i)} - ${validationBools.elementAt(i) ? 'complete' : 'to be completed'}'),
+                      ),
+                    )
+                ],
+              ),
+            ),
+          );
+          if (index != null) {
+            pageController.jumpToPage(index);
+            currentIndex = index;
+            setState(() {});
+          }
+        },
+        child: const Icon(Icons.done_outline_rounded),
       ),
     );
   }
