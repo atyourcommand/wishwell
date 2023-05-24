@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:typed_data';
 import 'package:pdf/pdf.dart';
+//import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/widgets.dart';
 
 //import 'package:wishwell/document_model.dart';
@@ -16,127 +17,91 @@ Future<Uint8List> makeClientPdf(ClientProvider clientProvider) async {
         log("clientProvider.clientItem ${clientProvider.clientItem}");
         return Column(
           children: [
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: [
-            //     Column(
-            //       children: [
-            //         Text("Attention to: ${doc.client}"),
-            //         Text(doc.address),
-            //       ],
-            //       crossAxisAlignment: CrossAxisAlignment.start,
-            //     ),
-            //     SizedBox(
-            //       height: 150,
-            //       width: 150,
-            //       child: Text(
-            //         'LOGO goes here',
-            //         style: Theme.of(context).header4,
-            //         textAlign: TextAlign.center,
-            //       ),
-            //     ),
-            //   ],
-            // ),
-            Container(height: 50),
-
-            Table(
-              border: TableBorder.all(color: PdfColors.black),
-              children: [
-                // TableRow(
-                //   children: [
-                //     Padding(
-                //       child: Text(
-                //         'SOME CLIENTS INFO',
-                //         style: Theme.of(context).header4,
-                //         textAlign: TextAlign.center,
-                //       ),
-                //       padding: const EdgeInsets.all(20),
-                //     ),
-                //   ],
-                // ),
-                // CAN WE PUT SOME BASIC CLIENT INFO INTO THIS LOOP LIKE LAST NAME PLEASE
-                ...clientProvider.clientItem.map(
-                  (e) => TableRow(
-                    children: [
-                      Expanded(
-                        child: PaddedText(e.firstName),
-                        flex: 2,
-                      ),
-                      Expanded(
-                        child: PaddedText("\$${e.lastName}"),
-                        flex: 1,
-                      )
-                    ],
-                  ),
-                ),
-                // TableRow(
-                //   children: [
-                //     PaddedText('TAX', align: TextAlign.right),
-                //     // PaddedText(
-                //     //     '\$${(doc.totalCost() * 0.1).toStringAsFixed(2)}'),
-                //   ],
-                // ),
-                // TableRow(
-                //   children: [
-                //     PaddedText('TOTAL', align: TextAlign.right),
-                //     PaddedText(
-                //         '\$${(doc.totalCost() * 1.1).toStringAsFixed(2)}')
-                //   ],
-                // )
-              ],
-            ),
             Padding(
               child: Text(
-                "THANK YOU FOR YOUR CUSTOM!",
+                "BEQUESTS",
                 style: Theme.of(context).header2,
               ),
               padding: const EdgeInsets.all(20),
             ),
             Text(
-                "Please forward the below slip to your accounts payable department."),
-            Divider(
-              height: 1,
-              borderStyle: BorderStyle.dashed,
+                "I will give the persons named below, if he or she survives me, the Property described below:"),
+            Container(height: 20),
+            ...clientProvider.clientItem.map(
+              (e) => Padding(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: Table(
+                  border: TableBorder.all(color: PdfColors.black),
+                  children: [
+                    TableRow(
+                      children: [
+                        Expanded(
+                          child: PaddedText('${e.firstName}'
+                              ' '
+                              '${e.lastName}\n'
+                              'Friend\n'
+                              '${e.address1}'
+                              ', '
+                              '${e.address2}'
+                              ', '
+                              '${e.city}'
+                              ', '
+                              '${e.country}.'),
+                          flex: 4,
+                        ),
+                      ],
+                    ),
+                    TableRow(
+                      children: [
+                        Expanded(
+                          child: PaddedText('Asset Name 1'),
+                          flex: 1,
+                        ),
+                        Expanded(
+                          child: PaddedText('Type'),
+                          flex: 1,
+                        ),
+                        Expanded(
+                          child: PaddedText('% Share'),
+                          flex: 1,
+                        ),
+                        Expanded(
+                          child: PaddedText('\$ Est Value'),
+                          flex: 1,
+                        ),
+                      ],
+                    ),
+                    TableRow(
+                      children: [
+                        Expanded(
+                          child: PaddedText('Asset Name 2'),
+                          flex: 1,
+                        ),
+                        Expanded(
+                          child: PaddedText('Type'),
+                          flex: 1,
+                        ),
+                        Expanded(
+                          child: PaddedText('% Share'),
+                          flex: 1,
+                        ),
+                        Expanded(
+                          child: PaddedText('\$ Est Value'),
+                          flex: 1,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
             ),
             Container(height: 50),
-            Table(
-              border: TableBorder.all(color: PdfColors.black),
-              children: [
-                TableRow(
-                  children: [
-                    PaddedText('Account Number'),
-                    PaddedText(
-                      '1234 1234',
-                    )
-                  ],
-                ),
-                TableRow(
-                  children: [
-                    PaddedText(
-                      'Account Name',
-                    ),
-                    PaddedText(
-                      'ADAM FAMILY TRUST',
-                    )
-                  ],
-                ),
-                TableRow(
-                  children: [
-                    PaddedText(
-                      'Total Amount to be Paid',
-                    ),
-                    // PaddedText(
-                    //     '\$${(doc.totalCost() * 1.1).toStringAsFixed(2)}')
-                  ],
-                )
-              ],
-            ),
             Padding(
               padding: const EdgeInsets.all(30),
               child: Text(
-                'Please ensure all cheques are payable to the ADAM FAMILY TRUST.',
-                style: Theme.of(context).header3.copyWith(
-                      fontStyle: FontStyle.italic,
+                'This Will and Testament was prepared for and by <userName>',
+                style: Theme.of(context).header5.copyWith(
+                      fontStyle: FontStyle.normal,
                     ),
                 textAlign: TextAlign.center,
               ),

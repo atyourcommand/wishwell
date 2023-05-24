@@ -203,7 +203,7 @@ class _UserAddState extends State<UserAdd> {
             child: PageView(
               controller: pageController,
               onPageChanged: (int index) {
-                print("==========> $currentIndex");
+                debugPrint("==========> $currentIndex");
                 validationBools[currentIndex] =
                     formKeys[currentIndex].currentState!.validate();
                 // if (currentIndex < index) {
@@ -257,7 +257,7 @@ class _UserAddState extends State<UserAdd> {
             7 ❌Simultaneous clause - to be completed 
             8 ✅ Burial/Cremation wishes - complete 
            */
-          print(validationBools);
+          //debugPrint(validationBools);
           final index = await showDialog(
             context: context,
             builder: (context) => AlertDialog(
