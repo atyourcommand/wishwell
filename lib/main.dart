@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:wishwell/nav.dart';
 import 'package:wishwell/provider/asset_provider.dart';
 import 'package:wishwell/provider/client_provider.dart';
+import 'package:wishwell/provider/user_provider.dart';
 
 void main() => runApp(const MyApp());
 
@@ -19,6 +20,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => AssetsProvider(),
+        ),
+        ChangeNotifierProvider<WillProvider>(
+          create: (context) => WillProvider(),
         ),
       ],
       child: MaterialApp(

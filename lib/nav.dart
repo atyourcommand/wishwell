@@ -14,8 +14,8 @@ import 'package:wishwell/home_screen.dart';
 import 'package:wishwell/client_screen.dart';
 
 class Nav extends StatefulWidget {
-  const Nav({Key? key}) : super(key: key);
-
+  const Nav({Key? key, this.index = 0}) : super(key: key);
+  final int index;
   @override
   State<Nav> createState() => _NavState();
 }
@@ -26,11 +26,17 @@ class _NavState extends State<Nav> {
   //   return count;
   // }
 
-  int _selectedIndex = 0;
+  late int _selectedIndex;
+  @override
+  void initState() {
+    _selectedIndex = widget.index;
+    super.initState();
+  }
+
   final List<Widget> _widgetOptions = <Widget>[
     //const Home(),
     const Home(),
-    const UserAdd(),
+    const UserScreen(),
     const ClientScreen(),
     const AssetScreen(),
   ];

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:wishwell/user_detail_model.dart';
 
 class UserFormPage extends StatefulWidget {
   final GlobalKey<FormState> formKey;
@@ -23,6 +24,8 @@ class UserFormPage extends StatefulWidget {
   State<UserFormPage> createState() => _UserFormPageState();
 }
 
+List<User> clients = [];
+
 class _UserFormPageState extends State<UserFormPage> {
   @override
   Widget build(BuildContext context) {
@@ -33,7 +36,7 @@ class _UserFormPageState extends State<UserFormPage> {
           key: widget.formKey,
           child: Column(
             children: [
-              const Text("User"),
+              const Text("My details"),
               const SizedBox(
                 height: 20,
               ),
@@ -858,9 +861,13 @@ class _SimultaneousClauseFormPageState
 class CremationFormPage extends StatefulWidget {
   final GlobalKey<FormState> formKey;
   final TextEditingController cremation;
+  final VoidCallback onTap;
 
   const CremationFormPage(
-      {super.key, required this.formKey, required this.cremation});
+      {super.key,
+      required this.formKey,
+      required this.cremation,
+      required this.onTap});
   @override
   // ignore: library_private_types_in_public_api
   _CremationFormPageState createState() => _CremationFormPageState();
@@ -937,6 +944,7 @@ class _CremationFormPageState extends State<CremationFormPage> {
                   return null;
                 },
               ),
+            TextButton(onPressed: widget.onTap, child: Text("Submit"))
           ],
         ),
       ),
