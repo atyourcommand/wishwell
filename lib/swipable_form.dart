@@ -907,6 +907,8 @@ class _CremationFormPageState extends State<CremationFormPage> {
             ),
             if (cremationChoice == 'Yes')
               TextFormField(
+                maxLines: 5,
+                minLines: 5,
                 controller: widget.cremation,
                 decoration: const InputDecoration(
                   labelText: 'Ashes Wishes',
@@ -921,6 +923,8 @@ class _CremationFormPageState extends State<CremationFormPage> {
               ),
             if (cremationChoice == 'No')
               TextFormField(
+                maxLines: 5,
+                minLines: 5,
                 controller: widget.cremation,
                 decoration: const InputDecoration(
                   labelText: 'Funeral & Burial Wishes',

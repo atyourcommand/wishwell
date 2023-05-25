@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wishwell/Assets/asset_screen.dart';
+import 'package:wishwell/user_add.dart';
 //import 'package:wishwell/user_add.dart';
 //import 'package:wishwell/client_detail.dart';
 //import 'package:wishwell/provider/client_provider.dart';
@@ -29,7 +30,7 @@ class _NavState extends State<Nav> {
   final List<Widget> _widgetOptions = <Widget>[
     //const Home(),
     const Home(),
-    const UserScreen(),
+    const UserAdd(),
     const ClientScreen(),
     const AssetScreen(),
   ];
@@ -73,7 +74,7 @@ class _NavState extends State<Nav> {
               color: Colors.grey.shade600,
             ),
             // backgroundColor: Colors.blue,
-            label: 'Clients',
+            label: 'Beneficiaries',
           ),
           BottomNavigationBarItem(
             // backgroundColor: Colors.blue,

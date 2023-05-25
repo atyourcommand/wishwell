@@ -176,6 +176,15 @@ class _UserAddState extends State<UserAdd> {
       appBar: AppBar(
         title: const Text('Details and Wishes'),
         centerTitle: true,
+        actions: [
+          Center(
+              child: OutlinedButton(
+                  onPressed: () {},
+                  child: const Text(
+                    "preview",
+                    style: TextStyle(color: Colors.white),
+                  )))
+        ],
       ),
       body: Column(
         children: [
@@ -261,6 +270,8 @@ class _UserAddState extends State<UserAdd> {
           final index = await showDialog(
             context: context,
             builder: (context) => AlertDialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15)),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -272,10 +283,20 @@ class _UserAddState extends State<UserAdd> {
                         onTap: () {
                           Navigator.pop(context, i);
                         },
-                        child: Text(
-                            '${validationBools.elementAt(i) ? '✅' : '❌'} ${listOfForms.elementAt(i)} - ${validationBools.elementAt(i) ? 'complete' : 'to be completed'}'),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                                '${validationBools.elementAt(i) ? '✅' : '❌'} ${listOfForms.elementAt(i)} - ${validationBools.elementAt(i) ? 'complete' : 'needs attention'}'),
+                            const Divider(
+                              color: Colors.black,
+                              height: 2,
+                            )
+                          ],
+                        ),
                       ),
-                    )
+                    ),
                 ],
               ),
             ),

@@ -140,20 +140,32 @@ class ClientScreenState extends State<ClientScreen> {
                           return clientProvider.clientItem.isNotEmpty
                               ? Column(
                                   children: [
-                                    OutlinedButton(
-                                      onPressed: () {
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                PdfPreviewClientPage(
-                                                    pdf: clientProvider),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        OutlinedButton(
+                                          onPressed: () {
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PdfPreviewClientPage(
+                                                        pdf: clientProvider),
+                                              ),
+                                            );
+                                            // rootBundle.
+                                          },
+                                          child: const Icon(
+                                            Icons.picture_as_pdf,
                                           ),
-                                        );
-                                        // rootBundle.
-                                      },
-                                      child: const Icon(
-                                        Icons.picture_as_pdf,
-                                      ),
+                                        ),
+                                        OutlinedButton(
+                                            onPressed: () {},
+                                            child: const Text(
+                                              "preview",
+                                              style: TextStyle(),
+                                            ))
+                                      ],
                                     ),
                                     ListView.builder(
                                         shrinkWrap: true,

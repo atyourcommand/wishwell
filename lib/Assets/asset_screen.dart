@@ -174,14 +174,25 @@ class AssetScreenState extends State<AssetScreen> {
                 height: 10,
               ),
 
-              OutlinedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const AssetsAdd()));
-                },
-                child: const Text('+ Add assets'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  OutlinedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const AssetsAdd()));
+                    },
+                    child: const Text('+ Add assets'),
+                  ),
+                  OutlinedButton(
+                      onPressed: () {},
+                      child: const Text(
+                        "preview",
+                        style: TextStyle(),
+                      ))
+                ],
               ),
               const SizedBox(
                 height: 20,
@@ -307,8 +318,9 @@ class AssetScreenState extends State<AssetScreen> {
                                           Navigator.of(context)
                                               .push(MaterialPageRoute(
                                             builder: (context) => AssetsPage(
-                                                asset: assetProvider
-                                                    .clienAssets[index]),
+                                              asset: assetProvider
+                                                  .clienAssets[index],
+                                            ),
                                           ));
                                         },
                                       ),
