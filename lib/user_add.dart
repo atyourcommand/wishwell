@@ -61,12 +61,13 @@ class _UserAddState extends State<UserAdd> {
   TextEditingController cremation = TextEditingController();
   List<bool> validationBools = [];
   bool _isLoading = false;
+  bool radioValue = true;
   getWill() async {
     setState(() {
       _isLoading = true;
     });
     await context.read<WillProvider>().selectData();
-
+    if (!mounted) {}
     final user = context.read<WillProvider>().userItem.first;
     userFirstName.text = user.firstName;
     userLastName.text = user.lastName;
@@ -99,7 +100,7 @@ class _UserAddState extends State<UserAdd> {
     guardian2City.text = user.guardian2City;
     guardian2Country.text = user.guardian2Country;
     ageOfTrust.text = user.ageOfTrust;
-    simultaneousClause.text = user.ashesWish;
+    simultaneousClause.text = user.days;
     cremation.text = user.burialWish;
     formPages = [
       // UserFormPage(
@@ -168,6 +169,13 @@ class _UserAddState extends State<UserAdd> {
         simultaneousClause: simultaneousClause,
       ),
       CremationFormPage(
+        radioValue: user.isCremation,
+        onChanged: (value) {
+          print("changed value is $value");
+          setState(() {
+            radioValue = value;
+          });
+        },
         formKey: formKeys[7],
         cremation: cremation,
         onTap: () async {
@@ -177,7 +185,7 @@ class _UserAddState extends State<UserAdd> {
           prefs.setStringList('validationBools',
               validationBools.map((e) => e.toString()).toList());
 
-          if (true) {
+          if (mounted) {
             context.read<WillProvider>().insertData(
                   User(
                     firstName: userFirstName.text,
@@ -212,7 +220,7 @@ class _UserAddState extends State<UserAdd> {
                     guardian2Country: guardian2Country.text,
                     ageOfTrust: ageOfTrust.text,
                     days: simultaneousClause.text,
-                    isCremation: true,
+                    isCremation: radioValue,
                     ashesWish: cremation.text,
                     burialWish: cremation.text,
                   ),
@@ -277,15 +285,19 @@ class _UserAddState extends State<UserAdd> {
           //     ),
           //   ),
           // ).then((value) => );
+          if (!mounted) {
+            return;
+          }
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => Nav(index: 1),
+                builder: (context) => const Nav(index: 1),
               ));
         },
       ),
     ];
     setState(() {
+      radioValue = user.isCremation;
       _isLoading = false;
     });
   }

@@ -862,19 +862,29 @@ class CremationFormPage extends StatefulWidget {
   final GlobalKey<FormState> formKey;
   final TextEditingController cremation;
   final VoidCallback onTap;
+  final ValueChanged<bool>? onChanged;
+  final bool radioValue;
 
   const CremationFormPage(
       {super.key,
       required this.formKey,
       required this.cremation,
-      required this.onTap});
+      required this.onTap,
+      this.radioValue = true,
+      required this.onChanged});
   @override
   // ignore: library_private_types_in_public_api
   _CremationFormPageState createState() => _CremationFormPageState();
 }
 
 class _CremationFormPageState extends State<CremationFormPage> {
-  String cremationChoice = 'Yes';
+  bool cremationChoice = true;
+
+  @override
+  void initState() {
+    cremationChoice = widget.radioValue;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -890,29 +900,31 @@ class _CremationFormPageState extends State<CremationFormPage> {
             ),
             Row(
               children: [
-                Radio<String>(
-                  value: 'Yes',
+                Radio<bool>(
+                  value: true,
                   groupValue: cremationChoice,
                   onChanged: (value) {
+                    widget.onChanged!(value!);
                     setState(() {
-                      cremationChoice = value!;
+                      cremationChoice = value;
                     });
                   },
                 ),
                 const Text('Yes'),
-                Radio<String>(
-                  value: 'No',
+                Radio<bool>(
+                  value: false,
                   groupValue: cremationChoice,
                   onChanged: (value) {
+                    widget.onChanged!(value!);
                     setState(() {
-                      cremationChoice = value!;
+                      cremationChoice = value;
                     });
                   },
                 ),
                 const Text('No'),
               ],
             ),
-            if (cremationChoice == 'Yes')
+            if (cremationChoice)
               TextFormField(
                 maxLines: 5,
                 minLines: 5,
@@ -928,7 +940,7 @@ class _CremationFormPageState extends State<CremationFormPage> {
                   return null;
                 },
               ),
-            if (cremationChoice == 'No')
+            if (!cremationChoice)
               TextFormField(
                 maxLines: 5,
                 minLines: 5,
@@ -944,7 +956,7 @@ class _CremationFormPageState extends State<CremationFormPage> {
                   return null;
                 },
               ),
-            TextButton(onPressed: widget.onTap, child: Text("Submit"))
+            TextButton(onPressed: widget.onTap, child: const Text("Submit"))
           ],
         ),
       ),

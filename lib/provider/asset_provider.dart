@@ -23,11 +23,12 @@ class AssetsProvider extends ChangeNotifier {
       log(_shares.toString());
 
       final asset = Assets(
-          value: double.parse(item['value'].toString()),
-          id: item['shareId'],
-          shares: _shares,
-          assetsType: item['assetType'],
-          assetsName: item['assetName']);
+        value: double.parse(item['value'].toString()),
+        id: item['shareId'],
+        shares: _shares,
+        assetsType: item['assetType'],
+        assetsName: item['assetName'],
+      );
       return asset;
     }).toList();
     clienAssets = assets;

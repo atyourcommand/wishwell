@@ -1,12 +1,12 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:printing/printing.dart';
-import 'package:wishwell/provider/client_provider.dart';
-import 'pdf_client.dart';
+import 'package:wishwell/pdf/pdf_will.dart';
+import 'package:wishwell/provider/user_provider.dart';
 
-class PdfPreviewClientPage extends StatelessWidget {
-  final ClientProvider pdf;
-  const PdfPreviewClientPage({Key? key, required this.pdf}) : super(key: key);
+class PdfPreviewWillPage extends StatelessWidget {
+  final WillProvider pdf;
+  const PdfPreviewWillPage({Key? key, required this.pdf}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class PdfPreviewClientPage extends StatelessWidget {
         title: const Text('PDF Preview'),
       ),
       body: PdfPreview(
-        build: (context) => makeClientPdf(pdf),
+        build: (context) => makeWillPdf(pdf),
       ),
     );
   }

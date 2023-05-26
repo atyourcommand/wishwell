@@ -5,10 +5,8 @@
 // import 'package:pdf/pdf.dart';
 // import 'package:pdf/widgets.dart' as pw;
 // import 'package:printing/printing.dart';
-// import 'package:pdf/widgets.dart' as pw;
 
-// Future<Uint8List> generateInvoice(
-//     PdfPageFormat pageFormat, CustomData data) async {
+// Future<Uint8List> generateInvoice(PdfPageFormat pageFormat, data) async {
 //   final lorem = pw.LoremText();
 
 //   final products = <Product>[
@@ -82,13 +80,13 @@
 
 //   Future<Uint8List> buildPdf(PdfPageFormat pageFormat) async {
 //     // Create a PDF document.
-//     final pdf = pw.Document();
+//     final doc = pw.Document();
 
 //     _logo = await rootBundle.loadString('assets/logo.svg');
 //     _bgShape = await rootBundle.loadString('assets/invoice.svg');
 
 //     // Add page to the PDF
-//     pdf.addPage(
+//     doc.addPage(
 //       pw.MultiPage(
 //         pageTheme: _buildTheme(
 //           pageFormat,
@@ -110,7 +108,7 @@
 //     );
 
 //     // Return the PDF file content
-//     return pdf.save();
+//     return doc.save();
 //   }
 
 //   pw.Widget _buildHeader(pw.Context context) {
@@ -268,14 +266,14 @@
 //                 child: pw.Container(
 //                   height: 70,
 //                   child: pw.RichText(
-//                     text: pw.TextSpan(
-//                       text: '$customerName\n',
-//                       style: pw.TextStyle(
-//                         color: _darkColor,
-//                         fontWeight: pw.FontWeight.bold,
-//                         fontSize: 12,
-//                       ),
-//                       children: [
+//                       text: pw.TextSpan(
+//                           text: '$customerName\n',
+//                           style: pw.TextStyle(
+//                             color: _darkColor,
+//                             fontWeight: pw.FontWeight.bold,
+//                             fontSize: 12,
+//                           ),
+//                           children: [
 //                         const pw.TextSpan(
 //                           text: '\n',
 //                           style: pw.TextStyle(
@@ -289,9 +287,7 @@
 //                             fontSize: 10,
 //                           ),
 //                         ),
-//                       ],
-//                     ),
-//                   ),
+//                       ])),
 //                 ),
 //               ),
 //             ],
