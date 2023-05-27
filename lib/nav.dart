@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wishwell/Assets/asset_screen.dart';
-import 'package:wishwell/user_add.dart';
+//import 'package:wishwell/user_add.dart';
 //import 'package:wishwell/user_add.dart';
 //import 'package:wishwell/client_detail.dart';
 //import 'package:wishwell/provider/client_provider.dart';
@@ -12,6 +12,7 @@ import 'package:wishwell/home_screen.dart';
 //import './common_controller.dart';
 //import 'package:wishwell/legatee_screen.dart';
 import 'package:wishwell/client_screen.dart';
+import 'package:wishwell/user_screen.dart';
 
 class Nav extends StatefulWidget {
   const Nav({Key? key, this.index = 0}) : super(key: key);

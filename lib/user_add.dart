@@ -171,7 +171,7 @@ class _UserAddState extends State<UserAdd> {
       CremationFormPage(
         radioValue: user.isCremation,
         onChanged: (value) {
-          print("changed value is $value");
+          //print("changed value is $value");
           setState(() {
             radioValue = value;
           });
@@ -226,6 +226,7 @@ class _UserAddState extends State<UserAdd> {
                   ),
                 );
           }
+          // ignore: unused_local_variable
           final listOfForms = [
             'My Detail',
             'Executor 1',
