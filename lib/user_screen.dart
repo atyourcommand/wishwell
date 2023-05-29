@@ -207,7 +207,9 @@ class _UserScreenState extends State<UserScreen> {
                                     Text(
                                       e.values.first,
                                       style: const TextStyle(
-                                          color: Colors.black, fontSize: 16),
+                                        color: Colors.black,
+                                        fontSize: 16,
+                                      ),
                                     ),
                                     const Icon(
                                       Icons.arrow_forward_ios,

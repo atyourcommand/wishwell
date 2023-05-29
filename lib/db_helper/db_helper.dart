@@ -138,6 +138,7 @@ class DBHelper {
 
   static Future<List<Map<String, dynamic>>> selectUsers(String table) async {
     final db = await DBHelper.willData();
+
     //without query
 
     final query = await db.query(table);
@@ -172,6 +173,7 @@ class DBHelper {
     await db.rawDelete("DELETE FROM $will");
     log("deleting SSSS=====");
     return db.insert(
+      
       table,
       data,
       conflictAlgorithm: ConflictAlgorithm.replace,

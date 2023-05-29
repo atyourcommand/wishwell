@@ -121,3 +121,45 @@ Widget PaddedText(
         textAlign: align,
       ),
     );
+/*
+
+Beneficiary 1 (Seperate table)
+
+(Name)
+(Relationship)
+(Address 1)
+(Address 2)
+(Country)
+
+Asset 1 (Name of asset) (Type) (Estimated value) (%Share of total)
+Asset 2 (Name of asset) (Type) (Estimated value) (%Share of total)
+Asset 3 (Name of asset) (Type) (Estimated value) (%Share of total)
+
+
+-----------
+
+Beneficiary 2 (Seperate table)
+
+(Name)
+(Relationship)
+(Address 1)
+(Address 2)
+(Country)
+
+
+Asset 3 (Name of asset) (Type) (Estimated value) (%Share of total)
+
+
+-----------
+
+Beneficiary 3 (Seperate table)
+
+(Name)
+(Relationship)
+(Address 1)
+(Address 2)
+(Country)
+
+Asset 2 (Name of asset) (Type) (Estimated value) (%Share of total)
+Asset 5 (Name of asset) (Type) (Estimated value) (%Share of total)
+ */

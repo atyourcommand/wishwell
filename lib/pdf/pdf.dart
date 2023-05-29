@@ -434,7 +434,7 @@
 
 //     return pw.TableHelper.fromTextArray(
 //       border: null,
-//       cellAlignment: pw.Alignment.centerLeft,
+//       cellAlignment: pw.Alignment.centerLeft,b
 //       headerDecoration: pw.BoxDecoration(
 //         borderRadius: const pw.BorderRadius.all(pw.Radius.circular(2)),
 //         color: baseColor,

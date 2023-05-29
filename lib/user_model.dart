@@ -33,6 +33,7 @@ class UserModel {
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
+      
       map['firstName'] != null ? map['firstName'] as String : null,
       map['lastName'] != null ? map['lastName'] as String : null,
       map['gender'] != null ? map['gender'] as String : null,
