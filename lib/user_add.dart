@@ -107,7 +107,6 @@ class _UserAddState extends State<UserAdd> {
       //   formKey: formKeys[0], userFirstName: null,
       // ),
       UserFormPage(
-        
         formKey: formKeys[0],
         userFirstName: userFirstName,
         userLastName: userLastName,
@@ -452,7 +451,7 @@ class _UserAddState extends State<UserAdd> {
               height: 10,
             ),
             DotsIndicator(
-              dotsCount: formPages.length,
+              dotsCount: formPages.isEmpty ? 8 : formPages.length,
               position: currentIndex,
               decorator: DotsDecorator(
                 activeColor: Colors.blue,

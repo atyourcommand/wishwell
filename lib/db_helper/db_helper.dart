@@ -173,7 +173,6 @@ class DBHelper {
     await db.rawDelete("DELETE FROM $will");
     log("deleting SSSS=====");
     return db.insert(
-      
       table,
       data,
       conflictAlgorithm: ConflictAlgorithm.replace,

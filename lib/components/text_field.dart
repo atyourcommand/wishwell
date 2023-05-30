@@ -33,40 +33,40 @@ class TF extends StatelessWidget {
   Widget build(BuildContext context) {
     final FormValidator formValidator = FormValidator();
     return TextFormField(
-        controller: controller,
-        validator: formValidator.validateText,
-        onSaved: onSaved,
-        readOnly: false,
-        obscureText: false,
-        focusNode: focusNode,
-        autofocus: false,
-        decoration: InputDecoration(
-            focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.greenAccent,
-                width: 1.0,
-              ),
+      controller: controller,
+      validator: formValidator.validateText,
+      onSaved: onSaved,
+      readOnly: false,
+      obscureText: false,
+      focusNode: focusNode,
+      autofocus: false,
+      decoration: InputDecoration(
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.greenAccent,
+              width: 1.0,
             ),
-            enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.grey,
-                width: 1.0,
-              ),
+          ),
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.grey,
+              width: 1.0,
             ),
-            border: const OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.grey,
-                width: 1.0,
-              ),
+          ),
+          border: const OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.grey,
+              width: 1.0,
             ),
-            hintText: hintText,
-            //helperText: helpText,
-            prefixIcon: const Icon(Icons.person_add),
-            suffix: suffix,
-            enabled: true,
-            labelText: hintText
-
-            //errorText: errorText
-            ));
+          ),
+          hintText: hintText,
+          //helperText: helpText,
+          prefixIcon: const Icon(Icons.person_add),
+          suffix: suffix,
+          enabled: true,
+          labelText: hintText
+          //errorText: errorText
+          ),
+    );
   }
 }
