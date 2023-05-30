@@ -31,7 +31,8 @@ class _UserScreenState extends State<UserScreen> {
   ];
   getValidationBools() async {
     final prefs = await SharedPreferences.getInstance();
-    final dataList = prefs.getStringList('validationBools') ?? [];
+    final dataList = prefs.getStringList('validationBools') ??
+        List.generate(8, (index) => "false");
     setState(() {
       validationBools = dataList.map<bool>((e) => jsonDecode(e)).toList();
     });

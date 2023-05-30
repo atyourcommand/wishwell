@@ -174,10 +174,11 @@ class ClientScreenState extends State<ClientScreen> {
                                         itemBuilder: (context, index) {
                                           return Padding(
                                             padding: const EdgeInsets.only(
-                                                left: 15.0,
-                                                right: 15.0,
-                                                bottom: 01.0,
-                                                top: 0.0),
+                                              left: 15.0,
+                                              right: 15.0,
+                                              bottom: 01.0,
+                                              top: 0.0,
+                                            ),
                                             child: Card(
                                               elevation: 0,
                                               shape:
@@ -235,8 +236,8 @@ class ClientScreenState extends State<ClientScreen> {
                                                         Text(
                                                           "No assets allocated yet",
                                                           style: TextStyle(
-                                                              color:
-                                                                  Colors.grey),
+                                                            color: Colors.grey,
+                                                          ),
                                                         ),
                                                       ],
                                                     ),
