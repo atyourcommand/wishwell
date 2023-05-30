@@ -71,10 +71,8 @@ class _UserAddState extends State<UserAdd> {
       return;
     }
     late final User user;
-    try {
-      user = context.read<WillProvider>().userItem.first;
-    } catch (e) {
-      print(e);
+    final userList = context.read<WillProvider>().userItem;
+    if (userList.isEmpty) {
       user = User(
           firstName: "",
           lastName: "",
@@ -111,7 +109,10 @@ class _UserAddState extends State<UserAdd> {
           isCremation: true,
           ashesWish: '',
           burialWish: "");
+    } else {
+      user = context.read<WillProvider>().userItem.first;
     }
+
     userFirstName.text = user.firstName;
     userLastName.text = user.lastName;
     userDob.text = user.dob;
