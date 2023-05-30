@@ -67,51 +67,8 @@ class _UserAddState extends State<UserAdd> {
       _isLoading = true;
     });
     await context.read<WillProvider>().selectData();
-    if (!mounted) {
-      return;
-    }
-    late final User user;
-    try {
-      user = context.read<WillProvider>().userItem.first;
-    } catch (e) {
-      print(e);
-      user = User(
-          firstName: "",
-          lastName: "",
-          dob: "",
-          gender: "",
-          city: "",
-          country: "",
-          executorFirstName: "",
-          executorLastName: "",
-          executorAddress1: "",
-          executorAddress2: "",
-          executorCity: "",
-          executorCountry: "",
-          executor2FirstName: "",
-          executor2LastName: "",
-          executor2Address1: "",
-          executor2Address2: "",
-          executor2City: "",
-          executor2Country: "",
-          guardianFirstName: "",
-          guardianLastName: "",
-          guardianAddress1: "",
-          guardianAddress2: "",
-          guardianCity: "",
-          guardianCountry: "",
-          guardian2FirstName: "",
-          guardian2LastName: "",
-          guardian2Address1: "",
-          guardian2Address2: "",
-          guardian2City: "",
-          guardian2Country: "",
-          ageOfTrust: "",
-          days: "",
-          isCremation: true,
-          ashesWish: '',
-          burialWish: "");
-    }
+    if (!mounted) {}
+    final user = context.read<WillProvider>().userItem.first;
     userFirstName.text = user.firstName;
     userLastName.text = user.lastName;
     userDob.text = user.dob;
