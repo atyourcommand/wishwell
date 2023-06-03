@@ -104,13 +104,16 @@ class _ClientEditState extends State<AssetsEdit> {
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
         leading: const BackButton(),
-        title: const Text('Edit client',
-            style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.w300,
-                color: Colors.black)),
+        title: const Text(
+          'Edit client',
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.w300,
+            color: Colors.black,
+          ),
+        ),
         iconTheme: const IconThemeData(
-          color: Colors.black, //change your color here
+          color: Colors.black,
         ),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
@@ -127,7 +130,6 @@ class _ClientEditState extends State<AssetsEdit> {
                 const SizedBox(
                   height: 30,
                 ),
-
                 TextFormField(
                   controller: _assetType,
                   decoration: const InputDecoration(labelText: 'Assets type'),
@@ -138,7 +140,6 @@ class _ClientEditState extends State<AssetsEdit> {
                     return null;
                   },
                 ),
-
                 const SizedBox(height: 10),
                 TextFormField(
                   controller: _assewtName,

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -66,10 +68,18 @@ class _UserAddState extends State<UserAdd> {
     setState(() {
       _isLoading = true;
     });
-    await context.read<WillProvider>().selectData();
+    final prefs = await SharedPreferences.getInstance();
+    final boolList = prefs.getStringList('validationBools');
+    if (boolList != null) {
+      validationBools = boolList.map<bool>((e) => jsonDecode(e)).toList();
+    } else {
+      validationBools = List.generate(8, (_) => false);
+    }
+
     if (!mounted) {
       return;
     }
+    await context.read<WillProvider>().selectData();
     late final User user;
     final userList = context.read<WillProvider>().userItem;
     if (userList.isEmpty) {
@@ -225,7 +235,9 @@ class _UserAddState extends State<UserAdd> {
         onTap: () async {
           validationBools[currentIndex] =
               formKeys[currentIndex].currentState!.validate();
-          final prefs = await SharedPreferences.getInstance();
+          // validationBools =
+          //     formKeys.map((e) => e.currentState!.validate()).toList();
+
           prefs.setStringList('validationBools',
               validationBools.map((e) => e.toString()).toList());
 
@@ -285,14 +297,14 @@ class _UserAddState extends State<UserAdd> {
           //   (e) => e.currentState!.validate(),
           // );
           /*
-            1 ✅ My details - complete 
-            2 ❌Executor 1 - to be completed 
-            3 ❌Executor 2 - to be completed 
-            4 ✅ Guardian 1 - complete  
-            5 ✅ Guardian 2 - complete 
-            6 ❌Age of trust - to be completed 
-            7 ❌Simultaneous clause - to be completed 
-            8 ✅ Burial/Cremation wishes - complete 
+            1 ✅ My details - complete
+            2 ❌Executor 1 - to be completed
+            3 ❌Executor 2 - to be completed
+            4 ✅ Guardian 1 - complete
+            5 ✅ Guardian 2 - complete
+            6 ❌Age of trust - to be completed
+            7 ❌Simultaneous clause - to be completed
+            8 ✅ Burial/Cremation wishes - complete
            */
           //debugPrint(validationBools);
           // showDialog(
@@ -353,7 +365,7 @@ class _UserAddState extends State<UserAdd> {
     pageController = PageController(initialPage: currentIndex);
     context.read<WillProvider>().selectData();
     formKeys = List.generate(8, (_) => GlobalKey<FormState>());
-    validationBools = List.generate(8, (_) => false);
+
     getWill();
     // formPages = [
     //   // UserFormPage(
@@ -390,7 +402,7 @@ class _UserAddState extends State<UserAdd> {
     //     executor2City: executor2City,
     //     executor2Country: executor2Country,
     //   ),
-    //   // GuardianFormPage(index: 1, formKey: formKeys[3]),
+    //      
     //   GuardianFormPage(
     //     index: 1,
     //     formKey: formKeys[3],
@@ -429,8 +441,130 @@ class _UserAddState extends State<UserAdd> {
     super.initState();
   }
 
+  onBack() async {
+    final prefs = await SharedPreferences.getInstance();
+    validationBools[currentIndex] =
+        formKeys[currentIndex].currentState!.validate();
+    // validationBools =
+    //     formKeys.map((e) => e.currentState!.validate()).toList();
+
+    prefs.setStringList(
+        'validationBools', validationBools.map((e) => e.toString()).toList());
+
+    if (mounted) {
+      context.read<WillProvider>().insertData(
+            User(
+              firstName: userFirstName.text,
+              lastName: userLastName.text,
+              dob: userDob.text,
+              gender: userGender.text,
+              city: userCity.text,
+              country: userCountry.text,
+              executorFirstName: executor1FirstName.text,
+              executorLastName: executor1LastName.text,
+              executorAddress1: executor1Address1.text,
+              executorAddress2: executor1Address2.text,
+              executorCity: executor1City.text,
+              executorCountry: executor1Country.text,
+              executor2FirstName: executor2FirstName.text,
+              executor2LastName: executor2LastName.text,
+              executor2Address1: executor2Address1.text,
+              executor2Address2: executor2Address2.text,
+              executor2City: executor2City.text,
+              executor2Country: executor2Country.text,
+              guardianFirstName: guardian1FirstName.text,
+              guardianLastName: guardian1LastName.text,
+              guardianAddress1: guardian1Address1.text,
+              guardianAddress2: guardian1Address2.text,
+              guardianCity: guardian1City.text,
+              guardianCountry: guardian1Country.text,
+              guardian2FirstName: guardian2FirstName.text,
+              guardian2LastName: guardian2LastName.text,
+              guardian2Address1: guardian2Address1.text,
+              guardian2Address2: guardian2Address2.text,
+              guardian2City: guardian2City.text,
+              guardian2Country: guardian2Country.text,
+              ageOfTrust: ageOfTrust.text,
+              days: simultaneousClause.text,
+              isCremation: radioValue,
+              ashesWish: cremation.text,
+              burialWish: cremation.text,
+            ),
+          );
+    }
+    // ignore: unused_local_variable
+    final listOfForms = [
+      'My Detail',
+      'Executor 1',
+      'Executor 2',
+      'Guardian 1',
+      'Guardian 2',
+      'Age of Trust',
+      'Silmultaneous Clause',
+      'Burial/Cremation Wishes',
+    ];
+    // final validationBools = formKeys.map<bool>(
+    //   (e) => e.currentState!.validate(),
+    // );
+    /*
+            1 ✅ My details - complete
+            2 ❌Executor 1 - to be completed
+            3 ❌Executor 2 - to be completed
+            4 ✅ Guardian 1 - complete
+            5 ✅ Guardian 2 - complete
+            6 ❌Age of trust - to be completed
+            7 ❌Simultaneous clause - to be completed
+            8 ✅ Burial/Cremation wishes - complete
+           */
+    //debugPrint(validationBools);
+    // showDialog(
+    //   context: context,
+    //   builder: (context) => AlertDialog(
+    //     shape: RoundedRectangleBorder(
+    //       borderRadius: BorderRadius.circular(15),
+    //     ),
+    //     content: Column(
+    //       mainAxisSize: MainAxisSize.min,
+    //       crossAxisAlignment: CrossAxisAlignment.start,
+    //       children: [
+    //         for (int i = 0; i < listOfForms.length; i++)
+    //           Padding(
+    //             padding: const EdgeInsets.all(8.0),
+    //             child: InkWell(
+    //               onTap: () {
+    //                 Navigator.pop(context, i);
+    //               },
+    //               child: Column(
+    //                 crossAxisAlignment: CrossAxisAlignment.start,
+    //                 mainAxisAlignment: MainAxisAlignment.center,
+    //                 children: [
+    //                   Text(
+    //                       '${validationBools.elementAt(i) ? '✅' : '❌'} ${listOfForms.elementAt(i)} - ${validationBools.elementAt(i) ? 'complete' : 'needs attention'}'),
+    //                   const Divider(
+    //                     color: Colors.black,
+    //                     height: 2,
+    //                   )
+    //                 ],
+    //               ),
+    //             ),
+    //           ),
+    //       ],
+    //     ),
+    //   ),
+    // ).then((value) => );
+    if (!mounted) {
+      return;
+    }
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const Nav(index: 1),
+        ));
+  }
+
   @override
   void dispose() {
+    // onBack();
     userLastName.dispose();
     userDob.dispose();
     userCity.dispose();
@@ -470,6 +604,8 @@ class _UserAddState extends State<UserAdd> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: onBack, icon: Icon(Icons.arrow_back_ios_new_outlined)),
         title: const Text('Details and Wishes'),
         centerTitle: true,
         actions: [

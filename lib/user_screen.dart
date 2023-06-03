@@ -63,136 +63,84 @@ class _UserScreenState extends State<UserScreen> {
                 builder: (context, snapshot) {
                   return Consumer<WillProvider>(
                       builder: (context, willProvider, child) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        const Text(
-                          "My wishes",
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.w300,
+                    return SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const SizedBox(
+                            height: 20,
                           ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        OutlinedButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const UserAdd()));
-                          },
-                          child: const Text('Edit my wishes'),
-                        ),
-                        OutlinedButton(
-                          onPressed: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    PdfPreviewWillPage(pdf: willProvider),
-                              ),
-                            );
-                          },
-                          child: const Icon(
-                            Icons.picture_as_pdf,
+                          const Text(
+                            "My wishes",
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.w300,
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 30),
-                          child: Text(
-                            textAlign: TextAlign.center,
-                            maxLines: 4,
-                            overflow: TextOverflow.ellipsis,
-                            "Prepering and perinting a beautiful formatted copy of youre last wishes, assets and beneficiaries is easy. Complete the tasks below to preview your PDF.",
-                            style: TextStyle(fontSize: 17),
+                          const SizedBox(
+                            height: 10,
                           ),
-                        ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                                height: 25,
-                                width: 30,
-                                decoration: BoxDecoration(
-                                  border: Border.all(),
-                                  shape: BoxShape.circle,
-                                ),
-                                child: const Icon(
-                                  Icons.check,
-                                  size: 20,
-                                )),
-                            const Text(
-                              " Completed",
-                              style:
-                                  TextStyle(fontSize: 17, color: Colors.grey),
-                            )
-                          ],
-                        ),
-                        ...validList.map(
-                          (e) => InkWell(
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => UserAdd(
-                                  index: e.keys.first,
-                                ),
-                              ));
+                          OutlinedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const UserAdd()));
                             },
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 20, left: 30),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    e.values.first,
-                                    style: const TextStyle(
-                                        color: Colors.black, fontSize: 16),
-                                  ),
-                                  const Icon(
-                                    Icons.arrow_forward_ios,
-                                    size: 19,
-                                  )
-                                ],
-                              ),
+                            child: const Text('Edit my wishes'),
+                          ),
+                          OutlinedButton(
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      PdfPreviewWillPage(pdf: willProvider),
+                                ),
+                              );
+                            },
+                            child: const Icon(
+                              Icons.picture_as_pdf,
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              height: 25,
-                              width: 30,
-                              decoration: BoxDecoration(
-                                color: Colors.pink,
-                                border: Border.all(),
-                                shape: BoxShape.circle,
-                              ),
-                              child: const Icon(
-                                Icons.rule,
-                                color: Colors.white,
-                                size: 18,
-                              ),
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 30),
+                            child: Text(
+                              textAlign: TextAlign.center,
+                              maxLines: 4,
+                              overflow: TextOverflow.ellipsis,
+                              "Prepering and perinting a beautiful formatted copy of youre last wishes, assets and beneficiaries is easy. Complete the tasks below to preview your PDF.",
+                              style: TextStyle(fontSize: 17),
                             ),
-                            const Text(
-                              " Incompleted/needs attention",
-                              style:
-                                  TextStyle(fontSize: 17, color: Colors.grey),
-                            )
-                          ],
-                        ),
-                        ...invalidList.map((e) => InkWell(
+                          ),
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                  height: 25,
+                                  width: 30,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: const Icon(
+                                    Icons.check,
+                                    size: 20,
+                                  )),
+                              const Text(
+                                " Completed",
+                                style:
+                                    TextStyle(fontSize: 17, color: Colors.grey),
+                              )
+                            ],
+                          ),
+                          ...validList.map(
+                            (e) => InkWell(
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => UserAdd(
@@ -208,9 +156,7 @@ class _UserScreenState extends State<UserScreen> {
                                     Text(
                                       e.values.first,
                                       style: const TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                      ),
+                                          color: Colors.black, fontSize: 16),
                                     ),
                                     const Icon(
                                       Icons.arrow_forward_ios,
@@ -219,23 +165,80 @@ class _UserScreenState extends State<UserScreen> {
                                   ],
                                 ),
                               ),
-                            )),
-                        // Flexible(
-                        //   child: ListView.builder(
-                        //       itemCount: invalidList.length,
-                        //       itemBuilder: (context, index) {
-                        //         return TextButton(
-                        //           onPressed: () {
-                        //             Navigator.of(context).push(MaterialPageRoute(
-                        //               builder: (context) =>
-                        //                   UserAdd(index: invalidList[index].keys.first),
-                        //             ));
-                        //           },
-                        //           child: Text(invalidList[index].values.first),
-                        //         );
-                        //       }),
-                        // ),
-                      ],
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: 25,
+                                width: 30,
+                                decoration: BoxDecoration(
+                                  color: Colors.pink,
+                                  border: Border.all(),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Icon(
+                                  Icons.rule,
+                                  color: Colors.white,
+                                  size: 18,
+                                ),
+                              ),
+                              const Text(
+                                " Incompleted/needs attention",
+                                style:
+                                    TextStyle(fontSize: 17, color: Colors.grey),
+                              )
+                            ],
+                          ),
+                          ...invalidList.map((e) => InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => UserAdd(
+                                      index: e.keys.first,
+                                    ),
+                                  ));
+                                },
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 20, left: 30),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        e.values.first,
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      const Icon(
+                                        Icons.arrow_forward_ios,
+                                        size: 19,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              )),
+                          // Flexible(
+                          //   child: ListView.builder(
+                          //       itemCount: invalidList.length,
+                          //       itemBuilder: (context, index) {
+                          //         return TextButton(
+                          //           onPressed: () {
+                          //             Navigator.of(context).push(MaterialPageRoute(
+                          //               builder: (context) =>
+                          //                   UserAdd(index: invalidList[index].keys.first),
+                          //             ));
+                          //           },
+                          //           child: Text(invalidList[index].values.first),
+                          //         );
+                          //       }),
+                          // ),
+                        ],
+                      ),
                     );
                   });
                 }),

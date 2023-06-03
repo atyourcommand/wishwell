@@ -31,7 +31,7 @@ class User {
   final String guardian2Country;
   final String ageOfTrust;
   final String days;
-  final bool   isCremation;
+  final bool isCremation;
   final String ashesWish;
   final String burialWish;
   //final String postcode;
