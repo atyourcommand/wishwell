@@ -81,6 +81,7 @@ class _UserAddState extends State<UserAdd> {
     }
     await context.read<WillProvider>().selectData();
     late final User user;
+    // ignore: use_build_context_synchronously
     final userList = context.read<WillProvider>().userItem;
     if (userList.isEmpty) {
       user = User(
@@ -120,6 +121,7 @@ class _UserAddState extends State<UserAdd> {
           ashesWish: '',
           burialWish: "");
     } else {
+      // ignore: use_build_context_synchronously
       user = context.read<WillProvider>().userItem.first;
     }
 
@@ -402,7 +404,7 @@ class _UserAddState extends State<UserAdd> {
     //     executor2City: executor2City,
     //     executor2Country: executor2Country,
     //   ),
-    //      
+    //
     //   GuardianFormPage(
     //     index: 1,
     //     formKey: formKeys[3],
@@ -605,7 +607,8 @@ class _UserAddState extends State<UserAdd> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-            onPressed: onBack, icon: Icon(Icons.arrow_back_ios_new_outlined)),
+            onPressed: onBack,
+            icon: const Icon(Icons.arrow_back_ios_new_outlined)),
         title: const Text('Details and Wishes'),
         centerTitle: true,
         actions: [
