@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:wishwell/add_client.dart';
 //import 'package:wishwell/home_screen.dart';
 import 'package:wishwell/pdf/pdfview_client.dart';
+import 'package:wishwell/provider/asset_provider.dart';
 //import 'package:wishwell/client_model.dart';
 import 'package:wishwell/provider/client_provider.dart';
 //import 'package:wishwell/shared_preferences.dart';
@@ -131,12 +132,17 @@ class ClientScreenState extends State<ClientScreen> {
                 ),
                 Expanded(
                   child: FutureBuilder(
-                    future: Provider.of<ClientProvider>(context, listen: false)
-                        .selectData(),
+                    future: Future.wait([
+                      Provider.of<ClientProvider>(context, listen: false)
+                          .selectData(),
+                      Provider.of<AssetsProvider>(context, listen: false)
+                          .selectAsset(),
+                    ]),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
-                        return Consumer<ClientProvider>(
-                            builder: (context, clientProvider, child) {
+                        return Consumer2<ClientProvider, AssetsProvider>(
+                            builder: (context, clientProvider, assetsProvider,
+                                child) {
                           return clientProvider.clientItem.isNotEmpty
                               ? Column(
                                   children: [
@@ -150,7 +156,9 @@ class ClientScreenState extends State<ClientScreen> {
                                               MaterialPageRoute(
                                                 builder: (context) =>
                                                     PdfPreviewClientPage(
-                                                        pdf: clientProvider),
+                                                  pdf: clientProvider,
+                                                  assets: assetsProvider,
+                                                ),
                                               ),
                                             );
                                             // rootBundle.
@@ -160,11 +168,12 @@ class ClientScreenState extends State<ClientScreen> {
                                           ),
                                         ),
                                         OutlinedButton(
-                                            onPressed: () {},
-                                            child: const Text(
-                                              "preview",
-                                              style: TextStyle(),
-                                            ))
+                                          onPressed: () {},
+                                          child: const Text(
+                                            "preview",
+                                            style: TextStyle(),
+                                          ),
+                                        ),
                                       ],
                                     ),
                                     ListView.builder(
@@ -190,10 +199,11 @@ class ClientScreenState extends State<ClientScreen> {
                                                 //dense: true,
                                                 contentPadding:
                                                     const EdgeInsets.only(
-                                                        top: 10.0,
-                                                        bottom: 10.0,
-                                                        left: 10.0,
-                                                        right: 10.0),
+                                                  top: 10.0,
+                                                  bottom: 10.0,
+                                                  left: 10.0,
+                                                  right: 10.0,
+                                                ),
                                                 trailing: const Icon(
                                                   Icons.arrow_forward_ios,
                                                   color: Colors.black26,
@@ -220,7 +230,6 @@ class ClientScreenState extends State<ClientScreen> {
                                                     const SizedBox(
                                                       height: 3,
                                                     ),
-
                                                     Row(
                                                       children: const [
                                                         Text(

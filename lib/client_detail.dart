@@ -65,11 +65,13 @@ class ClientPage extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              Text('${client.firstName} ${client.lastName}',
-                  style: const TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w300,
-                  )),
+              Text(
+                '${client.firstName} ${client.lastName}',
+                style: const TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
               const SizedBox(
                 height: 20,
               ),
@@ -150,7 +152,7 @@ class ClientPage extends StatelessWidget {
                             Navigator.of(context).pop();
                           },
                           child: const Text('No'),
-                        )
+                        ),
                       ],
                     ),
                   );
@@ -159,21 +161,29 @@ class ClientPage extends StatelessWidget {
                 child: const Text('Delete this person from your Will'),
               ),
               Container(
-                  child: (const Padding(
-                padding: EdgeInsets.only(
-                    left: 15.0, right: 15.0, bottom: 1.0, top: 0.0),
-                child: Card(
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                    color: Colors.black12,
-                  )),
-                  child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text('Add assets list view here'),
+                child: (const Padding(
+                  padding: EdgeInsets.only(
+                    left: 15.0,
+                    right: 15.0,
+                    bottom: 1.0,
+                    top: 0.0,
                   ),
-                ),
-              ))),
+                  child: Card(
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        color: Colors.black12,
+                      ),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Add assets list view here',
+                      ),
+                    ),
+                  ),
+                )),
+              ),
             ]),
           ),
         ),
