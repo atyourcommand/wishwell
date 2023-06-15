@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:printing/printing.dart';
+import 'package:wishwell/pdf/resume.dart';
 import 'package:wishwell/provider/asset_provider.dart';
 import 'package:wishwell/provider/client_provider.dart';
 import 'pdf_client.dart';
@@ -20,7 +21,8 @@ class PdfPreviewClientPage extends StatelessWidget {
         title: const Text('PDF Preview'),
       ),
       body: PdfPreview(
-        build: (context) => makeClientPdf(pdf,assets),
+        build: (context) => makeClientPdf(pdf, assets),
+        // build: (context) => generateResume(),
       ),
     );
   }
