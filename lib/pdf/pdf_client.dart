@@ -68,6 +68,9 @@ Future<Uint8List> makeClientPdf(
                   }
                 }
               }
+              if (clientAssets.isEmpty) {
+                return SizedBox();
+              }
               return Padding(
                 padding: const EdgeInsets.only(bottom: 20),
                 child: Table(
@@ -110,7 +113,7 @@ Future<Uint8List> makeClientPdf(
                             flex: 1,
                           ),
                           Expanded(
-                            child: PaddedText(e['share'].toString()),
+                            child: PaddedText("${e['share'].toString()} %"),
                             flex: 1,
                           ),
                           Expanded(

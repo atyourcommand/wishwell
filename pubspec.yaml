@@ -50,6 +50,7 @@ dependencies:
   printing: 
   dots_indicator: ^3.0.0
   flutter_svg:
+  flutter_holo_date_picker: ^1.1.0
   
 
 

@@ -437,6 +437,7 @@ class _AssetsAddState extends State<AssetsAdd> {
             elevation: 0.0,
             currentStep: _activeStepIndex,
             type: StepperType.horizontal,
+            physics: const ScrollPhysics(),
             steps: stepList(),
             onStepContinue: () async {
               final isLastStep = _activeStepIndex == stepList().length - 1;

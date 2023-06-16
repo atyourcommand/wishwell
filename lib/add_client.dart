@@ -1,6 +1,8 @@
 //import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_holo_date_picker/date_picker.dart';
+import 'package:flutter_holo_date_picker/i18n/date_picker_i18n.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -55,7 +57,7 @@ class _ClientAddState extends State<ClientAdd> {
   late TextEditingController _dob;
   String? _dropDownValue;
   //
-
+  DateTime? datePicked;
   List<Step> stepList() => [
         Step(
             state:
@@ -103,9 +105,10 @@ class _ClientAddState extends State<ClientAdd> {
                   decoration: const ShapeDecoration(
                     shape: RoundedRectangleBorder(
                       side: BorderSide(
-                          width: 1.0,
-                          style: BorderStyle.solid,
-                          color: Colors.grey),
+                        width: 1.0,
+                        style: BorderStyle.solid,
+                        color: Colors.grey,
+                      ),
                       borderRadius: BorderRadius.all(
                         Radius.circular(5.0),
                       ),
@@ -150,17 +153,41 @@ class _ClientAddState extends State<ClientAdd> {
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(), labelText: 'Date of Birth'),
                   validator: FormBuilderValidators.required(),
-                  onTap: () async {
-                    DateTime? pickedDate = await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(1950),
-                        lastDate: DateTime(2100));
+                  // onTap: () async {
+                  //   DateTime? pickedDate = await showDatePicker(
+                  //       context: context,
+                  //       initialDate: DateTime.now(),
+                  //       firstDate: DateTime(1950),
+                  //       lastDate: DateTime(2100));
 
-                    if (pickedDate != null) {
-                      debugPrint(pickedDate.toString());
+                  //   if (pickedDate != null) {
+                  //     debugPrint(pickedDate.toString());
+                  // String formattedDate =
+                  //     DateFormat('yyyy-MM-dd').format(pickedDate);
+                  //     //formatted date output using intl package =>  2021-03-16
+                  //     setState(() {
+                  //       _dob.text = formattedDate
+                  //           .toString(); //set output date to TextField value.
+                  //     });
+                  //   } else {
+                  //     debugPrint("===============working data");
+                  //   }
+                  // },
+                  onTap: () async {
+                    DateTime? datePicked =
+                        await DatePicker.showSimpleDatePicker(
+                      context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(1950),
+                      lastDate: DateTime(2100),
+                      dateFormat: "dd-MMMM-yyyy",
+                      locale: DateTimePickerLocale.en_us,
+                      looping: true,
+                    );
+                    if (datePicked != null) {
+                      debugPrint(datePicked.toString());
                       String formattedDate =
-                          DateFormat('yyyy-MM-dd').format(pickedDate);
+                          DateFormat('yyyy-MM-dd').format(datePicked);
                       //formatted date output using intl package =>  2021-03-16
                       setState(() {
                         _dob.text = formattedDate
@@ -169,6 +196,17 @@ class _ClientAddState extends State<ClientAdd> {
                     } else {
                       debugPrint("===============working data");
                     }
+
+                    setState(() {});
+                    // final snackBar = SnackBar(
+                    //     content: Text(
+                    //   "Date Picked $datePicked",
+                    //   style: TextStyle(color: Colors.red),
+                    // ));
+                    // if (!mounted) {
+                    //   return;
+                    // }
+                    // ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   },
                 ),
               ],
@@ -219,23 +257,24 @@ class _ClientAddState extends State<ClientAdd> {
               ],
             )),
         Step(
-            state: StepState.complete,
-            isActive: _activeStepIndex >= 2,
-            title: const Text('Confirm'),
-            content: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text('FirstName : ${_firstNameController.text}'),
-                Text('LastName : ${_lastNameController.text}'),
-                Text('Gender : ${_dropDownValue.toString()}'),
-                Text('Dob : ${_dob.text}'),
-                Text('Address1 : ${_address1.text}'),
-                Text('Address2 : ${_address2.text}'),
-                Text('City : ${_city.text}'),
-                Text('Country : ${_country.text}')
-              ],
-            ))
+          state: StepState.complete,
+          isActive: _activeStepIndex >= 2,
+          title: const Text('Confirm'),
+          content: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text('FirstName : ${_firstNameController.text}'),
+              Text('LastName : ${_lastNameController.text}'),
+              Text('Gender : ${_dropDownValue.toString()}'),
+              Text('Dob : ${_dob.text}'),
+              Text('Address1 : ${_address1.text}'),
+              Text('Address2 : ${_address2.text}'),
+              Text('City : ${_city.text}'),
+              Text('Country : ${_country.text}')
+            ],
+          ),
+        ),
       ];
 
   int _activeStepIndex = 0;

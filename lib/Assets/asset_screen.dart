@@ -186,12 +186,12 @@ class AssetScreenState extends State<AssetScreen> {
                     },
                     child: const Text('+ Add assets'),
                   ),
-                  OutlinedButton(
-                      onPressed: () {},
-                      child: const Text(
-                        "preview",
-                        style: TextStyle(),
-                      ))
+                  // OutlinedButton(
+                  //     onPressed: () {},
+                  //     child: const Text(
+                  //       "preview",
+                  //       style: TextStyle(),
+                  //     ))
                 ],
               ),
               const SizedBox(
@@ -233,10 +233,11 @@ class AssetScreenState extends State<AssetScreen> {
                                       child: ListTile(
                                         //dense: true,
                                         contentPadding: const EdgeInsets.only(
-                                            top: 10.0,
-                                            bottom: 10.0,
-                                            left: 5,
-                                            right: 2),
+                                          top: 10.0,
+                                          bottom: 10.0,
+                                          left: 5,
+                                          right: 2,
+                                        ),
                                         trailing: const Icon(
                                           Icons.arrow_forward_ios,
                                           color: Colors.black26,
@@ -265,29 +266,13 @@ class AssetScreenState extends State<AssetScreen> {
                                             const SizedBox(
                                               height: 3,
                                             ),
-                                            Row(
-                                              children: [
-                                                const Text(
-                                                  "Total approximate value:",
-                                                  style: TextStyle(
-                                                    color: Colors.grey,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  formatCurrency
-                                                      .format(assetProvider
-                                                          .clienAssets[index]
-                                                          .value)
-                                                      .toString()
-                                                      .replaceAll(regex, ''),
-                                                  maxLines: 2,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: const TextStyle(
-                                                    color: Colors.grey,
-                                                  ),
-                                                ),
-                                              ],
+                                            Text(
+                                              "Total approximate value: ${formatCurrency.format(assetProvider.clienAssets[index].value).toString().replaceAll(regex, '')}",
+                                              maxLines: 3,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: const TextStyle(
+                                                color: Colors.grey,
+                                              ),
                                             ),
 
                                             // print(

@@ -167,13 +167,13 @@ class ClientScreenState extends State<ClientScreen> {
                                             Icons.picture_as_pdf,
                                           ),
                                         ),
-                                        OutlinedButton(
-                                          onPressed: () {},
-                                          child: const Text(
-                                            "preview",
-                                            style: TextStyle(),
-                                          ),
-                                        ),
+                                        // OutlinedButton(
+                                        //   onPressed: () {},
+                                        //   child: const Text(
+                                        //     "preview",
+                                        //     style: TextStyle(),
+                                        //   ),
+                                        // ),
                                       ],
                                     ),
                                     ListView.builder(
@@ -192,9 +192,10 @@ class ClientScreenState extends State<ClientScreen> {
                                               elevation: 0,
                                               shape:
                                                   const RoundedRectangleBorder(
-                                                      side: BorderSide(
-                                                color: Colors.black12,
-                                              )),
+                                                side: BorderSide(
+                                                  color: Colors.black12,
+                                                ),
+                                              ),
                                               child: ListTile(
                                                 //dense: true,
                                                 contentPadding:
@@ -230,25 +231,16 @@ class ClientScreenState extends State<ClientScreen> {
                                                     const SizedBox(
                                                       height: 3,
                                                     ),
-                                                    Row(
-                                                      children: const [
-                                                        Text(
-                                                          "Incomplete details",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.grey),
-                                                        ),
-                                                      ],
+                                                    const Text(
+                                                      "Incomplete details",
+                                                      style: TextStyle(
+                                                          color: Colors.grey),
                                                     ),
-                                                    Row(
-                                                      children: const [
-                                                        Text(
-                                                          "No assets allocated yet",
-                                                          style: TextStyle(
-                                                            color: Colors.grey,
-                                                          ),
-                                                        ),
-                                                      ],
+                                                    const Text(
+                                                      "No assets allocated yet",
+                                                      style: TextStyle(
+                                                        color: Colors.grey,
+                                                      ),
                                                     ),
                                                     // Row(
                                                     //   children: [
