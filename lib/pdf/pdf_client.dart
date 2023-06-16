@@ -1,27 +1,210 @@
-import 'dart:developer';
-import 'dart:math';
+//import 'dart:developer';
+//import 'dart:math';
 import 'dart:typed_data';
 import 'package:flutter/services.dart';
 import 'package:pdf/pdf.dart';
-//import 'package:pdf/widgets.dart' as pw;
+import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/widgets.dart';
 import 'package:printing/printing.dart';
 import 'package:wishwell/pdf/resume.dart';
 import 'package:wishwell/provider/asset_provider.dart';
+//import 'package:pdf/src/pdf/page_format.dart';
 
 //import 'package:wishwell/document_model.dart';
 //import 'package:wishwell/client_model.dart';
 import 'package:wishwell/provider/client_provider.dart';
-import '../Assets/asset_screen.dart';
+//import '../Assets/asset_screen.dart';
 //import 'package:provider/provider.dart';
 
-Future<Uint8List> makeClientPdf(
+Future<Uint8List> makeClientPdf(PdfPageFormat pageFormat,
     ClientProvider clientProvider, AssetsProvider assetsProvider) async {
-  final pdf = Document();
-  final doc = Document(title: 'My Résumé', author: 'David PHAM-VAN');
+  final pdf = pw.Document(title: 'My Will', author: 'JB');
   // final profileImage = MemoryImage(
   //   (await rootBundle.load('assets/technical_logo.png')).buffer.asUint8List(),
   // );
+  // ignore: unused_local_variable
+  //_logo = await rootBundle.loadString('assets/logo.svg');
+  // _bgShape = await rootBundle.loadString('assets/invoice.svg');
+  //final pageTheme = await _myPageTheme(PdfPageFormat.a3);
+  pdf.addPage(pw.MultiPage(
+    pageTheme: _buildTheme(
+      pageFormat,
+      await PdfGoogleFonts.robotoRegular(),
+      await PdfGoogleFonts.robotoBold(),
+      await PdfGoogleFonts.robotoItalic(),
+    ),
+    build: (context) => [
+      // log("clientProvider.clientItem ${clientProvider.clientItem}");
+
+      Text(
+        'BEQUESTS',
+        textScaleFactor: 2,
+        style: Theme.of(context).defaultTextStyle.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+      ),
+      // Padding(
+      //   child: Text(
+      //     "BEQUESTS",
+      //     style: Theme.of(context).header2,
+      //   ),
+      //   padding: const EdgeInsets.all(20),
+      // ),
+      Text(
+        'I will give the persons named below, if he or she survives me, the Property described below:',
+        textScaleFactor: 1.2,
+        style: Theme.of(context).defaultTextStyle.copyWith(
+              fontWeight: FontWeight.bold,
+              color: PdfColors.black,
+            ),
+      ),
+      // Text(
+      //     "I will give the persons named below, if he or she survives me, the Property described below:"),
+      Container(height: 20),
+      ...clientProvider.clientItem.map((e) {
+        final clientAssets = [];
+        for (var element in assetsProvider.clienAssets) {
+          for (var share in element.shares) {
+            if (share.clientName == e.firstName) {
+              clientAssets.add({
+                'assetName': element.assetsName,
+                'type': element.assetsType,
+                'share': share.shareValue,
+                'value': element.value * share.shareValue / 100
+              });
+            }
+          }
+        }
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 20),
+          child: Table(
+            border: TableBorder.all(
+              color: PdfColors.black,
+            ),
+            children: [
+              TableRow(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(4),
+                      child: Text(
+                        '${e.firstName}'
+                        ' '
+                        '${e.lastName}\n'
+                        'Friend\n'
+                        '${e.address1}'
+                        ', '
+                        '${e.address2}'
+                        ', '
+                        '${e.city}'
+                        ', '
+                        '${e.country}.',
+                      ),
+                    ),
+                    flex: 4,
+                  ),
+                ],
+              ),
+              ...clientAssets.map(
+                (e) => TableRow(
+                  children: [
+                    Expanded(
+                      child: PaddedText(e['assetName']),
+                      flex: 1,
+                    ),
+                    Expanded(
+                      child: PaddedText(e['type']),
+                      flex: 1,
+                    ),
+                    Expanded(
+                      child: PaddedText(e['share'].toString()),
+                      flex: 1,
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(4),
+                        child: _UrlText(
+                          "\$ ${e['value']}",
+                          "",
+                        ),
+                      ),
+                      flex: 1,
+                    ),
+                  ],
+                ),
+              )
+              // TableRow(
+              //   children: [
+              //     Expanded(
+              //       child: PaddedText('Asset Name 1'),
+              //       flex: 1,
+              //     ),
+              //     Expanded(
+              //       child: PaddedText('Type'),
+              //       flex: 1,
+              //     ),
+              //     Expanded(
+              //       child: PaddedText('% Share'),
+              //       flex: 1,
+              //     ),
+              //     Expanded(
+              //       child: PaddedText('\$ Est Value'),
+              //       flex: 1,
+              //     ),
+              //   ],
+              // ),
+              // TableRow(
+              //   children: [
+              //     Expanded(
+              //       child: PaddedText('Asset Name 2'),
+              //       flex: 1,
+              //     ),
+              //     Expanded(
+              //       child: PaddedText('Type'),
+              //       flex: 1,
+              //     ),
+              //     Expanded(
+              //       child: PaddedText('% Share'),
+              //       flex: 1,
+              //     ),
+              //     Expanded(
+              //       child: PaddedText('\$ Est Value'),
+              //       flex: 1,
+              //     ),
+              //   ],
+              // ),
+            ],
+          ),
+        );
+      }),
+      Container(height: 50),
+      Padding(
+        padding: const EdgeInsets.all(30),
+        child: Text(
+          'This Will and Testament was prepared for and by <userName>',
+          style: Theme.of(context).header5.copyWith(
+                fontStyle: FontStyle.normal,
+              ),
+          textAlign: TextAlign.center,
+        ),
+      ),
+    ],
+  ));
+  return pdf.save();
+}
+
+pw.PageTheme _buildTheme(
+    PdfPageFormat pageFormat, pw.Font base, pw.Font bold, pw.Font italic) {
+  return pw.PageTheme(
+    pageFormat: pageFormat,
+    theme: pw.ThemeData.withFont(
+      base: base,
+      bold: bold,
+      italic: italic,
+    ),
+    buildBackground: (context) => pw.FullPage(
+      ignoreMargins: true,
+      //child: pw.SvgImage(svg: _bgShape!),
   final pageTheme = await _myPageTheme(PdfPageFormat.a3);
   pdf.addPage(
     Page(
@@ -189,7 +372,6 @@ Future<Uint8List> makeClientPdf(
       },
     ),
   );
-  return pdf.save();
 }
 
 // ignore: non_constant_identifier_names
@@ -205,6 +387,7 @@ Widget PaddedText(
       ),
     );
 
+// ignore: unused_element
 Future<PageTheme> _myPageTheme(PdfPageFormat format) async {
   // final bgShape = await rootBundle.loadString('assets/sugar-skull-1782019.svg');
 
@@ -244,9 +427,11 @@ Future<PageTheme> _myPageTheme(PdfPageFormat format) async {
   );
 }
 
+// ignore: unused_element
 class _Block extends StatelessWidget {
   _Block({
     required this.title,
+    // ignore: unused_element
     this.icon,
   });
 
@@ -294,6 +479,7 @@ class _Block extends StatelessWidget {
   }
 }
 
+// ignore: unused_element
 class _Category extends StatelessWidget {
   _Category({required this.title});
 
@@ -316,6 +502,7 @@ class _Category extends StatelessWidget {
   }
 }
 
+// ignore: unused_element
 class _Percent extends StatelessWidget {
   _Percent({
     required this.size,
