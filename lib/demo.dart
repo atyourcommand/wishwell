@@ -5,12 +5,15 @@ import 'package:flutter_holo_date_picker/i18n/date_picker_i18n.dart';
 import 'package:flutter_holo_date_picker/widget/date_picker_widget.dart';
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   DateTime? datePicked;
+  @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
@@ -36,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
               final snackBar = SnackBar(
                   content: Text(
                 "Date Picked $datePicked",
-                style: TextStyle(color: Colors.red),
+                style: const TextStyle(color: Colors.red),
               ));
               if (!mounted) {
                 return;
@@ -58,7 +61,10 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class WidgetPage extends StatefulWidget {
+  const WidgetPage({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _WidgetPageState createState() => _WidgetPageState();
 }
 
@@ -99,7 +105,7 @@ class _WidgetPageState extends State<WidgetPage> {
                       setState(() {
                         _selectedDate = newDate;
                       });
-                      print(_selectedDate);
+                      debugPrint(_selectedDate.toString());
                     },
                     pickerTheme: const DateTimePickerTheme(
                       backgroundColor: Colors.transparent,

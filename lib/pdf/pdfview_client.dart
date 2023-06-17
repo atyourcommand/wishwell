@@ -1,7 +1,8 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
-import 'package:wishwell/pdf/resume.dart';
+//import 'package:wishwell/pdf/resume.dart';
 import 'package:wishwell/provider/asset_provider.dart';
 import 'package:wishwell/provider/client_provider.dart';
 import 'pdf_client.dart';
@@ -9,8 +10,12 @@ import 'pdf_client.dart';
 class PdfPreviewClientPage extends StatelessWidget {
   final ClientProvider pdf;
   final AssetsProvider assets;
+  final PdfPageFormat pageFormat;
   const PdfPreviewClientPage(
-      {Key? key, required this.pdf, required this.assets})
+      {Key? key,
+      required this.pageFormat,
+      required this.pdf,
+      required this.assets})
       : super(key: key);
 
   @override
@@ -21,7 +26,7 @@ class PdfPreviewClientPage extends StatelessWidget {
         title: const Text('PDF Preview'),
       ),
       body: PdfPreview(
-        build: (context) => makeClientPdf(pdf, assets),
+        build: (context) => makeClientPdf(pageFormat, pdf, assets),
         // build: (context) => generateResume(),
       ),
     );

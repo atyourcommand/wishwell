@@ -3,6 +3,8 @@
 
 //import 'dart:html';
 import 'package:flutter/material.dart';
+import 'package:pdf/pdf.dart';
+//import 'package:pdf/pdf.dart';
 import 'package:wishwell/add_client.dart';
 //import 'package:wishwell/home_screen.dart';
 import 'package:wishwell/pdf/pdfview_client.dart';
@@ -156,6 +158,7 @@ class ClientScreenState extends State<ClientScreen> {
                                               MaterialPageRoute(
                                                 builder: (context) =>
                                                     PdfPreviewClientPage(
+                                                  pageFormat: PdfPageFormat.a4,
                                                   pdf: clientProvider,
                                                   assets: assetsProvider,
                                                 ),
