@@ -20,13 +20,13 @@ class _UserScreenState extends State<UserScreen> {
   List<Map<int, String>> validList = [];
   List<Map<int, String>> invalidList = [];
   final listOfForms = [
-    'My Detail',
+    'My Details',
     'Executor 1',
     'Executor 2',
     'Guardian 1',
     'Guardian 2',
     'Age of Trust',
-    'Silmultaneous Clause',
+    'Simultaneous Clause',
     'Burial/Cremation Wishes',
   ];
   getValidationBools() async {
@@ -70,75 +70,84 @@ class _UserScreenState extends State<UserScreen> {
                           const SizedBox(
                             height: 20,
                           ),
-                          const Text(
-                            "My wishes",
-                            style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.w300,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          OutlinedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const UserAdd()));
-                            },
-                            child: const Text('Edit my wishes'),
-                          ),
-                          OutlinedButton(
-                            onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      PdfPreviewWillPage(pdf: willProvider),
-                                ),
-                              );
-                            },
-                            child: const Icon(
-                              Icons.picture_as_pdf,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 30),
-                            child: Text(
-                              textAlign: TextAlign.center,
-                              maxLines: 4,
-                              overflow: TextOverflow.ellipsis,
-                              "Prepering and perinting a beautiful formatted copy of youre last wishes, assets and beneficiaries is easy. Complete the tasks below to preview your PDF.",
-                              style: TextStyle(fontSize: 17),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                  height: 25,
-                                  width: 30,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(),
-                                    shape: BoxShape.circle,
+                          Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "My wishes",
+                                  style: TextStyle(
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.w800,
+                                    fontFamily: 'Inter',
                                   ),
+                                ),
+                                Container(
+                                  width: 10,
+                                ),
+                                OutlinedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const UserAdd()));
+                                  },
+                                  child: const Text(
+                                    'Edit',
+                                  ),
+                                ),
+                                OutlinedButton(
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            PdfPreviewWillPage(
+                                                pdf: willProvider),
+                                      ),
+                                    );
+                                  },
                                   child: const Icon(
-                                    Icons.check,
-                                    size: 20,
-                                  )),
-                              const Text(
-                                " Completed",
-                                style:
-                                    TextStyle(fontSize: 17, color: Colors.grey),
-                              )
-                            ],
+                                    Icons.picture_as_pdf,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
+
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          // const Padding(
+                          //   padding: EdgeInsets.symmetric(horizontal: 30),
+                          //   child: Text(
+                          //     textAlign: TextAlign.center,
+                          //     maxLines: 4,
+                          //     overflow: TextOverflow.ellipsis,
+                          //     "Complete the sections below.",
+                          //     style: TextStyle(fontSize: 15),
+                          //   ),
+                          // ),
+
+                          Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "DONE",
+                                  style: TextStyle(
+                                    fontFamily: 'Inter',
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w800,
+                                    color: Colors.grey.shade600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 15),
                           ...validList.map(
                             (e) => InkWell(
                               onTap: () {
@@ -150,17 +159,36 @@ class _UserScreenState extends State<UserScreen> {
                               },
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.only(top: 20, left: 30),
+                                    const EdgeInsets.only(top: 10, left: 20),
                                 child: Row(
                                   children: [
+                                    Container(
+                                        height: 51,
+                                        width: 41,
+                                        decoration: const BoxDecoration(
+                                          //border: Border.all(),
+                                          shape: BoxShape.circle,
+                                          color: Color.fromARGB(
+                                              255, 108, 142, 235),
+                                        ),
+                                        child: const Icon(
+                                          Icons.check,
+                                          color: Colors.white,
+                                          size: 25,
+                                        )),
+                                    const SizedBox(width: 10),
                                     Text(
                                       e.values.first,
                                       style: const TextStyle(
-                                          color: Colors.black, fontSize: 16),
+                                        fontFamily: 'Inter',
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w400,
+                                      ),
                                     ),
+                                    const SizedBox(width: 5),
                                     const Icon(
                                       Icons.arrow_forward_ios,
-                                      size: 19,
+                                      size: 17,
                                     )
                                   ],
                                 ),
@@ -168,32 +196,26 @@ class _UserScreenState extends State<UserScreen> {
                             ),
                           ),
                           const SizedBox(
-                            height: 20,
+                            height: 40,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 25,
-                                width: 30,
-                                decoration: BoxDecoration(
-                                  color: Colors.pink,
-                                  border: Border.all(),
-                                  shape: BoxShape.circle,
+                          Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "TO DO",
+                                  style: TextStyle(
+                                    fontFamily: 'Inter',
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w800,
+                                    color: Colors.grey.shade600,
+                                  ),
                                 ),
-                                child: const Icon(
-                                  Icons.rule,
-                                  color: Colors.white,
-                                  size: 18,
-                                ),
-                              ),
-                              const Text(
-                                " Incompleted/needs attention",
-                                style:
-                                    TextStyle(fontSize: 17, color: Colors.grey),
-                              )
-                            ],
+                              ],
+                            ),
                           ),
+                          const SizedBox(height: 15),
                           ...invalidList.map((e) => InkWell(
                                 onTap: () {
                                   Navigator.of(context).push(MaterialPageRoute(
@@ -204,24 +226,39 @@ class _UserScreenState extends State<UserScreen> {
                                 },
                                 child: Padding(
                                   padding:
-                                      const EdgeInsets.only(top: 20, left: 30),
+                                      const EdgeInsets.only(top: 15, left: 20),
                                   child: Row(
                                     children: [
+                                      Container(
+                                          height: 50,
+                                          width: 40,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(),
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: const Icon(
+                                            Icons.edit,
+                                            size: 25,
+                                          )),
+                                      const SizedBox(width: 10),
                                       Text(
                                         e.values.first,
                                         style: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 16,
+                                          fontFamily: 'Inter',
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w400,
                                         ),
                                       ),
+                                      const SizedBox(width: 5),
                                       const Icon(
                                         Icons.arrow_forward_ios,
-                                        size: 19,
+                                        size: 17,
                                       )
                                     ],
                                   ),
                                 ),
                               )),
+
                           // Flexible(
                           //   child: ListView.builder(
                           //       itemCount: invalidList.length,

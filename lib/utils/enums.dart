@@ -29,3 +29,21 @@ extension Imagepath on AssetType {
     }
   }
 }
+
+extension FontAwesomeName on AssetType {
+  String get fontAwesomeName {
+    switch (this) {
+      case AssetType.property:
+        return "FontAwesomeIcons.user";
+
+      case AssetType.cash:
+        return "FontAwesomeIcons.user";
+
+      case AssetType.shares:
+        return "FontAwesomeIcons.user";
+
+      case AssetType.chattels:
+        return "FontAwesomeIcons.user";
+    }
+  }
+}

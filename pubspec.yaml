@@ -31,11 +31,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   shared_preferences: ^2.0.15
   flutter_form_builder: ^7.8.0
@@ -51,6 +46,10 @@ dependencies:
   dots_indicator: ^3.0.0
   flutter_svg:
   flutter_holo_date_picker: ^1.1.0
+  percent_indicator: ^4.0.1
+  font_awesome_flutter: ^10.4.0
+  #google_fonts: ^2.1.0 
+font_awesome_flutter: ^9.0.0-nullsafety
   
 
 
@@ -83,6 +82,9 @@ flutter:
   assets:
     - assets/data.json
     - assets/technical_logo.png
+    # - assets/fonts/Inter-Light.ttf
+    # - assets/fonts/Inter-Regular.ttf
+    # - assets/fonts/Inter-SemiBold.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -95,7 +97,7 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
+  fonts:
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
@@ -106,6 +108,13 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
-  #
+      - family: Inter
+        fonts:
+            - asset: fonts/Inter-Light.ttf
+            - asset: fonts/Inter-Regular.ttf
+            - asset: fonts/Inter-SemiBold.ttf
+
+uses-material-design: true
+           
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
