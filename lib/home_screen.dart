@@ -203,70 +203,72 @@ class DrawerWidget extends StatelessWidget {
         height: height / 3 + 70,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 10.0),
-          child: Column(children: <Widget>[
-            icon,
-            const Text(
-              "View your PDF document",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 11,
-                fontWeight: FontWeight.normal,
-                color: Colors.black45,
-              ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            const Text(
-              "The document can live in this container",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.normal,
-                color: Colors.black45,
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            ListView(
-              padding: EdgeInsets.zero,
-              shrinkWrap: true,
-              children: [
-                ...docs.map(
-                  (e) => ListTile(
-                    title: Text(e.name),
-                    subtitle: Text(e.name),
-                    trailing: Text('\$${e.totalCost().toStringAsFixed(2)}'),
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (builder) => DetailPage(doc: e),
-                        ),
-                      );
-                    },
-                  ),
+          child: Column(
+            children: <Widget>[
+              icon,
+              const Text(
+                "View your PDF document",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.black45,
                 ),
-              ],
-            ),
-            // ListView.builder(
-            //   itemCount: 1,
-            //   itemBuilder: (context, index) {
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              const Text(
+                "The document can live in this container",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.black45,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              ListView(
+                padding: EdgeInsets.zero,
+                shrinkWrap: true,
+                children: [
+                  ...docs.map(
+                    (e) => ListTile(
+                      title: Text(e.name),
+                      subtitle: Text(e.name),
+                      trailing: Text('\$${e.totalCost().toStringAsFixed(2)}'),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (builder) => DetailPage(doc: e),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              // ListView.builder(
+              //   itemCount: 1,
+              //   itemBuilder: (context, index) {
 
-            //   return ListTile(
+              //   return ListTile(
 
-            //       title: Text(client?.firstName??""),
-            //       subtitle: Text(client?.address1 ??""),
-            //       trailing: Text('\$${client?.firstName??""}'),
-            //       onTap: () {
-            //         Navigator.of(context).push(
-            //           MaterialPageRoute(
-            //             builder: (builder) => DetailPage(doc: client),
-            //           ),
-            //         );
-            //       });
-            // })
-          ]),
+              //       title: Text(client?.firstName??""),
+              //       subtitle: Text(client?.address1 ??""),
+              //       trailing: Text('\$${client?.firstName??""}'),
+              //       onTap: () {
+              //         Navigator.of(context).push(
+              //           MaterialPageRoute(
+              //             builder: (builder) => DetailPage(doc: client),
+              //           ),
+              //         );
+              //       });
+              // })
+            ],
+          ),
         ),
       ),
     );

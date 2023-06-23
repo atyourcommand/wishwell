@@ -251,10 +251,11 @@ class _Block extends StatelessWidget {
             padding: const EdgeInsets.only(left: 10, top: 5, bottom: 5),
             margin: const EdgeInsets.only(left: 5),
             child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Lorem(length: 20),
-                ]),
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Lorem(length: 20),
+              ],
+            ),
           ),
         ]);
   }

@@ -2,6 +2,8 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
 //import 'dart:html';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 //import 'package:path/path.dart';
 import 'package:pdf/pdf.dart';
@@ -122,21 +124,19 @@ class ClientScreenState extends State<ClientScreen> {
                                       //fontStyle: FontStyle.normal,
                                       fontFamily: 'Inter',
                                     )),
-                                Container(
-                                  width: 10,
-                                ),
                                 OutlinedButton(
                                   onPressed: () {
                                     Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const ClientAdd()));
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => const ClientAdd(),
+                                      ),
+                                    );
                                   },
-                                  child: const Text('+ Add '),
+                                  child: const Text('+Add'),
                                 ),
                                 const SizedBox(
-                                  width: 10,
+                                  width: 1,
                                 ),
                                 OutlinedButton(
                                   onPressed: () {
@@ -208,6 +208,7 @@ class ClientScreenState extends State<ClientScreen> {
                                             itemCount: clientProvider
                                                 .clientItem.length,
                                             itemBuilder: (context, index) {
+                                              log("121210 ${clientProvider.clientItem.length}");
                                               return Padding(
                                                 padding: const EdgeInsets.only(
                                                   left: 10.0,
@@ -288,9 +289,12 @@ class ClientScreenState extends State<ClientScreen> {
                                                               MaterialPageRoute(
                                                         builder: (context) =>
                                                             ClientPage(
-                                                                client: clientProvider
-                                                                        .clientItem[
-                                                                    index]),
+                                                          client: clientProvider
+                                                                  .clientItem[
+                                                              index],
+                                                          assetsProvider:
+                                                              assetsProvider,
+                                                        ),
                                                       ));
                                                     },
                                                   ),

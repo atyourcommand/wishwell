@@ -54,3 +54,23 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+/*
+1. Beneficiaries Page: 
+- Try to move the PDF button, next to the +add button.✅
+- Make the list of beneficiaries scrollable whilst keeping the white heading section fixed.✅
+- Add to the cards under the name of the asset, the number of assets allocated to that person.
+
+2. My Wishes Page:✅
+- Make the TO DO lists scrollable whilst keeping the white heading section fixed. Fix overflow issue.
+
+3. Assets Page:✅
+- Make the list of assets scrollable whilst keeping the white heading section fixed. Fix overflow issue.
+- I would like to use font awesome icons in the careds as you can see I have used 'FontAwesomeIcons.piggyBank,'.
+Can you use the method in the ENUMS to point to the appropriate icon names. I was unable to get this working.
+FontAwesomeIcons.piggyBank,  FontAwesomeIcons.buildingColumns, FontAwesomeIcons.warehouse, FontAwesomeIcons.sackDollar,
+
+4. Beneficiaries DETAIL Page: 
+- Add a list of assets that have been assigned to that person.✅
+- It would be great if we could also link each item to relevant Asset Detail page also.✅
+*/ 

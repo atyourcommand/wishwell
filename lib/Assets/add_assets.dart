@@ -11,6 +11,7 @@ import 'package:wishwell/provider/client_provider.dart';
 import '../client_model.dart';
 import '../form_validator.dart';
 import '../utils/enums.dart';
+import 'assets_model.dart';
 
 class AssetsAdd extends StatefulWidget {
   const AssetsAdd({super.key});

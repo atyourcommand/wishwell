@@ -175,7 +175,7 @@ class AssetScreenState extends State<AssetScreen> {
                           fontSize: 28,
                           fontWeight: FontWeight.w900,
                           //fontStyle: FontStyle.normal,
-                          fontFamily: 'Inter',
+                          fontFamily: 'Inter-Light',
                         )),
                     Container(
                       width: 10,
@@ -276,21 +276,21 @@ class AssetScreenState extends State<AssetScreen> {
 
                                               //LASTEST VERSION
                                               leading: Container(
-                                                  height: 46,
-                                                  width: 46,
-                                                  decoration:
-                                                      const BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    color: Color.fromARGB(
-                                                        255, 108, 142, 235),
-                                                  ),
-                                                  alignment: Alignment.center,
-                                                  child: const Icon(
-                                                    FontAwesomeIcons.user,
-                                                    size: 20, //Icon Size
-                                                    color: Colors
-                                                        .white, //Color Of Icon
-                                                  )),
+                                                height: 46,
+                                                width: 46,
+                                                decoration: const BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: Color.fromARGB(
+                                                      255, 108, 142, 235),
+                                                ),
+                                                alignment: Alignment.center,
+                                                child: const Icon(
+                                                  FontAwesomeIcons.user,
+                                                  size: 20, //Icon Size
+                                                  color: Colors
+                                                      .white, //Color Of Icon
+                                                ),
+                                              ),
 
                                               //NEXT VERSION
                                               // leading: CircleAvatar(
@@ -325,7 +325,7 @@ class AssetScreenState extends State<AssetScreen> {
                                                         .clienAssets[index]
                                                         .assetsName,
                                                     style: const TextStyle(
-                                                      fontFamily: 'Inter',
+                                                      fontFamily: 'Inter-Light',
                                                       fontSize: 17,
                                                       fontWeight:
                                                           FontWeight.w700,
@@ -358,7 +358,8 @@ class AssetScreenState extends State<AssetScreen> {
                                                             "Shared by ${assetProvider.clienAssets[index].shares.length} persons",
                                                         style: const TextStyle(
                                                           color: Colors.black,
-                                                          fontFamily: 'Inter',
+                                                          fontFamily:
+                                                              'Inter-Light',
                                                           fontSize: 15,
                                                         ),
                                                       ),
@@ -392,9 +393,10 @@ class AssetScreenState extends State<AssetScreen> {
                                                         const Color.fromARGB(
                                                             255, 108, 142, 235),
                                                     trailing: Icon(
-                                                        totalPercentage == 100
-                                                            ? Icons.mood
-                                                            : Icons.mood_bad),
+                                                      totalPercentage == 100
+                                                          ? Icons.mood
+                                                          : Icons.mood_bad,
+                                                    ),
                                                     barRadius:
                                                         const Radius.circular(
                                                             10),

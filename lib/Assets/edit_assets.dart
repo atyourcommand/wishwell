@@ -8,6 +8,7 @@ import 'package:wishwell/form_validator.dart';
 import 'package:wishwell/provider/asset_provider.dart';
 import '../client_model.dart';
 import '../provider/client_provider.dart';
+import 'assets_model.dart';
 
 class AssetsEdit extends StatefulWidget {
   const AssetsEdit({
@@ -90,7 +91,9 @@ class _ClientEditState extends State<AssetsEdit> {
       loading = true;
     });
     await context.read<ClientProvider>().selectData();
+
     clients = context.read<ClientProvider>().clientItem;
+   
     setState(() {
       loading = false;
     });

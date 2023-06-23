@@ -49,7 +49,7 @@ dependencies:
   percent_indicator: ^4.0.1
   font_awesome_flutter: ^10.4.0
   #google_fonts: ^2.1.0 
-font_awesome_flutter: ^9.0.0-nullsafety
+  # font_awesome_flutter: ^9.0.0-nullsafety
   
 
 
@@ -108,12 +108,15 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
-      - family: Inter
+      - family: Inter-Light
         fonts:
             - asset: fonts/Inter-Light.ttf
+      - family: Inter-Regular
+        fonts:
             - asset: fonts/Inter-Regular.ttf
+      - family: Inter-SemiBold
+        fonts:
             - asset: fonts/Inter-SemiBold.ttf
-
 uses-material-design: true
            
   # For details regarding fonts from package dependencies,

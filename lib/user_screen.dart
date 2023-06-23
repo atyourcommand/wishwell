@@ -165,19 +165,20 @@ class _UserScreenState extends State<UserScreen> {
                                     child: Row(
                                       children: [
                                         Container(
-                                            height: 51,
-                                            width: 41,
-                                            decoration: const BoxDecoration(
-                                              //border: Border.all(),
-                                              shape: BoxShape.circle,
-                                              color: Color.fromARGB(
-                                                  255, 108, 142, 235),
-                                            ),
-                                            child: const Icon(
-                                              Icons.check,
-                                              color: Colors.white,
-                                              size: 25,
-                                            )),
+                                          height: 51,
+                                          width: 41,
+                                          decoration: const BoxDecoration(
+                                            //border: Border.all(),
+                                            shape: BoxShape.circle,
+                                            color: Color.fromARGB(
+                                                255, 108, 142, 235),
+                                          ),
+                                          child: const Icon(
+                                            Icons.check,
+                                            color: Colors.white,
+                                            size: 25,
+                                          ),
+                                        ),
                                         const SizedBox(width: 10),
                                         Text(
                                           e.values.first,
