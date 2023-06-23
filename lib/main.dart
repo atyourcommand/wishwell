@@ -41,15 +41,16 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-          title: "ListView.builder",
-          //theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'Inter'),
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
-          debugShowCheckedModeBanner: false,
-          // home : new ListViewBuilder(), NO Need To Use Unnecessary New Keyword
-          //home: const ListTileApp());
-          home: const Nav()),
+        title: "ListView.builder",
+        //theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'Inter'),
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        debugShowCheckedModeBanner: false,
+        // home : new ListViewBuilder(), NO Need To Use Unnecessary New Keyword
+        //home: const ListTileApp());
+        home: const Nav(),
+      ),
     );
   }
 }

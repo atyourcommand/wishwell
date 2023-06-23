@@ -93,230 +93,227 @@ class ClientScreenState extends State<ClientScreen> {
         body: SafeArea(
           child: SizedBox(
             height: MediaQuery.of(context).size.height,
-            child: Column(
-              // ignore: prefer_const_literals_to_create_immutables
-              children: [
-                const SizedBox(
-                  height: 20,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const Text("Beneficiaries",
-                          style: TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.w900,
-                            //fontStyle: FontStyle.normal,
-                            fontFamily: 'Inter',
-                          )),
-                      Container(
-                        width: 10,
-                      ),
-                      OutlinedButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const ClientAdd()));
-                        },
-                        child: const Text('+ Add '),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                    padding:
-                        const EdgeInsets.only(left: 20, right: 20, bottom: 10),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: const [
-                          Text(
-                            '• 1 Beneficiary has no assets',
-                            style: TextStyle(
-                              fontFamily: 'Inter',
-                              fontSize: 16,
-                              fontWeight: FontWeight.w100,
-                            ),
+            child: FutureBuilder(
+                future: Future.wait([
+                  Provider.of<ClientProvider>(context, listen: false)
+                      .selectData(),
+                  Provider.of<AssetsProvider>(context, listen: false)
+                      .selectAsset(),
+                ]),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return Consumer2<ClientProvider, AssetsProvider>(builder:
+                        (context, clientProvider, assetsProvider, child) {
+                      return Column(
+                        // ignore: prefer_const_literals_to_create_immutables
+                        children: [
+                          const SizedBox(
+                            height: 20,
                           ),
-                        ])),
-                Padding(
-                    padding:
-                        const EdgeInsets.only(left: 20, right: 20, bottom: 10),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: const [
-                          Text(
-                            '• 3 Assets are unallocated',
-                            style: TextStyle(
-                              fontFamily: 'Inter',
-                              fontSize: 16,
-                              fontWeight: FontWeight.w100,
-                            ),
-                          ),
-                        ])),
-
-                const SizedBox(
-                  height: 25,
-                ),
-
-                Expanded(
-                  child: Container(
-                    color: Colors.grey.shade200,
-                    child: FutureBuilder(
-                      future: Future.wait([
-                        Provider.of<ClientProvider>(context, listen: false)
-                            .selectData(),
-                        Provider.of<AssetsProvider>(context, listen: false)
-                            .selectAsset(),
-                      ]),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          return Consumer2<ClientProvider, AssetsProvider>(
-                              builder: (context, clientProvider, assetsProvider,
-                                  child) {
-                            return clientProvider.clientItem.isNotEmpty
-                                ? ListView(
-                                    children: [
-                                      const SizedBox(
-                                        height: 20,
+                          Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                const Text("Beneficiaries",
+                                    style: TextStyle(
+                                      fontSize: 28,
+                                      fontWeight: FontWeight.w900,
+                                      //fontStyle: FontStyle.normal,
+                                      fontFamily: 'Inter',
+                                    )),
+                                Container(
+                                  width: 10,
+                                ),
+                                OutlinedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const ClientAdd()));
+                                  },
+                                  child: const Text('+ Add '),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                OutlinedButton(
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            PdfPreviewClientPage(
+                                          pageFormat: PdfPageFormat.a4,
+                                          pdf: clientProvider,
+                                          assets: assetsProvider,
+                                        ),
                                       ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          OutlinedButton(
-                                            onPressed: () {
-                                              Navigator.of(context).push(
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      PdfPreviewClientPage(
-                                                    pageFormat:
-                                                        PdfPageFormat.a4,
-                                                    pdf: clientProvider,
-                                                    assets: assetsProvider,
+                                    );
+                                    // rootBundle.
+                                  },
+                                  child: const Icon(
+                                    Icons.picture_as_pdf,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 20, right: 20, bottom: 10),
+                              child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: const [
+                                    Text(
+                                      '• 1 Beneficiary has no assets',
+                                      style: TextStyle(
+                                        fontFamily: 'Inter',
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w100,
+                                      ),
+                                    ),
+                                  ])),
+                          Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 20, right: 20, bottom: 10),
+                              child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: const [
+                                    Text(
+                                      '• 3 Assets are unallocated',
+                                      style: TextStyle(
+                                        fontFamily: 'Inter',
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w100,
+                                      ),
+                                    ),
+                                  ])),
+
+                          const SizedBox(
+                            height: 25,
+                          ),
+
+                          Expanded(
+                            child: Container(
+                              color: Colors.grey.shade200,
+                              child: clientProvider.clientItem.isNotEmpty
+                                  ? ListView(
+                                      children: [
+                                        ListView.builder(
+                                            physics: const ScrollPhysics(),
+                                            padding:
+                                                const EdgeInsets.only(top: 20),
+                                            shrinkWrap: true,
+                                            itemCount: clientProvider
+                                                .clientItem.length,
+                                            itemBuilder: (context, index) {
+                                              return Padding(
+                                                padding: const EdgeInsets.only(
+                                                  left: 10.0,
+                                                  right: 10.0,
+                                                  bottom: 0.0,
+                                                  top: 0.0,
+                                                ),
+                                                child: Card(
+                                                  elevation: 0,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            16),
+                                                    side: BorderSide(
+                                                      color:
+                                                          Colors.grey.shade300,
+                                                    ),
+                                                  ),
+                                                  child: ListTile(
+                                                    //dense: true,
+                                                    contentPadding:
+                                                        const EdgeInsets.only(
+                                                      top: 10.0,
+                                                      bottom: 10.0,
+                                                      left: 10.0,
+                                                      right: 10.0,
+                                                    ),
+                                                    trailing: const Icon(
+                                                      Icons.arrow_forward_ios,
+                                                      color: Color.fromARGB(
+                                                          255, 108, 142, 235),
+                                                    ),
+
+                                                    leading: const CircleAvatar(
+                                                      backgroundColor:
+                                                          Color.fromARGB(255,
+                                                              108, 142, 235),
+                                                      radius: 25,
+                                                      child: Icon(
+                                                        Icons.person_4_rounded,
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+
+                                                    title: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          '${clientProvider.clientItem[index].firstName} ${clientProvider.clientItem[index].lastName}',
+                                                          style:
+                                                              const TextStyle(
+                                                            fontFamily: 'Inter',
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight.w700,
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 3,
+                                                        ),
+                                                        const Text(
+                                                          "No assets yet",
+                                                          style: TextStyle(
+                                                            fontFamily: 'Inter',
+                                                            fontWeight:
+                                                                FontWeight.w100,
+                                                            fontSize: 13,
+                                                            color: Colors.grey,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    onTap: () {
+                                                      Navigator.of(context)
+                                                          .push(
+                                                              MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            ClientPage(
+                                                                client: clientProvider
+                                                                        .clientItem[
+                                                                    index]),
+                                                      ));
+                                                    },
                                                   ),
                                                 ),
                                               );
-                                              // rootBundle.
-                                            },
-                                            child: const Icon(
-                                              Icons.picture_as_pdf,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      ListView.builder(
-                                          shrinkWrap: true,
-                                          itemCount:
-                                              clientProvider.clientItem.length,
-                                          itemBuilder: (context, index) {
-                                            return Padding(
-                                              padding: const EdgeInsets.only(
-                                                left: 10.0,
-                                                right: 10.0,
-                                                bottom: 0.0,
-                                                top: 0.0,
-                                              ),
-                                              child: Card(
-                                                elevation: 0,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(16),
-                                                  side: BorderSide(
-                                                    color: Colors.grey.shade300,
-                                                  ),
-                                                ),
-                                                child: ListTile(
-                                                  //dense: true,
-                                                  contentPadding:
-                                                      const EdgeInsets.only(
-                                                    top: 10.0,
-                                                    bottom: 10.0,
-                                                    left: 10.0,
-                                                    right: 10.0,
-                                                  ),
-                                                  trailing: const Icon(
-                                                    Icons.arrow_forward_ios,
-                                                    color: Color.fromARGB(
-                                                        255, 108, 142, 235),
-                                                  ),
-
-                                                  leading: const CircleAvatar(
-                                                    backgroundColor:
-                                                        Color.fromARGB(
-                                                            255, 108, 142, 235),
-                                                    radius: 25,
-                                                    child: Icon(
-                                                        Icons.person_4_rounded,
-                                                        color: Colors.white),
-                                                  ),
-
-                                                  title: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        '${clientProvider.clientItem[index].firstName} ${clientProvider.clientItem[index].lastName}',
-                                                        style: const TextStyle(
-                                                          fontFamily: 'Inter',
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                        ),
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 3,
-                                                      ),
-                                                      const Text(
-                                                        "No assets yet",
-                                                        style: TextStyle(
-                                                          fontFamily: 'Inter',
-                                                          fontWeight:
-                                                              FontWeight.w100,
-                                                          fontSize: 13,
-                                                          color: Colors.grey,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  onTap: () {
-                                                    Navigator.of(context)
-                                                        .push(MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          ClientPage(
-                                                              client: clientProvider
-                                                                      .clientItem[
-                                                                  index]),
-                                                    ));
-                                                  },
-                                                ),
-                                              ),
-                                            );
-                                          }),
-                                    ],
-                                  )
-                                : const Center(
-                                    child: Text('No details found!!!'),
-                                  );
-                          });
-                        } else {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-                      },
-                    ),
-                  ),
-                )
-                // buildClients(clientList),
-              ],
-            ),
+                                            }),
+                                      ],
+                                    )
+                                  : const Center(
+                                      child: Text('No details found!!!'),
+                                    ),
+                            ),
+                          ),
+                          // buildClients(clientList),
+                        ],
+                      );
+                    });
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                }),
           ),
         ),
       );
@@ -508,9 +505,6 @@ class ClientScreenState extends State<ClientScreen> {
 //   ),
 // ));
 }
-
-
-
 
 // void _createClient() {
 //   if (_formKey.currentState == null) {
