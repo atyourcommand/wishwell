@@ -4,6 +4,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wishwell/main.dart';
 import 'package:wishwell/nav.dart';
 import 'package:wishwell/provider/user_provider.dart';
 import 'package:wishwell/swipable_form.dart';
@@ -606,80 +607,97 @@ class _UserAddState extends State<UserAdd> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        //toolbarHeight: 100,
+        backgroundColor: Colors.white,
         leading: IconButton(
             onPressed: onBack,
-            icon: const Icon(Icons.arrow_back_ios_new_outlined)),
-        title: const Text('Details and Wishes'),
+            icon: const Icon(Icons.arrow_back_ios_new_outlined,
+                color: Colors.black)),
+        title: const Text(
+          'Wishes',
+          style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w800,
+              fontFamily: 'Inter',
+              color: Colors.black),
+        ),
         centerTitle: true,
-        actions: [
-          Center(
-            child: OutlinedButton(
-              onPressed: () {},
-              child: const Text(
-                "preview",
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-        ],
+        // actions: [
+        //   Center(
+        //     child: OutlinedButton(
+        //       onPressed: () {},
+        //       child: const Text(
+        //         "preview",
+        //         style: TextStyle(color: Colors.white),
+        //       ),
+        //     ),
+        //   ),
+        // ],
       ),
       body: Visibility(
         visible: !_isLoading,
         replacement: const Center(
           child: CircularProgressIndicator(),
         ),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 10,
-            ),
-            DotsIndicator(
-              dotsCount: formPages.isEmpty ? 8 : formPages.length,
-              position: currentIndex,
-              decorator: DotsDecorator(
-                activeColor: Colors.blue,
-                color: Colors.grey,
-                spacing: const EdgeInsets.all(4),
-                activeSize: const Size(10, 10),
-                size: const Size(8, 8),
-                activeShape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5),
+        child: Container(
+          color: Colors.grey.shade200,
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 30,
+              ),
+              DotsIndicator(
+                dotsCount: formPages.isEmpty ? 8 : formPages.length,
+                position: currentIndex,
+                decorator: DotsDecorator(
+                  activeColor: ColorConstants.primaryAppColor,
+                  color: Colors.grey,
+                  spacing: const EdgeInsets.all(8),
+                  activeSize: const Size(20, 20),
+                  size: const Size(14, 14),
+                  activeShape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
                 ),
               ),
-            ),
-            Expanded(
-              child: PageView(
-                controller: pageController,
-                onPageChanged: (int index) {
-                  debugPrint("==========> $currentIndex");
-                  validationBools[currentIndex] =
-                      formKeys[currentIndex].currentState!.validate();
-                  // if (currentIndex < index) {
-                  // validationBools[index - 1] =
-                  //     formKeys[index - 1].currentState!.validate();
-                  // } else {
-                  //   validationBools[index] =
-                  //       formKeys[index].currentState!.validate();
-                  // }
-                  setState(() {
-                    currentIndex = index;
-                  });
+              const SizedBox(
+                height: 30,
+              ),
+              Expanded(
+                child: PageView(
+                  controller: pageController,
+                  onPageChanged: (int index) {
+                    debugPrint("==========> $currentIndex");
+                    validationBools[currentIndex] =
+                        formKeys[currentIndex].currentState!.validate();
+                    // if (currentIndex < index) {
+                    // validationBools[index - 1] =
+                    //     formKeys[index - 1].currentState!.validate();
+                    // } else {
+                    //   validationBools[index] =
+                    //       formKeys[index].currentState!.validate();
+                    // }
+                    setState(() {
+                      currentIndex = index;
+                    });
 
-                  // if (formKeys[currentIndex].currentState!.validate()) {
-                  //   setState(() {
-                  //     currentIndex = index;
-                  //   });
-                  // } else {
-                  //   pageController.jumpToPage(currentIndex);
-                  // }
-                },
-                children: formPages,
+                    // if (formKeys[currentIndex].currentState!.validate()) {
+                    //   setState(() {
+                    //     currentIndex = index;
+                    //   });
+                    // } else {
+                    //   pageController.jumpToPage(currentIndex);
+                    // }
+                  },
+                  children: formPages,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       // floatingActionButton: FloatingActionButton(

@@ -18,7 +18,7 @@ Color hexToColor(String hex) {
 }
 
 class ColorConstants {
-  static Color primaryAppColor = hexToColor('#5E92F3');
+  static Color primaryAppColor = hexToColor('#4f73eb');
 }
 
 class MyApp extends StatelessWidget {

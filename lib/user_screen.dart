@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,7 +9,6 @@ import 'package:wishwell/user_add.dart';
 
 class UserScreen extends StatefulWidget {
   const UserScreen({super.key});
-
   @override
   State<UserScreen> createState() => _UserScreenState();
 }
@@ -184,7 +182,7 @@ class _UserScreenState extends State<UserScreen> {
                                           e.values.first,
                                           style: const TextStyle(
                                             fontFamily: 'Inter',
-                                            fontSize: 20,
+                                            fontSize: 16,
                                             fontWeight: FontWeight.w400,
                                           ),
                                         ),
@@ -210,7 +208,7 @@ class _UserScreenState extends State<UserScreen> {
                                       "TO DO",
                                       style: TextStyle(
                                         fontFamily: 'Inter',
-                                        fontSize: 16,
+                                        fontSize: 15,
                                         fontWeight: FontWeight.w800,
                                         color: Colors.grey.shade600,
                                       ),
@@ -249,7 +247,7 @@ class _UserScreenState extends State<UserScreen> {
                                             e.values.first,
                                             style: const TextStyle(
                                               fontFamily: 'Inter',
-                                              fontSize: 20,
+                                              fontSize: 15,
                                               fontWeight: FontWeight.w400,
                                             ),
                                           ),

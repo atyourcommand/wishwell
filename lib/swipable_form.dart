@@ -36,9 +36,17 @@ class _UserFormPageState extends State<UserFormPage> {
           key: widget.formKey,
           child: Column(
             children: [
-              const Text("My details"),
+              const Text(
+                "My details",
+                style: TextStyle(
+                  fontFamily: 'Inter',
+                  fontSize: 22,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                ),
+              ),
               const SizedBox(
-                height: 20,
+                height: 40,
               ),
               TextFormField(
                 controller: widget.userFirstName,
@@ -224,9 +232,15 @@ class ExecutorFormPage extends StatelessWidget {
           key: formKey,
           child: Column(
             children: [
-              Text('Executor $index'),
+              Text('Executor $index',
+                  style: const TextStyle(
+                    fontFamily: 'Inter',
+                    fontSize: 22,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black,
+                  )),
               const SizedBox(
-                height: 20,
+                height: 40,
               ),
               TextFormField(
                 controller: executor1FirstName,
@@ -362,9 +376,15 @@ class ExecutorFormPage2 extends StatelessWidget {
           key: formKey,
           child: Column(
             children: [
-              Text('Executor $index'),
+              Text('Executor $index',
+                  style: const TextStyle(
+                    fontFamily: 'Inter',
+                    fontSize: 22,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black,
+                  )),
               const SizedBox(
-                height: 20,
+                height: 40,
               ),
               TextFormField(
                 controller: executor2FirstName,
@@ -500,9 +520,15 @@ class GuardianFormPage extends StatelessWidget {
           key: formKey,
           child: Column(
             children: [
-              Text('Guardian $index'),
+              Text('Guardian $index',
+                  style: const TextStyle(
+                    fontFamily: 'Inter',
+                    fontSize: 22,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black,
+                  )),
               const SizedBox(
-                height: 20,
+                height: 40,
               ),
               TextFormField(
                 controller: guardian1FirstName,
@@ -638,9 +664,15 @@ class GuardianFormPage2 extends StatelessWidget {
           key: formKey,
           child: Column(
             children: [
-              Text('Guardian $index'),
+              Text('Guardian $index',
+                  style: const TextStyle(
+                    fontFamily: 'Inter',
+                    fontSize: 22,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black,
+                  )),
               const SizedBox(
-                height: 20,
+                height: 40,
               ),
               TextFormField(
                 controller: guardian2FirstName,
@@ -771,9 +803,15 @@ class _AgeOfTrustFormPageState extends State<AgeOfTrustFormPage> {
         key: widget.formKey,
         child: Column(
           children: [
-            const Text('Age of Trust'),
+            const Text('Age of Trust',
+                style: TextStyle(
+                  fontFamily: 'Inter',
+                  fontSize: 22,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                )),
             const SizedBox(
-              height: 20,
+              height: 40,
             ),
             DropdownButtonFormField<int>(
               decoration: const InputDecoration(
@@ -829,9 +867,15 @@ class _SimultaneousClauseFormPageState
         key: widget.formKey,
         child: Column(
           children: [
-            const Text('Simultaneous Clause'),
+            const Text('Simultaneous Clause',
+                style: TextStyle(
+                  fontFamily: 'Inter',
+                  fontSize: 22,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                )),
             const SizedBox(
-              height: 20,
+              height: 40,
             ),
             TextFormField(
               controller: widget.simultaneousClause,
@@ -894,9 +938,15 @@ class _CremationFormPageState extends State<CremationFormPage> {
         key: widget.formKey,
         child: Column(
           children: [
-            const Text('Cremation'),
+            const Text('Cremation or burial wishes',
+                style: TextStyle(
+                  fontFamily: 'Inter',
+                  fontSize: 22,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                )),
             const SizedBox(
-              height: 20,
+              height: 40,
             ),
             Row(
               children: [
