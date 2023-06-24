@@ -1,4 +1,4 @@
-import 'dart:developer';
+//import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -8,7 +8,7 @@ import 'package:wishwell/provider/asset_provider.dart';
 import 'package:wishwell/provider/client_provider.dart';
 
 import 'Assets/assets_detail.dart';
-import 'Assets/assets_model.dart';
+//import 'Assets/assets_model.dart';
 
 class ClientPage extends StatefulWidget {
   final Client client;
