@@ -9,14 +9,24 @@ import 'package:printing/printing.dart';
 import 'package:wishwell/pdf/resume.dart';
 import 'package:wishwell/provider/asset_provider.dart';
 //import 'package:pdf/src/pdf/page_format.dart';
+import 'dart:async';
+//import 'package:path_provider/path_provider.dart';
+//import 'dart:io';
 
 //import 'package:wishwell/document_model.dart';
 //import 'package:wishwell/client_model.dart';
 import 'package:wishwell/provider/client_provider.dart';
 
+//Directory appDocDir = await getApplicationDocumentsDirectory();
+//appDocPath = appDocDir.path;
+//print(appDocPath);
+
 Future<Uint8List> makeClientPdf(PdfPageFormat pageFormat,
     ClientProvider clientProvider, AssetsProvider assetsProvider) async {
   final pdf = pw.Document(title: 'My Will', author: 'JB');
+  //final Uint8List fontData = File('fonts/arial.ttf').readAsBytesSync();
+  //final Arial = pw.Font.ttf(fontData.buffer.asByteData());
+
   // final profileImage = MemoryImage(
   //   (await rootBundle.load('assets/technical_logo.png')).buffer.asUint8List(),
   // );
