@@ -74,3 +74,20 @@ FontAwesomeIcons.piggyBank,  FontAwesomeIcons.buildingColumns, FontAwesomeIcons.
 - Add a list of assets that have been assigned to that person.✅
 - It would be great if we could also link each item to relevant Asset Detail page also.✅
 */ 
+
+
+
+/*
+Thank you for you work on the beneficiaries and assets
+Concept
+* All PDF previews will eventually be done here.
+* Create a list of templates for the user
+* Take the name from the document “title” like this
+ final pdf = pw.Document(title: ’’Template 1, author: ‘Users Name’);
+* Copy 3 or 4 of the existing pdf_will_1 and rename etc for new version prototypes
+* Each listing can be clicked for a preview.
+* Disabled listings cannot be previewed. A modal may be utilised to reenforce this message.
+* Devise a system where we can make some previews and UI as disabled. Future proof this method so we can integrate an App Store upgrade method later.
+* Maybe !!! The drawer widget could be accessed from any page!  ^ View PDF templates ____________________________  Complete your details before previewing  Beneficiaries/Assets Assign and share your assets easily
+Template 1  A simple template   Template 2 (upgrade required) [disabled] A template with extras  Template 3 (upgrade required) [disabled] A template with more extras  Template 4 (upgrade required) [disabled] A template with more extras
+does this seem ok to you?*/

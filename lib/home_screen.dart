@@ -17,18 +17,19 @@ Client? client;
 
 final docs = <Doc>[
   Doc(
-      client: 'David Thomas',
-      address: '123 Fake St\r\nBermuda Triangle',
-      items: [
-        LineItem(
-          'Technical Engagement',
-          120,
-        ),
-        LineItem('Deployment Assistance', 200),
-        LineItem('Develop Software Solution', 3020.45),
-        LineItem('Produce Documentation', 840.50),
-      ],
-      name: 'Create and deploy software package'),
+    client: 'David Thomas',
+    address: '123 Fake St\r\nBermuda Triangle',
+    items: [
+      LineItem(
+        'Technical Engagement',
+        120,
+      ),
+      LineItem('Deployment Assistance', 200),
+      LineItem('Develop Software Solution', 3020.45),
+      LineItem('Produce Documentation', 840.50),
+    ],
+    name: 'Create and deploy software package',
+  ),
   Doc(
     client: 'Michael Ambiguous',
     address: '82 Unsure St\r\nBaggle Palace',
@@ -50,9 +51,9 @@ final docs = <Doc>[
     name: 'Create software to teach robots how to dance',
   ),
 ];
-bool showBottomMenu = false;
 
 class _HomeState extends State<Home> {
+  bool showBottomMenu = false;
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -166,9 +167,9 @@ class _HomeState extends State<Home> {
               curve: Curves.easeInOut,
               duration: const Duration(milliseconds: 200),
               left: 0,
-              bottom: (showBottomMenu) ? 0 : -(height / 3),
-              child: const DrawerWidget(),
-            )
+              bottom: (showBottomMenu) ? 0 : -(height / 2.8),
+              child: DrawerWidget(isOpen: showBottomMenu),
+            ),
           ]),
         ),
       ),
@@ -177,100 +178,104 @@ class _HomeState extends State<Home> {
 }
 
 class DrawerWidget extends StatelessWidget {
-  const DrawerWidget({super.key});
+  final bool isOpen;
+  const DrawerWidget({super.key, required this.isOpen});
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
 
-    const icon = Icon(
-      Icons.keyboard_arrow_up,
+    final icon = Icon(
+      isOpen ? Icons.keyboard_arrow_down : Icons.keyboard_arrow_up,
       size: 30,
     );
-    return ClipRRect(
-      borderRadius: const BorderRadius.only(
-        topRight: Radius.circular(
-          20,
-        ),
-        topLeft: Radius.circular(
-          20,
-        ),
-      ),
-      child: Container(
-        color: Colors.white,
-        width: width,
-        height: height / 3 + 70,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 10.0),
-          child: Column(
-            children: <Widget>[
-              icon,
-              const Text(
-                "View your PDF document",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 11,
-                  fontWeight: FontWeight.normal,
-                  color: Colors.black45,
-                ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              const Text(
-                "The document can live in this container",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.normal,
-                  color: Colors.black45,
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              ListView(
-                padding: EdgeInsets.zero,
-                shrinkWrap: true,
-                children: [
-                  ...docs.map(
-                    (e) => ListTile(
-                      title: Text(e.name),
-                      subtitle: Text(e.name),
-                      trailing: Text('\$${e.totalCost().toStringAsFixed(2)}'),
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (builder) => DetailPage(doc: e),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              // ListView.builder(
-              //   itemCount: 1,
-              //   itemBuilder: (context, index) {
-
-              //   return ListTile(
-
-              //       title: Text(client?.firstName??""),
-              //       subtitle: Text(client?.address1 ??""),
-              //       trailing: Text('\$${client?.firstName??""}'),
-              //       onTap: () {
-              //         Navigator.of(context).push(
-              //           MaterialPageRoute(
-              //             builder: (builder) => DetailPage(doc: client),
-              //           ),
-              //         );
-              //       });
-              // })
-            ],
+    return FutureBuilder(builder: (context, snapshot) {
+      return ClipRRect(
+        borderRadius: const BorderRadius.only(
+          topRight: Radius.circular(
+            20,
+          ),
+          topLeft: Radius.circular(
+            20,
           ),
         ),
-      ),
-    );
+        child: Container(
+          color: Colors.white,
+          width: width,
+          height: height / 3 + 70,
+          child: Padding(
+            padding:
+                const EdgeInsets.symmetric(vertical: 2.0, horizontal: 10.0),
+            child: Column(
+              children: <Widget>[
+                icon,
+                const Text(
+                  "View PDF templates",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.black45,
+                  ),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                const Text(
+                  "Complete your details before previewing",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.black45,
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                ListView(
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: true,
+                  children: [
+                    ...docs.map(
+                      (e) => ListTile(
+                        title: Text(e.name),
+                        subtitle: Text(e.name),
+                        trailing: Text('\$${e.totalCost().toStringAsFixed(2)}'),
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (builder) => DetailPage(doc: e),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                // ListView.builder(
+                //   itemCount: 1,
+                //   itemBuilder: (context, index) {
+
+                //   return ListTile(
+
+                //       title: Text(client?.firstName??""),
+                //       subtitle: Text(client?.address1 ??""),
+                //       trailing: Text('\$${client?.firstName??""}'),
+                //       onTap: () {
+                //         Navigator.of(context).push(
+                //           MaterialPageRoute(
+                //             builder: (builder) => DetailPage(doc: client),
+                //           ),
+                //         );
+                //       });
+                // })
+              ],
+            ),
+          ),
+        ),
+      );
+    });
   }
 }
