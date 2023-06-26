@@ -18,8 +18,8 @@ import 'package:percent_indicator/percent_indicator.dart';
 //import '../pdf/pdf.dart';
 // ignore: unused_import
 import '../home_screen.dart';
-import '../pdf/detail_page.dart';
-import '../utils/enums.dart';
+//import '../pdf/detail_page.dart';
+//import '../utils/enums.dart';
 import 'add_assets.dart';
 import 'assets_detail.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

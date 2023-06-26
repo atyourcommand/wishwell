@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
 //import 'package:pdf/pdf.dart';
 import 'package:wishwell/add_client.dart';
-import 'package:wishwell/pdf/detail_page.dart';
+//import 'package:wishwell/pdf/detail_page.dart';
 //import 'package:wishwell/home_screen.dart';
 import 'package:wishwell/pdf/pdfview_client.dart';
 import 'package:wishwell/provider/asset_provider.dart';
@@ -399,7 +399,7 @@ class ClientScreenState extends State<ClientScreen> {
               duration: const Duration(milliseconds: 200),
               left: 0,
               bottom: (showBottomMenu) ? 0 : -(height / 2),
-              child:  DrawerWidget(isOpen:showBottomMenu ),
+              child: DrawerWidget(isOpen: showBottomMenu),
             ),
           ],
         ),
