@@ -89,4 +89,3 @@ class DetailPage extends StatelessWidget {
     );
   }
 }
-

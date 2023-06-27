@@ -433,14 +433,15 @@ class AssetScreenState extends State<AssetScreen> {
                                                   ],
                                                 ),
                                                 onTap: () {
-                                                  Navigator.of(context)
-                                                      .push(MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        AssetsPage(
-                                                      asset: assetProvider
-                                                          .clienAssets[index],
+                                                  Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          AssetsPage(
+                                                        asset: assetProvider
+                                                            .clienAssets[index],
+                                                      ),
                                                     ),
-                                                  ));
+                                                  );
                                                 },
                                               ),
                                             ),

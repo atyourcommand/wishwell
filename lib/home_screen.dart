@@ -28,7 +28,7 @@ final docs = <Doc>[
       LineItem('Develop Software Solution', 3020.45),
       LineItem('Produce Documentation', 840.50),
     ],
-    name: 'Create and deploy software package',
+    name: 'Beneficiaries/Assets',
   ),
   Doc(
     client: 'Michael Ambiguous',
@@ -38,7 +38,7 @@ final docs = <Doc>[
       LineItem('Lunch Bill', 43.55),
       LineItem('Remote Assistance', 50),
     ],
-    name: 'Provide remote support after lunch',
+    name: 'Template 2 (upgrade required)',
   ),
   Doc(
     client: 'Marty McDanceFace',
@@ -48,7 +48,17 @@ final docs = <Doc>[
       LineItem('Find tasteful dance moves for the robots', 80.55),
       LineItem('General quality assurance', 80),
     ],
-    name: 'Create software to teach robots how to dance',
+    name: 'Template 3 (upgrade required)',
+  ),
+  Doc(
+    client: 'Marty McDanceFace',
+    address: '55 Dancing Parade\r\nDance Place',
+    items: [
+      LineItem('Program the robots', 400.50),
+      LineItem('Find tasteful dance moves for the robots', 80.55),
+      LineItem('General quality assurance', 80),
+    ],
+    name: 'Template 4 (upgrade required)',
   ),
 ];
 
@@ -203,75 +213,63 @@ class DrawerWidget extends StatelessWidget {
         child: Container(
           color: Colors.white,
           width: width,
-          height: height / 3 + 70,
+          height: height / 2.5,
           child: Padding(
             padding:
                 const EdgeInsets.symmetric(vertical: 2.0, horizontal: 10.0),
-            child: Column(
-              children: <Widget>[
-                icon,
-                const Text(
-                  "View PDF templates",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.normal,
-                    color: Colors.black45,
-                  ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                const Text(
-                  "Complete your details before previewing",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.normal,
-                    color: Colors.black45,
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                ListView(
-                  padding: EdgeInsets.zero,
-                  shrinkWrap: true,
-                  children: [
-                    ...docs.map(
-                      (e) => ListTile(
-                        title: Text(e.name),
-                        subtitle: Text(e.name),
-                        trailing: Text('\$${e.totalCost().toStringAsFixed(2)}'),
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (builder) => DetailPage(doc: e),
-                            ),
-                          );
-                        },
-                      ),
+            child: SingleChildScrollView(
+              physics: const NeverScrollableScrollPhysics(),
+              child: Column(
+                children: <Widget>[
+                  icon,
+                  const Text(
+                    "View PDF templates",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black45,
                     ),
-                  ],
-                ),
-                // ListView.builder(
-                //   itemCount: 1,
-                //   itemBuilder: (context, index) {
-
-                //   return ListTile(
-
-                //       title: Text(client?.firstName??""),
-                //       subtitle: Text(client?.address1 ??""),
-                //       trailing: Text('\$${client?.firstName??""}'),
-                //       onTap: () {
-                //         Navigator.of(context).push(
-                //           MaterialPageRoute(
-                //             builder: (builder) => DetailPage(doc: client),
-                //           ),
-                //         );
-                //       });
-                // })
-              ],
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  const Text(
+                    "Complete your details before previewing",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black45,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  ListView(
+                    // physics: ScrollPhysics(),
+                    padding: EdgeInsets.zero,
+                    shrinkWrap: true,
+                    children: [
+                      ...docs.map(
+                        (e) => ListTile(
+                          title: Text(e.name),
+                          subtitle: Text(e.name),
+                          // trailing:
+                          //     Text('\$${e.totalCost().toStringAsFixed(2)}'),
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (builder) => DetailPage(doc: e),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
