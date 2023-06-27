@@ -17,15 +17,20 @@ import 'dart:async';
 //import 'package:wishwell/client_model.dart';
 import 'package:wishwell/provider/client_provider.dart';
 
-//Directory appDocDir = await getApplicationDocumentsDirectory();
-//appDocPath = appDocDir.path;
-//print(appDocPath);
+// String appDocPath = "";
+// getPaths() async {
+//   Directory appDocDir = await getApplicationDocumentsDirectory();
+//   appDocPath = appDocDir.path;
+//   // ignore: avoid_print
+//   print(appDocPath);
+//   //output: /data/user/0/com.example.test/app_flutter
+// }
 
 Future<Uint8List> makeClientPdf(PdfPageFormat pageFormat,
     ClientProvider clientProvider, AssetsProvider assetsProvider) async {
   final pdf = pw.Document(title: 'My Will', author: 'JB');
-  //final Uint8List fontData = File('fonts/arial.ttf').readAsBytesSync();
-  //final Arial = pw.Font.ttf(fontData.buffer.asByteData());
+  //final Uint8List fontData = File('wishwell/fonts/arial.ttf').readAsBytesSync();
+  //final arial = pw.Font.ttf(fontData.buffer.asByteData());
 
   // final profileImage = MemoryImage(
   //   (await rootBundle.load('assets/technical_logo.png')).buffer.asUint8List(),
@@ -36,24 +41,26 @@ Future<Uint8List> makeClientPdf(PdfPageFormat pageFormat,
   //final pageTheme = await _myPageTheme(PdfPageFormat.a3);
   pdf.addPage(pw.MultiPage(
     pageTheme: _buildTheme(
-      pageFormat,
-      await PdfGoogleFonts.robotoRegular(),
-      await PdfGoogleFonts.robotoBold(),
-      await PdfGoogleFonts.robotoItalic(),
-    ),
+        pageFormat,
+        // await PdfGoogleFonts.robotoRegular(),
+        // await PdfGoogleFonts.robotoBold(),
+        // await PdfGoogleFonts.robotoItalic(),
+        Font.helvetica(),
+        Font.helveticaBold(),
+        Font.helveticaOblique()),
     build: (context) => [
       // log("clientProvider.clientItem ${clientProvider.clientItem}");
       Text(
         'BEQUESTS',
-        textScaleFactor: 1.5,
+        textScaleFactor: 1.2,
         style: Theme.of(context).defaultTextStyle.copyWith(
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.normal,
             ),
       ),
       Container(height: 20),
       Text(
         'I will give the persons named below, if he or she survives me, the Property described below:',
-        textScaleFactor: 1.2,
+        textScaleFactor: 1.0,
         style: Theme.of(context).defaultTextStyle.copyWith(
               fontWeight: FontWeight.normal,
               color: PdfColors.black,
@@ -82,19 +89,19 @@ Future<Uint8List> makeClientPdf(PdfPageFormat pageFormat,
                   width: double.infinity,
                   padding: const EdgeInsets.all(0),
                   child: Text(
-                    textAlign: TextAlign.left,
-                    '${e.firstName}'
-                    ' '
-                    '${e.lastName}\n'
-                    'Friend\n'
-                    '${e.address1}'
-                    ', '
-                    '${e.address2}'
-                    ', '
-                    '${e.city}'
-                    ', '
-                    '${e.country}.',
-                  ),
+                      textAlign: TextAlign.left,
+                      '${e.firstName}'
+                      ' '
+                      '${e.lastName}\n'
+                      'Friend\n'
+                      '${e.address1}'
+                      ', '
+                      '${e.address2}'
+                      ', '
+                      '${e.city}'
+                      ', '
+                      '${e.country}.',
+                      style: const pw.TextStyle(fontSize: 14)),
                 ),
                 Container(height: 20),
                 Table(
@@ -117,12 +124,9 @@ Future<Uint8List> makeClientPdf(PdfPageFormat pageFormat,
                           ),
                           Expanded(
                             child: Padding(
-                              padding: const EdgeInsets.all(4),
-                              child: _UrlText(
-                                "\$ ${e['value']}",
-                                "",
-                              ),
-                            ),
+                                padding: const EdgeInsets.all(4),
+                                child:
+                                    PaddedText("\$ ${e['value'].toString()}")),
                             flex: 1,
                           ),
                         ],
@@ -349,6 +353,7 @@ class _Percent extends StatelessWidget {
   }
 }
 
+// ignore: unused_element
 class _UrlText extends StatelessWidget {
   _UrlText(this.text, this.url);
 
