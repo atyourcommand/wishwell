@@ -159,7 +159,7 @@ class AssetScreenState extends State<AssetScreen> {
   late final Future _futer;
 
   RegExp regex = RegExp(r'([.]*0)(?!.*\d)');
-  final formatCurrency = NumberFormat.simpleCurrency();
+  final formatCurrency = NumberFormat.simpleCurrency(decimalDigits: 2);
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -178,14 +178,9 @@ class AssetScreenState extends State<AssetScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         "Assets",
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.w900,
-                          //fontStyle: FontStyle.normal,
-                          fontFamily: 'Inter-Light',
-                        ),
+                        style: Theme.of(context).textTheme.titleLarge,
                       ),
                       Container(
                         width: 10,
@@ -338,13 +333,9 @@ class AssetScreenState extends State<AssetScreen> {
                                                       assetProvider
                                                           .clienAssets[index]
                                                           .assetsName,
-                                                      style: const TextStyle(
-                                                        fontFamily:
-                                                            'Inter-Light',
-                                                        fontSize: 17,
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                      ),
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyLarge,
                                                     ),
                                                     const SizedBox(
                                                       height: 3,
@@ -372,12 +363,9 @@ class AssetScreenState extends State<AssetScreen> {
                                                               //"${totalPercentage.toString().replaceAll(regex, '')}% Shared by ${assetProvider.clienAssets[index].shares.length} persons",
                                                               "Shared by ${assetProvider.clienAssets[index].shares.length} persons",
                                                           style:
-                                                              const TextStyle(
-                                                            color: Colors.black,
-                                                            fontFamily:
-                                                                'Inter-Light',
-                                                            fontSize: 15,
-                                                          ),
+                                                              Theme.of(context)
+                                                                  .textTheme
+                                                                  .bodyMedium,
                                                         ),
                                                         //SHOW A MESSAGE IF % IS LESS THAN 100
                                                         // totalPercentage < 100
@@ -437,6 +425,8 @@ class AssetScreenState extends State<AssetScreen> {
                                                     MaterialPageRoute(
                                                       builder: (context) =>
                                                           AssetsPage(
+                                                        totalPercentage:
+                                                            totalPercentage,
                                                         asset: assetProvider
                                                             .clienAssets[index],
                                                       ),
@@ -526,8 +516,11 @@ class AssetScreenState extends State<AssetScreen> {
               curve: Curves.easeInOut,
               duration: const Duration(milliseconds: 200),
               left: 0,
-              bottom: (showBottomMenu) ? 0 : -(height / 2),
-              child: DrawerWidget(isOpen: showBottomMenu),
+              bottom: (showBottomMenu) ? 0 : -(height / 1.7),
+              child: DrawerWidget(
+                isOpen: showBottomMenu,
+                metaTitle: '',
+              ),
             ),
           ],
         ),

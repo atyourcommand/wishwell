@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:pdf/pdf.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wishwell/pdf/pdfview_will.dart';
 import 'package:wishwell/provider/user_provider.dart';
 import 'package:wishwell/user_add.dart';
-
-import 'home_screen.dart';
+import '../home_screen.dart';
 
 class UserScreen extends StatefulWidget {
   const UserScreen({super.key});
@@ -80,13 +80,9 @@ class _UserScreenState extends State<UserScreen> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                const Text(
+                                Text(
                                   "My wishes",
-                                  style: TextStyle(
-                                    fontSize: 28,
-                                    fontWeight: FontWeight.w800,
-                                    fontFamily: 'Inter',
-                                  ),
+                                  style: Theme.of(context).textTheme.titleLarge,
                                 ),
                                 Container(
                                   width: 10,
@@ -112,7 +108,10 @@ class _UserScreenState extends State<UserScreen> {
                                       MaterialPageRoute(
                                         builder: (context) =>
                                             PdfPreviewWillPage(
-                                                pdf: willProvider),
+                                                pageFormat: PdfPageFormat.a4,
+                                                pdf: willProvider,
+                                                metaTitle:
+                                                    'Preview: My wishes'),
                                       ),
                                     );
                                   },
@@ -122,6 +121,22 @@ class _UserScreenState extends State<UserScreen> {
                                 ),
                               ],
                             ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 20, right: 20, bottom: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'You have nearly completed your wishes',
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 25,
                           ),
 
                           // const Padding(
@@ -141,6 +156,9 @@ class _UserScreenState extends State<UserScreen> {
                               child: SingleChildScrollView(
                                 child: Column(
                                   children: [
+                                    const SizedBox(
+                                      height: 25,
+                                    ),
                                     Padding(
                                       padding: const EdgeInsets.all(20.0),
                                       child: Row(
@@ -159,7 +177,7 @@ class _UserScreenState extends State<UserScreen> {
                                         ],
                                       ),
                                     ),
-                                    const SizedBox(height: 15),
+                                    const SizedBox(height: 5),
                                     ...validList.map(
                                       (e) => InkWell(
                                         onTap: () {
@@ -176,8 +194,8 @@ class _UserScreenState extends State<UserScreen> {
                                           child: Row(
                                             children: [
                                               Container(
-                                                height: 51,
-                                                width: 41,
+                                                height: 41,
+                                                width: 31,
                                                 decoration: const BoxDecoration(
                                                   //border: Border.all(),
                                                   shape: BoxShape.circle,
@@ -187,7 +205,7 @@ class _UserScreenState extends State<UserScreen> {
                                                 child: const Icon(
                                                   Icons.check,
                                                   color: Colors.white,
-                                                  size: 25,
+                                                  size: 20,
                                                 ),
                                               ),
                                               const SizedBox(width: 10),
@@ -230,7 +248,7 @@ class _UserScreenState extends State<UserScreen> {
                                         ],
                                       ),
                                     ),
-                                    const SizedBox(height: 15),
+                                    const SizedBox(height: 5),
                                     ...invalidList.map(
                                       (e) => InkWell(
                                         onTap: () {
@@ -247,15 +265,15 @@ class _UserScreenState extends State<UserScreen> {
                                           child: Row(
                                             children: [
                                               Container(
-                                                  height: 50,
-                                                  width: 40,
+                                                  height: 41,
+                                                  width: 31,
                                                   decoration: BoxDecoration(
                                                     border: Border.all(),
                                                     shape: BoxShape.circle,
                                                   ),
                                                   child: const Icon(
                                                     Icons.edit,
-                                                    size: 25,
+                                                    size: 20,
                                                   )),
                                               const SizedBox(width: 10),
                                               Text(
@@ -284,7 +302,9 @@ class _UserScreenState extends State<UserScreen> {
                           InkWell(
                             onTap: () {
                               setState(() {
-                                showBottomMenu = !showBottomMenu;
+                                //showBottomMenu = !showBottomMenu;
+                                showBottomMenu = true;
+                                debugPrint('Open the Drawer');
                               });
                             },
                             child: Container(
@@ -355,8 +375,11 @@ class _UserScreenState extends State<UserScreen> {
                       curve: Curves.easeInOut,
                       duration: const Duration(milliseconds: 200),
                       left: 0,
-                      bottom: (showBottomMenu) ? 0 : -(height / 2),
-                      child: DrawerWidget(isOpen: showBottomMenu),
+                      bottom: (showBottomMenu) ? 0 : -(height / 1.7),
+                      child: DrawerWidget(
+                        isOpen: showBottomMenu,
+                        metaTitle: '',
+                      ),
                     ),
                   ],
                 ),

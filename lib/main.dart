@@ -44,7 +44,28 @@ class MyApp extends StatelessWidget {
         title: "ListView.builder",
         //theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'Inter'),
         theme: ThemeData(
+          fontFamily: 'Inter',
           primarySwatch: Colors.blue,
+          textTheme: const TextTheme(
+            displayLarge: TextStyle(
+                fontFamily: 'Inter', fontSize: 72, fontWeight: FontWeight.bold),
+            titleLarge: TextStyle(
+                fontFamily: 'Inter', fontSize: 26, fontWeight: FontWeight.bold),
+            titleMedium: TextStyle(
+                fontFamily: 'Inter', fontSize: 20, fontWeight: FontWeight.bold),
+            titleSmall: TextStyle(
+                fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.bold),
+            bodyLarge: TextStyle(
+                fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.bold),
+            bodyMedium: TextStyle(
+              fontFamily: 'Inter',
+              fontSize: 16,
+            ),
+            bodySmall: TextStyle(
+              fontFamily: 'Inter',
+              fontSize: 14,
+            ),
+          ),
         ),
         debugShowCheckedModeBanner: false,
         // home : new ListViewBuilder(), NO Need To Use Unnecessary New Keyword

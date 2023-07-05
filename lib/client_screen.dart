@@ -126,15 +126,19 @@ class ClientScreenState extends State<ClientScreen> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  const Text(
+                                  Text(
                                     "Beneficiaries",
-                                    style: TextStyle(
-                                      fontSize: 28,
-                                      fontWeight: FontWeight.w900,
-                                      //fontStyle: FontStyle.normal,
-                                      fontFamily: 'Inter',
-                                    ),
+                                    style:
+                                        Theme.of(context).textTheme.titleLarge,
+
+                                    // style: TextStyle(
+                                    //   fontSize: 28,
+                                    //   fontWeight: FontWeight.w900,
+                                    //   //fontStyle: FontStyle.normal,
+                                    //   fontFamily: 'Inter',
+                                    // ),
                                   ),
+                                  const SizedBox(width: 10),
                                   OutlinedButton(
                                     onPressed: () {
                                       Navigator.push(
@@ -147,7 +151,7 @@ class ClientScreenState extends State<ClientScreen> {
                                     child: const Text('+Add'),
                                   ),
                                   const SizedBox(
-                                    width: 1,
+                                    width: 5,
                                   ),
                                   OutlinedButton(
                                     onPressed: () {
@@ -175,14 +179,11 @@ class ClientScreenState extends State<ClientScreen> {
                                   left: 20, right: 20, bottom: 10),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
-                                children: const [
+                                children: [
                                   Text(
-                                    '• 1 Beneficiary has no assets',
-                                    style: TextStyle(
-                                      fontFamily: 'Inter',
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w100,
-                                    ),
+                                    '! 1 Beneficiary has no assets',
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
                                   ),
                                 ],
                               ),
@@ -192,14 +193,11 @@ class ClientScreenState extends State<ClientScreen> {
                                   left: 20, right: 20, bottom: 10),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
-                                children: const [
+                                children: [
                                   Text(
-                                    '• 3 Assets are unallocated',
-                                    style: TextStyle(
-                                      fontFamily: 'Inter',
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w100,
-                                    ),
+                                    '! 3 Assets are unallocated',
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
                                   ),
                                 ],
                               ),
@@ -279,31 +277,20 @@ class ClientScreenState extends State<ClientScreen> {
                                                         children: [
                                                           Text(
                                                             '${clientProvider.clientItem[index].firstName} ${clientProvider.clientItem[index].lastName}',
-                                                            style:
-                                                                const TextStyle(
-                                                              fontFamily:
-                                                                  'Inter',
-                                                              fontSize: 15,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700,
-                                                            ),
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .bodyLarge,
                                                           ),
                                                           const SizedBox(
                                                             height: 3,
                                                           ),
-                                                          const Text(
-                                                            "No assets yet",
-                                                            style: TextStyle(
-                                                              fontFamily:
-                                                                  'Inter',
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w100,
-                                                              fontSize: 13,
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
+                                                          Text(
+                                                            'How many assets print here',
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .bodyMedium,
                                                           ),
                                                         ],
                                                       ),
@@ -398,8 +385,11 @@ class ClientScreenState extends State<ClientScreen> {
               curve: Curves.easeInOut,
               duration: const Duration(milliseconds: 200),
               left: 0,
-              bottom: (showBottomMenu) ? 0 : -(height / 2),
-              child: DrawerWidget(isOpen: showBottomMenu),
+              bottom: (showBottomMenu) ? 0 : -(height / 1.7),
+              child: DrawerWidget(
+                isOpen: showBottomMenu,
+                metaTitle: '',
+              ),
             ),
           ],
         ),
