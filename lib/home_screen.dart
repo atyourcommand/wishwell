@@ -296,7 +296,7 @@ class DrawerWidget extends StatelessWidget {
                                 } else if (e.type == 'assets') {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      //builder: (builder) => DetailPage(doc: e),
+                                      //builder: (builder) => PdfPreviewClientPage(),
                                       builder: (context) => PdfPreviewWillPage(
                                           pageFormat: PdfPageFormat.a4,
                                           pdf: willProvider,
