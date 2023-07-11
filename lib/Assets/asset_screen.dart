@@ -240,8 +240,8 @@ class AssetScreenState extends State<AssetScreen> {
 
                                           return Padding(
                                             padding: const EdgeInsets.only(
-                                              left: 10,
-                                              right: 10,
+                                              left: 15,
+                                              right: 15,
                                               bottom: .0,
                                               top: 0.0,
                                             ),
@@ -260,7 +260,7 @@ class AssetScreenState extends State<AssetScreen> {
                                                     const EdgeInsets.only(
                                                   top: 10.0,
                                                   bottom: 10.0,
-                                                  left: 10.0,
+                                                  left: 15.0,
                                                   right: 10.0,
                                                 ),
 

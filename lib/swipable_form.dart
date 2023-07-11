@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:intl/intl.dart';
 import 'package:wishwell/user_detail_model.dart';
 
@@ -933,7 +934,7 @@ class _CremationFormPageState extends State<CremationFormPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(20),
       child: Form(
         key: widget.formKey,
         child: Column(
@@ -974,37 +975,42 @@ class _CremationFormPageState extends State<CremationFormPage> {
                 const Text('No'),
               ],
             ),
+            Container(height: 10),
             if (cremationChoice)
-              TextFormField(
-                maxLines: 5,
-                minLines: 5,
-                controller: widget.cremation,
-                decoration: const InputDecoration(
-                  labelText: 'Ashes Wishes',
-                  border: OutlineInputBorder(),
+              Expanded(
+                child: TextFormField(
+                  maxLines: double.maxFinite.floor(),
+                  keyboardType: TextInputType.multiline,
+                  controller: widget.cremation,
+                  decoration: const InputDecoration(
+                    labelText: 'Funeral & Burial Wishes',
+                    border: OutlineInputBorder(),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please Enter Ashes Wishes';
+                    }
+                    return null;
+                  },
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please Enter Ashes Wishes';
-                  }
-                  return null;
-                },
               ),
             if (!cremationChoice)
-              TextFormField(
-                maxLines: 5,
-                minLines: 5,
-                controller: widget.cremation,
-                decoration: const InputDecoration(
-                  labelText: 'Funeral & Burial Wishes',
-                  border: OutlineInputBorder(),
+              Expanded(
+                child: TextFormField(
+                  maxLines: double.maxFinite.floor(),
+                  keyboardType: TextInputType.multiline,
+                  controller: widget.cremation,
+                  decoration: const InputDecoration(
+                    labelText: 'Funeral & Burial Wishes',
+                    border: OutlineInputBorder(),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please Enter Funeral or Burial Wishes';
+                    }
+                    return null;
+                  },
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please Enter Funeral & Burial Wishes';
-                  }
-                  return null;
-                },
               ),
             TextButton(onPressed: widget.onTap, child: const Text("Submit"))
           ],

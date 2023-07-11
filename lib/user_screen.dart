@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wishwell/main.dart';
+//import 'package:wishwell/main.dart';
 import 'package:wishwell/pdf/pdfview_will.dart';
 import 'package:wishwell/provider/user_provider.dart';
 import 'package:wishwell/user_add.dart';
@@ -115,26 +117,27 @@ class _UserScreenState extends State<UserScreen> {
                                       ),
                                     );
                                   },
-                                  child: const Icon(
+                                  child: Icon(
                                     Icons.picture_as_pdf,
+                                    color: ColorConstants.primaryAppColor,
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 20, right: 20, bottom: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'You have nearly completed your wishes',
-                                  style: Theme.of(context).textTheme.bodyMedium,
-                                ),
-                              ],
-                            ),
-                          ),
+                          // Padding(
+                          //   padding: const EdgeInsets.only(
+                          //       left: 20, right: 20, bottom: 10),
+                          //   child: Row(
+                          //     mainAxisAlignment: MainAxisAlignment.start,
+                          //     children: [
+                          //       Text(
+                          //         'You have nearly completed your wishes',
+                          //         style: Theme.of(context).textTheme.bodyMedium,
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
                           const SizedBox(
                             height: 25,
                           ),
@@ -159,24 +162,80 @@ class _UserScreenState extends State<UserScreen> {
                                     const SizedBox(
                                       height: 25,
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(20.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "DONE",
-                                            style: TextStyle(
-                                              fontFamily: 'Inter',
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w800,
-                                              color: Colors.grey.shade600,
+
+                                    // Padding(
+                                    //   padding: const EdgeInsets.all(20.0),
+                                    //   child: Text(
+                                    //     "DONE",
+                                    //     style: TextStyle(
+                                    //       fontFamily: 'Inter',
+                                    //       fontSize: 16,
+                                    //       fontWeight: FontWeight.w800,
+                                    //       color: Colors.grey.shade600,
+                                    //     ),
+                                    //     textAlign: TextAlign.center,
+                                    //   ),
+                                    // ),
+                                    const SizedBox(height: 5),
+                                    ...invalidList.map((e) => InkWell(
+                                          onTap: () {
+                                            Navigator.of(context)
+                                                .push(MaterialPageRoute(
+                                              builder: (context) => UserAdd(
+                                                index: e.keys.first,
+                                              ),
+                                            ));
+                                          },
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 15, left: 20),
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                    height: 41,
+                                                    width: 31,
+                                                    decoration: BoxDecoration(
+                                                      border: Border.all(),
+                                                      shape: BoxShape.circle,
+                                                    ),
+                                                    child: const Icon(
+                                                      Icons.edit,
+                                                      size: 20,
+                                                    )),
+                                                const SizedBox(width: 10),
+                                                Text(
+                                                  e.values.first,
+                                                  style: const TextStyle(
+                                                    fontFamily: 'Inter',
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.w400,
+                                                  ),
+                                                ),
+                                                const SizedBox(width: 5),
+                                                const Icon(
+                                                  Icons.arrow_forward_ios,
+                                                  size: 17,
+                                                )
+                                              ],
                                             ),
                                           ),
-                                        ],
-                                      ),
-                                    ),
+                                        )),
+                                    // const SizedBox(
+                                    //   height: 40,
+                                    // ),
+                                    // Padding(
+                                    //   padding: const EdgeInsets.all(20.0),
+                                    //   child: Text(
+                                    //     "TO DO",
+                                    //     style: TextStyle(
+                                    //       fontFamily: 'Inter',
+                                    //       fontSize: 15,
+                                    //       fontWeight: FontWeight.w800,
+                                    //       color: Colors.grey.shade600,
+                                    //     ),
+                                    //     textAlign: TextAlign.center,
+                                    //   ),
+                                    // ),
                                     const SizedBox(height: 5),
                                     ...validList.map(
                                       (e) => InkWell(
@@ -211,84 +270,15 @@ class _UserScreenState extends State<UserScreen> {
                                               const SizedBox(width: 10),
                                               Text(
                                                 e.values.first,
-                                                style: const TextStyle(
-                                                  fontFamily: 'Inter',
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w400,
-                                                ),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyLarge,
                                               ),
                                               const SizedBox(width: 5),
                                               const Icon(
                                                 Icons.arrow_forward_ios,
                                                 size: 17,
                                               ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 40,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(20.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "TO DO",
-                                            style: TextStyle(
-                                              fontFamily: 'Inter',
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w800,
-                                              color: Colors.grey.shade600,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    const SizedBox(height: 5),
-                                    ...invalidList.map(
-                                      (e) => InkWell(
-                                        onTap: () {
-                                          Navigator.of(context)
-                                              .push(MaterialPageRoute(
-                                            builder: (context) => UserAdd(
-                                              index: e.keys.first,
-                                            ),
-                                          ));
-                                        },
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 15, left: 20),
-                                          child: Row(
-                                            children: [
-                                              Container(
-                                                  height: 41,
-                                                  width: 31,
-                                                  decoration: BoxDecoration(
-                                                    border: Border.all(),
-                                                    shape: BoxShape.circle,
-                                                  ),
-                                                  child: const Icon(
-                                                    Icons.edit,
-                                                    size: 20,
-                                                  )),
-                                              const SizedBox(width: 10),
-                                              Text(
-                                                e.values.first,
-                                                style: const TextStyle(
-                                                  fontFamily: 'Inter',
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w400,
-                                                ),
-                                              ),
-                                              const SizedBox(width: 5),
-                                              const Icon(
-                                                Icons.arrow_forward_ios,
-                                                size: 17,
-                                              )
                                             ],
                                           ),
                                         ),

@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
 //import 'package:pdf/pdf.dart';
 import 'package:wishwell/add_client.dart';
+import 'package:wishwell/main.dart';
 //import 'package:wishwell/pdf/detail_page.dart';
 //import 'package:wishwell/home_screen.dart';
 import 'package:wishwell/pdf/pdfview_client.dart';
@@ -148,7 +149,7 @@ class ClientScreenState extends State<ClientScreen> {
                                         ),
                                       );
                                     },
-                                    child: const Text('+Add'),
+                                    child: const Text('+ Add'),
                                   ),
                                   const SizedBox(
                                     width: 5,
@@ -174,37 +175,9 @@ class ClientScreenState extends State<ClientScreen> {
                                 ],
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 20, right: 20, bottom: 10),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    '! 1 Beneficiary has no assets',
-                                    style:
-                                        Theme.of(context).textTheme.bodyMedium,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 20, right: 20, bottom: 10),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    '! 3 Assets are unallocated',
-                                    style:
-                                        Theme.of(context).textTheme.bodyMedium,
-                                  ),
-                                ],
-                              ),
-                            ),
 
                             const SizedBox(
-                              height: 25,
+                              height: 20,
                             ),
 
                             Expanded(
@@ -225,8 +198,8 @@ class ClientScreenState extends State<ClientScreen> {
                                                 return Padding(
                                                   padding:
                                                       const EdgeInsets.only(
-                                                    left: 10.0,
-                                                    right: 10.0,
+                                                    left: 15.0,
+                                                    right: 15.0,
                                                     bottom: 0.0,
                                                     top: 0.0,
                                                   ),
@@ -248,26 +221,24 @@ class ClientScreenState extends State<ClientScreen> {
                                                           const EdgeInsets.only(
                                                         top: 10.0,
                                                         bottom: 10.0,
-                                                        left: 10.0,
+                                                        left: 15.0,
                                                         right: 10.0,
                                                       ),
-                                                      trailing: const Icon(
-                                                        Icons.arrow_forward_ios,
-                                                        color: Color.fromARGB(
-                                                            255, 108, 142, 235),
-                                                      ),
-
-                                                      leading:
-                                                          const CircleAvatar(
-                                                        backgroundColor:
-                                                            Color.fromARGB(255,
-                                                                108, 142, 235),
-                                                        radius: 25,
-                                                        child: Icon(
+                                                      trailing: Icon(
                                                           Icons
-                                                              .person_4_rounded,
-                                                          color: Colors.white,
-                                                        ),
+                                                              .arrow_forward_ios,
+                                                          color: ColorConstants
+                                                              .primaryAppColor),
+
+                                                      leading: CircleAvatar(
+                                                        backgroundColor:
+                                                            Colors.white,
+                                                        radius: 20,
+                                                        child: Icon(
+                                                            Icons
+                                                                .person_4_rounded,
+                                                            color: ColorConstants
+                                                                .primaryAppColor),
                                                       ),
 
                                                       title: Column(
@@ -286,7 +257,7 @@ class ClientScreenState extends State<ClientScreen> {
                                                             height: 3,
                                                           ),
                                                           Text(
-                                                            'How many assets print here',
+                                                            'How many assets here',
                                                             style: Theme.of(
                                                                     context)
                                                                 .textTheme

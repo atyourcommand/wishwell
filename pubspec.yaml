@@ -119,7 +119,7 @@ flutter:
             - asset: fonts/Inter-SemiBold.ttf
       - family: Arial 
         fonts: 
-            - asset: fonts/Arial.ttf
+            - asset: fonts/arial.ttf
            
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

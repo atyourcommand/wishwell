@@ -28,7 +28,7 @@ class AssetsPage extends StatelessWidget {
         elevation: 0.0,
         title: Text(
           'Asset',
-          style: Theme.of(context).textTheme.titleMedium,
+          style: Theme.of(context).textTheme.titleSmall,
         ),
         iconTheme: const IconThemeData(
           color: Colors.black, //change your color here
@@ -99,7 +99,7 @@ class AssetsPage extends StatelessWidget {
                   ),
                   footer: Text(
                     "\nApproximate value: ${formatCurrency.format(asset.value.toDouble()).toString()}",
-                    style: Theme.of(context).textTheme.titleSmall,
+                    style: Theme.of(context).textTheme.bodyLarge,
                   ),
                   circularStrokeCap: CircularStrokeCap.round,
                   progressColor: const Color.fromARGB(255, 108, 142, 235),
@@ -198,7 +198,7 @@ class AssetsPage extends StatelessWidget {
                         ),
                       );
                     }),
-                const SizedBox(height: 30),
+
                 OutlinedButton(
                   onPressed: () async {
                     showDialog(
@@ -241,7 +241,6 @@ class AssetsPage extends StatelessWidget {
                   },
                   child: const Text(
                     'Delete this asset',
-                    style: TextStyle(color: Colors.grey),
                   ),
                 ),
                 // Container(

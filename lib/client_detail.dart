@@ -2,9 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
+
 //import 'package:wishwell/Assets/asset_screen.dart';
 import 'package:wishwell/client_model.dart';
 import 'package:wishwell/edit_client.dart';
+import 'package:wishwell/main.dart';
 import 'package:wishwell/provider/asset_provider.dart';
 import 'package:wishwell/provider/client_provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -53,44 +56,47 @@ class _ClientPageState extends State<ClientPage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          iconTheme: const IconThemeData(
-            color: Colors.black, //change your color here
-          ),
-          backgroundColor: Colors.white,
-          elevation: 0.0,
-          title: Text(
-            'Beneficiary',
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          actions: [
-            IconButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => ClientEdit(
-                      clientId: widget.client.clientId,
-                      firstName: widget.client.firstName,
-                      lastName: widget.client.lastName,
-                      gender: widget.client.gender,
-                      address1: widget.client.address1,
-                      address2: widget.client.address2,
-                      city: widget.client.city,
-                      country: widget.client.country,
-                      dob: widget.client.dob,
-                    ),
-                  ));
-                },
-                icon: const Icon(Icons.edit))
-          ],
+  Widget build(BuildContext context) {
+    final formatCurrency = NumberFormat.simpleCurrency(decimalDigits: 2);
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        iconTheme: const IconThemeData(
+          color: Colors.black, //change your color here
         ),
-        body: SizedBox.expand(
-          child: Container(
-            color: Colors.grey.shade200,
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height,
-              child: SingleChildScrollView(
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+        title: Text(
+          'Beneficiary',
+          style: Theme.of(context).textTheme.titleSmall,
+        ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ClientEdit(
+                    clientId: widget.client.clientId,
+                    firstName: widget.client.firstName,
+                    lastName: widget.client.lastName,
+                    gender: widget.client.gender,
+                    address1: widget.client.address1,
+                    address2: widget.client.address2,
+                    city: widget.client.city,
+                    country: widget.client.country,
+                    dob: widget.client.dob,
+                  ),
+                ));
+              },
+              icon: const Icon(Icons.edit))
+        ],
+      ),
+      body: SizedBox.expand(
+        child: Container(
+          color: Colors.grey.shade200,
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height,
+            child: SingleChildScrollView(
+              child: Center(
                 child: Column(children: [
                   // Icon(
                   //   Icons.account_circle_outlined,
@@ -102,22 +108,20 @@ class _ClientPageState extends State<ClientPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        '${widget.client.firstName} ${widget.client.lastName}',
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
+                    child: Text(
+                      '${widget.client.firstName} ${widget.client.lastName}',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ),
 
                   Padding(
                     padding: const EdgeInsets.only(
                         left: 20.0, right: 20.0, bottom: 10),
-                    child: Align(
-                      alignment: Alignment.topLeft,
+                    child: Center(
                       child: Text(
-                        '${widget.client.gender}\n${widget.client.dob}\n${widget.client.address1} ${widget.client.address2} \n${widget.client.city} ${widget.client.country}',
+                        '${widget.client.gender}, ${widget.client.dob}\n${widget.client.address1} ${widget.client.address2} ${widget.client.city} \n${widget.client.country},',
+                        textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ),
@@ -138,8 +142,8 @@ class _ClientPageState extends State<ClientPage> {
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.only(
-                            left: 10.0,
-                            right: 10.0,
+                            left: 18.0,
+                            right: 18.0,
                             bottom: 0.0,
                             top: 0.0,
                           ),
@@ -166,18 +170,16 @@ class _ClientPageState extends State<ClientPage> {
                               contentPadding: const EdgeInsets.only(
                                 top: 10.0,
                                 bottom: 10.0,
-                                left: 10.0,
+                                left: 15.0,
                                 right: 10.0,
                               ),
                               trailing: Padding(
-                                padding: const EdgeInsets.only(bottom: 6.0),
+                                padding: const EdgeInsets.only(bottom: 2.0),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const <Widget>[
-                                    Icon(
-                                      Icons.arrow_forward_ios,
-                                      color: Color.fromARGB(255, 108, 142, 235),
-                                    ),
+                                  children: <Widget>[
+                                    Icon(Icons.arrow_forward_ios,
+                                        color: ColorConstants.primaryAppColor),
                                   ],
                                 ),
                               ),
@@ -187,11 +189,11 @@ class _ClientPageState extends State<ClientPage> {
                                   Text(
                                     '${clientAssets[index]['assetName'].toString()} ',
                                     style:
-                                        Theme.of(context).textTheme.titleSmall,
+                                        Theme.of(context).textTheme.bodyLarge,
                                   ),
                                   const SizedBox(height: 3),
                                   Text(
-                                    '\$${clientAssets[index]['value'].toString()} (${clientAssets[index]['type'].toString()})',
+                                    '${formatCurrency.format(clientAssets[index]['value']).toString()} (${clientAssets[index]['type'].toString()})',
                                     style:
                                         Theme.of(context).textTheme.bodyMedium,
                                   ),
@@ -266,5 +268,7 @@ class _ClientPageState extends State<ClientPage> {
             ),
           ),
         ),
-      );
+      ),
+    );
+  }
 }

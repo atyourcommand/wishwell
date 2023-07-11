@@ -614,13 +614,9 @@ class _UserAddState extends State<UserAdd> {
             onPressed: onBack,
             icon: const Icon(Icons.arrow_back_ios_new_outlined,
                 color: Colors.black)),
-        title: const Text(
+        title: Text(
           'Wishes',
-          style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w800,
-              fontFamily: 'Inter',
-              color: Colors.black),
+          style: Theme.of(context).textTheme.titleSmall,
         ),
         centerTitle: true,
         // actions: [

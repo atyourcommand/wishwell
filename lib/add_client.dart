@@ -63,15 +63,13 @@ class _ClientAddState extends State<ClientAdd> {
             state:
                 _activeStepIndex <= 0 ? StepState.editing : StepState.complete,
             isActive: _activeStepIndex >= 0,
-            title: const Text('Account'),
+            title:
+                Text('Account', style: Theme.of(context).textTheme.bodyMedium),
             content: Column(
               children: [
-                const Text(
+                Text(
                     "You can add a person here. Return later to complete all the details in order to prepare your PDF.",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w300,
-                    )),
+                    style: Theme.of(context).textTheme.bodyMedium),
                 const SizedBox(
                   height: 40,
                 ),
@@ -215,7 +213,8 @@ class _ClientAddState extends State<ClientAdd> {
             state:
                 _activeStepIndex <= 1 ? StepState.editing : StepState.complete,
             isActive: _activeStepIndex >= 1,
-            title: const Text('Address'),
+            title:
+                Text('Address', style: Theme.of(context).textTheme.bodyMedium),
             content: Column(
               children: [
                 //=========Address  textFeild========//
@@ -259,7 +258,7 @@ class _ClientAddState extends State<ClientAdd> {
         Step(
           state: StepState.complete,
           isActive: _activeStepIndex >= 2,
-          title: const Text('Confirm'),
+          title: Text('Confirm', style: Theme.of(context).textTheme.bodyMedium),
           content: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -289,92 +288,96 @@ class _ClientAddState extends State<ClientAdd> {
         centerTitle: true,
         leading: const BackButton(),
         //title: const Text('My App'),
-        iconTheme: const IconThemeData(
-          color: Colors.black, //change your color here
-        ),
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         elevation: 0.0,
-        title:
-            // ignore: prefer_const_literals_to_create_immutables
-
-            const Text("Add a person",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w300,
-                    color: Colors.black)),
+        title: Text(
+          'Add a beneficiary',
+          style: Theme.of(context).textTheme.titleSmall,
+        ),
+        iconTheme: const IconThemeData(
+          color: Colors.black,
+        ),
       ),
-      body: Form(
-        key: _formKey,
-        child: Stepper(
-          elevation: 0.0,
-          currentStep: _activeStepIndex,
-          type: StepperType.horizontal,
-          steps: stepList(),
-          onStepContinue: () async {
-            final isLastStep = _activeStepIndex == stepList().length - 1;
-            _formKey.currentState?.validate();
-            bool isDetaildValid = isDetialCompleted();
-            if (isDetaildValid) {
-              if (isLastStep) {
-                await clientProvider.insertData(
-                  _firstNameController.text,
-                  _lastNameController.text,
-                  _dropDownValue.toString(),
-                  _address1.text,
-                  _address2.text,
-                  _city.text,
-                  _country.text,
-                  _dob.text,
-                );
-                // ignore: use_build_context_synchronously
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Client added successfully',
-                        textAlign: TextAlign.center),
-                    backgroundColor: Colors.green,
-                  ),
-                );
-                // ignore: use_build_context_synchronously
-                Navigator.of(context).pop();
-              } else {
-                setState(() {
-                  _activeStepIndex += 1;
-                });
-              }
-            }
-          },
-          onStepCancel: () {
-            if (_activeStepIndex == 0) {
-              return;
-            }
-            _activeStepIndex -= 1;
-            setState(() {});
-          },
-          controlsBuilder: (context, details) {
-            final isLastStep = _activeStepIndex == stepList().length - 1;
-            return Container(
-              margin: const EdgeInsets.only(top: 50),
-              child: Row(
-                children: [
-                  if (_activeStepIndex != 0)
-                    Expanded(
-                      child: OutlinedButton(
-                          onPressed: details.onStepCancel,
-                          child: const Text('BACK')),
+      body: SizedBox.expand(
+        child: Container(
+          color: Colors.grey.shade200,
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height,
+            child: Form(
+              key: _formKey,
+              child: Stepper(
+                elevation: 0.0,
+                currentStep: _activeStepIndex,
+                type: StepperType.horizontal,
+                steps: stepList(),
+                onStepContinue: () async {
+                  final isLastStep = _activeStepIndex == stepList().length - 1;
+                  _formKey.currentState?.validate();
+                  bool isDetaildValid = isDetialCompleted();
+                  if (isDetaildValid) {
+                    if (isLastStep) {
+                      await clientProvider.insertData(
+                        _firstNameController.text,
+                        _lastNameController.text,
+                        _dropDownValue.toString(),
+                        _address1.text,
+                        _address2.text,
+                        _city.text,
+                        _country.text,
+                        _dob.text,
+                      );
+                      // ignore: use_build_context_synchronously
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Client added successfully',
+                              textAlign: TextAlign.center),
+                          backgroundColor: Colors.green,
+                        ),
+                      );
+                      // ignore: use_build_context_synchronously
+                      Navigator.of(context).pop();
+                    } else {
+                      setState(() {
+                        _activeStepIndex += 1;
+                      });
+                    }
+                  }
+                },
+                onStepCancel: () {
+                  if (_activeStepIndex == 0) {
+                    return;
+                  }
+                  _activeStepIndex -= 1;
+                  setState(() {});
+                },
+                controlsBuilder: (context, details) {
+                  final isLastStep = _activeStepIndex == stepList().length - 1;
+                  return Container(
+                    margin: const EdgeInsets.only(top: 50),
+                    child: Row(
+                      children: [
+                        if (_activeStepIndex != 0)
+                          Expanded(
+                            child: OutlinedButton(
+                                onPressed: details.onStepCancel,
+                                child: const Text('Back')),
+                          ),
+                        if (_activeStepIndex != 0)
+                          const SizedBox(
+                            width: 12,
+                          ),
+                        Expanded(
+                          child: OutlinedButton(
+                              onPressed: details.onStepContinue,
+                              child: Text(isLastStep ? 'Confirm' : 'Next')),
+                        ),
+                      ],
                     ),
-                  if (_activeStepIndex != 0)
-                    const SizedBox(
-                      width: 12,
-                    ),
-                  Expanded(
-                    child: OutlinedButton(
-                        onPressed: details.onStepContinue,
-                        child: Text(isLastStep ? 'CONFIRM' : 'NEXT')),
-                  ),
-                ],
+                  );
+                },
               ),
-            );
-          },
+            ),
+          ),
         ),
       ),
       // body: SizedBox(

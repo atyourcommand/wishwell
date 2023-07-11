@@ -17,8 +17,10 @@ Color hexToColor(String hex) {
   );
 }
 
+var myThemeColor = const Color.fromARGB(255, 108, 142, 235);
+
 class ColorConstants {
-  static Color primaryAppColor = hexToColor('#4f73eb');
+  static Color primaryAppColor = const Color.fromARGB(255, 108, 142, 235);
 }
 
 class MyApp extends StatelessWidget {
@@ -42,19 +44,24 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: "ListView.builder",
+
         //theme: ThemeData(primarySwatch: Colors.blue, fontFamily: 'Inter'),
         theme: ThemeData(
           fontFamily: 'Inter',
           primarySwatch: Colors.blue,
+          primaryColor: Colors.red,
           textTheme: const TextTheme(
             displayLarge: TextStyle(
                 fontFamily: 'Inter', fontSize: 72, fontWeight: FontWeight.bold),
             titleLarge: TextStyle(
                 fontFamily: 'Inter', fontSize: 26, fontWeight: FontWeight.bold),
+            // Form Inputs
             titleMedium: TextStyle(
-                fontFamily: 'Inter', fontSize: 20, fontWeight: FontWeight.bold),
+                fontFamily: 'Inter',
+                fontSize: 16,
+                fontWeight: FontWeight.normal),
             titleSmall: TextStyle(
-                fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.bold),
+                fontFamily: 'Inter', fontSize: 20, fontWeight: FontWeight.w800),
             bodyLarge: TextStyle(
                 fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.bold),
             bodyMedium: TextStyle(
@@ -64,6 +71,13 @@ class MyApp extends StatelessWidget {
             bodySmall: TextStyle(
               fontFamily: 'Inter',
               fontSize: 14,
+            ),
+          ),
+          outlinedButtonTheme: OutlinedButtonThemeData(
+            style: OutlinedButton.styleFrom(
+              foregroundColor: Colors.black,
+              backgroundColor: Colors.transparent,
+              side: const BorderSide(color: Colors.black54, width: 0.5),
             ),
           ),
         ),

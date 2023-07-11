@@ -102,208 +102,212 @@ class _ClientEditState extends State<ClientEdit> {
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
         leading: const BackButton(),
-        title: const Text(
-          'Edit client',
-          style: TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.w300,
-            color: Colors.black,
-          ),
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+        title: Text(
+          'Edit beneficiary',
+          style: Theme.of(context).textTheme.titleSmall,
         ),
         iconTheme: const IconThemeData(
-          color: Colors.black, //change your color here
+          color: Colors.black,
         ),
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
         centerTitle: true,
       ),
-      body: SizedBox(
-        height: MediaQuery.of(context).size.height,
-        child: Padding(
-          padding: const EdgeInsets.only(
-              left: 20.0, right: 20.0, bottom: 1.0, top: 0.0),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 30,
-                ),
-                //=========frist name textFeild========//
-                TextFormField(
-                  controller: _firstNameController,
-                  decoration: const InputDecoration(labelText: 'First Name'),
-                  validator: (value) {
-                    if (value == null && value!.isEmpty) {
-                      ///--- toast
-                    }
-                    return null;
-                  },
-                  onSaved: (val) => _clientObject['firstName'] = val ?? '',
-                ),
-                //=========last name textFeild========//
-                const SizedBox(height: 10),
-                TextFormField(
-                  controller: _lastNameController,
-                  decoration: const InputDecoration(labelText: 'Last Name'),
-                  validator: (value) {
-                    if (value == null && value!.isEmpty) {
-                      ///--- toast
-                    }
-                    return null;
-                  },
-                  onSaved: (val) => _clientObject['lastName'] = val ?? '',
-                ),
-                //===============Gender =========//
-                const SizedBox(height: 10),
-                DropdownButton(
-                    hint: _dropDownValue == null
-                        ? const Text('Gender')
-                        : Text(
-                            _dropDownValue!,
-                            style: const TextStyle(color: Colors.black38),
-                          ),
-                    isExpanded: true,
-                    iconSize: 30.0,
-                    style: const TextStyle(color: Colors.black38),
-                    items: [
-                      'Male',
-                      'Female',
-                    ].map(
-                      (val) {
-                        return DropdownMenuItem<String>(
-                          value: val,
-                          child: Text(val),
-                        );
+      body: SizedBox.expand(
+        child: Container(
+          color: Colors.grey.shade200,
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                  left: 20.0, right: 20.0, bottom: 1.0, top: 0.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    //=========frist name textFeild========//
+                    TextFormField(
+                      controller: _firstNameController,
+                      decoration:
+                          const InputDecoration(labelText: 'First Name'),
+                      validator: (value) {
+                        if (value == null && value!.isEmpty) {
+                          ///--- toast
+                        }
+                        return null;
                       },
-                    ).toList(),
-                    onChanged: (val) {
-                      setState(
-                        () {
-                          _dropDownValue = val;
-                        },
-                      );
-                    }),
+                      onSaved: (val) => _clientObject['firstName'] = val ?? '',
+                    ),
+                    //=========last name textFeild========//
+                    const SizedBox(height: 10),
+                    TextFormField(
+                      controller: _lastNameController,
+                      decoration: const InputDecoration(labelText: 'Last Name'),
+                      validator: (value) {
+                        if (value == null && value!.isEmpty) {
+                          ///--- toast
+                        }
+                        return null;
+                      },
+                      onSaved: (val) => _clientObject['lastName'] = val ?? '',
+                    ),
+                    //===============Gender =========//
+                    const SizedBox(height: 10),
+                    DropdownButton(
+                        hint: _dropDownValue == null
+                            ? const Text('Gender')
+                            : Text(
+                                _dropDownValue!,
+                                style: const TextStyle(color: Colors.black38),
+                              ),
+                        isExpanded: true,
+                        iconSize: 30.0,
+                        style: const TextStyle(color: Colors.black38),
+                        items: [
+                          'Male',
+                          'Female',
+                        ].map(
+                          (val) {
+                            return DropdownMenuItem<String>(
+                              value: val,
+                              child: Text(val),
+                            );
+                          },
+                        ).toList(),
+                        onChanged: (val) {
+                          setState(
+                            () {
+                              _dropDownValue = val;
+                            },
+                          );
+                        }),
 
-                Divider(
-                  height: 1,
-                  color: Colors.grey.shade700,
+                    Divider(
+                      height: 1,
+                      color: Colors.grey.shade700,
 
-                  //  thickness: 10,
-                ),
-                //=========Address  textFeild========//
-                const SizedBox(height: 10),
-                FormBuilderTextField(
-                  controller: _address1,
-                  name: address,
-                  decoration: const InputDecoration(labelText: 'Address1'),
-                  validator: FormBuilderValidators.required(),
-                  onSaved: (val) => _clientObject['lastName'] = val ?? '',
-                ),
-                //=========Address1  textFeild========//
-                const SizedBox(height: 10),
-                FormBuilderTextField(
-                  controller: _address2,
-                  name: address1,
-                  decoration: const InputDecoration(labelText: 'Address2'),
-                  validator: FormBuilderValidators.required(),
-                  onSaved: (val) => _clientObject['lastName'] = val ?? '',
-                ),
-                //=========Address2  textFeild========//
-                const SizedBox(height: 10),
-                FormBuilderTextField(
-                  controller: _city,
-                  name: city,
-                  decoration: const InputDecoration(labelText: 'City'),
-                  validator: FormBuilderValidators.required(),
-                  onSaved: (val) => _clientObject['lastName'] = val ?? '',
-                ),
-                //============city==========//
-                const SizedBox(height: 10),
-                FormBuilderTextField(
-                  controller: _country,
-                  name: country,
-                  decoration: const InputDecoration(labelText: 'Country'),
-                  validator: FormBuilderValidators.required(),
-                  onSaved: (val) => _clientObject['lastName'] = val ?? '',
-                ),
-                //============country=============//
-                // FormBuilderTextField(
-                //   controller: _dob,
-                //   name: dob,
-                //   decoration: const InputDecoration(labelText: 'Date of Birth'),
-                //   validator: FormBuilderValidators.required(),
-                //   onSaved: (val) => _clientObject['lastName'] = val ?? '',
-                // ),
+                      //  thickness: 10,
+                    ),
+                    //=========Address  textFeild========//
+                    const SizedBox(height: 10),
+                    FormBuilderTextField(
+                      controller: _address1,
+                      name: address,
+                      decoration: const InputDecoration(labelText: 'Address1'),
+                      validator: FormBuilderValidators.required(),
+                      onSaved: (val) => _clientObject['lastName'] = val ?? '',
+                    ),
+                    //=========Address1  textFeild========//
+                    const SizedBox(height: 10),
+                    FormBuilderTextField(
+                      controller: _address2,
+                      name: address1,
+                      decoration: const InputDecoration(labelText: 'Address2'),
+                      validator: FormBuilderValidators.required(),
+                      onSaved: (val) => _clientObject['lastName'] = val ?? '',
+                    ),
+                    //=========Address2  textFeild========//
+                    const SizedBox(height: 10),
+                    FormBuilderTextField(
+                      controller: _city,
+                      name: city,
+                      decoration: const InputDecoration(labelText: 'City'),
+                      validator: FormBuilderValidators.required(),
+                      onSaved: (val) => _clientObject['lastName'] = val ?? '',
+                    ),
+                    //============city==========//
+                    const SizedBox(height: 10),
+                    FormBuilderTextField(
+                      controller: _country,
+                      name: country,
+                      decoration: const InputDecoration(labelText: 'Country'),
+                      validator: FormBuilderValidators.required(),
+                      onSaved: (val) => _clientObject['lastName'] = val ?? '',
+                    ),
+                    //============country=============//
+                    // FormBuilderTextField(
+                    //   controller: _dob,
+                    //   name: dob,
+                    //   decoration: const InputDecoration(labelText: 'Date of Birth'),
+                    //   validator: FormBuilderValidators.required(),
+                    //   onSaved: (val) => _clientObject['lastName'] = val ?? '',
+                    // ),
 
-                //============Date of birth=============//
-                const SizedBox(height: 10),
-                FormBuilderTextField(
-                  controller: _dob,
-                  name: lastName,
-                  decoration: const InputDecoration(labelText: 'Date of Birth'),
-                  validator: FormBuilderValidators.required(),
-                  //onSaved: (val) => _clientObject['lastName'] = val ?? '',
-                  onTap: () async {
-                    DateTime? pickedDate = await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(1950),
-                        lastDate: DateTime(2100));
+                    //============Date of birth=============//
+                    const SizedBox(height: 10),
+                    FormBuilderTextField(
+                      controller: _dob,
+                      name: lastName,
+                      decoration:
+                          const InputDecoration(labelText: 'Date of Birth'),
+                      validator: FormBuilderValidators.required(),
+                      //onSaved: (val) => _clientObject['lastName'] = val ?? '',
+                      onTap: () async {
+                        DateTime? pickedDate = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(1950),
+                            lastDate: DateTime(2100));
 
-                    if (pickedDate != null) {
-                      debugPrint(pickedDate.toString());
-                      String formattedDate =
-                          DateFormat('yyyy-MM-dd').format(pickedDate);
-                      //formatted date output using intl package =>  2021-03-16
-                      setState(() {
-                        _dob.text = formattedDate
-                            .toString(); //set output date to TextField value.
-                      });
-                    } else {
-                      debugPrint("===============working data");
-                    }
-                  },
+                        if (pickedDate != null) {
+                          debugPrint(pickedDate.toString());
+                          String formattedDate =
+                              DateFormat('yyyy-MM-dd').format(pickedDate);
+                          //formatted date output using intl package =>  2021-03-16
+                          setState(() {
+                            _dob.text = formattedDate
+                                .toString(); //set output date to TextField value.
+                          });
+                        } else {
+                          debugPrint("===============working data");
+                        }
+                      },
+                    ),
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    OutlinedButton(
+                      onPressed: () async {
+                        if (validateForm()) {
+                          clientProvider.updateFirstName(
+                              widget.clientId, _firstNameController.text);
+                          clientProvider.updateLastName(
+                              widget.clientId, _lastNameController.text);
+                          clientProvider.updateGender(
+                              widget.clientId, _dropDownValue.toString());
+                          clientProvider.updateAddress1(
+                              widget.clientId, _address1.text);
+                          clientProvider.updateAddress2(
+                              widget.clientId, _address2.text);
+                          clientProvider.updateCity(
+                              widget.clientId, _city.text);
+                          clientProvider.updateCountry(
+                              widget.clientId, _country.text);
+                          clientProvider.updateDob(widget.clientId, _dob.text);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                'Client updated successfully',
+                                textAlign: TextAlign.center,
+                              ),
+                              backgroundColor: Colors.green,
+                            ),
+                          );
+                          // Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          //   builder: (context) => const ClientScreen(),
+                          // ));
+                          int count = 0;
+                          Navigator.of(context).popUntil((_) => count++ >= 2);
+                        }
+                      },
+                      child: const Text('Save changes'),
+                    )
+                    //saveNameBtn(),
+                  ],
                 ),
-                const SizedBox(
-                  height: 50,
-                ),
-                OutlinedButton(
-                  onPressed: () async {
-                    if (validateForm()) {
-                      clientProvider.updateFirstName(
-                          widget.clientId, _firstNameController.text);
-                      clientProvider.updateLastName(
-                          widget.clientId, _lastNameController.text);
-                      clientProvider.updateGender(
-                          widget.clientId, _dropDownValue.toString());
-                      clientProvider.updateAddress1(
-                          widget.clientId, _address1.text);
-                      clientProvider.updateAddress2(
-                          widget.clientId, _address2.text);
-                      clientProvider.updateCity(widget.clientId, _city.text);
-                      clientProvider.updateCountry(
-                          widget.clientId, _country.text);
-                      clientProvider.updateDob(widget.clientId, _dob.text);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text(
-                            'Client updated successfully',
-                            textAlign: TextAlign.center,
-                          ),
-                          backgroundColor: Colors.green,
-                        ),
-                      );
-                      // Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      //   builder: (context) => const ClientScreen(),
-                      // ));
-                      int count = 0;
-                      Navigator.of(context).popUntil((_) => count++ >= 2);
-                    }
-                  },
-                  child: const Text('Save changes'),
-                )
-                //saveNameBtn(),
-              ],
+              ),
             ),
           ),
         ),
