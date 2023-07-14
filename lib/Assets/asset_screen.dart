@@ -264,15 +264,14 @@ class AssetScreenState extends State<AssetScreen> {
                                                   right: 10.0,
                                                 ),
 
-                                                trailing: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          bottom: 6.0),
+                                                trailing: const Padding(
+                                                  padding: EdgeInsets.only(
+                                                      bottom: 6.0),
                                                   child: Column(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
                                                             .center,
-                                                    children: const <Widget>[
+                                                    children: <Widget>[
                                                       Icon(
                                                         Icons.arrow_forward_ios,
                                                         color: Color.fromARGB(
@@ -475,8 +474,8 @@ class AssetScreenState extends State<AssetScreen> {
                         topRight: Radius.circular(15),
                       ),
                     ),
-                    child: Column(
-                      children: const [
+                    child: const Column(
+                      children: [
                         Icon(
                           Icons.keyboard_arrow_up,
                           size: 30,

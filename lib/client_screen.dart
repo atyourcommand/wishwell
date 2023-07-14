@@ -21,7 +21,6 @@ import 'package:wishwell/provider/client_provider.dart';
 import 'package:wishwell/client_detail.dart';
 //import 'components/nav2.dart';
 import 'package:provider/provider.dart';
-
 import 'home_screen.dart';
 //import 'package:wishwell/pdf/pdf_client.dart';
 
@@ -307,8 +306,8 @@ class ClientScreenState extends State<ClientScreen> {
                                     topRight: Radius.circular(15),
                                   ),
                                 ),
-                                child: Column(
-                                  children: const [
+                                child: const Column(
+                                  children: [
                                     Icon(
                                       Icons.keyboard_arrow_up,
                                       size: 30,

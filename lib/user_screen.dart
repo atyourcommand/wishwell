@@ -307,8 +307,8 @@ class _UserScreenState extends State<UserScreen> {
                                   topRight: Radius.circular(15),
                                 ),
                               ),
-                              child: Column(
-                                children: const [
+                              child: const Column(
+                                children: [
                                   Icon(
                                     Icons.keyboard_arrow_up,
                                     size: 30,

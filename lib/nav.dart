@@ -13,6 +13,7 @@ import 'package:wishwell/home_screen.dart';
 //import 'package:wishwell/legatee_screen.dart';
 import 'package:wishwell/client_screen.dart';
 import 'package:wishwell/user_screen.dart';
+import 'package:wishwell/menu_screen.dart';
 
 class Nav extends StatefulWidget {
   const Nav({Key? key, this.index = 0}) : super(key: key);
@@ -37,6 +38,7 @@ class _NavState extends State<Nav> {
   final List<Widget> _widgetOptions = <Widget>[
     //const Home(),
     const Home(),
+    const MenuScreen(),
     const UserScreen(),
     const ClientScreen(),
     const AssetScreen(),
@@ -66,6 +68,14 @@ class _NavState extends State<Nav> {
             ),
             // backgroundColor: Colors.blue,
             label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.menu,
+              color: Colors.grey.shade600,
+            ),
+            // backgroundColor: Colors.blue,
+            label: 'Menu',
           ),
           BottomNavigationBarItem(
             icon: Icon(

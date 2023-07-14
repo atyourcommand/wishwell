@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:wishwell/client_model.dart';
 import 'package:wishwell/document_model.dart';
 import 'package:provider/provider.dart';
+
 import 'package:wishwell/provider/user_provider.dart';
 //import 'package:wishwell/pdf/detail_page.dart';
 import 'package:pdf/pdf.dart';
@@ -144,9 +145,9 @@ class _HomeState extends State<Home> {
             Container(
               alignment: Alignment.center,
               padding: const EdgeInsets.all(20),
-              child: Column(
+              child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const <Widget>[
+                children: <Widget>[
                   Text(
                     "Let's play",
                     textAlign: TextAlign.center,
@@ -254,12 +255,12 @@ class DrawerWidget extends StatelessWidget {
                   children: <Widget>[
                     icon,
                     const Text(
-                      "View PDF templates",
+                      "View your PDF documents",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 14,
                         fontWeight: FontWeight.normal,
-                        color: Colors.black45,
+                        color: Colors.black,
                       ),
                     ),
                     const SizedBox(

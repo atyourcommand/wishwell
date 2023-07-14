@@ -17,8 +17,6 @@ Color hexToColor(String hex) {
   );
 }
 
-var myThemeColor = const Color.fromARGB(255, 108, 142, 235);
-
 class ColorConstants {
   static Color primaryAppColor = const Color.fromARGB(255, 108, 142, 235);
 }
@@ -52,7 +50,20 @@ class MyApp extends StatelessWidget {
           primaryColor: Colors.red,
           textTheme: const TextTheme(
             displayLarge: TextStyle(
-                fontFamily: 'Inter', fontSize: 72, fontWeight: FontWeight.bold),
+                fontFamily: 'Inter',
+                fontSize: 72,
+                fontWeight: FontWeight.bold,
+                color: Colors.black),
+            displayMedium: TextStyle(
+                fontFamily: 'Inter',
+                fontSize: 50,
+                fontWeight: FontWeight.bold,
+                color: Colors.black),
+            displaySmall: TextStyle(
+                fontFamily: 'Inter',
+                fontSize: 36,
+                fontWeight: FontWeight.w800,
+                color: Colors.black),
             titleLarge: TextStyle(
                 fontFamily: 'Inter', fontSize: 26, fontWeight: FontWeight.bold),
             // Form Inputs
@@ -63,7 +74,9 @@ class MyApp extends StatelessWidget {
             titleSmall: TextStyle(
                 fontFamily: 'Inter', fontSize: 20, fontWeight: FontWeight.w800),
             bodyLarge: TextStyle(
-                fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.bold),
+                fontFamily: 'Inter',
+                fontSize: 20,
+                fontWeight: FontWeight.normal),
             bodyMedium: TextStyle(
               fontFamily: 'Inter',
               fontSize: 16,
